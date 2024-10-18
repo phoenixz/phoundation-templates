@@ -59,7 +59,7 @@ class TemplateTabs extends TemplateRenderer
 
                 foreach ($tabs as $tab) {
                     $this->render .= '      <li class="nav-item" role="presentation">
-                                                <a data-mdb-tab-init class="nav-link' . ($active ? ' active' : '') . $tab->getClass(' ') . '" id="' . $tab->getId() . '-tab" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
+                                                <a data-mdb-tab-init class="nav-link ' . ($active ? ' active' : '') . $tab->getClass(' ') . '" id="' . $tab->getId() . '-tab" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
                                                     ' . $tab->getLabel() . '
                                                 </a>
                                             </li>';

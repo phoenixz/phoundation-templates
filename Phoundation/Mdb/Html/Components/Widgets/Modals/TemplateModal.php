@@ -52,7 +52,7 @@ class TemplateModal extends TemplateRenderer
 //            );
 //
 //        // Set defaults
-//        $component->setContent($layout);
+//        $component->setContent($layout->render());
 
         // Render the modal.
 

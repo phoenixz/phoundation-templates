@@ -49,9 +49,8 @@ class TemplateGridRow extends TemplateRenderer
                 $render .= $column->render();
             }
 
-            $this->render .= $this->component->getForm()->setContent($render);
+            $this->render .= $this->component->getForm()->setContent($render)->render();
             $this->component->setForm(null);
-
         } else {
             foreach ($this->component->getSource() as $column) {
                 $this->render .= $column->render();

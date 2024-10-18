@@ -44,9 +44,8 @@ class TemplateGridColumn extends TemplateRenderer
 
         if ($this->component->getForm()) {
             // Return column content rendered in a form
-            $this->render .= $this->component->getForm()->setContent($this->component->getContent());
+            $this->render .= $this->component->getForm()->setContent($this->component->getContent())->render();
             $this->component->setForm(null);
-
         } else {
             $this->render .= $this->component->getContent();
         }

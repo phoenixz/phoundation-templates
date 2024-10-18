@@ -57,10 +57,10 @@ class TemplateSignInModal extends TemplateRenderer
 
         // Set defaults
         $this->component
-             ->setId('signinModal')
-             ->setSize('lg')
-             ->setTitle(tr('Sign in'))
-             ->setContent($layout);
+            ->setId('signinModal')
+            ->setSize('lg')
+            ->setTitle(tr('Sign in'))
+            ->setContent($layout->render());
 
         // Render the sign in modal.
         return parent::render() . Script::new()
