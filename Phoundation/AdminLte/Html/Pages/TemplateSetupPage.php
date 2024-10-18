@@ -20,12 +20,11 @@ use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Requests\Response;
 
 
-throw new \Phoundation\Exception\UnderConstructionException();
-
 class TemplateSetupPage extends TemplateRenderer
 {
     public function render(): ?string
     {
+throw new \Phoundation\Exception\UnderConstructionException();
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 

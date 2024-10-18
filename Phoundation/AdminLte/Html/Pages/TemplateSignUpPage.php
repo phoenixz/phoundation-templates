@@ -32,6 +32,7 @@ class TemplateSignUpPage extends TemplateRenderer
         Response::setRenderMainWrapper(false);
 
         $terms = tr('terms');
+        $get   = $this->getComponent()->getGetData();
 
         $this->render = '   <body class="hold-transition register-page">
                                 <div class="register-box">
