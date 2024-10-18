@@ -153,7 +153,7 @@ function tr(text) {
 
         } catch (e) {
             // Is it a JSONP response with a callback, perhaps?
-            if (!response.match(/^jQuery[0-9]+_[0-9]+\(\{.+?\}\)$/s)) {
+            if (!response.match(/^jQuery[0-9]+_[0-9]+\(\{.+?}\)$/)) {
                 console.log("Failed to pre-process AJAX request with: " + e);
                 return response;
             }
@@ -205,10 +205,12 @@ function tr(text) {
         // Process flash and HTML sections
         if (json.flash) {
             Phoundation.processFlash(json.flash);
+            delete json.flash;
         }
 
         if (json.html) {
             Phoundation.processHtml(json.html);
+            delete json.html;
         }
 
         // Ensure we have data in the response
