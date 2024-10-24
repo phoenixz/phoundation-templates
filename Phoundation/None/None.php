@@ -18,9 +18,9 @@ declare(strict_types=1);
 
 namespace Templates\None;
 
-use Phoundation\Filesystem\FsDirectory;
-use Phoundation\Filesystem\FsRestrictions;
-use Phoundation\Filesystem\Interfaces\FsDirectoryInterface;
+use Phoundation\Filesystem\PhoDirectory;
+use Phoundation\Filesystem\PhoRestrictions;
+use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
 use Phoundation\Web\Html\Template\Template;
 use Templates\None\Html\Components\Menu;
 
@@ -56,10 +56,10 @@ class None extends Template
     /**
      * Returns the path for this template
      *
-     * @return FsDirectoryInterface
+     * @return PhoDirectoryInterface
      */
-    public function getDirectory(): FsDirectoryInterface
+    public function getDirectory(): PhoDirectoryInterface
     {
-        return new FsDirectory(__DIR__ . '/', FsRestrictions::newReadonly(DIRECTORY_ROOT));
+        return new PhoDirectory(__DIR__ . '/', PhoRestrictions::newReadonly(DIRECTORY_ROOT));
     }
 }
