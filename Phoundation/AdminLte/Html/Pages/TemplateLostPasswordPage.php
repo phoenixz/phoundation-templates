@@ -18,7 +18,6 @@ namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Core\Core;
 use Phoundation\Core\Sessions\Session;
-use Phoundation\Data\Validator\GetValidator;
 use Phoundation\Utils\Config;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -32,8 +31,6 @@ class TemplateLostPasswordPage extends TemplateRenderer
     {
         // This page will build its own body
         Response::setRenderMainWrapper(false);
-
-        $get = $this->getComponent()->getGetData();
 
         $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::getImg('img/backgrounds/' . Core::getProjectSeoName() . '/lost-password.jpg') . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
@@ -49,7 +46,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
 
         if (Session::supports('email')) {
             $this->render .= '                      <div class="input-group mb-3">
-                                                        <input type="email" name="email" id="email" class="form-control" placeholder="' . tr('Email address') . '"' . (isset_get($get['email']) ? 'value="' . $get['email'] . '"' : '') . '>
+                                                        <input type="email" name="email" id="email" class="form-control" placeholder="' . tr('Email address') . '"' . isset_get($get['email']) ? 'value="' . $get['email'] . '"' : '' . '>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <span class="fas fa-envelope"></span>

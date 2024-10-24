@@ -18,7 +18,6 @@ namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Core\Core;
 use Phoundation\Core\Sessions\Session;
-use Phoundation\Data\Validator\GetValidator;
 use Phoundation\Utils\Config;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -35,8 +34,6 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setPageTitle(tr('Please sign in'));
         Response::setHeaderTitle(tr('Please sign in'));
 
-        $get = $this->getComponent()->getGetData();
-
         $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::getImg('img/backgrounds/' . Core::getProjectSeoName() . '/signin.jpg') . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
                                 <div class="login-box">
                                   <!-- /.login-logo -->
@@ -51,7 +48,7 @@ class TemplateSignInPage extends TemplateRenderer
 
                                             if (Session::supports('email')) {
                                                 $this->render .= '  <div class="input-group mb-3">
-                                                                        <input type="email" name="email" id="email" class="form-control" placeholder="' . tr('Email address') . '"' . (isset($get['email']) ? 'value="' . $get['email'] . '"' : '') . '>
+                                                                        <input type="email" name="email" id="email" class="form-control" placeholder="' . tr('Email address') . '"' . (isset_get($get['email']) ? 'value="' . $get['email'] . '"' : '') . '>
                                                                         <div class="input-group-append">
                                                                             <div class="input-group-text">
                                                                                 <span class="fas fa-envelope"></span>
@@ -106,13 +103,13 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('lost-password')) {
             $this->render .= '        <p class="mb-1">
-                                          <a href="' . Url::getWww('/lost-password.html')->addQueries((isset_get($get['email']) ? 'email=' . $get['email'] : ''), (isset_get($get['redirect']) ? 'redirect=' . $get['redirect'] : '')) . '">' . tr('I forgot my password') . '</a>
+                                          <a href="' . Url::getWww('/lost-password.html')->addQueries(isset_get($post['email']) ? 'email=' . $post['email'] : '', isset_get($post['redirect']) ? 'redirect=' . $post['redirect'] : '') . '">' . tr('I forgot my password') . '</a>
                                       </p>';
         }
 
         if (Session::supports('register')) {
             $this->render .= '        <p class="mb-0">
-                                          <a href="' . Url::getWww('/sign-up.html') . '" class="text-center">' . tr('Register a new membership') . '</a>
+                                          <a href="' . Url::getWww('/sign-in.html') . '" class="text-center">' . tr('Register a new membership') . '</a>
                                       </p>';
         }
 

@@ -38,18 +38,13 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                             <a href="' . Config::getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . Config::getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
                                         </div>
                                         <div class="card-body">
-                                            <p class="login-box-msg">' . tr('All done! You can now continue to your dashboard or continue to the sign-in page...') . '</p>
+                                            <p class="login-box-msg">' . tr('Your password has been updated. Please return to the sign-in page to continue...') . '</p>
 
                                             <form action="' . Url::getWww() . '" method="post">
                                                 ' . Csrf::getHiddenElement() . '
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <a href="' . Url::getWww('index') . '" class="btn btn-primary btn-block">' . tr('Go to dashboard') . '</a>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-12">
-                                                        <a href="' . Url::getWww('sign-out')->removeQueryKeys('redirect') . '" class="btn btn-outline-secondary btn-block">' . tr('Go to sign-in page') . '</a>
+                                                        <a href="' . Url::getWww('/sign-out.html') . '" class="btn btn-outline-secondary btn-block">' . tr('Go to sign-in page') . '</a>
                                                     </div>
                                                 </div>
                                             </form>

@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets;
 
-use Phoundation\Date\Date;
+use Phoundation\Date\PhoDate;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Widgets\LanguagesDropDown;
@@ -67,7 +67,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
 
                 $this->render .= '<a href="' . Html::safe(str_replace(':ID', $language->getId(), $this->component->getLanguagesUrl())) . '" class="dropdown-item">
                                     ' . ($language->getIcon() ? '<i class="text-' . Html::safe($language->getMode()->value) . ' fas fa-' . Html::safe($language->getIcon()) . ' mr-2"></i> ' : null) . Strings::truncate($language->getTitle(), 24) . '
-                                    <span class="float-right text-muted text-sm"> ' . Html::safe(Date::getAge($language->getCreatedOnDateTimeObject())) . '</span>
+                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($language->getCreatedOnDateTimeObject())) . '</span>
                                   </a>
                                   <div class="dropdown-divider"></div>';
             }

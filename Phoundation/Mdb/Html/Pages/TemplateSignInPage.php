@@ -37,8 +37,6 @@ class TemplateSignInPage extends TemplateRenderer
         $sso      = '';
         $terms    = '<a href="' . Url::getWww('terms') . '">' . tr('terms and conditions') . '</a>';
         $register = '<a href="' . Url::getWww('sign-up') . '">' . tr('Register') . '</a>';
-        $get      = $this->getComponent()->getGetData();
-
 
         // Render SSO entries?
         if (Session::supports('facebook')) {
@@ -82,7 +80,7 @@ class TemplateSignInPage extends TemplateRenderer
         }
 
         $signin .= '      <div class="form-outline mb-4" data-mdb-input-init>
-                            <input type="email" id="loginName" name="email" class="form-control"' . (isset($get['email']) ? 'value="' . $get['email'] . '"' : '') . ' />
+                            <input type="email" id="loginName" name="email" class="form-control"' . ($this->component->getEmail() ? 'value="' . $this->component->getEmail() . '"' : '') . ' />
                             <label class="form-label" for="loginName">' . tr('Email or username') . '</label>
                           </div>
 
