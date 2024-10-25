@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputMonth;
 
 
-class TemplateInputMonth extends TemplateInput
+class TemplateInputMonth extends TemplateInputText
 {
     /**
      * InputMonth class constructor

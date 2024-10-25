@@ -40,45 +40,48 @@ class TemplateCard extends TemplateRenderer
     {
         $tabs = $this->component->getTabsObject(false);
 
-        if ($tabs and ($tabs->getOrientation() === EnumOrientation::top)) {
-            $this->render = '   <div' . ($this->component->getId() ? ' id="' . $this->component->getId() . '"' : '') . ' class="card ' . ($this->component->getClass() ? $this->component->getClass() . ' ' : null) . ($this->component->getGradient() ? 'gradient-' . Html::safe($this->component->getGradient()) : '') . ($this->component->getMode()->value ? 'card-' . Html::safe($this->component->getMode()->value) : '') . ($this->component->getOutline() ? ' card-outline' : '') . ($this->component->getBackground() ? 'bg-' . Html::safe($this->component->getBackground()) : '') . ' card-tabs">
-                                    <div class="card-header p-0 p-1 border-bottom-0">
-                                        <ul class="nav nav-tabs" id="" role="tablist">';
+        if ($tabs) {
+            // Build a card with tabs
+            if ($tabs->getOrientation() === EnumOrientation::top) {
+                $this->render = '   <div' . ($this->component->getId() ? ' id="' . $this->component->getId() . '"' : '') . ' class="card ' . ($this->component->getClass() ? $this->component->getClass() . ' ' : null) . ($this->component->getGradient() ? 'gradient-' . Html::safe($this->component->getGradient()) : '') . ($this->component->getMode()->value ? 'card-' . Html::safe($this->component->getMode()->value) : '') . ($this->component->getOutline() ? ' card-outline' : '') . ($this->component->getBackground() ? 'bg-' . Html::safe($this->component->getBackground()) : '') . ' card-tabs">
+                                        <div class="card-header p-0 p-1 border-bottom-0">
+                                            <ul class="nav nav-tabs" id="" role="tablist">';
 
-            if ($this->component->getTitle()) {
-                $this->render .= '          <li class="pt-2 px-3"><h3 class="card-title">' . $this->component->getTitle() . '</h3></li>';
+                if ($this->component->getTitle()) {
+                    $this->render .= '          <li class="pt-2 px-3"><h3 class="card-title">' . $this->component->getTitle() . '</h3></li>';
+                }
+
+                // Render tabs
+                $active = true;
+
+                foreach ($tabs as $tab) {
+                    $this->render .= '          <li class="nav-item">
+                                                    <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">' . $tab->getLabel() . '</a>
+                                                </li>';
+                    $active       = false;
+                }
+
+                // Render transition tabs to tab contents
+                $this->render .= '          </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content">';
+
+                // Render tab contents
+                $active = true;
+
+                foreach ($tabs as $tab) {
+                    $this->render .= '          <div class="tab-pane fade' . ($active ? ' active show' : '') . '" id="' . $tab->getId() . '" role="tabpanel" aria-labelledby="' . $tab->getId() . '-tab">
+                                                    ' . $tab->getContent() . '
+                                                </div>';
+                    $active       = false;
+                }
+
+                // Finish tab contents
+                $this->render .= '          </div>
+                                        </div>
+                                    </div>';
             }
-
-            // Render tabs
-            $active = true;
-
-            foreach ($tabs as $tab) {
-                $this->render .= '          <li class="nav-item">
-                                                <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">' . $tab->getLabel() . '</a>
-                                            </li>';
-                $active = false;
-            }
-
-            // Render transition tabs to tab contents
-            $this->render .= '          </ul>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="tab-content">';
-
-            // Render tab contents
-            $active = true;
-
-            foreach ($tabs as $tab) {
-                $this->render .= '          <div class="tab-pane fade' . ($active ? ' active show' : '') . '" id="' . $tab->getId() . '" role="tabpanel" aria-labelledby="' . $tab->getId() . '-tab">
-                                                ' . $tab->getContent() . '
-                                            </div>';
-                $active = false;
-            }
-
-            // Finish tab contents
-            $this->render .= '          </div>
-                                    </div>
-                                </div>';
 
         } else {
             $this->render = '   <div' . ($this->component->getId() ? ' id="' . $this->component->getId() . '"' : '') . ' class="card ' . ($this->component->getClass() ? $this->component->getClass() . ' ' : null) . ($this->component->getGradient() ? 'gradient-' . Html::safe($this->component->getGradient()) : '') . ($this->component->getMode()->value ? 'card-' . Html::safe($this->component->getMode()->value) : '') . ($this->component->getOutline() ? ' card-outline' : '') . ($this->component->getBackground() ? 'bg-' . Html::safe($this->component->getBackground()) : '') . '">';

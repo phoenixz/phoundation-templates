@@ -19,7 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputDateTimeRange;
 
 
-class TemplateInputDateTimeRange extends TemplateInput
+class TemplateInputDateTimeRange extends TemplateInputText
 {
     /**
      * InputText class constructor

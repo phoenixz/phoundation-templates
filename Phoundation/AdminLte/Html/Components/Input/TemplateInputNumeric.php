@@ -19,7 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputNumeric;
 
 
-class TemplateInputNumeric extends TemplateInput
+class TemplateInputNumeric extends TemplateInputText
 {
     /**
      * InputNumeric class constructor

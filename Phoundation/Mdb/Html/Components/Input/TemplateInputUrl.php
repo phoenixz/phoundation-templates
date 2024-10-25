@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputUrl;
 
 
-class TemplateInputUrl extends TemplateInput
+class TemplateInputUrl extends TemplateInputText
 {
     /**
      * InputUrl class constructor

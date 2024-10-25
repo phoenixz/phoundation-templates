@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
 
 
-class TemplateInputAutoSuggest extends TemplateInput
+class TemplateInputAutoSuggest extends TemplateInputText
 {
     /**
      * InputAutoSuggest class constructor

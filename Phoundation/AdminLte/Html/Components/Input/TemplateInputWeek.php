@@ -19,7 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputWeek;
 
 
-class TemplateInputWeek extends TemplateInput
+class TemplateInputWeek extends TemplateInputText
 {
     /**
      * InputWeek class constructor

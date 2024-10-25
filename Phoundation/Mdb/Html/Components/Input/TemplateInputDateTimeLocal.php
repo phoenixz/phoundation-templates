@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputDateTimeLocal;
 
 
-class TemplateInputDateTimeLocal extends TemplateInput
+class TemplateInputDateTimeLocal extends TemplateInputText
 {
     /**
      * InputDateTimeLocal class constructor

@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputTextArea;
 
 
-class TemplateInputTextArea extends TemplateInput
+class TemplateInputTextArea extends TemplateInputText
 {
     /**
      * TextArea class constructor

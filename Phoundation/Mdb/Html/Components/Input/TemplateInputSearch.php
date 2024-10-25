@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputSearch;
 
 
-class TemplateInputSearch extends TemplateInput
+class TemplateInputSearch extends TemplateInputText
 {
     /**
      * InputSearch class constructor

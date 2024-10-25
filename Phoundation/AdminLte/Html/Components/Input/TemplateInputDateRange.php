@@ -20,7 +20,7 @@ use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Input\InputDateRange;
 
 
-class TemplateInputDateRange extends TemplateInput
+class TemplateInputDateRange extends TemplateInputText
 {
     /**
      * InputText class constructor

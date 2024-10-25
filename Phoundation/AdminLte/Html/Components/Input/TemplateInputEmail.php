@@ -19,7 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputEmail;
 
 
-class TemplateInputEmail extends TemplateInput
+class TemplateInputEmail extends TemplateInputText
 {
     /**
      * InputEmail class constructor

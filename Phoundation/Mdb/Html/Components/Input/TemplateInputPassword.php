@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputPassword;
 
 
-class TemplateInputPassword extends TemplateInput
+class TemplateInputPassword extends TemplateInputText
 {
     /**
      * InputPassword class constructor

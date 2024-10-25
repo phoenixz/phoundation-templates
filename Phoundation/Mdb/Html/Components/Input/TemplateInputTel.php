@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputTel;
 
 
-class TemplateInputTel extends TemplateInput
+class TemplateInputTel extends TemplateInputText
 {
     /**
      * InputTel class constructor

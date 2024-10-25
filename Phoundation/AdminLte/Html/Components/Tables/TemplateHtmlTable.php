@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateAdminLte TemplateHtmlTable
+ * Class TemplateHtmlTable
  *
  *
  *
@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Tables;
 
 use Phoundation\Web\Html\Components\Tables\HtmlTable;
+use Phoundation\Web\Html\Layouts\GridColumn;
+use Phoundation\Web\Html\Layouts\GridRow;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 
 
@@ -29,5 +31,19 @@ class TemplateHtmlTable extends TemplateRenderer
     {
         $component->addClasses('table');
         parent::__construct($component);
+    }
+
+
+    /**
+     * Renders and returns the HTML for this object
+     *
+     * @return string|null
+     */
+    public function render(): ?string
+    {
+        return GridRow::new()
+                      ->addGridColumn(GridColumn::new()
+                                                ->setContent(parent::render())
+                                                ->addClass('overflow-x'))->render();
     }
 }

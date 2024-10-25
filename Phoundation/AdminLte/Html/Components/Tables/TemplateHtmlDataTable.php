@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateAdminLte TemplateHtmlDataTable
+ * Class TemplateHtmlDataTable
  *
  *
  *
@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Tables;
 
 use Phoundation\Web\Html\Components\Tables\HtmlTable;
+use Phoundation\Web\Html\Layouts\GridColumn;
 use Phoundation\Web\Html\Layouts\GridRow;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 
@@ -40,6 +41,9 @@ class TemplateHtmlDataTable extends TemplateRenderer
      */
     public function render(): ?string
     {
-        return GridRow::new()->addGridColumn(parent::render())->render();
+        return GridRow::new()
+                      ->addGridColumn(GridColumn::new()
+                                                ->setContent(parent::render())
+                                                ->addClass('overflow-x'))->render();
     }
 }
