@@ -85,7 +85,7 @@ function tr(text) {
             switch (section.method) {
                 case "delete":
                     // Replace the selector with the new HTML
-                    $(section.selector).delete();
+                    $(section.selector).remove();
                     break;
 
                 case "replace":
@@ -124,7 +124,7 @@ function tr(text) {
         }
 
         messages.forEach(function(section, id) {
-            $(document).Toasts("create", JSON.parse(section));
+            $(document).Toasts("create", section);
         });
     }
 
