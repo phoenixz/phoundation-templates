@@ -34,7 +34,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
 
         $user = Session::getUserObject();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::getImg('img/backgrounds/' . Core::getProjectSeoName() . '/password.jpg') . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('img/backgrounds/' . Core::getProjectSeoName() . '/password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
@@ -43,7 +43,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Hello :user, please enter a new password for your account to continue...', [':user' => $user->getDisplayName()]) . '</p>
 
-                                            <form action="' . Url::getWww() . '" method="post">
+                                            <form action="' . Url::newCurrent() . '" method="post">
                                                 ' . Csrf::getHiddenElement() . '
                                                 <div class="input-group mb-3">
                                                     <input type="password" name="password" id="password" class="form-control" placeholder="' . tr('Password') . '">
@@ -68,7 +68,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <a href="' . Url::getWww('sign-out') . '" class="btn btn-outline-secondary btn-block">' . tr('Sign out') . '</a>
+                                                        <a href="' . Url::new('sign-out')->makeWww() . '" class="btn btn-outline-secondary btn-block">' . tr('Sign out') . '</a>
                                                     </div>
                                                 </div>
                                             </form>

@@ -45,7 +45,7 @@ class TemplateTopMenu extends TemplateRenderer
                             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                         </li>
                         <li class="nav-item d-none d-sm-inline-block">
-                            <a href="' . Html::safe(Url::getCurrent()) . '" class="nav-link">' . tr('Home') . '</a>
+                            <a href="' . Html::safe(Url::newCurrent()) . '" class="nav-link">' . tr('Home') . '</a>
                         </li>';
 
         if ($this->component->getSource()) {

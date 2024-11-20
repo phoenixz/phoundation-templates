@@ -35,7 +35,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
 
         $get = $this->getComponent()->getGetData();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::getImg('img/backgrounds/' . Core::getProjectSeoName() . '/lost-password.jpg') . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('img/backgrounds/' . Core::getProjectSeoName() . '/lost-password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
@@ -44,7 +44,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Please provide your email address and we will send you a link where you can re-establish your password') . '</p>
 
-                                            <form action="' . Url::getWww() . '" method="post">
+                                            <form action="' . Url::newCurrent() . '" method="post">
                                                 ' . Csrf::getHiddenElement();
 
         if (Session::supports('email')) {
@@ -65,7 +65,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <a class="btn btn-outline-secondary btn-block" href="' . Url::getWww('sign-in')->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email') . '">' . tr('Back to sign in') . '</a>
+                                                            <a class="btn btn-outline-secondary btn-block" href="' . Url::new('sign-in')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email') . '">' . tr('Back to sign in') . '</a>
                                                         </div>
                                                     </div>';
         }

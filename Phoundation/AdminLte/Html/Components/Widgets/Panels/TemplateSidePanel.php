@@ -44,13 +44,13 @@ class TemplateSidePanel extends TemplateRenderer
     public function render(): ?string
     {
         $this->render = ' <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                            <a href="' . Url::getCurrent() . '" class="brand-link">
-                              <img src="' . Url::getImg('img/logos/' . Core::getProjectSeoName() . '/large.webp') . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" class="brand-image elevation-3" width="250px" style="opacity: .8">
+                            <a href="' . Url::newCurrent() . '" class="brand-link">
+                              <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" class="brand-image elevation-3" width="250px" style="opacity: .8">
                             </a>
                             <div class="sidebar">
                               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                 <div class="image">
-                                    <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::getWww('/my/profile.html')) . '" class="d-block">
+                                    <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">
                                       ' . Session::getUserObject()
                                                  ->getProfileImageObject()
                                                      ->getHtmlImgObject()
@@ -61,7 +61,7 @@ class TemplateSidePanel extends TemplateRenderer
                                     </a>
                                   </div>
                                 <div class="info">
-                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::getWww('/my/profile.html')) . '" class="d-block">' . Session::getUserObject()->getDisplayName() . '</a>
+                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">' . Session::getUserObject()->getDisplayName() . '</a>
                                 </div>
                               </div>
                               <div class="form-inline">

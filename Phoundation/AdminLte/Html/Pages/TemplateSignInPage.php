@@ -37,7 +37,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         $get = $this->getComponent()->getGetData();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::getImg('img/backgrounds/' . Core::getProjectSeoName() . '/signin.jpg') . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('img/backgrounds/' . Core::getProjectSeoName() . '/signin.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
                                 <div class="login-box">
                                   <!-- /.login-logo -->
                                   <div class="card card-outline card-info">
@@ -46,7 +46,7 @@ class TemplateSignInPage extends TemplateRenderer
                                     </div>
                                     <div class="card-body">
                                       <p class="login-box-msg">' . tr('Please sign in to start your session') . '</p>
-                                      <form action="' . Url::getWww() . '" method="post">
+                                      <form action="' . Url::newCurrent() . '" method="post">
                                             ' . Csrf::getHiddenElement();
 
                                             if (Session::supports('email')) {
@@ -106,13 +106,13 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('lost-password')) {
             $this->render .= '        <p class="mb-1">
-                                          <a href="' . Url::getWww('/lost-password.html')->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email') . '">' . tr('I forgot my password') . '</a>
+                                          <a href="' . Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email') . '">' . tr('I forgot my password') . '</a>
                                       </p>';
         }
 
         if (Session::supports('register')) {
             $this->render .= '        <p class="mb-0">
-                                          <a href="' . Url::getWww('/sign-up.html') . '" class="text-center">' . tr('Register a new membership') . '</a>
+                                          <a href="' . Url::new('/sign-up.html')->makeWww() . '" class="text-center">' . tr('Register a new membership') . '</a>
                                       </p>';
         }
 

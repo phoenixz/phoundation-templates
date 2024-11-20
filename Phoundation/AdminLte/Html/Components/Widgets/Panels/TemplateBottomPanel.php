@@ -41,7 +41,7 @@ class TemplateBottomPanel extends TemplateRenderer
     {
         $phoudation = '<a href="https://phoundation.org/">Phoundation</a>';
         $adminlte   = tr('template :name', [':name' => '<a href="https://adminlte.io/">' . tr('AdminLte') . '</a>']);
-        $project    = '<a href="' . Url::getCurrentDomainRootUrl() . '">' . Config::getString('project.name', 'Phoundation') . '</a>';
+        $project    = '<a href="' . Url::newCurrentDomainRootUrl() . '">' . Config::getString('project.name', 'Phoundation') . '</a>';
 
         return '  <footer class="main-footer">
                     <div class="float-right d-none d-sm-block">

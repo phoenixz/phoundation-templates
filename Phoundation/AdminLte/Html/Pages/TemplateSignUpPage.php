@@ -42,7 +42,7 @@ class TemplateSignUpPage extends TemplateRenderer
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Register a new membership') . '</p>
-                                            <form action="' . Url::getWww() . '" method="post">
+                                            <form action="' . Url::newCurrent() . '" method="post">
                                                 ' . Csrf::getHiddenElement() . '
                                                 <div class="input-group mb-3">
                                                     <input type="text" class="form-control" placeholder="Full name">
@@ -81,7 +81,7 @@ class TemplateSignUpPage extends TemplateRenderer
                                                         <div class="icheck-primary">
                                                             <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                                             <label for="agreeTerms">
-                                                                ' . tr('I agree to the :terms', [':terms' => '<a href="' . Url::getWww('terms') . '">' . $terms . '</a>']) . '
+                                                                ' . tr('I agree to the :terms', [':terms' => '<a href="' . Url::new('terms')->makeWww() . '">' . $terms . '</a>']) . '
                                                             </label>
                                                         </div>
                                                     </div>
@@ -115,7 +115,7 @@ class TemplateSignUpPage extends TemplateRenderer
                                             </div>';
         }
 
-        $this->render .= '                  <a href="' . Url::getWww('sign-in') . '" class="text-center">' . tr('I already have an account') . '</a>
+        $this->render .= '                  <a href="' . Url::new('sign-in')->makeWww() . '" class="text-center">' . tr('I already have an account') . '</a>
                                         </div>';
 
         if (Session::supports('copyright')) {

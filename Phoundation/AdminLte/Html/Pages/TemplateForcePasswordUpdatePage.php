@@ -31,7 +31,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' .  Url::getImg('img/backgrounds/' . Core::getProjectSeoName() . '/password.jpg') . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' .  Url::new('img/backgrounds/' . Core::getProjectSeoName() . '/password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
                                     <!-- /.login-logo -->
                                     <div class="card card-outline card-info">
@@ -42,7 +42,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                         <p class="login-box-msg">' .  tr('Please update your account to have a new and secure password password before continuing...') . '</p>
                                         <p class="login-box-msg">' .  tr('Please ensure that your password has at least 10 characters, is secure, and is known only to you.') . '</p>
 
-                                        <form action="' .  Url::getWww() . '" method="post">
+                                        <form action="' .  Url::newCurrent() . '" method="post">
                                             ' . Csrf::getHiddenElement() . '
                                             <div class="input-group mb-3">
                                                 <input type="password" name="password" id="password" class="form-control" placeholder="' .  tr('Password') . '">
@@ -67,7 +67,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-12">
-                                                    <a href="' .  Url::getWww('/sign-out.html') . '" class="btn btn-outline-secondary btn-block">' .  tr('Sign out') . '</a>
+                                                    <a href="' .  Url::new('/sign-out.html')->makeWww() . '" class="btn btn-outline-secondary btn-block">' . tr('Sign out') . '</a>
                                                 </div>
                                             </div>
                                         </form>

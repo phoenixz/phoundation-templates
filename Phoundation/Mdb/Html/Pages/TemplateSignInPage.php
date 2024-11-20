@@ -35,8 +35,8 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setHeaderTitle(tr('Please sign in'));
 
         $sso      = '';
-        $terms    = '<a href="' . Url::getWww('terms') . '">' . tr('terms and conditions') . '</a>';
-        $register = '<a href="' . Url::getWww('sign-up') . '">' . tr('Register') . '</a>';
+        $terms    = '<a href="' . Url::new('terms')->makeWww() . '">' . tr('terms and conditions') . '</a>';
+        $register = '<a href="' . Url::new('sign-up')->makeWww() . '">' . tr('Register') . '</a>';
         $get      = $this->getComponent()->getGetData();
 
 
@@ -66,7 +66,7 @@ class TemplateSignInPage extends TemplateRenderer
         }
 
         // Render the signin page section
-        $signin   = '   <form method="post" action="' . Url::getWww() . '">
+        $signin   = '   <form method="post" action="' . Url::newCurrent() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1">
                               ' . Config::getString('project.owner.label', '<span>Phoun</span>dation') . '
@@ -132,7 +132,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('signup')) {
             // Render the signup page section
-            $signup = '     <form method="post" action="' . Url::getWww() . '">
+            $signup = '     <form method="post" action="' . Url::newCurrent() . '">
                               ' . Csrf::getHiddenElement() . '
                               <div class="form-outline mb-4" data-mdb-input-init>
                                 <input type="text" id="registerName" class="form-control" />
@@ -193,7 +193,7 @@ class TemplateSignInPage extends TemplateRenderer
                               <!-- Heading -->
                               <section class="text-center text-md-start">
                                 <!-- Background gradient -->
-                                <div class="p-5" style="height: 200px; background: url(' . Url::getImg('img/banners/' . Core::getProjectSeoName() . '/large.jpg') . ') no-repeat;  !important;">
+                                <div class="p-5" style="height: 200px; background: url(' . Url::new('img/banners/' . Core::getProjectSeoName() . '/large.jpg')->makeImg() . ') no-repeat;  !important;">
                                 </div>
                                 <!-- Background gradient -->
                               </section>

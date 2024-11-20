@@ -54,7 +54,7 @@ class TemplateBreadCrumbs extends TemplateRenderer
                     $this->render .= '<li class="breadcrumb-item active">' . Html::safe($label) . '</li>';
 
                 } else {
-                    $this->render .= '<li class="breadcrumb-item"><a href="' . Html::safe(Url::getWww($url)) . '">' . Html::safe($label) . '</a></li>';
+                    $this->render .= '<li class="breadcrumb-item"><a href="' . Html::safe(Url::new($url)->makeWww()) . '">' . Html::safe($label) . '</a></li>';
                 }
             }
         }

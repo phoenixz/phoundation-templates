@@ -68,7 +68,7 @@ class TemplateSignInModal extends TemplateRenderer
             $("form#form-sign-in").submit(function(e) {
                 e.stopPropagation();
 
-                $.post("' . Url::getAjax('sign-in') . '", $(this).serialize())
+                $.post("' . Url::new('sign-in')->makeAjax() . '", $(this).serialize())
                     .done(function (data, textStatus, jqXHR) {
                         $(".image-menu").replaceWith(data.html);
                         $("#signinModal").modal("hide");

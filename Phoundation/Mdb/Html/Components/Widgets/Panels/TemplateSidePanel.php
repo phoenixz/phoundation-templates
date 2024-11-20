@@ -44,14 +44,14 @@ class TemplateSidePanel extends TemplateRenderer
     public function render(): ?string
     {
         $this->render = '   <nav data-mdb-sidenav-init id="sidenav-9" data-mdb-scroll-container="#scroll-container" class="sidenav sidenav-sm" data-mdb-hidden="true" data-mdb-accordion="true">
-                              <a href="' . Url::getWww('index') . '" data-mdb-ripple-init class="d-flex justify-content-center py-4 mb-3" style="border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary">
-                                <img src="' . Url::getImg('img/logos/' . Core::getProjectSeoName() . '/large.webp') . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" width="250px" draggable="false">
+                              <a href="' . Url::new('index')->makeWww() . '" data-mdb-ripple-init class="d-flex justify-content-center py-4 mb-3" style="border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary">
+                                <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" width="250px" draggable="false">
                               </a>
 
-                              <a data-mdb-ripple-init class="d-flex py-4 mb-3 justify-content-center" style="border-bottom: 2px solid #f5f5f5" href="' . Url::getWww('profile') . '" data-mdb-ripple-color="primary">
+                              <a data-mdb-ripple-init class="d-flex py-4 mb-3 justify-content-center" style="border-bottom: 2px solid #f5f5f5" href="' . Url::new('profile')->makeWww() . '" data-mdb-ripple-color="primary">
                                 ' . Session::getUserObject()->getImageFileObject()
                                            ->getImgObject()
-                                               ->setSrc(Url::getImg('img/profiles/default.png'))
+                                               ->setSrc(Url::new('img/profiles/default.png')->makeImg())
                                                ->setId('menu-profile-image')
                                                ->setClass('img-circle elevation-2')
                                                ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
@@ -67,24 +67,24 @@ class TemplateSidePanel extends TemplateRenderer
         return parent::render();
 
         $this->render = ' <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                            <a href="' . Url::getWww('index') . '" class="brand-link">
-                              <img src="' . Url::getImg('img/logos/' . Core::getProjectSeoName() . '/large.webp') . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" class="brand-image elevation-3" style="opacity: .8" width="250px">
+                            <a href="' . Url::new('index')->makeWww() . '" class="brand-link">
+                              <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" class="brand-image elevation-3" style="opacity: .8" width="250px">
                             </a>
                             <div class="sidebar">
                               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                 <div class="image">
-                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::getWww('/my/profile.html')) . '" class="d-block">
+                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">
                                     ' . Session::getUserObject()->getImageFileObject()
                                           ->getImgObject()
                                               ->setId('menu-profile-image')
-                                              ->setSrc(Url::getImg('img/profiles/default.png'))
+                                              ->setSrc(Url::new('img/profiles/default.png')->makeImg())
                                               ->setClass('img-circle elevation-2')
                                               ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
                                               ->render() . '
                                   </a>
                                 </div>
                                 <div class="info">
-                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::getWww('/my/profile.html')) . '" class="d-block">' . Session::getUserObject()->getDisplayName() . '</a>
+                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">' . Session::getUserObject()->getDisplayName() . '</a>
                                 </div>
                               </div>
                               <div class="form-inline">
