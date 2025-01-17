@@ -193,7 +193,7 @@ class TemplateSignInPage extends TemplateRenderer
                               <!-- Heading -->
                               <section class="text-center text-md-start">
                                 <!-- Background gradient -->
-                                <div class="p-5" style="height: 200px; background: url(' . Url::new('img/banners/' . Core::getProjectSeoName() . '/large.jpg')->makeImg() . ') no-repeat;  !important;">
+                                <div class="p-5" style="height: 200px; background: url(' . Url::new('img/banners/' . Core::getProjectSeoName() . '/large.jpg')->makeImg() . ') center no-repeat;  !important;">
                                 </div>
                                 <!-- Background gradient -->
                               </section>
