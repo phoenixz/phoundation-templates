@@ -53,12 +53,6 @@ class TemplateSignInPage extends TemplateRenderer
                         </button>';
         }
 
-        if (Session::supports('twitter')) {
-            $sso .= '   <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
-                          <i class="fab fa-twitter"></i>
-                        </button>';
-        }
-
         if (Session::supports('github')) {
             $sso .= '   <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
                           <i class="fab fa-github"></i>
