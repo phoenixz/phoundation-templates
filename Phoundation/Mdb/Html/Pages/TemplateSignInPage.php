@@ -7,7 +7,7 @@
  *
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
- * @copyright Copyright (c) 2024 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
+ * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @package Phoundation\Web
  */
 
@@ -117,7 +117,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('copyright')) {
             $signin .= '  <div class="text-center">
-                            Copyright © 2024 <a target="_blank" href="' . Config::getString('project.owner.url', 'https://phoundation.org') . '">' . Config::getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
+                            Copyright © 2025 <a target="_blank" href="' . Config::getString('project.owner.url', 'https://phoundation.org') . '">' . Config::getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
                           </div>';
         }
 
@@ -173,7 +173,7 @@ class TemplateSignInPage extends TemplateRenderer
 
             if (Session::supports('copyright')) {
                 $signup .= '  <div class="text-center">
-                                Copyright © 2024 ' . Config::getString('project.name', 'Phoundation') . '<br/><small>All rights reserved</small>
+                                Copyright © 2025 ' . Config::getString('project.name', 'Phoundation') . '<br/><small>All rights reserved</small>
                               </div>';
             }
 
