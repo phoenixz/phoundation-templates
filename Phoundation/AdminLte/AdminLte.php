@@ -58,6 +58,6 @@ class AdminLte extends Template
      */
     public function getDirectory(): PhoDirectoryInterface
     {
-        return new PhoDirectory(__DIR__ . '/', PhoRestrictions::newReadonly(DIRECTORY_ROOT));
+        return new PhoDirectory(__DIR__ . '/', PhoRestrictions::newReadonlyObject(DIRECTORY_ROOT));
     }
 }
