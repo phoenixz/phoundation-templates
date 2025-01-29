@@ -64,7 +64,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
                        $body .
                        Request::getPanelsObject()->get('bottom', false)?->render();
 
-            $output .= ' <body class="sidebar-mini' . (Config::get('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . '" style="height: auto;">
+            $output .= ' <body class="sidebar-mini' . (config()->get('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . '" style="height: auto;">
                             <div class="wrapper">' .
                                 Response::getFlashMessagesObject()->render() .
                                 $body . '
@@ -94,10 +94,10 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
     public function getAvailablePanelsObject(): PanelsInterface
     {
         return Panels::new()
-            ->add(Config::getBoolean('web.panels.top.enabled'   , true) ? TopPanel::new()    : null, 'top')
-            ->add(Config::getBoolean('web.panels.left.enabled'  , true) ? SidePanel::new()   : null, 'left')
-            ->add(Config::getBoolean('web.panels.header.enabled', true) ? HeaderPanel::new() : null, 'header')
-            ->add(Config::getBoolean('web.panels.bottom.enabled', true) ? BottomPanel::new() : null, 'bottom');
+            ->add(config()->getBoolean('web.panels.top.enabled'   , true) ? TopPanel::new()    : null, 'top')
+            ->add(config()->getBoolean('web.panels.left.enabled'  , true) ? SidePanel::new()   : null, 'left')
+            ->add(config()->getBoolean('web.panels.header.enabled', true) ? HeaderPanel::new() : null, 'header')
+            ->add(config()->getBoolean('web.panels.bottom.enabled', true) ? BottomPanel::new() : null, 'bottom');
     }
 
 
@@ -137,7 +137,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         ], true);
 
         // Load configured CSS files
-        Response::loadCss(Config::getArray('templates.adminlte.css', []));
+        Response::loadCss(config()->getArray('templates.adminlte.css', []));
 
         // Load basic AdminLte amd jQuery javascript libraries
         Response::loadJavascript([
@@ -150,7 +150,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         ], prefix: true);
 
         // Set basic page details
-        Response::setPageTitle(Config::get('project.name', tr('Phoundation project')) . ' (' . Response::getHeaderTitle() . ')');
+        Response::setPageTitle(config()->get('project.name', tr('Phoundation project')) . ' (' . Response::getHeaderTitle() . ')');
 
         return Response::renderHtmlHeaders();
     }

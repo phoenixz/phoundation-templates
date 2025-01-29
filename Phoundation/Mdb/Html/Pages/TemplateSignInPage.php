@@ -63,7 +63,7 @@ class TemplateSignInPage extends TemplateRenderer
         $signin   = '   <form method="post" action="' . Url::newCurrent() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1">
-                              ' . Config::getString('project.owner.label', '<span>Phoun</span>dation') . '
+                              ' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '
                           </div>
                           <hr>';
 
@@ -117,7 +117,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('copyright')) {
             $signin .= '  <div class="text-center">
-                            Copyright © 2025 <a target="_blank" href="' . Config::getString('project.owner.url', 'https://phoundation.org') . '">' . Config::getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
+                            Copyright © 2025 <a target="_blank" href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '">' . config()->getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
                           </div>';
         }
 
@@ -173,7 +173,7 @@ class TemplateSignInPage extends TemplateRenderer
 
             if (Session::supports('copyright')) {
                 $signup .= '  <div class="text-center">
-                                Copyright © 2025 ' . Config::getString('project.name', 'Phoundation') . '<br/><small>All rights reserved</small>
+                                Copyright © 2025 ' . config()->getString('project.name', 'Phoundation') . '<br/><small>All rights reserved</small>
                               </div>';
             }
 

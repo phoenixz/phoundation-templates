@@ -42,7 +42,7 @@ class TemplateSignInPage extends TemplateRenderer
                                   <!-- /.login-logo -->
                                   <div class="card card-outline card-info">
                                     <div class="card-header text-center">
-                                      <a href="' . Config::getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . Config::getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                      <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
                                     </div>
                                     <div class="card-body">
                                       <p class="login-box-msg">' . tr('Please sign in to start your session') . '</p>
@@ -118,7 +118,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('copyright')) {
             $this->render .= '      <div class="login-footer text-center">
-                                        ' . 'Copyright © ' . Config::getString('project.copyright', '2024') . ' <b><a href="' . Config::getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . Config::getString('project.owner.name', 'Phoundation') . '</a></b><br>' . '
+                                        ' . 'Copyright © ' . config()->getString('project.copyright', '2024') . ' <b><a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a></b><br>' . '
                                         ' . tr('All rights reserved') . '</div>
                                     </div>';
         }

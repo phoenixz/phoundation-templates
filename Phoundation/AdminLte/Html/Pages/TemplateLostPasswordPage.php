@@ -39,7 +39,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                            <a href="' . Config::getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . Config::getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                            <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Please provide your email address and we will send you a link where you can re-establish your password') . '</p>

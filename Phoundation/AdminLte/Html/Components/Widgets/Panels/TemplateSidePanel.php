@@ -45,7 +45,7 @@ class TemplateSidePanel extends TemplateRenderer
     {
         $this->render = ' <aside class="main-sidebar sidebar-dark-primary elevation-4">
                             <a href="' . Url::newCurrent() . '" class="brand-link">
-                              <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Config::get('project.name'))]) . '" class="brand-image elevation-3" width="250px" style="opacity: .8">
+                              <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" class="brand-image elevation-3" width="250px" style="opacity: .8">
                             </a>
                             <div class="sidebar">
                               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
