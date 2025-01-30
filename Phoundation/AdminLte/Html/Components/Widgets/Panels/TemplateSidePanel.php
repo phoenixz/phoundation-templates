@@ -18,7 +18,6 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Core;
 use Phoundation\Core\Sessions\Session;
-use Phoundation\Utils\Config;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Widgets\Panels\SidePanel;
 use Phoundation\Web\Html\Template\TemplateRenderer;

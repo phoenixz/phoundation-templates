@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Core\Core;
-use Phoundation\Utils\Config;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;

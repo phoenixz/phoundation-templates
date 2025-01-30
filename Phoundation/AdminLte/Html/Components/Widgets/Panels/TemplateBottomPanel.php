@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Core;
-use Phoundation\Utils\Config;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;

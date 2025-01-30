@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte;
 
 use Phoundation\Core\Plugins\Plugins;
-use Phoundation\Utils\Config;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\Interfaces\PanelsInterface;
