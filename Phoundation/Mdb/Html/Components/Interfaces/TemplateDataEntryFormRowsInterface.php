@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Interfaces;
 
-use Phoundation\Data\DataEntry\Definitions\Interfaces\DefinitionInterface;
+use Phoundation\Data\DataEntries\Definitions\Interfaces\DefinitionInterface;
 use Phoundation\Web\Html\Components\Forms\DataEntryFormColumn;
 use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
 
