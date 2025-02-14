@@ -88,7 +88,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
 
                 $this->render .= '<a href="' . Html::safe(str_replace(':ID', (string) $notification->getId(), (string) $this->component->getNotificationsUrl())) . '" class="dropdown-item notification open-modal" data-id="' . $notification->getId() . '">
                                     ' . ($notification->getIcon() ? '<i class="text-' . Html::safe($notification->getMode()->value) . ' fas fa-' . Html::safe($notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($notification->getTitle(), 24)) . '
-                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($notification->getCreatedOnDateTimeObject())) . '</span>
+                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($notification->getCreatedOnObject())) . '</span>
                                   </a>
                                   <div class="dropdown-divider"></div>';
             }

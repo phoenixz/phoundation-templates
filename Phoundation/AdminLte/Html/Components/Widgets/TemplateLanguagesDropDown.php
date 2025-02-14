@@ -67,7 +67,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
 
                 $this->render .= '<a href="' . Html::safe(str_replace(':ID', $language->getId(), $this->component->getLanguagesUrl())) . '" class="dropdown-item">
                                     ' . ($language->getIcon() ? '<i class="text-' . Html::safe($language->getMode()->value) . ' fas fa-' . Html::safe($language->getIcon()) . ' mr-2"></i> ' : null) . Strings::truncate($language->getTitle(), 24) . '
-                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($language->getCreatedOnDateTimeObject())) . '</span>
+                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($language->getCreatedOnObject())) . '</span>
                                   </a>
                                   <div class="dropdown-divider"></div>';
             }
