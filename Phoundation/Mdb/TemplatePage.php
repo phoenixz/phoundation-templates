@@ -56,7 +56,8 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Build HTML and minify the output
         $output = $this->renderHtmlHeadTag();
-        Response::getHtmlHeadersSent(true);
+
+        Response::getHtmlHeadersSent();
 
         if (Response::getRenderMainWrapper()) {
             $body    = Request::getPanelsObject()->get('top', false)?->render() .
