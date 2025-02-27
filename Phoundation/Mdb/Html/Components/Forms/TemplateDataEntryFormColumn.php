@@ -24,6 +24,7 @@ use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterButtonsInterface
 use Phoundation\Web\Html\Components\Input\Interfaces\InputSelectInterface;
 use Phoundation\Web\Html\Components\Widgets\Tooltips\Tooltip;
 use Phoundation\Web\Html\Enums\EnumElement;
+use Phoundation\Web\Html\Enums\EnumInputType;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Templates\Phoundation\Mdb\TemplatePage;
@@ -142,15 +143,23 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 $mdb_init = '';
         }
 
-        $this->render .= match ($definition->getInputType()?->value) {
-            default    => '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . '">
-                                 <div' . $mdb_init . ' class="form-outline' . ($group ? ' input-group' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
-                                     ' . $render . '
-                                     <label class="form-label' . $label . '" for="' . Html::safe($definition->getColumn()) . '">
-                                       ' . Html::safe($definition->getLabel()) . '
-                                     </label>
-                                 </div>
-                             </div>',
+        $this->render .= match ($definition->getInputType()) {
+            EnumInputType::auto_suggest => '  <div id="' . $component->getId() . '-div" class="autocomplete ' . TemplatePage::getBottomMarginString() . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . '">
+                                                  <div' . $mdb_init . ' class="form-outline' . ($group ? ' input-group' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+                                                      ' . $render . '
+                                                      <label class="form-label' . $label . '" for="' . Html::safe($definition->getColumn()) . '">
+                                                        ' . Html::safe($definition->getLabel()) . '
+                                                      </label>
+                                                  </div>
+                                              </div>',
+            default                     => '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . '">
+                                                  <div' . $mdb_init . ' class="form-outline' . ($group ? ' input-group' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+                                                      ' . $render . '
+                                                      <label class="form-label' . $label . '" for="' . Html::safe($definition->getColumn()) . '">
+                                                        ' . Html::safe($definition->getLabel()) . '
+                                                      </label>
+                                                  </div>
+                                              </div>',
 //            ' . $this->renderTooltip($definition) . '
         };
 

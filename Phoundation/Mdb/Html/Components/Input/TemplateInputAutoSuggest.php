@@ -16,7 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+use Phoundation\Exception\OutOfBoundsException;
+use Phoundation\Utils\Arrays;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
+use Phoundation\Web\Html\Components\Script;
 
 
 class TemplateInputAutoSuggest extends TemplateInputText
@@ -26,7 +29,65 @@ class TemplateInputAutoSuggest extends TemplateInputText
      */
     public function __construct(InputAutoSuggest $component)
     {
-        $component->addClasses('form-control');
+        $component->addClasses('form-outline autocomplete')
+                  ->addData(null, 'data-mdb-input-init');
+
         parent::__construct($component);
+    }
+
+
+    /**
+     * Render and return the HTML for this object
+     *
+     * @return string|null
+     */
+    public function render(): ?string
+    {
+        $component = $this->getComponent();
+
+        // Auto suggest is only available when not readonly or not disabled
+        if ($component->getReadonly() or $component->getDisabled()) {
+            return parent::render();
+        }
+
+        if (empty($component->getName())) {
+            throw new OutOfBoundsException(tr('No required HTML name attribute specified for auto suggest component'));
+        }
+
+        if (empty($component->getSourceUrl())) {
+            throw new OutOfBoundsException(tr('No source URL specified for auto suggest component ":name"', [
+                ':name' => $component->getName(),
+            ]));
+        }
+
+        if ($component->getVariables()) {
+            $variables = $component->getVariables()->getSource();
+            $variables = ',' . Arrays::implodeWithKeys($variables, ',' . PHP_EOL, ':');
+
+        } else {
+            $variables = null;
+        }
+
+        // Create JavaScript code for the component
+        $script = Script::new()
+                         ->setContent('const asyncAutocomplete = document.querySelector(\'#' . $component->getId() . '-div\');
+                                       const asyncFilter = async (query) => {
+                                         const response = await fetch(`' . $component->getSourceUrl() . '?term=${encodeURI(query)}`);
+                                         const data = await response.json();
+                                         return data.data;
+                                       };
+                                       
+                                       new mdb.Autocomplete(asyncAutocomplete, {
+                                         filter: asyncFilter,
+                                         displayValue: (value) => value.label
+                                       });');
+
+        return $script->render() . parent::render();
+
+// TODO Delete the following section
+//        return $script->render() . '<div id="' . $component->getId() . '" class="form-outline autocomplete" data-mdb-input-init>
+//                                      <input type="text" id="form2" class="form-control" />
+//                                      <label class="form-label" for="form2">' . $component->getDefinitions()->getLabel() . '</label>
+//                                    </div>';
     }
 }
