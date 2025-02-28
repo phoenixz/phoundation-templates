@@ -85,7 +85,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                     $definition->setElement(EnumElement::select);
 
                     Log::warning(tr('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
-                        ':data_entry' => get_class($definition->getDataEntry()),
+                        ':data_entry' => $definition->getDataEntry() ? get_class($definition->getDataEntry()) : 'N/A',
                         ':component'  => $definition->getColumn(),
                         ':element'    => $component->getElement(),
                     ]));
