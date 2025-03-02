@@ -24,6 +24,7 @@ use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterButtonsInterface
 use Phoundation\Web\Html\Components\Input\Interfaces\InputSelectInterface;
 use Phoundation\Web\Html\Components\Widgets\Tooltips\Tooltip;
 use Phoundation\Web\Html\Enums\EnumElement;
+use Phoundation\Web\Html\Enums\EnumInputType;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Templates\Phoundation\Mdb\TemplatePage;
@@ -84,7 +85,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                     $definition->setElement(EnumElement::select);
 
                     Log::warning(tr('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
-                        ':data_entry' => get_class($definition->getDataEntry()),
+                        ':data_entry' => $definition->getDataEntry() ? get_class($definition->getDataEntry()) : 'N/A',
                         ':component'  => $definition->getColumn(),
                         ':element'    => $component->getElement(),
                     ]));
@@ -142,15 +143,23 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 $mdb_init = '';
         }
 
-        $this->render .= match ($definition->getInputType()?->value) {
-            default    => '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . '">
-                                 <div' . $mdb_init . ' class="form-outline' . ($group ? ' input-group' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
-                                     ' . $render . '
-                                     <label class="form-label' . $label . '" for="' . Html::safe($definition->getColumn()) . '">
-                                       ' . Html::safe($definition->getLabel()) . '
-                                     </label>
-                                 </div>
-                             </div>',
+        $this->render .= match ($definition->getInputType()) {
+            EnumInputType::auto_suggest => '  <div id="' . $component->getId() . '-div" class="autocomplete ' . TemplatePage::getBottomMarginString() . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . '">
+                                                  <div' . $mdb_init . ' class="form-outline' . ($group ? ' input-group' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+                                                      ' . $render . '
+                                                      <label class="form-label' . $label . '" for="' . Html::safe($definition->getColumn()) . '">
+                                                        ' . Html::safe($definition->getLabel()) . '
+                                                      </label>
+                                                  </div>
+                                              </div>',
+            default                     => '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . '">
+                                                  <div' . $mdb_init . ' class="form-outline' . ($group ? ' input-group' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+                                                      ' . $render . '
+                                                      <label class="form-label' . $label . '" for="' . Html::safe($definition->getColumn()) . '">
+                                                        ' . Html::safe($definition->getLabel()) . '
+                                                      </label>
+                                                  </div>
+                                              </div>',
 //            ' . $this->renderTooltip($definition) . '
         };
 

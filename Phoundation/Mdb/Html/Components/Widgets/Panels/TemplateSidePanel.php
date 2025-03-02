@@ -49,14 +49,14 @@ class TemplateSidePanel extends TemplateRenderer
 
                               <a data-mdb-ripple-init class="d-flex py-4 mb-3 justify-content-center" style="border-bottom: 2px solid #f5f5f5" href="' . Url::new('profile')->makeWww() . '" data-mdb-ripple-color="primary">
                                 ' . Session::getUserObject()
-                                           ->getProfileImageObject()->getHtmlImgObject()
-                                                                    ->setSrc(Url::new('img/profiles/default.png')->makeImg())
-                                                                    ->setId('menu-profile-image')
-                                                                    ->setClass('img-circle elevation-2')
-                                                                    ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
-                                                                    ->setWidth(32)
-                                                                    ->setHeight(32)
-                                                                    ->render() . Session::getUserObject()->getDisplayName() . '
+                                           ->getProfileImageObject()->getImageFileObject()
+                                                                    ->getImgObject()->setSrc(Url::new('img/profiles/default.png')->makeImg())
+                                                                                    ->setId('menu-profile-image')
+                                                                                    ->setClass('img-circle elevation-2')
+                                                                                    ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
+                                                                                    ->setWidth(32)
+                                                                                    ->setHeight(32)
+                                                                                    ->render() . Session::getUserObject()->getDisplayName() . '
                               </a>
                               ' . $this->component->getMenu()?->render() . '
                             </nav>';
