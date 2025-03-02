@@ -48,15 +48,15 @@ class TemplateSidePanel extends TemplateRenderer
                               </a>
 
                               <a data-mdb-ripple-init class="d-flex py-4 mb-3 justify-content-center" style="border-bottom: 2px solid #f5f5f5" href="' . Url::new('profile')->makeWww() . '" data-mdb-ripple-color="primary">
-                                ' . Session::getUserObject()->getImageFileObject()
-                                           ->getImgObject()
-                                               ->setSrc(Url::new('img/profiles/default.png')->makeImg())
-                                               ->setId('menu-profile-image')
-                                               ->setClass('img-circle elevation-2')
-                                               ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
-                                               ->setWidth(32)
-                                               ->setHeight(32)
-                                               ->render() . Session::getUserObject()->getDisplayName() . '
+                                ' . Session::getUserObject()
+                                           ->getProfileImageObject()->getHtmlImgObject()
+                                                                    ->setSrc(Url::new('img/profiles/default.png')->makeImg())
+                                                                    ->setId('menu-profile-image')
+                                                                    ->setClass('img-circle elevation-2')
+                                                                    ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
+                                                                    ->setWidth(32)
+                                                                    ->setHeight(32)
+                                                                    ->render() . Session::getUserObject()->getDisplayName() . '
                               </a>
                               ' . $this->component->getMenu()?->render() . '
                             </nav>';
@@ -73,13 +73,13 @@ class TemplateSidePanel extends TemplateRenderer
                               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                 <div class="image">
                                   <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">
-                                    ' . Session::getUserObject()->getImageFileObject()
-                                          ->getImgObject()
-                                              ->setId('menu-profile-image')
-                                              ->setSrc(Url::new('img/profiles/default.png')->makeImg())
-                                              ->setClass('img-circle elevation-2')
-                                              ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
-                                              ->render() . '
+                                    ' . Session::getUserObject()
+                                               ->getProfileImageObject()->getHtmlImgObject()
+                                                                        ->setId('menu-profile-image')
+                                                                        ->setSrc(Url::new('img/profiles/default.png')->makeImg())
+                                                                        ->setClass('img-circle elevation-2')
+                                                                        ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
+                                                                        ->render() . '
                                   </a>
                                 </div>
                                 <div class="info">
