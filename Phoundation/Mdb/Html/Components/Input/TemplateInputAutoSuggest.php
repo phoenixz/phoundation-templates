@@ -45,6 +45,15 @@ class TemplateInputAutoSuggest extends TemplateInputText
     {
         $component = $this->getComponent();
 
+        if (empty($component->getId())) {
+            if (empty($component->getName())) {
+                throw new OutOfBoundsException(tr('Cannot render autosuggest input, it has no id nor name specified'));
+            }
+
+            // Copy name from ID
+            $component->setId($component->getName());
+        }
+
         // Auto suggest is only available when not readonly or not disabled
         if ($component->getReadonly() or $component->getDisabled()) {
             return parent::render();
@@ -69,25 +78,18 @@ class TemplateInputAutoSuggest extends TemplateInputText
         }
 
         // Create JavaScript code for the component
-        $script = Script::new()
-                         ->setContent('const asyncAutocomplete = document.querySelector(\'#' . $component->getId() . '-div\');
-                                       const asyncFilter = async (query) => {
-                                         const response = await fetch(`' . $component->getSourceUrl() . '?term=${encodeURI(query)}`);
-                                         const data = await response.json();
-                                         return data.data;
-                                       };
-                                       
-                                       new mdb.Autocomplete(asyncAutocomplete, {
-                                         filter: asyncFilter,
-                                         displayValue: (value) => value.label
-                                       });');
-
-        return $script->render() . parent::render();
-
-// TODO Delete the following section
-//        return $script->render() . '<div id="' . $component->getId() . '" class="form-outline autocomplete" data-mdb-input-init>
-//                                      <input type="text" id="form2" class="form-control" />
-//                                      <label class="form-label" for="form2">' . $component->getDefinitions()->getLabel() . '</label>
-//                                    </div>';
+        return Script::new()
+                     ->setContent('const asyncAutocomplete = document.querySelector(\'#' . $component->getId() . '-div\');
+                                   const asyncFilter = async (query) => {
+                                     const response = await fetch(`' . $component->getSourceUrl() . '?term=${encodeURI(query)}`);
+                                     const data = await response.json();
+                                     return data.data;
+                                   };
+                                   
+                                   new mdb.Autocomplete(asyncAutocomplete, {
+                                     filter: asyncFilter,
+                                     displayValue: (value) => value.label
+                                   });')
+                     ->render() . parent::render();
     }
 }
