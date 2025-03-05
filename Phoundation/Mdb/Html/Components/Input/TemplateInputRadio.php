@@ -29,4 +29,20 @@ class TemplateInputRadio extends TemplateInput
         parent::__construct($component);
         $component->getClasses()->removeKeys('form-control')->add(true, 'form-check-input');
     }
+
+
+    /**
+     * Render and return the HTML for this object
+     *
+     * @return string|null
+     */
+    public function render(): ?string
+    {
+        $component = $this->getComponent();
+
+        return '<div class="form-check' . ($component->getInline() ? ' form-check-inline' : '') . '">
+                    ' . parent::render() . '
+                    ' . ($component->getLabel() ? '<label for="' . $component->getId() . '" class="form-check-label">' . $component->getLabel() . '</label>' : '') . '
+                </div>';
+    }
 }
