@@ -82,13 +82,15 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         } else {
             if ($component instanceof InputSelectInterface) {
                 if ($definition->getElement() !== EnumElement::select) {
-                    $definition->setElement(EnumElement::select);
+                    if ($definition->getElement() !== 'select') {
+                        Log::warning(ts('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
+                            ':data_entry' => get_class($definition->getDataEntry()),
+                            ':component'  => $definition->getColumn(),
+                            ':element'    => $component->getElement(),
+                        ]));
+                    }
 
-                    Log::warning(ts('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
-                        ':data_entry' => get_class($definition->getDataEntry()),
-                        ':component'  => $definition->getColumn(),
-                        ':element'    => $component->getElement(),
-                    ]));
+                    $definition->setElement(EnumElement::select);
                 }
             }
 
