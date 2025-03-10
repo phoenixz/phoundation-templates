@@ -19,9 +19,9 @@ namespace Templates\Phoundation\Mdb\Html\Components\Forms;
 use Phoundation\Core\Log\Log;
 use Phoundation\Data\DataEntries\Definitions\Interfaces\DefinitionInterface;
 use Phoundation\Exception\OutOfBoundsException;
-use Phoundation\Web\Html\Components\Forms\Interfaces\DataEntryFormColumnInterface;
 use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterButtonsInterface;
 use Phoundation\Web\Html\Components\Input\Interfaces\InputSelectInterface;
+use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
 use Phoundation\Web\Html\Components\Widgets\Tooltips\Tooltip;
 use Phoundation\Web\Html\Enums\EnumElement;
 use Phoundation\Web\Html\Enums\EnumInputType;
@@ -35,7 +35,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
     /**
      * FilterForm class constructor
      */
-    public function __construct(DataEntryFormColumnInterface $component)
+    public function __construct(RenderInterface $component)
     {
         parent::__construct($component);
     }
@@ -84,7 +84,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 if ($definition->getElement() !== EnumElement::select) {
                     if ($definition->getElement() !== 'select') {
                         Log::warning(ts('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
-                            ':data_entry' => get_class($definition->getDataEntry()),
+                            ':data_entry' => get_class($definition->getDataEntryObject()),
                             ':component'  => $definition->getColumn(),
                             ':element'    => $component->getElement(),
                         ]));
