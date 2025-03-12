@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Tabs;
 
+use Phoundation\Core\Log\Log;
 use Phoundation\Enums\EnumOrientation;
 use Phoundation\Exception\UnderConstructionException;
 use Phoundation\Web\Html\Components\Widgets\Tabs\Tabs;
@@ -55,9 +56,26 @@ class TemplateTabs extends TemplateRenderer
                                         <ul class="nav nav-tabs mb-3" role="tablist">';
 
                 // Render the tabs
-                $active = true;
+                $active_tab = $tabs->getActiveTab();
+
+                if (empty($active_tab)) {
+                    $first_tab_active = true;
+                    $active           = true;
+
+                } else {
+                    $first_tab_active = false;
+                    $active           = false;
+                }
 
                 foreach ($tabs as $tab) {
+                    if (!$first_tab_active) {
+                        $name = $tab->getName();
+
+                        if ($name === $active_tab) {
+                            $active = true;
+                        }
+                    }
+
                     $this->render .= '      <li class="nav-item" role="presentation">
                                                 <a data-mdb-tab-init class="nav-link ' . ($active ? ' active' : '') . $tab->getClass(' ') . '" id="' . $tab->getId() . '-tab" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
                                                     ' . $tab->getLabel() . '
@@ -71,10 +89,26 @@ class TemplateTabs extends TemplateRenderer
                 $this->render .= '      </ul>
                                         <div class="tab-content" id="ex-with-icons-content">';
 
-                // Render the tab contents
-                $active = true;
+                $active_tab = $tabs->getActiveTab();
+
+                if (empty($active_tab)) {
+                    $first_tab_active = true;
+                    $active           = true;
+
+                } else {
+                    $first_tab_active = false;
+                    $active           = false;
+                }
 
                 foreach ($tabs as $tab) {
+                    if (!$first_tab_active) {
+                        $name = $tab->getName();
+
+                        if ($name === $active_tab) {
+                            $active = true;
+                        }
+                    }
+
                     $this->render .= '      <div class="tab-pane fade' . ($active ? ' active show' : '') . '" id="' . $tab->getId() . '" role="tabpanel" aria-labelledby="' . $tab->getId() . '-tab">
                                                 ' . $tab->getContent() . '
                                             </div>';
@@ -93,9 +127,26 @@ class TemplateTabs extends TemplateRenderer
                                             <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist" aria-orientation="vertical">';
 
                 // Render the tabs
-                $active = true;
+                $active_tab = $tabs->getActiveTab();
+
+                if (empty($active_tab)) {
+                    $first_tab_active = true;
+                    $active           = true;
+
+                } else {
+                    $first_tab_active = false;
+                    $active           = false;
+                }
 
                 foreach ($tabs as $tab) {
+                    if (!$first_tab_active) {
+                        $name = $tab->getName();
+
+                        if ($name === $active_tab) {
+                            $active = true;
+                        }
+                    }
+
                     $this->render .= '          <a data-mdb-tab-init class="nav-link' . $tab->getClass(' ') . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
                                                     ' . $tab->getLabel() . '
                                                 </a>';
@@ -108,10 +159,26 @@ class TemplateTabs extends TemplateRenderer
                                         <div class="col-' . $content_display_size . ' col-sm-' . $content_display_size . '">
                                             <div class="tab-content" id="v-tabs-tabContent">';
 
-                // Render the tab contents
-                $active = true;
+                $active_tab = $tabs->getActiveTab();
+
+                if (empty($active_tab)) {
+                    $first_tab_active = true;
+                    $active           = true;
+
+                } else {
+                    $first_tab_active = false;
+                    $active           = false;
+                }
 
                 foreach ($tabs as $tab) {
+                    if (!$first_tab_active) {
+                        $name = $tab->getName();
+
+                        if ($name === $active_tab) {
+                            $active = true;
+                        }
+                    }
+
                     $this->render .= '          <div class="tab-pane fade' . ($active ? ' active show' : '') . '" id="' . $tab->getId() . '" role="tabpanel" aria-labelledby="' . $tab->getId() . '-tab">
                                                   ' . $tab->getContent() . '
                                                 </div>';
@@ -132,9 +199,26 @@ class TemplateTabs extends TemplateRenderer
                                             <div class="tab-content" id="vert-tabs-tabContent">';
 
                 // Render the tab contents
-                $active = true;
+                $active_tab = $tabs->getActiveTab();
+
+                if (empty($active_tab)) {
+                    $first_tab_active = true;
+                    $active           = true;
+
+                } else {
+                    $first_tab_active = false;
+                    $active           = false;
+                }
 
                 foreach ($tabs as $tab) {
+                    if (!$first_tab_active) {
+                        $name = $tab->getName();
+
+                        if ($name === $active_tab) {
+                            $active = true;
+                        }
+                    }
+
                     $this->render .= '          <div class="tab-pane text-left fade' . ($active ? ' active show' : '') . '" id="' . $tab->getId() . '" role="tabpanel" aria-labelledby="' . $tab->getId() . '-tab">
                                                     ' . $tab->getContent() . '
                                                 </div>';
@@ -148,9 +232,26 @@ class TemplateTabs extends TemplateRenderer
                                             <div class="nav flex-column nav-tabs nav-tabs-right h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">';
 
                 // Render the tabs
-                $active = true;
+                $active_tab = $tabs->getActiveTab();
+
+                if (empty($active_tab)) {
+                    $first_tab_active = true;
+                    $active           = true;
+
+                } else {
+                    $first_tab_active = false;
+                    $active           = false;
+                }
 
                 foreach ($tabs as $tab) {
+                    if (!$first_tab_active) {
+                        $name = $tab->getName();
+
+                        if ($name === $active_tab) {
+                            $active = true;
+                        }
+                    }
+
                     $this->render .= '          <a class="nav-link' . $tab->getClass(' ') . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
                                                     ' . $tab->getLabel() . '
                                                 </a>';
