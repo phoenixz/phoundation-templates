@@ -30,9 +30,9 @@ class TemplateNotificationsDropDown extends TemplateRenderer
     /**
      * NotificationsDropDown class constructor
      */
-    public function __construct(NotificationsDropDown $component)
+    public function __construct(NotificationsDropDown $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -43,34 +43,34 @@ class TemplateNotificationsDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->component->getAllNotificationsUrl()) {
+        if (!$this->o_component->getAllNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No all notifications page URL specified'));
         }
 
-        if (!$this->component->getNotificationsUrl()) {
+        if (!$this->o_component->getNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No notifications page URL specified'));
         }
 
-        $notifications = $this->component->getNotifications();
+        $o_notifications = $this->o_component->getNotifications();
 
-        if ($notifications) {
-            $notifications->autoUpdate();
+        return cache('html')->get($o_notifications->getCacheKey() . '-AdminLteNotificationsDropDown', function () use ($o_notifications) {
+            if ($o_notifications) {
+                $o_notifications->autoUpdate();
 
-            $count = $notifications->getCount();
-            $mode = $notifications->getMostImportantMode();
-            $mode = strtolower($mode);
+                $count = $o_notifications->getCount();
+                $mode  = $o_notifications->getMostImportantMode();
+                $mode  = strtolower($mode);
+                $mode  = match ($mode) {
+                    // With HTML, "notice" and "information" are known as "info"
+                    'unknown', 'notice', 'information' => 'info',
+                    default                            => $mode
+                };
 
-            // With HTML, "notice" and "information" are known as "info"
-            $mode = match ($mode) {
-                'unknown', 'notice', 'information' => 'info',
-                default => $mode
-            };
+            } else {
+                $count = 0;
+            }
 
-        } else {
-            $count = 0;
-        }
-
-        $this->render = '   <a class="nav-link" data-toggle="dropdown" href="#">
+            $this->render = '   <a class="nav-link" data-toggle="dropdown" href="#">
                               <i class="far fa-bell"></i>
                               ' . ($count ? '<span class="badge badge-' . Html::safe($mode) . ' navbar-badge">' . Html::safe($count > 99 ? '99+' : $count) . '</span>' : null) . '                              
                             </a>
@@ -78,25 +78,26 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                                   <span class="dropdown-item dropdown-header">' . tr(':count Notifications', [':count' => ($count > 99 ? '99+' : $count)]) . '</span>
                                   <div class="dropdown-divider"></div>';
 
-        if ($count) {
-            $current = 0;
+            if ($count) {
+                $current = 0;
 
-            foreach ($notifications as $notification) {
-                if (++$current > 12) {
-                    break;
-                }
+                foreach ($o_notifications as $o_notification) {
+                    if (++$current > 12) {
+                        break;
+                    }
 
-                $this->render .= '<a href="' . Html::safe(str_replace(':ID', (string) $notification->getId(), (string) $this->component->getNotificationsUrl())) . '" class="dropdown-item notification open-modal" data-id="' . $notification->getId() . '">
-                                    ' . ($notification->getIcon() ? '<i class="text-' . Html::safe($notification->getMode()->value) . ' fas fa-' . Html::safe($notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($notification->getTitle(), 24)) . '
-                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($notification->getCreatedOnObject())) . '</span>
+                    $this->render .= '<a href="' . Html::safe(str_replace(':ID', (string) $o_notification->getId(), (string) $this->o_component->getNotificationsUrl())) . '" class="dropdown-item notification open-modal" data-id="' . $o_notification->getId() . '">
+                                    ' . ($o_notification->getIcon() ? '<i class="text-' . Html::safe($o_notification->getMode()->value) . ' fas fa-' . Html::safe($o_notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($o_notification->getTitle(), 24)) . '
+                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($o_notification->getCreatedOnObject())) . '</span>
                                   </a>
                                   <div class="dropdown-divider"></div>';
+                }
             }
-        }
 
-        $this->render .= '        <a href="' . Html::safe($this->component->getAllNotificationsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See all unread notifications') . '</a>
+            $this->render .= '        <a href="' . Html::safe($this->o_component->getAllNotificationsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See all unread notifications') . '</a>
                                 </div>';
 
-        return parent::render() . NotificationModal::new()->render();
+            return parent::render() . NotificationModal::new()->render();
+        });
     }
 }

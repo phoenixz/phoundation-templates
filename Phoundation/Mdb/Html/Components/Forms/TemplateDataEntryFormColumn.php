@@ -35,9 +35,9 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
     /**
      * FilterForm class constructor
      */
-    public function __construct(DataEntryFormColumnInterface $component)
+    public function __construct(DataEntryFormColumnInterface $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -52,12 +52,12 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->component) {
+        if (!$this->o_component) {
             return null;
         }
 
-        $definition = $this->component->getDefinition();
-        $component  = $this->component->getColumnComponent();
+        $definition = $this->o_component->getDefinition();
+        $component  = $this->o_component->getColumnComponent();
         $scripts    = '';
 
         if (!$definition) {

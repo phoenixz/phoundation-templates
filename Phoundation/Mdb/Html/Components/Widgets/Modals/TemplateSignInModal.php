@@ -31,9 +31,9 @@ class TemplateSignInModal extends TemplateRenderer
     /**
      * SignInModal class constructor
      */
-    public function __construct(SignInModal $component)
+    public function __construct(SignInModal $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -45,7 +45,7 @@ class TemplateSignInModal extends TemplateRenderer
     public function render(): ?string
     {
         // Build the form
-        $form = $this->component->getForm()->render();
+        $form = $this->o_component->getForm()->render();
 
         // Build the layout
         $layout = Grid::new()
@@ -56,7 +56,7 @@ class TemplateSignInModal extends TemplateRenderer
             );
 
         // Set defaults
-        $this->component
+        $this->o_component
             ->setId('signinModal')
             ->setSize('lg')
             ->setTitle(tr('Sign in'))

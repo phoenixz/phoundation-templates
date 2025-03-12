@@ -25,8 +25,8 @@ abstract class TemplateBox extends TemplateRenderer
     /**
      * Box class constructor
      */
-    public function __construct(Box $component)
+    public function __construct(Box $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 }

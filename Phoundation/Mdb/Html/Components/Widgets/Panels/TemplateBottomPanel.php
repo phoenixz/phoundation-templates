@@ -27,9 +27,9 @@ class TemplateBottomPanel extends TemplateRenderer
     /**
      * BottomPanel class constructor
      */
-    public function __construct(BottomPanel $component)
+    public function __construct(BottomPanel $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 

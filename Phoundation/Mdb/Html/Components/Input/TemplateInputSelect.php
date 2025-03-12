@@ -30,12 +30,12 @@ class TemplateInputSelect extends TemplateInput
     /**
      * Select class constructor
      */
-    public function __construct(InputSelect $component)
+    public function __construct(InputSelect $o_component)
     {
-        $component->addClasses('col-sm-' . $component->getDefinition()->getSize());
-        $component->addClasses('form-control');
-        $component->getAttributes()->add('', 'data-mdb-select-init');
-        parent::__construct($component);
+        $o_component->addClasses('col-sm-' . $o_component->getDefinition()->getSize());
+        $o_component->addClasses('form-control');
+        $o_component->getAttributes()->add('', 'data-mdb-select-init');
+        parent::__construct($o_component);
     }
 
 
@@ -44,7 +44,7 @@ class TemplateInputSelect extends TemplateInput
      */
     public function render(): ?string
     {
-        $component = $this->component;
+        $component = $this->o_component;
 
         // Hidden elements render as an <input hidden>
         if ($component->getHidden()) {

@@ -26,9 +26,9 @@ class TemplateTabs extends TemplateRenderer
     /**
      * Card class constructor
      */
-    public function __construct(Tabs $component)
+    public function __construct(Tabs $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -37,7 +37,7 @@ class TemplateTabs extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $tabs                 = $this->component;
+        $tabs                 = $this->o_component;
         $content_display_size = $tabs->getContentDisplaySize()->value;
         $tab_display_size     = 12 - $content_display_size;
 

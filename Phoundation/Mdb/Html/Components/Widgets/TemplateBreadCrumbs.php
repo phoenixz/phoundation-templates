@@ -28,9 +28,9 @@ class TemplateBreadCrumbs extends TemplateRenderer
     /**
      * BreadCrumbs class constructor
      */
-    public function __construct(BreadCrumbs $component)
+    public function __construct(BreadCrumbs $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -43,10 +43,10 @@ class TemplateBreadCrumbs extends TemplateRenderer
     {
         $this->render = ' <ol class="breadcrumb float-sm-right">';
 
-        if ($this->component->getSource()) {
-            $count = count($this->component->getSource());
+        if ($this->o_component->getSource()) {
+            $count = count($this->o_component->getSource());
 
-            foreach ($this->component->getSource() as $url => $label) {
+            foreach ($this->o_component->getSource() as $url => $label) {
                 $label = Strings::truncate($label, 48);
 
                 if (!--$count) {

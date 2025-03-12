@@ -24,10 +24,10 @@ class TemplateInputDateTimeRange extends TemplateInputText
     /**
      * InputText class constructor
      */
-    public function __construct(InputDateTimeRange $component)
+    public function __construct(InputDateTimeRange $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 
 

@@ -25,9 +25,9 @@ class TemplateIcon extends TemplateRenderer
     /**
      * Icons class constructor
      */
-    public function __construct(Icon $component)
+    public function __construct(Icon $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -39,7 +39,7 @@ class TemplateIcon extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->component->addClasses('fa-lg');
+        $this->o_component->addClasses('fa-lg');
         $html = parent::render();
         return '<span>' . $html . '</span>';
     }

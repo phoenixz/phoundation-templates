@@ -26,9 +26,9 @@ class TemplateGridColumn extends TemplateRenderer
     /**
      * GridColumn class constructor
      */
-    public function __construct(GridColumn $component)
+    public function __construct(GridColumn $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -39,15 +39,15 @@ class TemplateGridColumn extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $class        = $this->component->getClass();
-        $this->render = '   <div class="col' . (Html::safe($this->component->getTier()->value) ? '-' . Html::safe($this->component->getTier()->value) : '') . '-' . Html::safe($this->component->getSize()->value) . ($class ? ' ' . $class : '') . '">';
+        $class        = $this->o_component->getClass();
+        $this->render = '   <div class="col' . (Html::safe($this->o_component->getTier()->value) ? '-' . Html::safe($this->o_component->getTier()->value) : '') . '-' . Html::safe($this->o_component->getSize()->value) . ($class ? ' ' . $class : '') . '">';
 
-        if ($this->component->getForm()) {
+        if ($this->o_component->getForm()) {
             // Return column content rendered in a form
-            $this->render .= $this->component->getForm()->setContent($this->component->getContent())->render();
-            $this->component->setForm(null);
+            $this->render .= $this->o_component->getForm()->setContent($this->o_component->getContent())->render();
+            $this->o_component->setForm(null);
         } else {
-            $this->render .= $this->component->getContent();
+            $this->render .= $this->o_component->getContent();
         }
 
         $this->render .= '</div>';

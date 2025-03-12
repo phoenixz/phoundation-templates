@@ -27,9 +27,9 @@ class TemplateMessagesDropDown extends TemplateRenderer
     /**
      * MessagesDropDown class constructor
      */
-    public function __construct(MessagesDropDown $component)
+    public function __construct(MessagesDropDown $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -40,12 +40,12 @@ class TemplateMessagesDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->component->getMessagesUrl()) {
+        if (!$this->o_component->getMessagesUrl()) {
             throw new OutOfBoundsException(tr('No messages page URL specified'));
         }
 
-        if ($this->component->getMessages()) {
-            $count = $this->component->getMessages()->count();
+        if ($this->o_component->getMessages()) {
+            $count = $this->o_component->getMessages()->count();
         } else {
             $count = 0;
         }
@@ -59,7 +59,7 @@ class TemplateMessagesDropDown extends TemplateRenderer
                                   <div class="dropdown-divider"></div>';
 
         if ($count) {
-            foreach ($this->component->getMessages() as $message) {
+            foreach ($this->o_component->getMessages() as $message) {
                 $this->render . -'<a href="' . Html::safe($message->getUrl()) . '" class="dropdown-item">
                                     <!-- Message Start -->
                                     <div class="media">
@@ -80,7 +80,7 @@ class TemplateMessagesDropDown extends TemplateRenderer
         }
 
         $this->render .= '
-                                  <a href="' . Html::safe($this->component->getMessagesUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See All Messages') . '</a>
+                                  <a href="' . Html::safe($this->o_component->getMessagesUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See All Messages') . '</a>
                                 </div>';
 
         return parent::render();

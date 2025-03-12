@@ -25,9 +25,9 @@ class TemplateButtons extends TemplateRenderer
     /**
      * Buttons class constructor
      */
-    public function __construct(Buttons $component)
+    public function __construct(Buttons $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -41,11 +41,11 @@ class TemplateButtons extends TemplateRenderer
         $render       = [];
         $this->render = '';
 
-        if ($this->component->getGroup()) {
+        if ($this->o_component->getGroup()) {
             $this->render .= '<div class="btn-group" role="group" aria-label="Button group">';
         }
 
-        foreach ($this->component->getSource() as $button) {
+        foreach ($this->o_component->getSource() as $button) {
             if (is_string($button)) {
                 $render[] = $button;
             } else {
@@ -55,7 +55,7 @@ class TemplateButtons extends TemplateRenderer
 
         $this->render = implode(' ', $render);
 
-        if ($this->component->getGroup()) {
+        if ($this->o_component->getGroup()) {
             $this->render .= '</div>';
         }
 

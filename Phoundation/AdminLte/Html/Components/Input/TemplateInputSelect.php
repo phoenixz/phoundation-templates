@@ -30,10 +30,10 @@ class TemplateInputSelect extends TemplateInput
     /**
      * Select class constructor
      */
-    public function __construct(InputSelect $component)
+    public function __construct(InputSelect $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 
 
@@ -42,7 +42,7 @@ class TemplateInputSelect extends TemplateInput
      */
     public function render(): ?string
     {
-        $component = $this->component;
+        $component = $this->o_component;
 
         // Hidden elements render as an <input hidden>
         if ($component->getHidden()) {

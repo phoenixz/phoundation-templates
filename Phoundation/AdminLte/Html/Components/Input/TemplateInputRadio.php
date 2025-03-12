@@ -24,10 +24,10 @@ class TemplateInputRadio extends TemplateInput
     /**
      * InputRadio class constructor
      */
-    public function __construct(InputRadio $component)
+    public function __construct(InputRadio $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 
 
@@ -38,7 +38,7 @@ class TemplateInputRadio extends TemplateInput
      */
     public function render(): ?string
     {
-        $component = $this->getComponent();
+        $component = $this->getComponentObject();
 
         return '<div class="custom-control custom-checkbox">
                     ' . parent::render() . '

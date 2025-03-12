@@ -26,9 +26,9 @@ class TemplateInfoBox extends TemplateRenderer
     /**
      * InfoBox class constructor
      */
-    public function __construct(InfoBox $component)
+    public function __construct(InfoBox $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -40,13 +40,13 @@ class TemplateInfoBox extends TemplateRenderer
     public function render(): ?string
     {
         $this->render = '   <div class="info-box shadow-none">
-                              <span class="info-box-icon bg-' . Html::safe($this->component->getMode()->value) . '"><i class="far ' . Html::safe($this->component->getIcon()) . '"></i></span>
+                              <span class="info-box-icon bg-' . Html::safe($this->o_component->getMode()->value) . '"><i class="far ' . Html::safe($this->o_component->getIcon()) . '"></i></span>
                 
                               <div class="info-box-content">
-                                <span class="info-box-text">' . Html::safe($this->component->getTitle()) . '</span>
-                                <span class="info-box-number">' . Html::safe($this->component->get()) . '</span>
+                                <span class="info-box-text">' . Html::safe($this->o_component->getTitle()) . '</span>
+                                <span class="info-box-number">' . Html::safe($this->o_component->get()) . '</span>
                               </div>
-                              ' . Html::safe($this->component->getDescription()) . '
+                              ' . Html::safe($this->o_component->getDescription()) . '
                             </div>';
 
         return parent::render();

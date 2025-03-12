@@ -24,9 +24,9 @@ class TemplateInputImage extends TemplateInput
     /**
      * InputImage class constructor
      */
-    public function __construct(InputImage $component)
+    public function __construct(InputImage $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 }

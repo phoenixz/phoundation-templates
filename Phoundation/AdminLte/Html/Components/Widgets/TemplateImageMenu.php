@@ -27,9 +27,9 @@ class TemplateImageMenu extends TemplateRenderer
     /**
      * ImageMenu class constructor
      */
-    public function __construct(ImageMenu $component)
+    public function __construct(ImageMenu $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -40,22 +40,22 @@ class TemplateImageMenu extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->component->getImage()) {
+        if (!$this->o_component->getImage()) {
             throw new OutOfBoundsException(tr('Cannot render ImageMenu object HTML, no image specified'));
         }
 //.        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal" style=""> Launch demo modal </button>
 
         $this->render = ' <div class="dropdown image-menu">
-                            <a class="' . ($this->component->getMenu() ? 'dropdown-toggle ' : '') . 'd-flex align-items-center hidden-arrow"
-                              href="' . ($this->component->getMenu() ? '#' : Html::safe($this->component->getUrl())) . '"
+                            <a class="' . ($this->o_component->getMenu() ? 'dropdown-toggle ' : '') . 'd-flex align-items-center hidden-arrow"
+                              href="' . ($this->o_component->getMenu() ? '#' : Html::safe($this->o_component->getUrl())) . '"
                               id="navbarDropdownMenuAvatar" aria-expanded="false"
-                              ' . ($this->component->getMenu() ? 'role="button" data-mdb-toggle="dropdown"' : ($this->component->getModalSelector() ? 'data-mdb-toggle="modal" data-mdb-target="' . Html::safe($this->component->getModalSelector()) . '"' : null)) . '>';
+                              ' . ($this->o_component->getMenu() ? 'role="button" data-mdb-toggle="dropdown"' : ($this->o_component->getModalSelector() ? 'data-mdb-toggle="modal" data-mdb-target="' . Html::safe($this->o_component->getModalSelector()) . '"' : null)) . '>';
 
-        $this->render .= $this->component->getImage()->getImgObject()
-            ->setHeight($this->component->getHeight())
-            ->addClasses('rounded-circle')
-            ->setExtra('loading="lazy"')
-            ->render();
+        $this->render .= $this->o_component->getImage()->getImgObject()
+                                           ->setHeight($this->o_component->getHeight())
+                                           ->addClasses('rounded-circle')
+                                           ->setExtra('loading="lazy"')
+                                           ->render();
 
         $this->render .= '  </a>
                             <ul
@@ -63,8 +63,8 @@ class TemplateImageMenu extends TemplateRenderer
                               aria-labelledby="navbarDropdownMenuAvatar"
                             >';
 
-        if ($this->component->getMenu()) {
-            foreach ($this->component->getMenu() as $label => $url) {
+        if ($this->o_component->getMenu()) {
+            foreach ($this->o_component->getMenu() as $label => $url) {
                 $this->render .= '<li>
                                     <a class="dropdown-item" href="' . Html::safe($url) . '">' . Html::safe($label) . '</a>
                                   </li>';

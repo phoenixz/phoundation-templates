@@ -31,9 +31,9 @@ class TemplateSignInModal extends TemplateRenderer
     /**
      * SignInModal class constructor
      */
-    public function __construct(SignInModal $component)
+    public function __construct(SignInModal $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -45,36 +45,41 @@ class TemplateSignInModal extends TemplateRenderer
     public function render(): ?string
     {
         // Build the form
-        $form = $this->component->getForm()->render();
+        $form = $this->o_component->getForm()->render();
 
         // Build the layout
         $layout = Grid::new()
-            ->addGridRow(GridRow::new()
-                ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::three))
-                ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::six)->setContent($form))
-                ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::three))
-            );
+                      ->addGridRow(GridRow::new()
+                                          ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::three))
+                                          ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::six)->setContent($form))
+                                          ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::three)));
 
         // Set defaults
-        $this->component
-            ->setId('signinModal')
-            ->setSize('lg')
-            ->setTitle(tr('Sign in'))
-            ->setContent($layout->render());
+        $this->o_component
+             ->setId('signinModal')
+             ->setSize('lg')
+             ->setTitle(tr('Sign in'))
+             ->setContent($layout->render());
 
         // Render the sign in modal.
-        return parent::render() . Script::new()
-            ->setContent('
-            $("form#form-sign-in").submit(function(e) {
-                e.stopPropagation();
+        // TemplateSignInModal objects handle caching themselves to avoid Script class output not being cached
+        return cache('html')->get($this->o_component->getCacheKeySeed(), function () {
+            $this->o_component->setCache(false);
 
-                $.post("' . Url::new('sign-in')->makeAjax() . '", $(this).serialize())
-                    .done(function (data, textStatus, jqXHR) {
-                        $(".image-menu").replaceWith(data.html);
-                        $("#signinModal").modal("hide");
-                    });
-
-                return false;
-            })')->render();
+            return parent::render() . Script::new()
+                                            ->setContent('
+                                                $("form#form-sign-in").submit(function(e) {
+                                                    e.stopPropagation();
+                                    
+                                                    $.post("' . Url::new('sign-in')
+                                                                   ->makeAjax() . '", $(this).serialize())
+                                                        .done(function (data, textStatus, jqXHR) {
+                                                            $(".image-menu").replaceWith(data.html);
+                                                            $("#signinModal").modal("hide");
+                                                        });
+                                    
+                                                    return false;
+                                                })');
+        });
     }
 }

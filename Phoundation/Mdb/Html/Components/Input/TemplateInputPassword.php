@@ -24,9 +24,9 @@ class TemplateInputPassword extends TemplateInputText
     /**
      * InputPassword class constructor
      */
-    public function __construct(InputPassword $component)
+    public function __construct(InputPassword $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 }

@@ -24,10 +24,10 @@ class TemplateInputText extends TemplateInput
     /**
      * InputText class constructor
      */
-    public function __construct(InputText $component)
+    public function __construct(InputText $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 
 
@@ -39,14 +39,14 @@ class TemplateInputText extends TemplateInput
     public function render(): ?string
     {
         $return = parent::render();
-        $icon   = $this->component->getIcon();
+        $icon   = $this->o_component->getIcon();
 
         if ($icon) {
             // Add an icon
             $return = $icon->render() . ' ' . $return;
         }
 
-        if ($this->component->getClearButton()) {
+        if ($this->o_component->getClearButton()) {
             // Add a clear button
             $return .= '<span class="trailing pe-auto clear d-none" tabindex="0">✕</span>';
         }

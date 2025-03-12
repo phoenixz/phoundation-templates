@@ -29,9 +29,9 @@ class TemplateSidePanel extends TemplateRenderer
     /**
      * SidePanel class constructor
      */
-    public function __construct(SidePanel $component)
+    public function __construct(SidePanel $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -87,14 +87,14 @@ class TemplateSidePanel extends TemplateRenderer
                         
                               <!-- Sidebar Menu -->
                               <nav>
-                                ' . $this->component->getMenu()?->render() . '                                
+                                ' . $this->o_component->getMenu()?->render() . '                                
                               </nav>
                               <!-- /.sidebar-menu -->
                             </div>
                             <!-- /.sidebar -->
                           </aside>';
 
-        $this->render .= $this->component->getModals()?->render() . PHP_EOL;
+        $this->render .= $this->o_component->getModals()?->render() . PHP_EOL;
 
         return parent::render();
     }

@@ -25,9 +25,9 @@ class TemplateInputMultiButtonText extends TemplateInput
     /**
      * InputMultiButtonText class constructor
      */
-    public function __construct(InputMultiButtonText $component)
+    public function __construct(InputMultiButtonText $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -41,7 +41,7 @@ class TemplateInputMultiButtonText extends TemplateInput
         $options = '';
 
         // Build the options list
-        foreach ($this->component->getSource() as $url => $label) {
+        foreach ($this->o_component->getSource() as $url => $label) {
             if (str_starts_with($label, '#')) {
                 // Any label starting with # is a divider
                 $options .= '<li class="dropdown-divider"></li>';
@@ -53,13 +53,13 @@ class TemplateInputMultiButtonText extends TemplateInput
         // Render the entire object
         $this->render = '   <div class="input-group input-group-lg mb-3">
                                 <div class="input-group-prepend">
-                                ' . $this->component->getButton()->render() . '                                
+                                ' . $this->o_component->getButton()->render() . '                                
                                 <ul class="dropdown-menu" style="">
                                     ' . $options . '
                                 </ul>
                                 </div>
                                 
-                                ' . $this->component->getInput()->render() . '
+                                ' . $this->o_component->getInput()->render() . '
                             </div>';
 
         return parent::render();

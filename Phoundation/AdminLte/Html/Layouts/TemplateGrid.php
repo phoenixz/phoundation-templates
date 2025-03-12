@@ -25,9 +25,9 @@ class TemplateGrid extends TemplateRenderer
     /**
      * Grid class constructor
      */
-    public function __construct(Grid $component)
+    public function __construct(Grid $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -38,21 +38,21 @@ class TemplateGrid extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $class        = $this->component->getClass();
+        $class        = $this->o_component->getClass();
         $this->render = '<div class="container-fluid' . ($class ? ' ' . $class : '') . '">';
 
-        if ($this->component->getForm()) {
+        if ($this->o_component->getForm()) {
             // Return content rendered in a form
             $render = '';
 
-            foreach ($this->component->getSource() as $row) {
+            foreach ($this->o_component->getSource() as $row) {
                 $render .= $row->render();
             }
 
-            $this->render .= $this->component->getForm()->setContent($render)->render();
-            $this->component->setForm(null);
+            $this->render .= $this->o_component->getForm()->setContent($render)->render();
+            $this->o_component->setForm(null);
         } else {
-            foreach ($this->component->getSource() as $row) {
+            foreach ($this->o_component->getSource() as $row) {
                 $this->render .= $row->render();
             }
         }

@@ -24,9 +24,9 @@ class TemplateInputButton extends TemplateInput
     /**
      * InputButton class constructor
      */
-    public function __construct(InputButton $component)
+    public function __construct(InputButton $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 }

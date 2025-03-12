@@ -25,7 +25,7 @@ class Template extends TemplateRenderer
 {
     public function render(): ?string
     {
-        switch ($this->component->getPage()) {
+        switch ($this->o_component->getPage()) {
             case 'system/http-error':
                 $this->render =  '<body>
                                     <div class="container pt-5">
@@ -69,7 +69,7 @@ class Template extends TemplateRenderer
 
             default:
                 throw new OutOfBoundsException(tr('Specified template page ":template" does not exist', [
-                    ':template' => $this->component->getPage()
+                    ':template' => $this->o_component->getPage()
                 ]));
         }
 

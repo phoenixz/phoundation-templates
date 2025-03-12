@@ -24,9 +24,9 @@ class TemplateInputEmail extends TemplateInputText
     /**
      * InputEmail class constructor
      */
-    public function __construct(InputEmail $component)
+    public function __construct(InputEmail $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 }

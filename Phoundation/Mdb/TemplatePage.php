@@ -139,7 +139,6 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Set basic page details
         Response::setPageTitle(tr('Phoundation platform'));
-        Response::setFavIcon('img/favicons/project.png');
 
         // Set basic page details
         Response::setPageTitle(config()->get('project.name', tr('Phoundation project')) . ' (' . Response::getHeaderTitle() . ')');

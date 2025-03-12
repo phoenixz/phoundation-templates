@@ -30,10 +30,10 @@ class TemplateInput extends TemplateRenderer
     /**
      * Input class constructor
      */
-    public function __construct(InputInterface $component)
+    public function __construct(InputInterface $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 
 
@@ -44,7 +44,7 @@ class TemplateInput extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $component = $this->component;
+        $component = $this->o_component;
 
         // Hidden elements render as an <input hidden>
         if ($component->getHidden()) {

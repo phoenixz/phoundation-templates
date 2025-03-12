@@ -33,9 +33,9 @@ class TemplateTopPanel extends TemplateRenderer
     /**
      * TemplateTopPanel class constructor
      */
-    public function __construct(TopPanel $component)
+    public function __construct(TopPanel $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -213,14 +213,14 @@ class TemplateTopPanel extends TemplateRenderer
 
         // Render the top panel
         $this->render = '   <header> 
-                              <nav class="navbar phoundation-navbar navbar-expand-lg navbar-' . Html::safe($this->component->getBootstrapBackgroundColor()->value) . ' bg-body-tertiary">
+                              <nav class="navbar phoundation-navbar navbar-expand-lg navbar-' . Html::safe($this->o_component->getBootstrapBackgroundColor()->value) . ' bg-body-tertiary">
                                 <div class="container-fluid">';
 
         $delete   = [];
         $contents = '';
 
         // Render collapsible parts
-        foreach ($this->component->getElementsObject() as $element_id => $element) {
+        foreach ($this->o_component->getElementsObject() as $element_id => $element) {
             $element_type = Strings::until($element, '-');
 
             switch ($element) {
@@ -235,8 +235,8 @@ class TemplateTopPanel extends TemplateRenderer
                 case 'menu':
                     $delete[] = $element_id;
 
-                    if ($this->component->getMenusObject()->getCount()) {
-                        foreach ($this->component->getMenusObject() as $menu) {
+                    if ($this->o_component->getMenusObject()->getCount()) {
+                        foreach ($this->o_component->getMenusObject() as $menu) {
                             $contents .= $menu->render();
                         }
                     }
@@ -246,8 +246,8 @@ class TemplateTopPanel extends TemplateRenderer
                 case 'text':
                     $delete[] = $element_id;
 
-                    if ($this->component->getTexts()->getCount()) {
-                        foreach ($this->component->getTexts() as $text) {
+                    if ($this->o_component->getTexts()->getCount()) {
+                        foreach ($this->o_component->getTexts() as $text) {
                             $contents .= '<small>' . $text . '</small>';
                         }
                     }
@@ -278,7 +278,7 @@ class TemplateTopPanel extends TemplateRenderer
         }
 
         if ($contents) {
-            $this->component->getElementsObject()->removeKeys($delete);
+            $this->o_component->getElementsObject()->removeKeys($delete);
 
             $this->render .= '<div class="d-flex">
                                 ' . $contents . ' 
@@ -292,47 +292,47 @@ class TemplateTopPanel extends TemplateRenderer
         // Build the rest
         $contents = '';
 
-        foreach ($this->component->getElementsObject() as $element) {
+        foreach ($this->o_component->getElementsObject() as $element) {
             $element_type = Strings::until($element, '-');
 
             switch ($element) {
                 case 'messages':
-                    $content = $this->component->getMessagesDropDown()->render();
+                    $content = $this->o_component->getMessagesDropDown()->render();
                     break;
 
                 case 'notifications':
                     $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
-                                      <span>' . $this->component->getNotificationsDropDown()->render() . '</span>
+                                      <span>' . $this->o_component->getNotificationsDropDown()->render() . '</span>
                                   </li>';
                     break;
 
                 case 'languages':
                     $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
-                                    <span>' . $this->component->getLanguagesDropDown()->render() . '</span>
+                                    <span>' . $this->o_component->getLanguagesDropDown()->render() . '</span>
                                   </li>';
                     break;
 
                 case 'breadcrumbs':
-                    $content = $this->component->getBreadcrumbs()->get($element_type)->render();
+                    $content = $this->o_component->getBreadcrumbs()->get($element_type)->render();
                     break;
 
                 case 'button':
                     $content = '  <li class="nav-item me-3 me-lg-1">
-                                    <span>' . $this->component->getButtons()->get($element_type)->render() . '</span>
+                                    <span>' . $this->o_component->getButtons()->get($element_type)->render() . '</span>
                                   </li>';
                     break;
 
                 case 'avatar':
                     $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
                                     <a class="nav-link" href="#">
-                                      <span>' . $this->component->getAvatars()->get($element_type)->render() . '</span>
+                                      <span>' . $this->o_component->getAvatars()->get($element_type)->render() . '</span>
                                     </a>
                                   </li>';
                     break;
 
                 case 'icon':
                     $content = '  <li class="nav-item me-3 me-lg-1">
-                                    ' . $this->component->getIcons()->get($element_type)->render() . '
+                                    ' . $this->o_component->getIcons()->get($element_type)->render() . '
                                   </li>';
                     break;
 

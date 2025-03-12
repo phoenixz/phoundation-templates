@@ -25,8 +25,8 @@ class TemplateButton extends TemplateRenderer
     /**
      * Button class constructor
      */
-    public function __construct(Button $component)
+    public function __construct(Button $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 }

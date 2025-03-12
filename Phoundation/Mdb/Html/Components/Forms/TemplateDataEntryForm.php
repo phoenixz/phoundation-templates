@@ -25,8 +25,8 @@ class TemplateDataEntryForm extends TemplateRenderer
     /**
      * FilterForm class constructor
      */
-    public function __construct(DataEntryForm $component)
+    public function __construct(DataEntryForm $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 }

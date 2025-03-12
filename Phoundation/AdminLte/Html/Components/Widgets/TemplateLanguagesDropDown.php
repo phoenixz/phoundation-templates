@@ -29,9 +29,9 @@ class TemplateLanguagesDropDown extends TemplateRenderer
     /**
      * LanguagesDropDown class constructor
      */
-    public function __construct(LanguagesDropDown $component)
+    public function __construct(LanguagesDropDown $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -42,11 +42,11 @@ class TemplateLanguagesDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->component->getSettingsUrl()) {
+        if (!$this->o_component->getSettingsUrl()) {
             throw new OutOfBoundsException(tr('No settings page URL specified'));
         }
 
-        $languages = $this->component->getLanguages();
+        $languages = $this->o_component->getLanguages();
         $count     = $languages?->getCount();
 
         $this->render = '   <a class="nav-link" data-toggle="dropdown" href="#">
@@ -65,7 +65,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                     break;
                 }
 
-                $this->render .= '<a href="' . Html::safe(str_replace(':ID', $language->getId(), $this->component->getLanguagesUrl())) . '" class="dropdown-item">
+                $this->render .= '<a href="' . Html::safe(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl())) . '" class="dropdown-item">
                                     ' . ($language->getIcon() ? '<i class="text-' . Html::safe($language->getMode()->value) . ' fas fa-' . Html::safe($language->getIcon()) . ' mr-2"></i> ' : null) . Strings::truncate($language->getTitle(), 24) . '
                                     <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($language->getCreatedOnObject())) . '</span>
                                   </a>
@@ -77,7 +77,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                                     <div class="dropdown-divider"></div>';
         }
 
-        $this->render .= '        <a href="' . Html::safe($this->component->getSettingsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('Language settings') . '</a>
+        $this->render .= '        <a href="' . Html::safe($this->o_component->getSettingsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('Language settings') . '</a>
                                 </div>';
 
         return parent::render();

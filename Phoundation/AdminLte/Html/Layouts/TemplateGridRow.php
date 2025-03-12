@@ -25,9 +25,9 @@ class TemplateGridRow extends TemplateRenderer
     /**
      * GridRow class constructor
      */
-    public function __construct(GridRow $component)
+    public function __construct(GridRow $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -38,21 +38,21 @@ class TemplateGridRow extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $class        = $this->component->getClass();
+        $class        = $this->o_component->getClass();
         $this->render = '<div class="row' . ($class ? ' ' . $class : '') . '">';
 
-        if ($this->component->getForm()) {
+        if ($this->o_component->getForm()) {
             // Return content rendered in a form
             $render = '';
 
-            foreach ($this->component->getSource() as $column) {
+            foreach ($this->o_component->getSource() as $column) {
                 $render .= $column->render();
             }
 
-            $this->render .= $this->component->getForm()->setContent($render)->render();
-            $this->component->setForm(null);
+            $this->render .= $this->o_component->getForm()->setContent($render)->render();
+            $this->o_component->setForm(null);
         } else {
-            foreach ($this->component->getSource() as $column) {
+            foreach ($this->o_component->getSource() as $column) {
                 $this->render .= $column->render();
             }
         }

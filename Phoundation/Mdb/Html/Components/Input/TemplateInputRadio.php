@@ -24,10 +24,10 @@ class TemplateInputRadio extends TemplateInput
     /**
      * TemplateInputRadio class constructor
      */
-    public function __construct(InputRadio $component)
+    public function __construct(InputRadio $o_component)
     {
-        parent::__construct($component);
-        $component->getClasses()->removeKeys('form-control')->add(true, 'form-check-input');
+        parent::__construct($o_component);
+        $o_component->getClasses()->removeKeys('form-control')->add(true, 'form-check-input');
     }
 
 
@@ -38,7 +38,7 @@ class TemplateInputRadio extends TemplateInput
      */
     public function render(): ?string
     {
-        $component = $this->getComponent();
+        $component = $this->getComponentObject();
 
         return '<div class="form-check' . ($component->getInline() ? ' form-check-inline' : '') . '">
                     ' . parent::render() . '

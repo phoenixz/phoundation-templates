@@ -24,9 +24,9 @@ class TemplateInputSubmit extends TemplateInput
     /**
      * InputSubmit class constructor
      */
-    public function __construct(InputSubmit $component)
+    public function __construct(InputSubmit $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 }

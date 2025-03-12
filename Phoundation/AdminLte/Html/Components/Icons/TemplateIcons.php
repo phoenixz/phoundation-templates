@@ -26,9 +26,9 @@ class TemplateIcons extends TemplateRenderer
     /**
      * Icons class constructor
      */
-    public function __construct(Icons $component)
+    public function __construct(Icons $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -40,11 +40,11 @@ class TemplateIcons extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (preg_match('/[a-z0-9-_]*]/i', $this->component->getContent())) {
+        if (preg_match('/[a-z0-9-_]*]/i', $this->o_component->getContent())) {
             // icon names should only have letters, numbers and dashes and underscores
-            return $this->component->getContent();
+            return $this->o_component->getContent();
         }
 
-        return '<i class="fas fa-' . $this->component->getContent() . ($this->component->getTier()->value ? ' fa-' . Html::safe($this->component->getTier()->value) : '') .'"></i>';
+        return '<i class="fas fa-' . $this->o_component->getContent() . ($this->o_component->getTier()->value ? ' fa-' . Html::safe($this->o_component->getTier()->value) : '') . '"></i>';
     }
 }

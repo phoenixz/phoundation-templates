@@ -29,9 +29,9 @@ class TemplateNotificationsDropDown extends TemplateRenderer
     /**
      * NotificationsDropDown class constructor
      */
-    public function __construct(NotificationsDropDown $component)
+    public function __construct(NotificationsDropDown $o_component)
     {
-        parent::__construct($component);
+        parent::__construct($o_component);
     }
 
 
@@ -42,15 +42,15 @@ class TemplateNotificationsDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->component->getAllNotificationsUrl()) {
+        if (!$this->o_component->getAllNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No all notifications page URL specified'));
         }
 
-        if (!$this->component->getNotificationsUrl()) {
+        if (!$this->o_component->getNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No notifications page URL specified'));
         }
 
-        $notifications = $this->component->getNotifications();
+        $notifications = $this->o_component->getNotifications();
 
         if ($notifications) {
             $notifications->autoUpdate();
@@ -90,7 +90,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                 }
 
                 $this->render .= '<li>
-                                    <a class="dropdown-item" href="' . Html::safe(str_replace(':ID', (string)$notification->getId(), (string)$this->component->getNotificationsUrl())) . '">
+                                    <a class="dropdown-item" href="' . Html::safe(str_replace(':ID', (string)$notification->getId(), (string)$this->o_component->getNotificationsUrl())) . '">
                                         ' . $notification->getIcon()?->render() . Html::safe(Strings::truncate($notification->getTitle(), 24)) . '
                                     </a>
                                   </li>';
@@ -105,7 +105,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
         }
 
         $this->render .= '        <li>
-                                    <a href="' . Html::safe($this->component->getAllNotificationsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See all unread notifications') . '</a>
+                                    <a href="' . Html::safe($this->o_component->getAllNotificationsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See all unread notifications') . '</a>
                                   </li>
                                 </ul>';
 

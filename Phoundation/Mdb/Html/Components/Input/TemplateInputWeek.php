@@ -24,9 +24,9 @@ class TemplateInputWeek extends TemplateInputText
     /**
      * InputWeek class constructor
      */
-    public function __construct(InputWeek $component)
+    public function __construct(InputWeek $o_component)
     {
-        $component->addClasses('form-control');
-        parent::__construct($component);
+        $o_component->addClasses('form-control');
+        parent::__construct($o_component);
     }
 }

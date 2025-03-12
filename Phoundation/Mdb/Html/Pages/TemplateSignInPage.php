@@ -36,7 +36,7 @@ class TemplateSignInPage extends TemplateRenderer
         $sso      = '';
         $terms    = '<a href="' . Url::new('terms')->makeWww() . '">' . tr('terms and conditions') . '</a>';
         $register = '<a href="' . Url::new('sign-up')->makeWww() . '">' . tr('Register') . '</a>';
-        $get      = $this->getComponent()->getGetData();
+        $get      = $this->getComponentObject()->getGetData();
 
 
         // Render SSO entries?

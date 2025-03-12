@@ -4,24 +4,25 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Components\Interfaces;
 
-use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
+use Phoundation\Web\Html\Components\Interfaces\ComponentInterface;
+
 
 interface TemplateDataEntryFormColumnInterface
 {
     /**
      * Returns the component
      *
-     * @return RenderInterface|null
+     * @return ComponentInterface|null
      */
-    public function getComponent(): RenderInterface|null;
+    public function getComponentObject(): ComponentInterface|null;
 
     /**
      * Sets the component
      *
-     * @param RenderInterface|null $component
+     * @param ComponentInterface|null $component
      * @return static
      */
-    public function setComponent(RenderInterface|null $component): static;
+    public function setComponentObject(ComponentInterface|null $component): static;
 
     /**
      * Renders and returns the HTML for this component
