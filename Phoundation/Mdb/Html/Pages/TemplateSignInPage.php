@@ -26,6 +26,11 @@ use Phoundation\Web\Requests\Response;
 
 class TemplateSignInPage extends TemplateRenderer
 {
+    /**
+     * Renders and returns the sign in page
+     *
+     * @return string|null
+     */
     public function render(): ?string
     {
         // This page will build its own body
