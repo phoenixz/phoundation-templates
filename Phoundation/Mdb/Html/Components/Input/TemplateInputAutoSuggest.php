@@ -18,7 +18,6 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Arrays;
-use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
 use Phoundation\Web\Html\Components\Script;
 
@@ -51,15 +50,8 @@ class TemplateInputAutoSuggest extends TemplateInputText
                 throw new OutOfBoundsException(tr('Cannot render autosuggest input, it has no id nor name specified'));
             }
 
-            // Copy name from ID. Remove Prefixes
-            $name = $component->getName();
-
-            if (str_contains($name, '_')) {
-                $component->setId(Strings::from($component->getName(), '_'));
-
-            } else {
-                $component->setId($component->getName());
-            }
+            // Copy name from ID
+            $component->setId($component->getName());
         }
 
         // Auto suggest is only available when not readonly or not disabled
