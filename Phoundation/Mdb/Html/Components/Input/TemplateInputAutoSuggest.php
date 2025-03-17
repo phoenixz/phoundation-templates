@@ -79,7 +79,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
 
         // Create JavaScript code for the component
         return Script::new()
-                     ->setContent('const asyncAutocomplete = document.querySelector(\'#' . $component->getId() . '-div\');
+                     ->setContent('const asyncAutocomplete = document.querySelector(\'[id="' . $component->getId() . '-div"]\');
                                    const asyncFilter = async (query) => {
                                      const response = await fetch(`' . $component->getSourceUrl() . '?term=${encodeURI(query)}`);
                                      const data = await response.json();
