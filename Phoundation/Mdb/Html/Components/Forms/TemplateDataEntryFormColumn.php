@@ -137,7 +137,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
             case EnumElement::input:
                 $label    = null;
-                $mdb_init = ' data-mdb-input-init=""';
+                $mdb_init = ($group ? null : ' data-mdb-input-init=""');
                 break;
 
             default:
