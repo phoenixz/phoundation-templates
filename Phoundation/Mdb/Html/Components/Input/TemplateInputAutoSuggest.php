@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+use Phoundation\Core\Log\Log;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Arrays;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
@@ -43,34 +44,35 @@ class TemplateInputAutoSuggest extends TemplateInputText
      */
     public function render(): ?string
     {
-        $component = $this->getComponentObject();
+        $o_component = $this->getComponentObject();
 
-        if (empty($component->getId())) {
-            if (empty($component->getName())) {
+        // ID is required. If ID is not available, name can be used as an alternative
+        if (empty($o_component->getId())) {
+            if (empty($o_component->getName())) {
                 throw new OutOfBoundsException(tr('Cannot render autosuggest input, it has no id nor name specified'));
             }
 
-            // Copy name from ID
-            $component->setId($component->getName());
+            // Copy ID from name
+            $o_component->setId($o_component->getName());
         }
 
         // Auto suggest is only available when not readonly or not disabled
-        if ($component->getReadonly() or $component->getDisabled()) {
+        if ($o_component->getReadonly() or $o_component->getDisabled()) {
             return parent::render();
         }
 
-        if (empty($component->getName())) {
+        if (empty($o_component->getName())) {
             throw new OutOfBoundsException(tr('No required HTML name attribute specified for auto suggest component'));
         }
 
-        if (empty($component->getSourceUrl())) {
+        if (empty($o_component->getSourceUrl())) {
             throw new OutOfBoundsException(tr('No source URL specified for auto suggest component ":name"', [
-                ':name' => $component->getName(),
+                ':name' => $o_component->getName(),
             ]));
         }
 
-        if ($component->getVariables()) {
-            $variables = $component->getVariables()->getSource();
+        if ($o_component->getVariables()) {
+            $variables = $o_component->getVariables()->getSource();
             $variables = ',' . Arrays::implodeWithKeys($variables, ',' . PHP_EOL, ':');
 
         } else {
@@ -79,9 +81,9 @@ class TemplateInputAutoSuggest extends TemplateInputText
 
         // Create JavaScript code for the component
         return Script::new()
-                     ->setContent('const asyncAutocomplete = document.querySelector(\'[id="' . $component->getId() . '-div"]\');
+                     ->setContent('const asyncAutocomplete = document.querySelector(\'[id="' . $o_component->getId() . '-div"]\');
                                    const asyncFilter = async (query) => {
-                                     const response = await fetch(`' . $component->getSourceUrl() . '?term=${encodeURI(query)}`);
+                                     const response = await fetch(`' . $o_component->getSourceUrl() . '?term=${encodeURI(query)}`);
                                      const data = await response.json();
                                      return data.data;
                                    };
