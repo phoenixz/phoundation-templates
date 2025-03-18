@@ -63,7 +63,7 @@ class TemplateMfaCreatePage extends TemplateRenderer
 
                           <!-- Submit button -->
                           <button class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                              ' . tr('Confirm and enable multi-factor authentication') . '
+                              ' . (Request::isPostRequestMethod() ? tr('Confirm and enable multi-factor authentication') : tr('Test multi-factor authentication code')) . '
                           </button>
                           ' . $back . '                          
                           <a href="' . Url::new('signout')->makeWww() . '" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-init>
