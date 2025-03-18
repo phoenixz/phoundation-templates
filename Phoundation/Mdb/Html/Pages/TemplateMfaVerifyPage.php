@@ -18,10 +18,15 @@ namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Core\Core;
 use Phoundation\Core\Sessions\Session;
+use Phoundation\Web\Html\Components\Forms\Form;
+use Phoundation\Web\Html\Components\Script;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
+use Phoundation\Web\Html\Enums\EnumJavascriptWrappers;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
+use Plugins\Phoundation\MultiFactorAuthentication\MultiFactorAuthentication;
 use RobThree\Auth\Providers\Qr\QRServerProvider;
 use RobThree\Auth\TwoFactorAuth;
 
@@ -39,6 +44,10 @@ class TemplateMfaVerifyPage extends TemplateRenderer
         Response::setRenderMainWrapper(false);
         Response::setPageTitle(tr('Please setup multi-factor authentication'));
         Response::setHeaderTitle(tr('Please setup multi-factor authentication'));
+        Response::loadJavascript([
+            'phoundation/mdb/js/jquery',
+            'phoundation/phoundation/js/jquery-phoundation'
+        ], prefix: true);
 
         $qr     = new QRServerProvider();
         $tfa    = new TwoFactorAuth(qrcodeprovider: $qr);
@@ -48,58 +57,26 @@ class TemplateMfaVerifyPage extends TemplateRenderer
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new('/img/logos/' . str_replace('_', '-', strtolower(PROJECT)) . '/sign-in-large.webp')->makeCdn() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
+                              <img src="' . Url::new('/img/logos/' . Core::getProjectSeoName() . '/sign-in-large.webp')->makeCdn() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
                           </div>
                           <hr>  
-                          <p class="login-box-msg">' .  tr('Please type the 2FA code for your account :account', [':account' => Session::getUserObject()->getEmail()]) . '</p>
-                          </div>
-
-                          <div class="row">
-                              <div class="col-sm-3">
-                              </div>
-                              <div class="col-sm-1">
-                                  <div class="form-horizontal text-center" data-mdb-input-init>
-                                    <input type="number1" id="number1" name="number1" class="form-control no-controls" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-1">
-                                  <div class="form-horizontal text-center" data-mdb-input-init>
-                                    <input type="number2" id="number2" name="number1" class="form-control no-controls" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-1">
-                                  <div class="form-horizontal text-center" data-mdb-input-init>
-                                    <input type="number3" id="number3" name="number1" class="form-control no-controls" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-1">
-                                  <div class="form-horizontal text-center" data-mdb-input-init>
-                                    <input type="number4" id="number4" name="number1" class="form-control no-controls" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-1">
-                                  <div class="form-horizontal text-center" data-mdb-input-init>
-                                    <input type="number5" id="number5" name="number1" class="form-control no-controls" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-1">
-                                  <div class="form-horizontal text-center" data-mdb-input-init>
-                                    <input type="number6" id="number6" name="number1" class="form-control no-controls" />
-                                  </div>
-                              </div>
-                              <div class="col-sm-3">
-                              </div>
-                          </div>
+                          <p class="login-box-msg text-center">' .  tr('Please type the 2FA code for your account ":account"', [':account' => Session::getUserObject()->getDisplayName()]) . '</p>
+                          ' . Form::new()
+                                  ->setRequestMethod(EnumHttpRequestMethod::post)
+                                  ->setAction(Url::new('mfa-create')->makeWww())
+                                  ->setContent(Session::getMultiFactorAuthenticationObject()->renderVerify()) . '
                           <hr>
 
                           <!-- Submit button -->
                           <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
                             ' . tr('Confirm and enable multi-factor authentication') . '
                           </button>
+                          <a href="' . Url::new('mfa-create')->makeWww() . '" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-init>
+                            ' . tr('Back to creating a new MFA code') . '
+                          </a>
                           <a href="' . Url::new('signout')->makeWww() . '" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-init>
                             ' . tr('Sign out') . '
                           </a>';
-
 
         if (Session::supports('copyright')) {
             $render .= '  <div class="text-center">

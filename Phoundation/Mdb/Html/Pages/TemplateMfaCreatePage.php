@@ -18,10 +18,13 @@ namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Core\Core;
 use Phoundation\Core\Sessions\Session;
+use Phoundation\Data\Validator\PostValidator;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
+use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
+use Plugins\Phoundation\MultiFactorAuthentication\MultiFactorAuthentication;
 use RobThree\Auth\Providers\Qr\QRServerProvider;
 use RobThree\Auth\TwoFactorAuth;
 
@@ -40,40 +43,31 @@ class TemplateMfaCreatePage extends TemplateRenderer
         Response::setPageTitle(tr('Please setup multi-factor authentication'));
         Response::setHeaderTitle(tr('Please setup multi-factor authentication'));
 
-        $qr     = new QRServerProvider();
-        $tfa    = new TwoFactorAuth(qrcodeprovider: $qr);
-        $secret = $tfa->createSecret();
+        $back = null;
+
+        if (Request::isPostRequestMethod()) {
+            $back = ' <a href="' . Url::new('mfa-verify')->makeWww() . '" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
+                          ' . tr('Back to creating a new MFA code') . '
+                      </a>';
+        }
 
         // Render the page
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new('/img/logos/' . str_replace('_', '-', strtolower(PROJECT)) . '/sign-in-large.webp')->makeCdn() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
+                              <img src="' . Url::new('/img/logos/' . Core::getProjectSeoName() . '/sign-in-large.webp')->makeCdn() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
                           </div>
                           <hr>  
                           <p class="login-box-msg">' .  tr('Please setup multi-factor authentication before continuing...') . '</p>
-                          <div class="form-outline mb-4 text-center" data-mdb-input-init>
-                            <label class="form-label" for="qr-code">' . tr('Please scan the QR code below and register your account in your favorite 2FA application') . '</label>
-                            <img src="' . $tfa->getQRCodeImageAsDataUri('Demo', $secret) . '">
-                          </div>
-
-                          <div class="form-outline mb-4" data-mdb-input-init>
-                            <label class="form-label" for="loginPassword">' . tr('Or register the following code manually:') . '</label>
-                            ' . chunk_split($secret, 4, ' ') . '
-                          </div>
-
-                          <div class="form-outline mb-4" data-mdb-input-init>
-                            <input type="password" id="password" name="password" class="form-control" />
-                            <label class="form-label" for="password">' . tr('Please enter your password to confirm this is you') . '</label>
-                          </div>
-                          <hr>
+                          ' . Session::getMultiFactorAuthenticationObject()->renderCreate() . '
 
                           <!-- Submit button -->
-                          <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                            ' . tr('Confirm and enable multi-factor authentication') . '
+                          <button class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
+                              ' . tr('Confirm and enable multi-factor authentication') . '
                           </button>
+                          ' . $back . '                          
                           <a href="' . Url::new('signout')->makeWww() . '" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-init>
-                            ' . tr('Sign out') . '
+                              ' . tr('Sign out') . '
                           </a>';
 
 
