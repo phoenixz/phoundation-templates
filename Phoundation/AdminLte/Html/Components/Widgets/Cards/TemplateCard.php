@@ -55,6 +55,10 @@ class TemplateCard extends TemplateRenderer
                 $active = true;
 
                 foreach ($tabs as $tab) {
+                    if ($active) {
+                        $this->render .= $this->o_component->getHeaderContent();
+                    }
+
                     $this->render .= '          <li class="nav-item">
                                                     <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">' . $tab->getLabel() . '</a>
                                                 </li>';
@@ -114,9 +118,10 @@ class TemplateCard extends TemplateRenderer
                                         ' . $this->o_component->getContent() . '
                                     </div>';
 
-            if ($this->o_component->getButtons()) {
+            if ($this->o_component->getButtons() or $this->o_component->getFooterContent()) {
                 $this->render .= '  <div class="card-footer">
-                                        ' . $this->o_component->getButtons()->render() . '           
+                                        ' . $this->o_component->getFooterContent()
+                                          . $this->o_component->getButtons()->render() . '     
                                     </div>';
             }
 

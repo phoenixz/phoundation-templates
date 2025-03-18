@@ -42,7 +42,7 @@ class TemplateCard extends TemplateRenderer
 
         if ($tabs and ($tabs->getOrientation() === EnumOrientation::top)) {
             $this->render = '   <div' . ($this->o_component->getId() ? ' id="' . $this->o_component->getId() . '"' : '') . ' class="card ' . ($this->o_component->getClass() ? $this->o_component->getClass() . ' ' : null) . ($this->o_component->getGradient() ? 'gradient-' . Html::safe($this->o_component->getGradient()) : '') . ($this->o_component->getMode()->value ? 'card-' . Html::safe($this->o_component->getMode()->value) : '') . ($this->o_component->getOutline() ? ' card-outline' : '') . ($this->o_component->getBackground() ? 'bg-' . Html::safe($this->o_component->getBackground()) : '') . ' card-tabs">
-                                    <div class="card-header p-0 p-1 border-bottom-0">
+                                    <div class="card-header p-0 p-1 border-bottom-0"> 
                                         <ul class="nav nav-tabs" id="" role="tablist">';
 
             if ($this->o_component->getTitle()) {
@@ -56,6 +56,11 @@ class TemplateCard extends TemplateRenderer
                 $this->render .= '          <li class="nav-item">
                                                 <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">' . $tab->getLabel() . '</a>
                                             </li>';
+
+                if ($active) {
+                    $this->render .= $this->o_component->getHeaderContent();
+                }
+
                 $active = false;
             }
 
@@ -111,9 +116,10 @@ class TemplateCard extends TemplateRenderer
                                         ' . $this->o_component->getContent() . '
                                     </div>';
 
-            if ($this->o_component->getButtons()) {
+            if ($this->o_component->getButtons() or $this->o_component->getFooterContent()) {
                 $this->render .= '  <div class="card-footer">
-                                        ' . $this->o_component->getButtons()->render() . '           
+                                        ' . $this->o_component->getFooterContent()
+                                          . $this->o_component->getButtons()->render() . '           
                                     </div>';
             }
 
