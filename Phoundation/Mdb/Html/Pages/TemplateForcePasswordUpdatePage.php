@@ -44,7 +44,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new('/img/logos/' . Core::getProjectSeoName() . '/sign-in-large.webp')->makeCdn() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
+                              <img src="' . Url::new('/logos/sign-in-large.webp')->makeImg() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
                           </div>
                           <hr>  
                           <p class="login-box-msg">' .  tr('Please update your account to have a new and secure password password before continuing...') . '</p>
@@ -84,7 +84,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                               <!-- Heading -->
                               <section class="text-center text-md-start">
                                 <!-- Background gradient -->
-                                <div class="p-5" style="height: 200px; background: url(' . Url::new('img/banners/' . Core::getProjectSeoName() . '/large.jpg')->makeImg() . ') center no-repeat;  !important;">
+                                <div class="p-5" style="height: 200px; background: url(' . Url::new('banners/large.jpg')->makeImg() . ') center no-repeat;  !important;">
                                 </div>
                                 <!-- Background gradient -->
                               </section>

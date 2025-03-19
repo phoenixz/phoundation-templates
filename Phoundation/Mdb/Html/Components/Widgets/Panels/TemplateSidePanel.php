@@ -44,7 +44,7 @@ class TemplateSidePanel extends TemplateRenderer
     {
         $this->render = '   <nav data-mdb-sidenav-init id="sidenav-9" data-mdb-scroll-container="#scroll-container" class="sidenav sidenav-sm" data-mdb-hidden="true" data-mdb-accordion="true">
                               <a href="' . Url::new('index')->makeWww() . '" data-mdb-ripple-init class="d-flex justify-content-center py-4 mb-3" style="border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary">
-                                <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" width="250px" draggable="false">
+                                <img src="' . Url::new('logos/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" width="250px" draggable="false">
                               </a>
 
                               <a data-mdb-ripple-init class="d-flex py-4 mb-3 justify-content-center" style="border-bottom: 2px solid #f5f5f5" href="' . Url::new('profile')->makeWww() . '" data-mdb-ripple-color="primary">
@@ -67,7 +67,7 @@ class TemplateSidePanel extends TemplateRenderer
 
         $this->render = ' <aside class="main-sidebar sidebar-dark-primary elevation-4">
                             <a href="' . Url::new('index')->makeWww() . '" class="brand-link">
-                              <img src="' . Url::new('img/logos/' . Core::getProjectSeoName() . '/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" class="brand-image elevation-3" style="opacity: .8" width="250px">
+                              <img src="' . Url::new('logos/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" class="brand-image elevation-3" style="opacity: .8" width="250px">
                             </a>
                             <div class="sidebar">
                               <div class="user-panel mt-3 pb-3 mb-3 d-flex">

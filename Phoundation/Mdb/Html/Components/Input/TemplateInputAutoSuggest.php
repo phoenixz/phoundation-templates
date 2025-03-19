@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
-use Phoundation\Core\Log\Log;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Arrays;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
@@ -45,6 +44,9 @@ class TemplateInputAutoSuggest extends TemplateInputText
     public function render(): ?string
     {
         $o_component = $this->getComponentObject();
+
+show($this->getComponentObject()->getName());
+showbacktrace();
 
         // ID is required. If ID is not available, name can be used as an alternative
         if (empty($o_component->getId())) {
