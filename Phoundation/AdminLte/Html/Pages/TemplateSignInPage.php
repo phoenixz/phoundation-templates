@@ -36,7 +36,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         $get = $this->getComponentObject()->getGetData();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('img/backgrounds/' . Core::getProjectSeoName() . '/signin.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('backgrounds/signin.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
                                 <div class="login-box">
                                   <!-- /.login-logo -->
                                   <div class="card card-outline card-info">

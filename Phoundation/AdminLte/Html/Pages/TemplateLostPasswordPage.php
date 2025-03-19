@@ -34,7 +34,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
 
         $get = $this->getComponentObject()->getGetData();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('img/backgrounds/' . Core::getProjectSeoName() . '/lost-password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('backgrounds/lost-password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
