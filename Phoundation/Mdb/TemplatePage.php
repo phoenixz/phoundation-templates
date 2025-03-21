@@ -120,7 +120,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Load basic MDB and fonts CSS
         Response::loadCss([
-            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
             'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap',
             'phoundation/mdb/css/mdb',
             'phoundation/mdb/css/mdb-fix',
