@@ -45,9 +45,6 @@ class TemplateInputAutoSuggest extends TemplateInputText
     {
         $o_component = $this->getComponentObject();
 
-show($this->getComponentObject()->getName());
-showbacktrace();
-
         // ID is required. If ID is not available, name can be used as an alternative
         if (empty($o_component->getId())) {
             if (empty($o_component->getName())) {

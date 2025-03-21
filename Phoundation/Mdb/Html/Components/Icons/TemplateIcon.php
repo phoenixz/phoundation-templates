@@ -39,7 +39,6 @@ class TemplateIcon extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->o_component->addClasses('fa-lg');
         $html = parent::render();
         return '<span>' . $html . '</span>';
     }
