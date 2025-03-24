@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Panels;
 
+use Phoundation\Core\Log\Log;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Icons\FullScreen;
 use Phoundation\Web\Html\Components\Icons\SignOut;
@@ -301,7 +302,8 @@ class TemplateTopPanel extends TemplateRenderer
                     break;
 
                 case 'notifications':
-                    $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
+                    Log::warning(ts('Notifications and the icon in the top nav-bar are temporarily disabled'));
+                    $content = '  <li class="nav-item me-3 me-lg-1 dropdown d-none">
                                       <span>' . $this->o_component->getNotificationsDropDown()->render() . '</span>
                                   </li>';
                     break;
