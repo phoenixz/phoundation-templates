@@ -122,9 +122,9 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::loadCss([
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
             'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap',
-            'phoundation/mdb/css/mdb',
-            'phoundation/mdb/css/mdb-fix',
-            'phoundation/mdb/css/phoundation',
+            'templates/mdb/css/mdb',
+            'templates/mdb/css/mdb-fix',
+            'templates/mdb/css/phoundation',
         ], true);
 
         // Load configured CSS files
@@ -132,9 +132,9 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Load basic MDB amd jQuery javascript libraries
         Response::loadJavascript([
-            'phoundation/mdb/js/jquery',
-            'phoundation/mdb/js/mdb.umd',
-            'phoundation/phoundation/js/jquery-phoundation'
+            'templates/mdb/js/jquery',
+            'templates/mdb/js/mdb.umd',
+            'templates/phoundation/js/jquery-phoundation'
         ], prefix: true);
 
         // Set basic page details
@@ -181,9 +181,11 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
     /**
      * Returns the string required for the bottom margin
      *
+     * @param string|false $prefix_space
+     *
      * @return string|null
      */
-    public static function getBottomMarginString(): ?string
+    public static function getBottomMarginString(bool $prefix_space = false): ?string
     {
         static $return = null;
 
@@ -191,7 +193,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             $margin = config()->getInteger('templates.mdb.forms.margins.bottom', 4);
 
             if ($margin) {
-                $return = ' mb-' . $margin . ' ';
+                $return = ($prefix_space ? ' ' : '') . 'mb-' . $margin . ' ';
 
             } else {
                 $return = '';

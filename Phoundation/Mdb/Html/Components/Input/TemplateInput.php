@@ -19,13 +19,10 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputHidden;
 use Phoundation\Web\Html\Components\Input\Interfaces\InputInterface;
 use Phoundation\Web\Html\Template\TemplateRenderer;
-use Templates\Phoundation\Mdb\Html\Traits\TraitTemplateRenderBeforeAfterButtons;
 
 
 class TemplateInput extends TemplateRenderer
 {
-    use TraitTemplateRenderBeforeAfterButtons;
-
 
     /**
      * Input class constructor
@@ -44,24 +41,16 @@ class TemplateInput extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $component = $this->o_component;
+        $o_component = $this->o_component;
 
         // Hidden elements render as an <input hidden>
-        if ($component->getHidden()) {
+        if ($o_component->getHidden()) {
             return InputHidden::new()
-                ->setName($component->getName())
-                ->setValue($component->getValue())
-                ->render();
+                              ->setName($o_component->getName())
+                              ->setValue($o_component->getValue())
+                              ->render();
         }
 
-        $after  = $this->renderAfterButtons($component);
-        $before = $this->renderBeforeButtons($component);
-
-        if ($before or $after) {
-            // Place buttons in an input group
-            return $before . parent::render() . isset_get($render) . $after;
-        }
-
-        return parent::render();
+        return $o_component->renderBeforeContent() . parent::render() . $o_component->renderAfterContent();
     }
 }

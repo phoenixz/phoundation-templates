@@ -19,7 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Forms;
 use Phoundation\Data\DataEntries\Definitions\Interfaces\DefinitionInterface;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Forms\Interfaces\DataEntryFormColumnInterface;
-use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterButtonsInterface;
+use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterContentInterface;
 use Phoundation\Web\Html\Components\Widgets\Tooltips\Tooltip;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -38,65 +38,65 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
     public function render(): ?string
     {
-        $definition = $this->o_component->getDefinition();
-        $component  = $this->o_component->getColumnComponent();
-        $scripts    = '';
+        $o_definition = $this->o_component->getDefinition();
+        $o_component  = $this->o_component->getColumnComponent();
+        $scripts      = '';
 
-        if (!$definition) {
+        if (!$o_definition) {
             throw new OutOfBoundsException(tr('Cannot render form component, no definition specified'));
         }
 
-        if (!$component) {
+        if (!$o_component) {
             return null;
         }
 
-        if (is_string($component)) {
-            $render = $component;
+        if (is_string($o_component)) {
+            $render = $o_component;
             $group  = false;
 
         } else {
-            $render =  $component->render();
-            $group  = (($component instanceof BeforeAfterButtonsInterface) and ($component->hasBeforeButtons() or $component->hasAfterButtons()));
+            $render =  $o_component->render();
+            $group  = (($o_component instanceof BeforeAfterContentInterface) and ($o_component->hasBeforeContent() or $o_component->hasAfterContent()));
 
-            if ($component->hasOuterDiv()) {
+            if ($o_component->hasOuterDiv()) {
                 // Get attributes and properties for the outer div
-                $outer      = $component->getOuterDiv();
+                $outer      = $o_component->getOuterDiv();
                 $class      = $outer->getClass();
                 $attributes = $outer->getAttributesString();
             }
         }
 
         // Add scripts?
-        if ($definition->getScripts()) {
-            foreach ($definition->getScripts() as $script) {
-                $scripts .= $script->render();
+        if ($o_definition->getScripts()) {
+            foreach ($o_definition->getScripts() as $o_script) {
+                $scripts .= $o_script->render();
             }
         }
 
-        if ($definition->getHidden()) {
+        if ($o_definition->getHidden()) {
             // Hidden elements don't display anything beyond the hidden <input>
             return $render . $scripts;
         }
 
-        $this->render .= match ($definition->getInputType()?->value) {
-            'checkbox' => '    <div class="' . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+        $this->render .= match ($o_definition->getInputType()?->value) {
+            'checkbox' => '    <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                    <div class="form-group'  . ($group ? 'input-group ' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                        <div class="form-horizontal">
-                                           <label for="' . Html::safe($definition->getColumn()) . '">' . Html::safe($definition->getLabel()) . '</label>
-                                           ' . $this->renderTooltip($definition) . '
+                                           <label for="' . Html::safe($o_definition->getColumn()) . '">' . Html::safe($o_definition->getLabel()) . '</label>
+                                           ' . $this->renderTooltip($o_definition) . '
                                        </div>
                                        <div class="form-check">
                                            ' . $render . $scripts . '
-                                           <label class="form-check-label" for="' . Html::safe($definition->getColumn()) . '">' . Html::safe($definition->getLabel()) . '</label>
+                                           <label class="form-check-label" for="' . Html::safe($o_definition->getColumn()) . '">' . Html::safe($o_definition->getLabel()) . '</label>
                                        </div>
                                    </div>
                                </div>',
 
-            default    => '    <div class="' . Html::safe($definition->getSize() ? 'col-sm-' . $definition->getSize() : 'col') . ($definition->getVisible() ? '' : ' invisible') . ($definition->getDisplay() ? '' : ' d-none') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+            default    => '    <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                    <div class="form-group'  . ($group ? 'input-group ' : null) . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                        <div class="form-horizontal">
-                                           <label for="' . Html::safe($definition->getColumn()) . '">' . Html::safe($definition->getLabel()) . '</label>
-                                           ' . $this->renderTooltip($definition) . '
+                                           <label for="' . Html::safe($o_definition->getColumn()) . '">' . Html::safe($o_definition->getLabel()) . '</label>
+                                           ' . $this->renderTooltip($o_definition) . '
                                        </div>
                                        ' . $render . $scripts . '
                                    </div>
@@ -118,9 +118,9 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         if ($definition->getTooltip()) {
             // Render and return the tooltip
             return Tooltip::new()
-                ->setTitle($definition->getTooltip())
-                ->setUseIcon(true)
-                ->render();
+                          ->setTitle($definition->getTooltip())
+                          ->setUseIcon(true)
+                          ->render();
         }
 
         return null;

@@ -54,7 +54,7 @@ class TemplateImageMenu extends TemplateRenderer
         $this->render .= $this->o_component->getImage()->getImgObject()
                                            ->setHeight($this->o_component->getHeight())
                                            ->addClasses('rounded-circle')
-                                           ->setExtra('loading="lazy"')
+                                           ->addExtraAttributes('loading="lazy"')
                                            ->render();
 
         $this->render .= '  </a>

@@ -127,12 +127,12 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         // Load basic AdminLte and fonts CSS
         Response::loadCss([
             'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback',
-            'phoundation/adminlte/plugins/fontawesome-free-6.4.0-web/css/all',
-            'phoundation/adminlte/plugins/fontawesome-free-6.4.0-web/css/regular',
-//            'phoundation/adminlte/plugins/fontawesome-free-6.4.0-web/css/v4-shim',
-            'phoundation/adminlte/css/adminlte',
-            'phoundation/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars',
-            'phoundation/adminlte/css/phoundation'
+            'templates/adminlte/plugins/fontawesome-free-6.4.0-web/css/all',
+            'templates/adminlte/plugins/fontawesome-free-6.4.0-web/css/regular',
+//            'templates/adminlte/plugins/fontawesome-free-6.4.0-web/css/v4-shim',
+            'templates/adminlte/css/adminlte',
+            'templates/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars',
+            'templates/adminlte/css/phoundation'
         ], true);
 
         // Load configured CSS files
@@ -140,12 +140,12 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Load basic AdminLte amd jQuery javascript libraries
         Response::loadJavascript([
-            'phoundation/adminlte/plugins/jquery/jquery',
-            'phoundation/adminlte/plugins/jquery-ui/jquery-ui',
-            'phoundation/adminlte/plugins/bootstrap/js/bootstrap.bundle',
-            'phoundation/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars',
-            'phoundation/adminlte/js/adminlte',
-            'phoundation/phoundation/js/jquery-phoundation',
+            'templates/adminlte/plugins/jquery/jquery',
+            'templates/adminlte/plugins/jquery-ui/jquery-ui',
+            'templates/adminlte/plugins/bootstrap/js/bootstrap.bundle',
+            'templates/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars',
+            'templates/adminlte/js/adminlte',
+            'templates/phoundation/js/jquery-phoundation',
         ], prefix: true);
 
         // Set basic page details

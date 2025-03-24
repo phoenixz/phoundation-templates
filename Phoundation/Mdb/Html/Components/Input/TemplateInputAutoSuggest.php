@@ -45,9 +45,6 @@ class TemplateInputAutoSuggest extends TemplateInputText
     {
         $o_component = $this->getComponentObject();
 
-show($this->getComponentObject()->getName());
-showbacktrace();
-
         // ID is required. If ID is not available, name can be used as an alternative
         if (empty($o_component->getId())) {
             if (empty($o_component->getName())) {
@@ -81,19 +78,26 @@ showbacktrace();
             $variables = null;
         }
 
-        // Create JavaScript code for the component
-        return Script::new()
-                     ->setContent('const asyncAutocomplete = document.querySelector(\'[id="' . $o_component->getId() . '-div"]\');
+        if ($o_component->getPropertyBoolean('add_javascript', true)) {
+            return Script::new()
+                         ->setContent('const asyncAutocompletes = document.querySelectorAll(\'' . $o_component->getSelector() . '\');
                                    const asyncFilter = async (query) => {
                                      const response = await fetch(`' . $o_component->getSourceUrl() . '?term=${encodeURI(query)}`);
                                      const data = await response.json();
                                      return data.data;
                                    };
                                    
-                                   new mdb.Autocomplete(asyncAutocomplete, {
-                                     filter: asyncFilter,
-                                     displayValue: (value) => value.label
+                                   asyncAutocompletes.forEach(function(asyncAutocomplete) {
+                                       new mdb.Autocomplete(asyncAutocomplete, {
+                                         filter: asyncFilter,
+                                         displayValue: (value) => value.label
+                                       });
                                    });')
-                     ->render() . parent::render();
+                         ->render() . parent::render();
+            // Create JavaScript code for the component
+        }
+
+        // Don't render the JavaScript object
+        return parent::render();
     }
 }

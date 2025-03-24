@@ -42,23 +42,25 @@ class TemplateInputAutoSuggest extends TemplateInputText
      */
     public function render(): ?string
     {
+        $o_component = $this->o_component;
+
         // Auto suggest is only available when not readonly or not disabled
-        if ($this->o_component->getReadonly() or $this->o_component->getDisabled()) {
+        if ($o_component->getReadonly() or $o_component->getDisabled()) {
             return parent::render();
         }
 
-        if (empty($this->o_component->getName())) {
+        if (empty($o_component->getName())) {
             throw new OutOfBoundsException(tr('No required HTML name attribute specified for auto suggest component'));
         }
 
-        if (empty($this->o_component->getSourceUrl())) {
+        if (empty($o_component->getSourceUrl())) {
             throw new OutOfBoundsException(tr('No source URL specified for auto suggest component ":name"', [
-                ':name' => $this->o_component->getName(),
+                ':name' => $o_component->getName(),
             ]));
         }
 
-        if ($this->o_component->getVariables()) {
-            $variables = $this->o_component->getVariables()->getSource();
+        if ($o_component->getVariables()) {
+            $variables = $o_component->getVariables()->getSource();
             $variables = ',' . Arrays::implodeWithKeys($variables, ',' . PHP_EOL, ':');
 
         } else {
@@ -67,16 +69,17 @@ class TemplateInputAutoSuggest extends TemplateInputText
 
         // This input element requires some javascript
         // TODO This should load from the correct Template library!
-        Response::loadJavascript('phoundation/adminlte/plugins/jquery-ui/jquery-ui');
+        Response::loadJavascript('templates/adminlte/plugins/jquery-ui/jquery-ui');
 
-        // Create JavaScript code for the component
-        return Script::new()
-                     ->setContent('$(\'[name="' . $this->o_component->getName() . '"]\').autocomplete({
+        if ($o_component->getPropertyBoolean('add_javascript', true)) {
+            // Create JavaScript code for the component
+            return Script::new()
+                         ->setContent('$(\'' . $o_component->getSelector() . '\').autocomplete({
                                        source: function(request, response) {
-                                         let $selected = $(\'[name="' . $this->o_component->getName() . '"]\');
+                                         let $selected = $(\'[name="' . $o_component->getName() . '"]\');
                          
                                          $.ajax({
-                                           url: "' . $this->o_component->getSourceUrl() . '",
+                                           url: "' . $o_component->getSourceUrl() . '",
                                            dataType: "jsonp",
                                            data: {
                                              term: request.term
@@ -87,16 +90,21 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                            }
                                          });
                                        },
-' . ($this->o_component->getWidth() ? 'open: function(event, ui) {
+      ' . ($o_component->getWidth() ? 'open: function(event, ui) {
                                             $(this).autocomplete("widget").css({
-                                                width: ' . $this->o_component->getWidth() . '
+                                                width: ' . $o_component->getWidth() . '
                                             });
                                        },' : '') . '
-                                       delay: ' . $this->o_component->getDelay() . ', 
-                                       minLength: ' . $this->o_component->getMinSuggestLength() . ',
+                                       delay: ' . $o_component->getDelay() . ', 
+                                       minLength: ' . $o_component->getMinSuggestLength() . ',
                                        select: function(event, ui) {
                                          console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
                                        }
-                                     });')->render() . parent::render();
+                                     });')
+                         ->render() . parent::render();
+        }
+
+        // Don't render the JavaScript part
+        return parent::render();
     }
 }
