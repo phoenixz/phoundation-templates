@@ -155,7 +155,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         switch ($o_definition->getInputType()) {
             case EnumInputType::auto_suggest:
                 $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $o_component->getClass()) . ' ';
-                $this->render .= '  <div id="' . $o_component->getId() . '-div" class="' . TemplatePage::getBottomMarginString() . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . '">
+                $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . TemplatePage::getBottomMarginString() . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render . '
                                             <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
