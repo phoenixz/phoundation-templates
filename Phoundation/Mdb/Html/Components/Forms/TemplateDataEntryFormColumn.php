@@ -56,9 +56,9 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
             return null;
         }
 
-        $o_definition = $this->o_component->getDefinition();
-        $o_component  = $this->o_component->getColumnComponent();
-        $scripts      = '';
+        $o_definition =  $this->o_component->getDefinition();
+        $o_component  =  $this->o_component->getColumnComponent();
+        $scripts      =  '';
 
         if (!$o_definition) {
             throw new OutOfBoundsException(tr('Cannot render form component, no definition specified'));
@@ -67,6 +67,12 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         if (!$o_component) {
             return null;
         }
+
+        // Ensure that when d-none is added, its only added to the div
+        $d_none = ($o_definition->getDisplay() ? '' : ' d-none');
+
+        $o_definition->setDisplay(true);
+        $o_component->removeClass('d-none');
 
         // Add scripts?
         if ($o_definition->getScripts()) {
@@ -119,7 +125,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         switch ($o_definition->getElement()) {
             case EnumElement::select:
                 if ($group) {
-                    $this->render .= '<div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . '">
+                    $this->render .= '<div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                           <div class="input-group">
                                             ' . $render . $scripts .
                ($o_definition->getLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
@@ -129,7 +135,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                                       </div>';
 
                 } else {
-                    $this->render .= '<div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . '">
+                    $this->render .= '<div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         ' . $render . $scripts .
            ($o_definition->getLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
                                               ' . Html::safe($o_definition->getLabel()) . '
@@ -155,7 +161,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         switch ($o_definition->getInputType()) {
             case EnumInputType::auto_suggest:
                 $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $o_component->getClass()) . ' ';
-                $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . TemplatePage::getBottomMarginString() . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . '">
+                $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . TemplatePage::getBottomMarginString() . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render . '
                                             <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
@@ -166,7 +172,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 break;
 
             default:
-                $this->render .= '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . ($o_definition->getDisplay() ? '' : ' d-none') . '">
+                $this->render .= '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render . '
                                             <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
