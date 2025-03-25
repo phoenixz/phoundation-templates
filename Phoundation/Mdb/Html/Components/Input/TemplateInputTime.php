@@ -29,9 +29,9 @@ class TemplateInputTime extends TemplateInputText
     {
         $o_component->addClasses('form-control');
         $o_component->setInputType(EnumInputType::text);
-        $o_component->getOuterDiv()
+        $o_component->getOuterDivObject()
                     ->addClasses('form-outline timepicker')
-                    ->getAttributes()
+                    ->getAttributesObject()
                     ->add('', 'data-mdb-timepicker-init')
                     ->add('', 'data-mdb-input-init');
 

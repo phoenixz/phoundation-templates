@@ -30,7 +30,7 @@ class TemplateInputSelect extends TemplateInput
     {
         $o_component->addClasses('col-sm-' . $o_component->getDefinitionObject()->getSize());
         $o_component->addClasses('form-control');
-        $o_component->getAttributes()->add('', 'data-mdb-select-init');
+        $o_component->getAttributesObject()->add('', 'data-mdb-select-init');
         parent::__construct($o_component);
     }
 
@@ -58,17 +58,17 @@ class TemplateInputSelect extends TemplateInput
         }
 
         if ($o_component->getClearButton()) {
-            $o_component->getAttributes()->add("true", 'data-mdb-clear-button');
-            $o_component->getAttributes()->removeKeys('clear_button');
+            $o_component->getAttributesObject()->add("true", 'data-mdb-clear-button');
+            $o_component->getAttributesObject()->removeKeys('clear_button');
         }
 
         if ($o_component->getSearch()) {
-            $o_component->getAttributes()->add("true", 'data-mdb-filter');
-            $o_component->getAttributes()->removeKeys('search');
+            $o_component->getAttributesObject()->add("true", 'data-mdb-filter');
+            $o_component->getAttributesObject()->removeKeys('search');
         }
 
         if ($o_component->getCustomContent()) {
-            $o_component->getAttributes()->removeKeys('custom_content');
+            $o_component->getAttributesObject()->removeKeys('custom_content');
 
             $render = '<div class="select-custom-content">
                          ' . render($o_component->getCustomContent()) . '

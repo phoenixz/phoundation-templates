@@ -228,7 +228,7 @@ class TemplateTopPanel extends TemplateRenderer
                 case 'logo':
                     $delete[]  = $element_id;
                     $logo      = Logo::new();
-                    $contents .= '<a class="navbar-brand mt-2 mt-lg-0" href="' . $logo->getAnchor()->getHref() . '">
+                    $contents .= '<a class="navbar-brand mt-2 mt-lg-0" href="' . $logo->getAnchorObject()->getHref() . '">
                                     <img src="' . $logo->getSrc() . '" height="15" alt="' . $logo->getAlt() . '" loading="lazy"/>
                                   </a>';
                     break;

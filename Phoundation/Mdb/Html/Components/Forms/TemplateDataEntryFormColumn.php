@@ -114,7 +114,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
             if ($o_component->hasOuterDiv()) {
                 // Get attributes and properties for the o_outer div
-                $o_outer    = $o_component->getOuterDiv();
+                $o_outer    = $o_component->getOuterDivObject();
                 $class      = $o_outer->getClass();
                 $attributes = $o_outer->getAttributesString();
             }

@@ -27,7 +27,7 @@ class TemplateInputRadio extends TemplateInput
     public function __construct(InputRadio $o_component)
     {
         parent::__construct($o_component);
-        $o_component->getClasses()->removeKeys('form-control')->add(true, 'form-check-input');
+        $o_component->getClassesObject()->removeKeys('form-control')->add(true, 'form-check-input');
     }
 
 
