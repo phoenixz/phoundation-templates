@@ -46,7 +46,11 @@ class TemplateCard extends TemplateRenderer
                                         <ul class="nav nav-tabs" id="" role="tablist">';
 
             if ($this->o_component->getTitle()) {
-                $this->render .= '          <li class="pt-2 px-3"><h3 class="card-title">' . $this->o_component->getTitle() . '</h3></li>';
+                $this->render .= '          <li class="pt-2 px-3"><' . $this->o_component->getHeaderTitleTag() . ' class="card-title">' . $this->o_component->getTitle() . '</' . $this->o_component->getHeaderTitleTag() . '></li>';
+            }
+
+            if ($this->o_component->getHeaderContent()) {
+                $this->render .= $this->o_component->getHeaderContent();
             }
 
             // Render tabs
@@ -90,7 +94,7 @@ class TemplateCard extends TemplateRenderer
 
             if ($this->o_component->getReloadSwitch() or $this->o_component->getMaximizeSwitch() or $this->o_component->getCollapseSwitch() or $this->o_component->getCloseSwitch() or $this->o_component->getTitle() or $this->o_component->getHeaderContent()) {
                 $this->render .= '  <div class="card-header">
-                                        <h3 class="card-title">' . $this->o_component->getTitle() . '</h3>
+                                        <' . $this->o_component->getHeaderTitleTag() . ' class="card-title">' . $this->o_component->getTitle() . '</' . $this->o_component->getHeaderTitleTag() . '>
                                         <div class="card-tools">
                                             ' . $this->o_component->getHeaderContent() . '
                                             ' . ($this->o_component->getReloadSwitch() ? '   <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="widgets.html" data-source-selector="#card-refresh-content" data-load-on-init="false">
