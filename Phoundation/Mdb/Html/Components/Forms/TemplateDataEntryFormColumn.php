@@ -64,14 +64,17 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
             throw new OutOfBoundsException(tr('Cannot render form component, no definition specified'));
         }
 
+        if (!$o_definition->getRender()) {
+            // Don't render the object!
+            return null;
+        }
+
         if (!$o_component) {
             return null;
         }
 
-        // Ensure that when d-none is added, its only added to the div
+        // Ensure that when d-none is added, it is only added to the div
         $d_none = ($o_definition->getDisplay() ? '' : ' d-none');
-
-        $o_definition->setDisplay(true);
         $o_component->removeClass('d-none');
 
         // Add scripts?
@@ -163,22 +166,29 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $o_component->getClass()) . ' ';
                 $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . TemplatePage::getBottomMarginString() . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
-                                            ' . $render . '
-                                            <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
+                                            ' . $render;
+
+                if (!$group) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
                                                 ' . Html::safe($o_definition->getLabel()) . '
-                                            </label>
-                                        </div>
+                                            </label>';
+                }
+
+                $this->render .= '      </div>
                                     </div>';
                 break;
 
             default:
                 $this->render .= '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
-                                            ' . $render . '
-                                            <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
+                                            ' . $render;
+                if (!$group) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
                                                 ' . Html::safe($o_definition->getLabel()) . '
-                                            </label>
-                                        </div>
+                                            </label>';
+                }
+
+                $this->render .= '      </div>
                                     </div>';
             //            ' . $this->renderTooltip($definition) . '
         };
