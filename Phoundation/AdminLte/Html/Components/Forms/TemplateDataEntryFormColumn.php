@@ -38,7 +38,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
     public function render(): ?string
     {
-        $o_definition = $this->o_component->getDefinition();
+        $o_definition = $this->o_component->getDefinitionObject();
         $o_component  = $this->o_component->getColumnComponent();
         $scripts      = '';
 
