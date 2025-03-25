@@ -86,7 +86,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 if ($o_definition->getElement() !== EnumElement::select) {
                     if ($o_definition->getElement() !== 'select') {
                         Log::warning(ts('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
-                            ':data_entry' => get_class($o_definition->getDataEntryObject()),
+                            ':data_entry' => $o_definition->getDataEntryObject() ? get_class($o_definition->getDataEntryObject()) : 'N/A',
                             ':component'  => $o_definition->getColumn(),
                             ':element'    => $o_component->getElement(),
                         ]));
@@ -124,7 +124,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                     $this->render .= '<div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                           <div class="input-group">
                                             ' . $render . $scripts .
-               ($o_definition->getLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
+               ($o_definition->hasLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
                                                   ' . Html::safe($o_definition->getLabel()) . '
                                               </label>' : '') . '
                                           </div>
@@ -133,7 +133,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 } else {
                     $this->render .= '<div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         ' . $render . $scripts .
-           ($o_definition->getLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
+      ($o_definition->hasLabel() ?      ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
                                               ' . Html::safe($o_definition->getLabel()) . '
                                           </label>' : '') . '
                                       </div>';
@@ -161,7 +161,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render;
 
-                if (!$group) {
+                if (!$group and $o_definition->hasLabel()) {
                     $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
                                                 ' . Html::safe($o_definition->getLabel()) . '
                                             </label>';
@@ -175,7 +175,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 $this->render .= '  <div class="' . TemplatePage::getBottomMarginString() . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render;
-                if (!$group) {
+                if (!$group and $o_definition->hasLabel()) {
                     $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
                                                 ' . Html::safe($o_definition->getLabel()) . '
                                             </label>';
