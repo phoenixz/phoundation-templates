@@ -54,7 +54,7 @@ class TemplateInput extends TemplateRenderer
         $after  = $o_component->renderAfterContent();
 
         if ($before or $after) {
-            return '<div class="input-group mb-3">' . $before . parent::render() . isset_get($render) . $after . '</div>';
+            return '<div class="input-group mb-3">' . $before . parent::render() . $after . '</div>';
         }
 
         return parent::render();

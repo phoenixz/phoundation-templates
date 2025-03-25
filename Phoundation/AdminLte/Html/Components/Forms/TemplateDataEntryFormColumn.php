@@ -66,13 +66,6 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
             }
         }
 
-        // Add scripts?
-        if ($o_definition->getScripts()) {
-            foreach ($o_definition->getScripts() as $o_script) {
-                $scripts .= $o_script->render();
-            }
-        }
-
         if ($o_definition->getHidden()) {
             // Hidden elements don't display anything beyond the hidden <input>
             return $render . $scripts;

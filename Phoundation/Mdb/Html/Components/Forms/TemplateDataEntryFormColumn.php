@@ -77,13 +77,6 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         $d_none = ($o_definition->getDisplay() ? '' : ' d-none');
         $o_component->removeClass('d-none');
 
-        // Add scripts?
-        if ($o_definition->getScripts()) {
-            foreach ($o_definition->getScripts() as $o_script) {
-                $scripts .= $o_script->render();
-            }
-        }
-
         if (is_string($o_component)) {
             $render = $o_component;
             $group  = false;
