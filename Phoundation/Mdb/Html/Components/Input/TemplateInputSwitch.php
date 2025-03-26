@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateInputCheckbox
+ * Class TemplateInputSwitch
  *
  *
  *
@@ -16,10 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+
 use Phoundation\Web\Html\Components\Input\InputCheckbox;
 
-
-class TemplateInputCheckbox extends TemplateInput
+class TemplateInputSwitch extends TemplateInput
 {
     /**
      * InputCheckbox class constructor
@@ -31,7 +31,7 @@ class TemplateInputCheckbox extends TemplateInput
     }
 
 
-    /**
+   /**
      * Render and return the HTML for this object
      *
      * @return string|null
@@ -39,12 +39,16 @@ class TemplateInputCheckbox extends TemplateInput
     public function render(): ?string
     {
         $o_component = $this->getComponentObject();
-        $label       = $o_component->getLabel() ? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>'
-                                                : '';
-        
-        return '<div class="form-check' . ($o_component->getInline() ? ' form-check-inline' : '') . '">
-                    ' . ($o_component->getLabelAfter() ? parent::render() . $label
-                                                       : $label . parent::render()) .
+        $label       = $o_component->getLabel() ?? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>';
+
+        if ($o_component->getLabelAfter()) {
+            return '<div class="form-check form-switch">' .
+                        parent::render() . (string) $label .
+                    '</div>';
+        }
+
+        return '<div class="form-check form-switch">' .
+                    (string) $label . parent::render() .
                '</div>';
     }
 }
