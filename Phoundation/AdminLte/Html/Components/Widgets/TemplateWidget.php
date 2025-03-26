@@ -20,7 +20,7 @@ use Phoundation\Web\Html\Components\Widgets\Widget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 
 
-abstract class TemplateWidget extends TemplateRenderer
+class TemplateWidget extends TemplateRenderer
 {
     /**
      * Widget class constructor
