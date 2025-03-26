@@ -22,6 +22,14 @@ use Phoundation\Web\Html\Components\Input\InputCheckbox;
 class TemplateInputCheckbox extends TemplateInput
 {
     /**
+     * Tracks the class of the container div
+     *
+     * @var string $class
+     */
+    protected string $class = 'custom-checkbox';
+
+
+    /**
      * InputCheckbox class constructor
      */
     public function __construct(InputCheckbox $o_component)
@@ -38,11 +46,13 @@ class TemplateInputCheckbox extends TemplateInput
      */
     public function render(): ?string
     {
-        $component = $this->getComponentObject();
+        $o_component = $this->getComponentObject();
+        $label      = $o_component->getLabel() ? '<label for="' . $o_component->getId() . '" class="custom-control-label">' . $o_component->getLabel() . '</label>'
+                                               : '';
 
-        return '<div class="custom-control custom-radio">
-                    ' . parent::render() . '
-                    ' . ($component->getLabel() ? '<label for="' . $component->getId() . '" class="custom-control-label">' . $component->getLabel() . '</label>' : '') . '
-                </div>';
+        return '<div class="custom-control ' . $this->class . '">' .
+                    ($o_component->getLabelAfter() ? parent::render() . $label
+                                                   : $label . parent::render())
+             . '</div>';
     }
 }
