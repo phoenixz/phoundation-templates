@@ -89,7 +89,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                             ':data_entry' => $o_definition->getDataEntryObject() ? get_class($o_definition->getDataEntryObject()) : 'N/A',
                             ':component'  => $o_definition->getColumn(),
                             ':element'    => $o_component->getElement(),
-                        ]));
+                        ]), 4);
                     }
 
                     $o_definition->setElement(EnumElement::select);
