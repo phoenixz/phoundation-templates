@@ -95,20 +95,20 @@ class TemplateCard extends TemplateRenderer
             if ($this->o_component->getReloadSwitch() or $this->o_component->getMaximizeSwitch() or $this->o_component->getCollapseSwitch() or $this->o_component->getCloseSwitch() or $this->o_component->getTitle() or $this->o_component->getHeaderContent()) {
                 $this->render .= '  <div class="card-header">
                                         <' . $this->o_component->getHeaderTitleTag() . ' class="card-title">' . $this->o_component->getTitle() . '</' . $this->o_component->getHeaderTitleTag() . '>
+                                         ' . $this->o_component->getHeaderContent() . '
                                         <div class="card-tools">
-                                            ' . $this->o_component->getHeaderContent() . '
                                             ' . ($this->o_component->getReloadSwitch() ? '   <button type="button" class="btn btn-tool" data-card-widget="card-refresh" data-source="widgets.html" data-source-selector="#card-refresh-content" data-load-on-init="false">
                                                                                                  <i class="fas fa-sync-alt"></i>
-                                                                                               </button>' : '') . '
+                                                                                             </button>' : '') . '
                                             ' . ($this->o_component->getMaximizeSwitch() ? ' <button type="button" class="btn btn-tool" data-card-widget="maximize">
                                                                                                  <i class="fas fa-expand"></i>
-                                                                                               </button>' : '') . '
+                                                                                             </button>' : '') . '
                                             ' . ($this->o_component->getCollapseSwitch() ? ' <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                                                                                  <i class="fas fa-' . ($this->o_component->getCollapsed() ? 'plus' : 'minus') . '"></i>
-                                                                                               </button>' : '') . '
+                                                                                             </button>' : '') . '
                                             ' . ($this->o_component->getCloseSwitch() ? '    <button type="button" class="btn btn-tool" data-card-widget="remove">
                                                                                                  <i class="fas fa-times"></i>
-                                                                                               </button>' : '') . '                              
+                                                                                             </button>' : '') . '                              
                                         </div>
                                     </div>';
             }

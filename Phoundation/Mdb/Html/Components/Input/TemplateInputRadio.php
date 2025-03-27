@@ -19,7 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Input;
 use Phoundation\Web\Html\Components\Input\InputRadio;
 
 
-class TemplateInputRadio extends TemplateInput
+class TemplateInputRadio extends TemplateInputCheckbox
 {
     /**
      * TemplateInputRadio class constructor
@@ -27,22 +27,5 @@ class TemplateInputRadio extends TemplateInput
     public function __construct(InputRadio $o_component)
     {
         parent::__construct($o_component);
-        $o_component->getClassesObject()->removeKeys('form-control')->add(true, 'form-check-input');
-    }
-
-
-    /**
-     * Render and return the HTML for this object
-     *
-     * @return string|null
-     */
-    public function render(): ?string
-    {
-        $component = $this->getComponentObject();
-
-        return '<div class="form-check' . ($component->getInline() ? ' form-check-inline' : '') . '">
-                    ' . parent::render() . '
-                    ' . ($component->getLabel() ? '<label for="' . $component->getId() . '" class="form-check-label">' . $component->getLabel() . '</label>' : '') . '
-                </div>';
     }
 }
