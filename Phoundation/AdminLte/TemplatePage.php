@@ -74,7 +74,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             $output .= Response::getFlashMessagesObject()->render() . $body;
         }
 
-        // Add file upload javascript, if required. Add footers and minify all the HTML
+        // Add file upload JavaScript, if required. Add footers and minify all the HTML
         $output .= Response::getFileUploadHandlersObject()->render();
         $output .= $this->renderHtmlFooters();
         $output  = Html::minify($output);
