@@ -79,22 +79,21 @@ class TemplateInputAutoSuggest extends TemplateInputText
         }
 
         if ($o_component->getPropertyBoolean('add_javascript', true)) {
-            return Script::new()
-                         ->setContent('const asyncAutocompletes = document.querySelectorAll(\'' . $o_component->getSelector() . '\');
+            return parent::render() . Script::new('const asyncAutocompletes = document.querySelectorAll(\'' . $o_component->getSelector() . '\');
                                    const asyncFilter = async (query) => {
                                      const response = await fetch(`' . $o_component->getSourceUrl() . '?term=${encodeURI(query)}`);
                                      const data = await response.json();
                                      return data.data;
                                    };
                                    
-                                   asyncAutocompletes.forEach(function(asyncAutocomplete) {
-                                       new mdb.Autocomplete(asyncAutocomplete, {
-                                         filter: asyncFilter,
-                                         displayValue: (value) => value.label
+                                   if (asyncAutocompletes.length) {                                   
+                                       asyncAutocompletes.forEach(function(asyncAutocomplete) {
+                                           new mdb.Autocomplete(asyncAutocomplete, {
+                                             filter: asyncFilter,
+                                             displayValue: (value) => value.label
+                                           });
                                        });
-                                   });')
-                         ->render() . parent::render();
-            // Create JavaScript code for the component
+                                   }');
         }
 
         // Don't render the JavaScript object
