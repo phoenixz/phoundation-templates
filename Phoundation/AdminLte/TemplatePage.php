@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte;
 
 use Phoundation\Core\Plugins\Plugins;
+use Phoundation\Core\Sessions\Session;
+use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\Interfaces\PanelsInterface;
@@ -30,6 +32,50 @@ use Phoundation\Web\Requests\Response;
 
 class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 {
+    /**
+     * Returns the display mode string for the configured mode
+     *
+     * Currently supported modes are "light" and "dark" or "" (no mode, template default)
+     *
+     * @param string|null $mode
+     *
+     * @return string
+     */
+    protected function getDisplayModeString(?string $mode = null): string
+    {
+        $mode = $mode ?? sessionconfig()->getString('web.display.mode', '');
+
+        if ($mode) {
+            switch ($mode) {
+                case 'light':
+                    return '';
+
+                case 'dark':
+                    return ' dark-mode';
+            }
+
+            throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
+                ':mode' => $mode,
+            ]));
+        }
+
+        return '';
+    }
+
+
+    /**
+     * Renders the HTML header string
+     *
+     * @param string $doctype
+     *
+     * @return string|null
+     */
+    public function renderHtmlHeaders(string $doctype): ?string
+    {
+        return '<!DOCTYPE ' . $doctype . ">\n<html lang=\"" . Session::getLanguage() . '">' . PHP_EOL . '<head>';
+    }
+
+
     /**
      * Execute, builds and returns the page output, according to the template.
      *
@@ -63,7 +109,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
                        $body .
                        Request::getPanelsObject()->get('bottom', false)?->render();
 
-            $output .= ' <body class="sidebar-mini' . (config()->get('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . '" style="height: auto;">
+            $output .= ' <body class="sidebar-mini' . (config()->get('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . $this->getDisplayModeString() . '" style="height: auto;">
                             <div class="wrapper">' .
                                 Response::getFlashMessagesObject()->render() .
                                 $body . '

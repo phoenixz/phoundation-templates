@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb;
 
 use Phoundation\Core\Plugins\Plugins;
+use Phoundation\Core\Sessions\Session;
+use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Forms\DataEntryFormRows;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
@@ -32,9 +34,53 @@ use Phoundation\Web\Requests\Response;
 class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 {
     /**
+     * Returns the display mode string for the configured mode
+     *
+     * Currently supported modes are "light" and "dark" or "" (no mode, template default)
+     *
+     * @param string|null $mode
+     *
+     * @return string
+     */
+    protected function getDisplayModeString(?string $mode = null): string
+    {
+        $mode = $mode ?? sessionconfig()->getString('web.display.mode', '');
+
+        if ($mode) {
+            switch ($mode) {
+                case 'light':
+                    return '';
+
+                case 'dark':
+                    return ' data-mdb-theme="dark';
+            }
+
+            throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
+                ':mode' => $mode,
+            ]));
+        }
+
+        return '';
+    }
+
+
+    /**
+     * Renders the HTML header string
+     *
+     * @param string $doctype
+     *
+     * @return string|null
+     */
+    public function renderHtmlHeaders(string $doctype): ?string
+    {
+        return '<!DOCTYPE ' . $doctype . ">\n<html lang=\"" . Session::getLanguage() . $this->getDisplayModeString() . '">' . PHP_EOL . '<head>';
+    }
+
+
+    /**
      * Execute, builds and returns the page output, according to the template.
      *
-     * Either use the default execution steps from parent::execute($target), or write your own execution steps here.
+     * Either use the default execution steps from parent::execute($target) or write your own execution steps here.
      * Once the output has been generated, it should be returned.
      *
      * @return string|null

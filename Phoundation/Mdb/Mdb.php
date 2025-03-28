@@ -57,7 +57,7 @@ class Mdb extends Template
      *
      * @return PhoDirectoryInterface
      */
-    public function getDirectory(): PhoDirectoryInterface
+    public function getDirectoryObject(): PhoDirectoryInterface
     {
         return new PhoDirectory(__DIR__ . '/', PhoRestrictions::newReadonlyObject(DIRECTORY_ROOT));
     }
