@@ -57,7 +57,7 @@ class Template extends TemplateRenderer
                                                 <h2 class="display-4 mt-5 mb-4" style="color: #344e41"><i class="fas fa-exclamation-triangle text-:type"></i> :h2 :h3</h2>
                                                 <p>:p</p>
                                                 <a class="btn btn-lg btn-primary" href="' . Url::new('sign-out')->makeWww() . '">' . tr('Sign out') . '</a>
-                                                <a class="btn btn-lg btn-primary" href="' . Url::newCurrentDomainRootUrl() . '" role="button" data-mdb-ripple-init>' . tr('Goto index page') . '</a>
+                                                <a class="btn btn-lg btn-primary" href="' . Url::newCurrentDomainRootUrl() . '" role="button" data-mdb-ripple-init>' . tr('Go to main page') . '</a>
                                               </div>
                                             </div>
                                           </div>
