@@ -236,7 +236,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         static $return = null;
 
         if ($return === null) {
-            $margin = config()->getInteger('templates.mdb.forms.margins.bottom', 4);
+            $margin = sessionconfig()->getInteger('templates.mdb.forms.margins.bottom', 4);
 
             if ($margin) {
                 $return = ($prefix_space ? ' ' : '') . 'mb-' . $margin . ' ';
