@@ -39,16 +39,18 @@ class TemplateInputSwitch extends TemplateInput
     public function render(): ?string
     {
         $o_component = $this->getComponentObject();
-        $label       = $o_component->getLabel() ?? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>';
+        $label       = ($o_component->getLabel() ? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>' : '');
 
         if ($o_component->getLabelAfter()) {
-            return '<div class="form-check form-switch">' .
-                        parent::render() . (string) $label .
-                    '</div>';
+            return '<div class="form-check form-switch">
+                       ' . parent::render() .
+                           $label . '
+                    </div>';
         }
 
-        return '<div class="form-check form-switch">' .
-                    (string) $label . parent::render() .
-               '</div>';
+        return '<div class="form-check form-switch">
+                    ' . $label .
+                        parent::render() . '
+                </div>';
     }
 }

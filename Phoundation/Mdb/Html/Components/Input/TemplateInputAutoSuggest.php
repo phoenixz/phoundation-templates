@@ -45,19 +45,20 @@ class TemplateInputAutoSuggest extends TemplateInputText
     {
         $o_component = $this->getComponentObject();
 
+        // Auto suggest is only available when not readonly or not disabled
+        if ($o_component->getReadonly() or $o_component->getDisabled()) {
+            return parent::render();
+        }
+
         // ID is required. If ID is not available, name can be used as an alternative
         if (empty($o_component->getId())) {
             if (empty($o_component->getName())) {
                 throw new OutOfBoundsException(tr('Cannot render autosuggest input, it has no id nor name specified'));
+
             }
 
             // Copy ID from name
             $o_component->setId($o_component->getName());
-        }
-
-        // Auto suggest is only available when not readonly or not disabled
-        if ($o_component->getReadonly() or $o_component->getDisabled()) {
-            return parent::render();
         }
 
         if (empty($o_component->getName())) {
