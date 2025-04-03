@@ -200,8 +200,6 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     public function renderMain(): ?string
     {
-        DataEntryFormRows::setForceRows(true);
-
         $body = parent::renderMain();
 
         if (Response::getRenderMainContentsOnly() or !Response::getRenderMainWrapper()) {
