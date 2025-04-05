@@ -44,15 +44,15 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     protected function getDisplayModeString(?string $mode = null): string
     {
-        $mode = $mode ?? sessionconfig()->getString('web.display.mode', '');
+        $mode = $mode ?? config()->getString('web.display.modes.dark', '', true);
 
         if ($mode) {
             switch ($mode) {
-                case 'light':
+                case 0:
                     return '';
 
-                case 'dark':
-                    return ' data-mdb-theme="dark';
+                case 1:
+                    return ' data-mdb-theme="dark"';
             }
 
             throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
@@ -73,7 +73,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     public function renderHtmlHeaders(string $doctype): ?string
     {
-        return '<!DOCTYPE ' . $doctype . ">\n<html lang=\"" . Session::getLanguage() . $this->getDisplayModeString() . '">' . PHP_EOL . '<head>';
+        return '<!DOCTYPE ' . $doctype . ">\n<html lang=\"" . Session::getLanguage() . '"' . $this->getDisplayModeString() . '>' . PHP_EOL . '<head>';
     }
 
 
@@ -234,7 +234,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         static $return = null;
 
         if ($return === null) {
-            $margin = sessionconfig()->getInteger('templates.mdb.forms.margins.bottom', 4);
+            $margin = (config()->getBoolean('web.interface.user.modes.compact', false, true) ? 2 : 4);
 
             if ($margin) {
                 $return = ($prefix_space ? ' ' : '') . 'mb-' . $margin . ' ';
