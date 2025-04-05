@@ -43,7 +43,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     protected function getDisplayModeString(?string $mode = null): string
     {
-        $mode = $mode ?? sessionconfig()->getString('web.display.mode', '');
+        $mode = $mode ?? config()->getString('web.display.mode', '', true);
 
         if ($mode) {
             switch ($mode) {
