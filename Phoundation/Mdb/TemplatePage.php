@@ -44,23 +44,19 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     protected function getDisplayModeString(?string $mode = null): string
     {
-        $mode = $mode ?? config()->getString('web.display.modes.dark', '', true);
+        $mode = $mode ?? config()->getBoolean('web.display.modes.dark', false, true);
 
-        if ($mode) {
-            switch ($mode) {
-                case 0:
-                    return '';
+        switch ($mode) {
+            case false:
+                return ' class="light"';
 
-                case 1:
-                    return ' data-mdb-theme="dark"';
-            }
-
-            throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
-                ':mode' => $mode,
-            ]));
+            case true:
+                return ' data-mdb-theme="dark" class="dark"';
         }
 
-        return '';
+        throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
+            ':mode' => $mode,
+        ]));
     }
 
 
