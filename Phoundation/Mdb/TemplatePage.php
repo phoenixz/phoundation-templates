@@ -39,24 +39,52 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      * Currently supported modes are "light" and "dark" or "" (no mode, template default)
      *
      * @param string|null $mode
+     * @param bool|null   $compact
      *
      * @return string
      */
-    protected function getDisplayModeString(?string $mode = null): string
+    protected function getDisplayModeString(?string $mode = null, ?bool $compact = null): string
     {
-        $mode = $mode ?? config()->getBoolean('web.display.modes.dark', false, true);
+        $return  = null;
+        $classes = [];
+        $compact = $compact ?? config()->getBoolean('web.display.compact'   , false, true);
+        $mode    = $mode    ?? config()->getBoolean('web.display.modes.dark', false, true);
 
         switch ($mode) {
             case false:
-                return ' class="light"';
+                $classes[] = 'light';
+                break;
 
             case true:
-                return ' data-mdb-theme="dark" class="dark"';
+                $classes[] = 'dark';
+                $return   .= ' data-mdb-theme="dark"';
+                break;
+
+            default:
+                throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
+                    ':mode' => $mode,
+                ]));
         }
 
-        throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
-            ':mode' => $mode,
-        ]));
+        switch ($compact) {
+            case false:
+                break;
+
+            case true:
+                $classes[] = 'compact';
+                break;
+
+            default:
+                throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
+                    ':mode' => $mode,
+                ]));
+        }
+
+        if (count($classes)) {
+            $return .= ' class="' . implode(' ', $classes) . '"';
+        }
+
+        return $return;
     }
 
 
@@ -225,15 +253,20 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      *
      * @return string|null
      */
-    public static function getBottomMarginString(bool $prefix_space = false): ?string
+    public function getBottomMarginString(bool $prefix_space = true): ?string
     {
-        static $return = null;
+        static $compact = null;
+        static $return  = null;
+
+        if ($compact === null) {
+            $compact = config()->getBoolean('web.display.compact', false, true);
+        }
 
         if ($return === null) {
-            $margin = (config()->getBoolean('web.interface.user.modes.compact', false, true) ? 2 : 4);
+            $margin = ($compact ? 2 : 4);
 
             if ($margin) {
-                $return = ($prefix_space ? ' ' : '') . 'mb-' . $margin . ' ';
+                $return = ($prefix_space ? ' ' : '') . 'mb-' . $margin;
 
             } else {
                 $return = '';
