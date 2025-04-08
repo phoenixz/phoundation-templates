@@ -19,6 +19,7 @@ namespace Templates\Phoundation\AdminLte;
 use Phoundation\Filesystem\PhoDirectory;
 use Phoundation\Filesystem\PhoRestrictions;
 use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
+use Phoundation\Seo\Seo;
 use Phoundation\Web\Html\Template\Template;
 use Templates\Phoundation\AdminLte\Html\Components\Widgets\Menus\TemplateMenu;
 
@@ -37,6 +38,28 @@ class AdminLte extends Template
         $this->menus_class = TemplateMenu::class;
 
         parent::__construct();
+    }
+
+
+    /**
+     * Return a description for this template
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * Return a description for this template
+     *
+     * @return string
+     */
+    public function getSeoName(): string
+    {
+        return Seo::string($this->name);
     }
 
 

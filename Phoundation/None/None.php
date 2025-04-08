@@ -16,13 +16,15 @@
 declare(strict_types=1);
 
 
-namespace Templates\None;
+namespace Templates\Phoundation\None;
 
 use Phoundation\Filesystem\PhoDirectory;
 use Phoundation\Filesystem\PhoRestrictions;
 use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
+use Phoundation\Seo\Seo;
+use Phoundation\Web\Html\Components\Widgets\Menus\Menu;
 use Phoundation\Web\Html\Template\Template;
-use Templates\None\Html\Components\Menu;
+use Templates\Phoundation\Mdb\TemplatePage;
 
 
 class None extends Template
@@ -39,6 +41,28 @@ class None extends Template
         $this->menus_class = Menu::class;
 
         parent::__construct();
+    }
+
+
+    /**
+     * Return a description for this template
+     *
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+
+    /**
+     * Return a description for this template
+     *
+     * @return string
+     */
+    public function getSeoName(): string
+    {
+        return Seo::string($this->name);
     }
 
 

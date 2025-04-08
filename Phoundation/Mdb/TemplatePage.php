@@ -45,10 +45,18 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     protected function getDisplayModeString(?string $mode = null, ?bool $compact = null): string
     {
-        $return  = null;
-        $classes = [];
-        $compact = $compact ?? config()->getBoolean('web.display.compact'   , false, true);
-        $mode    = $mode    ?? config()->getBoolean('web.display.modes.dark', false, true);
+        if (Session::getUserObject()->isGuest()) {
+            $return  = null;
+            $classes = [];
+            $compact = $compact ?? Session::get('display', 'dark_mode')    ?? config()->getBoolean('web.display.compact'   , false, true);
+            $mode    = $mode    ?? Session::get('display', 'compact_mode') ?? config()->getBoolean('web.display.modes.dark', false, true);
+
+        } else {
+            $return  = null;
+            $classes = [];
+            $compact = $compact ?? config()->getBoolean('web.display.compact'   , false, true);
+            $mode    = $mode    ?? config()->getBoolean('web.display.modes.dark', false, true);
+        }
 
         switch ($mode) {
             case false:
