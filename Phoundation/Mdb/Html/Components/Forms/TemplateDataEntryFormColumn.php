@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class DataEntryForm
+ * Class TemplateDataEntryFormColumn
  *
  *
  *
@@ -19,6 +19,8 @@ namespace Templates\Phoundation\Mdb\Html\Components\Forms;
 use Phoundation\Core\Log\Log;
 use Phoundation\Data\DataEntries\Definitions\Interfaces\DefinitionInterface;
 use Phoundation\Exception\OutOfBoundsException;
+use Phoundation\Web\Html\Components\Input\InputDateRange;
+use Phoundation\Web\Html\Components\Input\InputDateTimeRange;
 use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterContentInterface;
 use Phoundation\Web\Html\Components\Input\Interfaces\InputSelectInterface;
 use Phoundation\Web\Html\Components\Interfaces\ComponentInterface;
@@ -99,7 +101,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
             $group = (($o_component instanceof BeforeAfterContentInterface) and ($o_component->hasBeforeContent() or $o_component->hasAfterContent()));
 
-            if ($group) {
+            if ($group or ($o_component instanceof InputDateRange) or ($o_component instanceof InputDateTimeRange)) {
                 $o_component->setPlaceholder($o_definition->getLabel());
                 $o_definition->setLabel(null);
             }

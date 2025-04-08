@@ -38,7 +38,8 @@ class TemplateCard extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $tabs = $this->o_component->getTabsObject(false);
+        $o_component = $this->o_component;
+        $tabs        = $o_component->getTabsObject(false);
 
         if ($tabs and ($tabs->getOrientation() === EnumOrientation::top)) {
             $this->render = '   <div' . ($this->o_component->getId() ? ' id="' . $this->o_component->getId() . '"' : '') . ' class="card ' . ($this->o_component->getClass() ? $this->o_component->getClass() . ' ' : null) . ($this->o_component->getGradient() ? 'gradient-' . Html::safe($this->o_component->getGradient()) : '') . ($this->o_component->getMode()->value ? 'card-' . Html::safe($this->o_component->getMode()->value) : '') . ($this->o_component->getOutline() ? ' card-outline' : '') . ($this->o_component->getBackground() ? 'bg-' . Html::safe($this->o_component->getBackground()) : '') . ' card-tabs">
@@ -71,7 +72,7 @@ class TemplateCard extends TemplateRenderer
             // Render transition tabs to tab contents
             $this->render .= '          </ul>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-body' . ($o_component->getCenter() ? ' text-center' : null) . '">
                                         <div class="tab-content">';
 
             // Render tab contents
@@ -115,7 +116,7 @@ class TemplateCard extends TemplateRenderer
 
             $description   = $this->o_component->getDescription();
             $this->render .= '      <!-- /.card-header -->
-                                    <div class="card-body">
+                                    <div class="card-body' . ($o_component->getCenter() ? ' text-center' : null) . '">
                                         ' . ($description ? '<p class="card-description">' . $description . '</p>' : null) . '                                    
                                         ' . $this->o_component->getContent() . '
                                     </div>';

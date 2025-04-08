@@ -38,7 +38,8 @@ class TemplateCard extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $tabs = $this->o_component->getTabsObject(false);
+        $o_component = $this->o_component;
+        $tabs        = $o_component->getTabsObject(false);
 
         if ($tabs) {
             // Build a card with tabs
@@ -68,7 +69,7 @@ class TemplateCard extends TemplateRenderer
                 // Render transition tabs to tab contents
                 $this->render .= '          </ul>
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body' . ($o_component->getCenter() ? ' text-center' : null) . '">
                                             <div class="tab-content">';
 
                 // Render tab contents
@@ -113,7 +114,7 @@ class TemplateCard extends TemplateRenderer
 
             $description   = $this->o_component->getDescription();
             $this->render .= '      <!-- /.card-header -->
-                                    <div class="card-body">
+                                    <div class="card-body' . ($o_component->getCenter() ? ' text-center' : null) . '">
                                         ' . ($description ? '<p class="card-description">' . $description . '</p>' : null) . '                                    
                                         ' . $this->o_component->getContent() . '
                                     </div>';
