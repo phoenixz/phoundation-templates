@@ -117,7 +117,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('copyright')) {
             $this->render .= '      <div class="login-footer text-center">
-                                        ' . 'Copyright © ' . config()->getString('project.copyright', '2024') . ' <b><a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a></b><br>' . '
+                                        ' . 'Copyright © ' . config()->getString('project.copyright', '2025') . ' <b><a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a></b><br>' . '
                                         ' . tr('All rights reserved') . '</div>
                                     </div>';
         }
