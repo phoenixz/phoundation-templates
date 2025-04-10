@@ -148,6 +148,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Page requested that no body parts be built
         $output .= Response::getFlashMessagesObject()->render() . $body;
+        $output .= Response::getFileUploadHandlersObject()->render();
         $output .= $this->renderHtmlFooters();
         $output  = Html::minify($output);
 
