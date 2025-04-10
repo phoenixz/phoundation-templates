@@ -16,18 +16,12 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
-use Phoundation\Core\Core;
-use Phoundation\Core\Sessions\Session;
-use Phoundation\Data\Validator\PostValidator;
+use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
-use Plugins\Phoundation\MultiFactorAuthentication\MultiFactorAuthentication;
-use RobThree\Auth\Providers\Qr\QRServerProvider;
-use RobThree\Auth\TwoFactorAuth;
-
 
 class TemplateMfaCreatePage extends TemplateRenderer
 {

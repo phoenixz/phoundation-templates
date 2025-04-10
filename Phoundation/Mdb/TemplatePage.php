@@ -16,10 +16,9 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb;
 
+use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Core\Plugins\Plugins;
-use Phoundation\Core\Sessions\Session;
 use Phoundation\Exception\OutOfBoundsException;
-use Phoundation\Web\Html\Components\Forms\DataEntryFormRows;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\Interfaces\PanelsInterface;
@@ -29,7 +28,6 @@ use Phoundation\Web\Html\Components\Widgets\Panels\TopPanel;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
-
 
 class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 {
