@@ -16,11 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Cards;
 
-use Phoundation\Enums\EnumOrientation;
 use Phoundation\Web\Html\Components\Widgets\Cards\Card;
+use Phoundation\Web\Html\Enums\EnumOrientation;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
-
 
 class TemplateCard extends TemplateRenderer
 {

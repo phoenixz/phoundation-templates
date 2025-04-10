@@ -17,10 +17,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb;
 
+use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
 use Phoundation\Filesystem\PhoDirectory;
 use Phoundation\Filesystem\PhoRestrictions;
-use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
-use Phoundation\Seo\Seo;
+use Phoundation\Utils\Seo;
 use Phoundation\Web\Html\Template\Template;
 use Templates\Phoundation\Mdb\Html\Components\Widgets\Menus\TemplateMenu;
 

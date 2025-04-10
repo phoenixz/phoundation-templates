@@ -18,14 +18,13 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\None;
 
+use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
 use Phoundation\Filesystem\PhoDirectory;
 use Phoundation\Filesystem\PhoRestrictions;
-use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
-use Phoundation\Seo\Seo;
+use Phoundation\Utils\Seo;
 use Phoundation\Web\Html\Components\Widgets\Menus\Menu;
 use Phoundation\Web\Html\Template\Template;
 use Templates\Phoundation\Mdb\TemplatePage;
-
 
 class None extends Template
 {

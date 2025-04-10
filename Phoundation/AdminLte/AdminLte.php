@@ -16,13 +16,12 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte;
 
+use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
 use Phoundation\Filesystem\PhoDirectory;
 use Phoundation\Filesystem\PhoRestrictions;
-use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
-use Phoundation\Seo\Seo;
+use Phoundation\Utils\Seo;
 use Phoundation\Web\Html\Template\Template;
 use Templates\Phoundation\AdminLte\Html\Components\Widgets\Menus\TemplateMenu;
-
 
 class AdminLte extends Template
 {

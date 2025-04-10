@@ -16,12 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Tabs;
 
-use Phoundation\Core\Log\Log;
-use Phoundation\Enums\EnumOrientation;
 use Phoundation\Exception\UnderConstructionException;
 use Phoundation\Web\Html\Components\Widgets\Tabs\Tabs;
+use Phoundation\Web\Html\Enums\EnumOrientation;
 use Phoundation\Web\Html\Template\TemplateRenderer;
-
 
 class TemplateTabs extends TemplateRenderer
 {
