@@ -124,7 +124,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         switch ($o_definition->getElement()) {
             case EnumElement::select:
                 if ($group) {
-                    $this->render .= '<div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()->getBottomMarginString() . '">
+                    $this->render .= '<div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                           <div class="input-group">
                                             ' . $render . $scripts .
                ($o_definition->hasLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
@@ -134,7 +134,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                                       </div>';
 
                 } else {
-                    $this->render .= '<div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()->getBottomMarginString() . '">
+                    $this->render .= '<div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                         ' . $render . $scripts .
       ($o_definition->hasLabel() ?      ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
                                               ' . Html::safe($o_definition->getLabel()) . '
@@ -160,7 +160,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         switch ($o_definition->getInputType()) {
             case EnumInputType::auto_suggest:
                 $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $o_component->getClass()) . ' ';
-                $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()->getBottomMarginString() . '">
+                $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render;
 
@@ -175,7 +175,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 break;
 
             default:
-                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()->getBottomMarginString() . '">
+                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render;
                 if (!$group and $o_definition->hasLabel()) {
