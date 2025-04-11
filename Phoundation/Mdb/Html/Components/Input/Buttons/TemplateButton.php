@@ -29,7 +29,8 @@ class TemplateButton extends TemplateRenderer
     {
         parent::__construct($o_component);
 
-        $o_component->setReadonly($o_component->getReadonly() or $o_component->getDisabled());
+        $o_component->setReadonly($o_component->getReadonly() or $o_component->getDisabled())
+                    ->addData('', 'mdb-ripple-init');
 
         if ($o_component->getReadonly()) {
             $o_component->setAnchorUrl(null)
