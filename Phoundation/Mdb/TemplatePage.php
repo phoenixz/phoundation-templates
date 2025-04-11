@@ -16,10 +16,9 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb;
 
+use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Core\Plugins\Plugins;
-use Phoundation\Core\Sessions\Session;
 use Phoundation\Exception\OutOfBoundsException;
-use Phoundation\Web\Html\Components\Forms\DataEntryFormRows;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\Interfaces\PanelsInterface;
@@ -29,7 +28,6 @@ use Phoundation\Web\Html\Components\Widgets\Panels\TopPanel;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
-
 
 class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 {
@@ -239,16 +237,39 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             return $body;
         }
 
+        $header             = null;
         $horizontal_padding = 1;
         $vertical_padding   = 1;
         $horizontal_margin  = 1;
         $vertical_margin    = 1;
 
+        if (str_contains(ENVIRONMENT, 'trial')) {
+            $header .= '<div class="row">
+                            <div class="p-3 mb-4 bg-secondary bg-gradient col-xl-12 rounded-5">
+                                <div class="text-center example-square">' . tr('This is a trial version. All data is artificially generated and the database can be reset upon request') . '</div>
+                            </div>
+                        </div>';
+
+        } elseif (str_contains(ENVIRONMENT, 'demo')) {
+            $header .= '<div class="row">
+                            <div class="p-3 mb-4 bg-secondary bg-gradient col-xl-12 rounded-5">
+                                <div class="text-center example-square">' . tr('This is a demonstration version. All data is artificially generated and the database can be reset upon request') . '</div>
+                            </div>
+                        </div>';
+
+        } elseif (str_contains(ENVIRONMENT, 'local')) {
+            $header .= '<div class="row">
+                            <div class="p-3 mb-4 bg-secondary bg-gradient col-xl-12 rounded-5">
+                                <div class="text-center example-square">' . tr('This is a local version of your project') . '</div>
+                            </div>
+                        </div>';
+        }
+
         return  Request::getPanelsObject()->get('header', false)?->render() . '
                 <main class="pt-' . $horizontal_padding . ' mdb-docs-layout">
                     <div class="container mt-' . $vertical_padding . ' mt-' . $horizontal_padding . ' px-lg-' . $horizontal_margin . '">
                         <div class="tab-content">
-                            ' . $body . '
+                            ' . $header . $body . '
                         </div>
                     </div>
                 </main>';

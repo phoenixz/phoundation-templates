@@ -16,20 +16,15 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
-use Phoundation\Core\Core;
-use Phoundation\Core\Sessions\Session;
+use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Web\Html\Components\Forms\Form;
-use Phoundation\Web\Html\Components\Script;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
-use Phoundation\Web\Html\Enums\EnumJavascriptWrappers;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
-use Plugins\Phoundation\MultiFactorAuthentication\MultiFactorAuthentication;
 use RobThree\Auth\Providers\Qr\QRServerProvider;
 use RobThree\Auth\TwoFactorAuth;
-
 
 class TemplateMfaVerifyPage extends TemplateRenderer
 {
