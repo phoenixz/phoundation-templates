@@ -42,7 +42,7 @@ class TemplateToast extends TemplateRenderer
     {
         $o_message    = $this->o_component->getFlashMessageObject();
         $position     = $this->renderPosition($o_message);
-        $this->render = '   const toast = document.createElement("div");
+        $this->render = '   var toast = document.createElement("div");
                             toast.setAttribute("data-mdb-color", "' . $o_message->getMode()->value . '");
                             toast.classList.add("toast", "fade");
                             toast.innerHTML = `
@@ -58,7 +58,7 @@ class TemplateToast extends TemplateRenderer
                             
                             document.body.appendChild(toast);
                             
-                            const toastInstance = new mdb.Toast(toast, {
+                            var toastInstance = new mdb.Toast(toast, {
                                 stacking: true,
                                 hidden: true,
                                 width: "' . $o_message->getWidth() . 'px",
