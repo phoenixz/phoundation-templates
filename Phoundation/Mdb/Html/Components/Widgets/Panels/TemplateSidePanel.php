@@ -51,8 +51,7 @@ class TemplateSidePanel extends TemplateRenderer
                                                                                      ->setClass('img-circle elevation-2')
                                                                                      ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
                                                                                      ->setWidth(32)
-                                                                                     ->setHeight(32)
-                                                                                     ->render() . Session::getUserObject()->getDisplayName(reverse: true) . '
+                                                                                     ->setHeight(32) . Session::getUserObject()->getDisplayName(reverse: true) . '
                               </a>
                               ' . $this->o_component->getMenu()?->render() . '
                             </nav>';
