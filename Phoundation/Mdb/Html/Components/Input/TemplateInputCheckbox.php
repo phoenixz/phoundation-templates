@@ -22,6 +22,14 @@ use Phoundation\Web\Html\Components\Input\InputCheckbox;
 class TemplateInputCheckbox extends TemplateInput
 {
     /**
+     * Tracks the type of control to render
+     *
+     * @var string|null $type
+     */
+    protected ?string $type_class = null;
+
+
+    /**
      * InputCheckbox class constructor
      */
     public function __construct(InputCheckbox $o_component)
@@ -42,7 +50,7 @@ class TemplateInputCheckbox extends TemplateInput
         $label       = $o_component->getLabel() ? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>'
                                                 : '';
         
-        return '<div class="form-check' . ($o_component->getInline() ? ' form-check-inline' : '') . '">
+        return '<div class="form-check' . ($o_component->getInline() ? ' form-check-inline' : '') . $this->type_class . '">
                     ' . ($o_component->getLabelAfter() ? parent::render() . $label
                                                        : $label . parent::render()) .
                '</div>';

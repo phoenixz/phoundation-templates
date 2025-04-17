@@ -16,41 +16,17 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+use Phoundation\Web\Html\Components\Input\InputSwitch;
 
-use Phoundation\Web\Html\Components\Input\InputCheckbox;
 
-class TemplateInputSwitch extends TemplateInput
+class TemplateInputSwitch extends TemplateInputCheckbox
 {
     /**
      * InputCheckbox class constructor
      */
-    public function __construct(InputCheckbox $o_component)
+    public function __construct(InputSwitch $o_component)
     {
+        $this->type_class = ' form-switch';
         parent::__construct($o_component);
-        $o_component->getClassesObject()->removeKeys('form-control')->add(true, 'form-check-input');
-    }
-
-
-   /**
-     * Render and return the HTML for this object
-     *
-     * @return string|null
-     */
-    public function render(): ?string
-    {
-        $o_component = $this->getComponentObject();
-        $label       = ($o_component->getLabel() ? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>' : '');
-
-        if ($o_component->getLabelAfter()) {
-            return '<div class="form-check form-switch">
-                       ' . parent::render() .
-                           $label . '
-                    </div>';
-        }
-
-        return '<div class="form-check form-switch">
-                    ' . $label .
-                        parent::render() . '
-                </div>';
     }
 }
