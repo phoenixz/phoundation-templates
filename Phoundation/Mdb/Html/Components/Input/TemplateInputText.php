@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
 use Phoundation\Web\Html\Components\Input\InputText;
+use Phoundation\Web\Html\Components\Script;
 
 
 class TemplateInputText extends TemplateInput
@@ -38,6 +39,10 @@ class TemplateInputText extends TemplateInput
      */
     public function render(): ?string
     {
+        if ($this->o_component->getClearButton()) {
+            $this->o_component->addClass('form-icon-trailing');
+        }
+
         $return = parent::render();
         $icon   = $this->o_component->getIcon();
 
@@ -47,10 +52,48 @@ class TemplateInputText extends TemplateInput
         }
 
         if ($this->o_component->getClearButton()) {
-            // Add a clear button
-            $return .= '<span class="trailing pe-auto clear d-none" tabindex="0">✕</span>';
-        }
+            $name = $this->o_component->getName();
 
+            // Add a clear button
+            $return .= '<span class="trailing pe-auto clear" tabindex="0">✕</span>';
+
+            $return .= Script::new('const clearButton = document.querySelector(".trailing.clear");
+                                    const ' . $name . '= document.querySelector("#' . $name . '");
+                                    const  showElement = (element) => {
+                                        if (element.classList.contains("d-none")) {
+                                            element.classList.remove("d-none");
+                                        }
+                                    }
+                                    
+                                    const hideElement = (element) => {
+                                        if (!element.classList.contains("d-none")) {
+                                            element.classList.add("d-none");
+                                      }
+                                    }
+                                    
+                                    const clearInput = (button) => {
+                                        const evt = document.createEvent("HTMLEvents");
+                                        evt.initEvent("blur", false, true);
+                                        const input = button.parentNode.querySelector(".form-icon-trailing");
+                                        input.value = null;
+                                        input.dispatchEvent(evt);
+                                        hideElement(button);
+                                    }
+                                    
+                                    clearButton.addEventListener("click", () => clearInput(clearButton));
+                                    clearButton.addEventListener("keydown", (event) => {
+                                      if (event.code === "Enter") {
+                                        event.preventDefault();
+                                        clearButton.click();
+                                      }
+                                    });
+                                    
+                                    ' . $name . '.addEventListener("input", () => {
+                                      if (' . $name . 'value !== null) {
+                                        showElement(clearButton);
+                                      }
+                                    });');
+        }
 
         return $return;
     }
