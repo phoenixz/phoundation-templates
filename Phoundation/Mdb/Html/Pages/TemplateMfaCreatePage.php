@@ -23,6 +23,7 @@ use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
 
+
 class TemplateMfaCreatePage extends TemplateRenderer
 {
     /**

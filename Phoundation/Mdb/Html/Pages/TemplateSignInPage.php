@@ -8,7 +8,7 @@
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Phoundation\Web
+ * @package Templates\Phoundation\Mdb
  */
 
 
@@ -16,230 +16,147 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
-use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
 
+
 class TemplateSignInPage extends TemplateRenderer
 {
     /**
-     * Renders and returns the sign in page
+     * Renders and returns the lost password page
      *
      * @return string|null
      */
-    public function render(): ?string
-    {
+    public function render(): ?string {
+        // Render sign-in form
         // This page will build its own body
-        Response::setRenderMainWrapper(false);
         Response::setPageTitle(tr('Please sign in'));
-        Response::setHeaderTitle(tr('Please sign in'));
+        Response::setRenderMainWrapper(false);
 
-        $sso      = '';
-        $terms    = '<a href="' . Url::new('terms')->makeWww() . '">' . tr('terms and conditions') . '</a>';
-        $register = '<a href="' . Url::new('sign-up')->makeWww() . '">' . tr('Register') . '</a>';
-        $get      = $this->getComponentObject()->getGetData();
-
+        $o_component  = $this->getComponentObject();
+        $terms        = '<a href="' . Url::new('terms')->makeWww() . '">' . tr('terms and conditions') . '</a>';
+        $register     = '<a href="' . Url::new('sign-up')->makeWww() . '">' . tr('Register') . '</a>';
 
         // Render SSO entries?
-        if (Session::supports('facebook')) {
-            $sso .= '   <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
-                          <i class="fab fa-facebook-f"></i>
+        if ($o_component->getEnabled('facebook')) {
+            $facebook = ' <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
+                              <i class="fab fa-facebook-f"></i>
+                          </button>';
+        }
+
+        if ($o_component->getEnabled('google')) {
+            $google = ' <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
+                            <i class="fab fa-google"></i>
                         </button>';
         }
 
-        if (Session::supports('google')) {
-            $sso .= '   <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
-                          <i class="fab fa-google"></i>
+        if ($o_component->getEnabled('github')) {
+            $github = ' <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
+                            <i class="fab fa-github"></i>
                         </button>';
         }
 
-        if (Session::supports('github')) {
-            $sso .= '   <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
-                          <i class="fab fa-github"></i>
-                        </button>';
-        }
-
-        // Render the signin page section
-        $signin   = '   <form method="post" action="' . Url::newCurrent() . '">
+        // Render the sign-in page section
+        $signin   = ' <form method="post" action="' . Url::new($o_component->getUrl('form-action', default: config()->getString('web.pages.sign-in.urls.form', 'sign-in')))->makeWww() . '">
                           ' . Csrf::getHiddenElement() . '
-                          <div class="sign-in text-center h1">
-                              ' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '
+                          <div class="sign-in text-center h1"> 
+                              <img src="' . Url::new($o_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $o_component->getText(tr('Medinet Mobile')) . '" width="310">
                           </div>
                           <hr>';
 
-        if ($sso) {
-            $this->render .= '<div class="text-center mb-3">
-                                    <p>' . tr('Sign up with:') . '</p>
-                                    ' . $sso . '
-                                  </div>
-                                  <p class="text-center">' . tr('or:') . '</p>';
-        }
-
-        $signin .= '      <div class="form-outline mb-4" data-mdb-input-init>
-                            <input type="email" id="loginName" name="email" class="form-control"' . (isset($get['email']) ? 'value="' . $get['email'] . '"' : '') . ' />
-                            <label class="form-label" for="loginName">' . tr('Email or username') . '</label>
+        if ($o_component->getEnabled('email', default: config()->getBoolean('web.pages.sign-in.enabled.email', true))) {
+            $signin .= '  <div class="form-outline mb-4" data-mdb-input-init>
+                              <input type="email" id="loginName" name="email" class="form-control"' . $o_component->getValue(EnumHttpRequestMethod::get, 'email') . ' />
+                              <label class="form-label" for="loginName">' . $o_component->getText(tr('Email')) . '</label>
                           </div>
-
-                          <!-- Password input -->
                           <div class="form-outline mb-4" data-mdb-input-init>
-                            <input type="password" id="loginPassword" name="password" class="form-control" />
-                            <label class="form-label" for="loginPassword">' . tr('Password') . '</label>
+                              <input type="password" id="loginPassword" name="password" class="form-control" />
+                              <label class="form-label" for="loginPassword">' . $o_component->getText(tr('Password')) . '</label>
                           </div>
-
-                          <!-- 2 column grid layout -->
-                          <div class="row mb-4">
-                            <div class="col-md-6 d-flex justify-content-center">
-                              <!-- Checkbox -->
-                              <div class="form-check mb-3 mb-md-0">
-                                <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-                                <label class="form-check-label" for="loginCheck">
-                                  ' . tr('Remember me') . '
-                                </label>
-                              </div>
-                            </div>
-
-                            <div class="col-md-6 d-flex justify-content-center">
-                              <!-- Simple link -->
-                              <a href="#!">Forgot password?</a>
-                            </div>
-                          </div>
-
-                          <!-- Submit button -->
                           <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                            Sign in
+                              ' . $o_component->getText(tr('Sign in')) . '
                           </button>';
 
-        if (Session::supports('signup')) {
-            $signin .= '  <div class="text-center">
-                            <p>' . tr('Not a member? :register', [':register' => $register]) . '</p>
+        }
+
+        $signin .=        $o_component->getSection('sso') . '
+                          <div class="row mb-4">
+                              <div class="col-md-12 d-flex justify-content-center">
+                                  <a href="' . Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww() . '">' . $o_component->getText('Forgot password?') . '</a>
+                              </div>
+                          </div>';
+
+        if ($o_component->getEnabled('sign-up', default: config()->getBoolean('web.pages.sign-in.enabled.sign-up', true))) {
+            $signin .= '   <div class="text-center">
+                              <p>' . $o_component->getText(tr('Not a member? :register', [':register' => $register])) . '</p>
                           </div>';
         }
 
-        if (Session::supports('copyright')) {
+        if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.sign-in.enabled.copyright', true))) {
             $signin .= '  <div class="text-center">
-                            Copyright © 2025 <a target="_blank" href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '">' . config()->getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
+                              ' . $o_component->getText(tr('Copyright © 2025 :url', [
+                                  ':url' => '<a target="_blank" href="' . $o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')) . '">' . $o_component->getText(config()->getString('project.owner.name', 'Phoundation')) . '</a>'
+                              ])) . '
+                              <br/>
+                              <small>
+                                  ' . $o_component->getText(tr('All rights reserved')) . '
+                              </small>
                           </div>';
         }
 
-        $signin .= Csrf::getHiddenElement() .
-                   '    </form>';
-
-        if (Session::supports('signup')) {
-            // Render the signup page section
-            $signup = '     <form method="post" action="' . Url::newCurrent() . '">
-                              ' . Csrf::getHiddenElement() . '
-                              <div class="form-outline mb-4" data-mdb-input-init>
-                                <input type="text" id="registerName" class="form-control" />
-                                <label class="form-label" for="registerName">' . tr('Name') . '</label>
-                              </div>
-
-                              <!-- Username input -->
-                              <div class="form-outline mb-4" data-mdb-input-init>
-                                <input type="text" id="registerUsername" class="form-control" />
-                                <label class="form-label" for="registerUsername">' . tr('Username') . '</label>
-                              </div>
-
-                              <!-- Email input -->
-                              <div class="form-outline mb-4" data-mdb-input-init>
-                                <input type="email" id="registerEmail" class="form-control" />
-                                <label class="form-label" for="registerEmail">' . tr('Email') . '</label>
-                              </div>
-
-                              <!-- Password input -->
-                              <div class="form-outline mb-4" data-mdb-input-init>
-                                <input type="password" id="registerPassword" class="form-control" />
-                                <label class="form-label" for="registerPassword">' . tr('Password') . '</label>
-                              </div>
-
-                              <!-- Repeat Password input -->
-                              <div class="form-outline mb-4" data-mdb-input-init>
-                                <input type="password" id="registerRepeatPassword" class="form-control" />
-                                <label class="form-label" for="registerRepeatPassword">' . tr('Repeat password') . '</label>
-                              </div>
-
-                              <!-- Checkbox -->
-                              <div class="form-check d-flex justify-content-center mb-4">
-                                <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
-                                       aria-describedby="registerCheckHelpText" />
-                                <label class="form-check-label" for="registerCheck">
-                                  ' . tr('I have read and agree to the :terms', [':terms' => $terms]) . '
-                                </label>
-                              </div>
-
-                              <!-- Submit button -->
-                              <button type="submit" class="btn btn-primary btn-block mb-3" data-mdb-ripple-init>
-                                Sign in
-                              </button>';
-
-            if (Session::supports('copyright')) {
-                $signup .= '  <div class="text-center">
-                                Copyright © 2025 ' . config()->getString('project.name', 'Phoundation') . '<br/><small>All rights reserved</small>
-                              </div>';
-            }
-
-            $signup .= Csrf::getHiddenElement() .
-                       '    </form>';
-        }
+        $signin .= '  </form>';
 
         // Render the entire page
-        $this->render = '   <!--Main Navigation-->
-                            <header>
-                              <!-- Heading -->
-                              <section class="text-center text-md-start">
-                                <!-- Background gradient -->
-                                <div class="p-5" style="height: 200px; background: url(' . Url::new('banners/large.jpg')->makeImg() . ') center no-repeat;  !important;">
-                                </div>
-                                <!-- Background gradient -->
-                              </section>
-                              <!-- Heading -->
-
-                            </header>
-                            <!--Main Navigation-->
-
-                            <!--Main layout-->
-                            <main class="mb-5" style="margin-top: -100px;">
-                              <!-- Container for demo purpose -->
-                              <div class="container px-4">
-
-                                <div class="row d-flex justify-content-center">
+        $render = '   <header>
+                          <section class="text-center text-md-start">
+                              <div class="p-5" style="height: 200px; background: url(' . Url::new($o_component->getUrl('banner', default: 'banners/large.jpg'))->makeImg() . ') center no-repeat;">
+                              </div>
+                          </section>
+                      </header>
+                      <main class="mb-5" style="margin-top: -100px;">
+                          <div class="container px-4">
+                              <div class="row d-flex justify-content-center">
                                   <div class="col-xl-5 col-md-8">
-                                    <div class="card shadow-4">
-                                      <div class="card-body p-4">';
+                                      <div class="card shadow-4">
+                                          <div class="card-body p-4">';
 
-        if (Session::supports('signup')) {
-            $this->render .= '          <!-- Pills navs -->
-                                        <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                                          <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" id="tab-login" data-mdb-pill-init href="#pills-login" role="tab"
-                                               aria-controls="pills-login" aria-selected="true">Login</a>
-                                          </li>
-                                          <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="tab-register" data-mdb-pill-init href="#pills-register" role="tab"
-                                               aria-controls="pills-register" aria-selected="false">Register</a>
-                                          </li>
-                                        </ul>';
+        if ($o_component->getEnabled('signup')) {
+            $render .= '                      <!-- Pills navs -->
+                                              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                                                  <li class="nav-item" role="presentation">
+                                                      <a class="nav-link active" id="tab-login" data-mdb-pill-init href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">
+                                                          ' . $o_component->getText(tr('Sign in')) . '
+                                                      </a>
+                                                  </li>
+                                                  <li class="nav-item" role="presentation">
+                                                      <a class="nav-link" id="tab-register" data-mdb-pill-init href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">
+                                                          ' . $o_component->getText(tr('Register')) . '
+                                                      </a>
+                                                  </li>
+                                              </ul>';
 
-            $this->render .= '          <div class="tab-content">
-                                          <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                                            ' . $signin . '
-                                          </div>
-                                          <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                                            ' . $signup . '
-                                          </div>
-                                        </div>';
+            $render .= '                      <div class="tab-content">
+                                                  <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                                                      ' . $signin . '
+                                                  </div>
+                                                  <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                                                      ' . $signup . '
+                                                  </div>
+                                              </div>';
         } else {
-            $this->render .= $signin;
+            $render .= $signin;
         }
 
-        $this->render .= '            </div>
-                                    </div>
+        $render .= '                      </div>
+                                      </div>
                                   </div>
-                                </div>
                               </div>
-                            </main>';
+                          </div>
+                      </main>';
 
-        return parent::render(); // TODO: Change the autogenerated stub
+        return $render;
     }
 }

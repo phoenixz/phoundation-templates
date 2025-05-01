@@ -8,7 +8,7 @@
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Phoundation\Web
+ * @package Templates\Phoundation\AdminLte
  */
 
 
@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
-use Phoundation\Core\Core;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -30,6 +29,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
+        $o_component  = $this->getComponentObject();
         $this->render = '   <body class="hold-transition login-page" style="background: url(' .  Url::new('backgrounds/password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
                                     <!-- /.login-logo -->
@@ -38,7 +38,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                           <a href="' .  config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
                                     </div>
                                     <div class="card-body">
-                                        <p class="login-box-msg">' .  tr('Please update your account to have a new and secure password password before continuing...') . '</p>
+                                        <p class="login-box-msg">' .  $o_component->getText(tr('Please update your account to have a new and secure password password before continuing...')) . '</p>
                                         <p class="login-box-msg">' .  tr('Please ensure that your password has at least 10 characters, is secure, and is known only to you.') . '</p>
 
                                         <form action="' .  Url::newCurrent() . '" method="post">

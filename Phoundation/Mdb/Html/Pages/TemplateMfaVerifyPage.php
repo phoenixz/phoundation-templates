@@ -26,6 +26,7 @@ use Phoundation\Web\Requests\Response;
 use RobThree\Auth\Providers\Qr\QRServerProvider;
 use RobThree\Auth\TwoFactorAuth;
 
+
 class TemplateMfaVerifyPage extends TemplateRenderer
 {
     /**

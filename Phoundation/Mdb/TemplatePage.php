@@ -29,6 +29,7 @@ use Phoundation\Web\Html\Html;
 use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
 
+
 class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 {
     /**
@@ -47,13 +48,13 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             $return  = null;
             $classes = [];
             $compact = $compact ?? Session::get('display', 'dark_mode')    ?? config()->getBoolean('web.display.compact'   , false, true);
-            $mode    = $mode    ?? Session::get('display', 'compact_mode') ?? config()->getBoolean('web.display.modes.dark', false, true);
+            $mode    = $mode    ?? Session::get('display', 'compact_mode') ?? config()->getTristate('web.display.modes.dark', false, true);
 
         } else {
             $return  = null;
             $classes = [];
             $compact = $compact ?? config()->getBoolean('web.display.compact'   , false, true);
-            $mode    = $mode    ?? config()->getBoolean('web.display.modes.dark', false, true);
+            $mode    = $mode    ?? config()->getTristate('web.display.modes.dark', false, true);
         }
 
         switch ($mode) {

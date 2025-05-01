@@ -22,6 +22,7 @@ use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
 
+
 class TemplateForcePasswordUpdatePage extends TemplateRenderer
 {
     /**

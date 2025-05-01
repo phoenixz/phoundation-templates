@@ -31,6 +31,7 @@ class TemplateInputSelect extends TemplateInput
         $o_component->addClasses('col-sm-' . $o_component->getDefinitionObject()->getSize());
         $o_component->addClasses('form-control');
         $o_component->getAttributesObject()->add('', 'data-mdb-select-init');
+
         parent::__construct($o_component);
     }
 

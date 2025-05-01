@@ -16,7 +16,9 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
+use Phoundation\Web\Html\Template\TemplateRenderer;
 
-class TemplateRegister
+
+class TemplateRegister extends TemplateRenderer
 {
 }
