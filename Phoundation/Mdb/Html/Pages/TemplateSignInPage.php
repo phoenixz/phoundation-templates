@@ -85,7 +85,7 @@ class TemplateSignInPage extends TemplateRenderer
         $signin .=        $o_component->getSection('sso') . '
                           <div class="row mb-4">
                               <div class="col-md-12 d-flex justify-content-center">
-                                  <a href="' . Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww() . '">' . $o_component->getText('Forgot password?') . '</a>
+                                  <a href="' . Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email') . '">' . $o_component->getText('Forgot password?') . '</a>
                               </div>
                           </div>';
 

@@ -18,6 +18,7 @@ namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
@@ -30,51 +31,68 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $user = Session::getUserObject();
+        $o_component = $this->getComponentObject();
+        $o_user      = Session::getUserObject();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('backgrounds/password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
-                                <div class="login-box">
-                                    <div class="card card-outline card-info">
-                                        <div class="card-header text-center">
-                                            <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="login-box-msg">' . tr('Hello :user, please enter a new password for your account to continue...', [':user' => $user->getDisplayName()]) . '</p>
+        // Render the entire page
+        $this->render = ' <header>
+                              <section class="text-center text-md-start">
+                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($o_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
+                                  </div>
+                              </section>
+                          </header>
+                          <main class="mb-5" style="margin-top: -100px;">
+                              <div class="container px-4">
+                                  <div class="row d-flex justify-content-center">
+                                      <div class="col-xl-5 col-md-8">
+                                          <div class="card shadow-4">
+                                              <div class="card-body p-4">
+                                                  <form method="post" action="' . Url::new($o_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.form', Url::newCurrent())))->makeWww() . '">
+                                                      ' . Csrf::getHiddenElement() . '
+                                                      <div class="sign-in text-center h1"> 
+                                                          <img src="' . Url::new($o_component->getImage('image-logo', default: config()->getString('web.pages.update-lost-password.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $o_component->getText(tr('Medinet Mobile')) . '" width="310">
+                                                      </div>
+                                                      <hr>
+                                                      <h2 class="text-center">' . $o_component->getText(tr('Update lost password')) . '</h2>
+                                                      <p class="login-box-msg text-center">' . $o_component->getText(tr('Please provide your new password below')) . '</p>
+                                                      <hr>
+                                                      <div class="form-outline mb-4" data-mdb-input-init>
+                                                          <input type="password" id="password" name="password" class="form-control" />
+                                                          <label class="form-label" for="password">' . $o_component->getText(tr('Password')) . '</label>
+                                                      </div>
+                                                      <div class="form-outline mb-4" data-mdb-input-init>
+                                                          <input type="password" id="passwordv" name="passwordv" class="form-control" />
+                                                          <label class="form-label" for="passwordv">' . $o_component->getText(tr('Verify password')) . '</label>
+                                                      </div>
+                                                      <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
+                                                          ' . $o_component->getText(tr('Request a new password')) . '
+                                                      </button>
+                                                      <div class="row mb-4">
+                                                          <div class="col-md-12 d-flex justify-content-center">
+                                                              <a data-mdb-ripple-init class="btn btn-block btn-outline-primary" href="' . Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww() . '">' . $o_component->getText('Back to sign-in page') . '</a>
+                                                          </div>
+                                                      </div>';
 
-                                            <form action="' . Url::newCurrent() . '" method="post">
-                                                ' . Csrf::getHiddenElement() . '
-                                                <div class="input-group mb-3">
-                                                    <input type="password" name="password" id="password" class="form-control" placeholder="' . tr('Password') . '">
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-lock"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="input-group mb-3">
-                                                    <input type="password" name="passwordv" id="passwordv" class="form-control" placeholder="' . tr('Verify password') . '">
-                                                    <div class="input-group-append">
-                                                        <div class="input-group-text">
-                                                            <span class="fas fa-lock"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-12">
-                                                        <button type="submit" class="btn btn-primary btn-block">' . tr('Update and continue') . '</button>
-                                                    </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                    <div class="col-12">
-                                                        <a href="' . Url::new('sign-out')->makeWww() . '" class="btn btn-outline-secondary btn-block">' . tr('Sign out') . '</a>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </body>';
+        if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
+            $this->render .= '                        <div class="text-center">
+                                                          ' . $o_component->getText(tr('Copyright © 2025 :url', [
+                    ':url' => '<a target="_blank" href="' . $o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')) . '">' . $o_component->getText(config()->getString('project.owner.name', 'Phoundation')) . '</a>'
+                ])) . '
+                                                          <br/>
+                                                          <small>
+                                                              ' . $o_component->getText(tr('All rights reserved')) . '
+                                                          </small>
+                                                      </div>';
+        }
 
-        return parent::render();
+        $this->render .= '                        </form>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </main>';
+
+        return $this->render;
     }
 }
