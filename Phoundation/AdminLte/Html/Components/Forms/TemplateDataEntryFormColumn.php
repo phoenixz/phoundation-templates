@@ -52,7 +52,17 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
         // Add marker to all labels that are obligatory
         if (!$o_definition->getOptional()) {
-            $o_definition->setLabel('* ' . $o_definition->getLabel());
+            if ($o_definition->getContainsData()) {
+                if ($o_definition->getRender()) {
+                    if ($o_definition->getLabel()) {
+                        $o_definition->setLabel('* ' . $o_definition->getLabel());
+                    }
+
+                    if ($o_definition->getPlaceholder()) {
+                        $o_definition->setLabel('* ' . $o_definition->getPlaceholder());
+                    }
+                }
+            }
         }
 
         if (is_string($o_component)) {
