@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Tables;
 
+use Phoundation\Web\Html\Components\Script;
 use Phoundation\Web\Html\Components\Tables\HtmlTable;
 use Phoundation\Web\Html\Layouts\GridRow;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -40,6 +41,16 @@ class TemplateHtmlDataTable extends TemplateRenderer
      */
     public function render(): ?string
     {
-        return GridRow::new()->addGridColumn(parent::render())->render();
+        return GridRow::new()->addGridColumn(parent::render())->render() .
+            Script::new('$(document).keydown(function(e) {
+                                if ((e.ctrlKey) && (e.key === "p")) {
+                                    // Prevent default print dialog
+                                    // Trigger click on the print button
+                                    e.preventDefault(); 
+                                    $(".buttons-print").click(); 
+                                }
+                                
+                                return false; 
+                           });');
     }
 }
