@@ -89,7 +89,7 @@ class TemplateInputText extends TemplateInput
                                     });
                                     
                                     ' . $name . '.addEventListener("input", () => {
-                                      if (' . $name . 'value !== null) {
+                                      if (' . $name . '.value !== null) {
                                         showElement(clearButton);
                                       }
                                     });');
