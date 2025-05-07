@@ -43,14 +43,13 @@ class TemplateHtmlDataTable extends TemplateRenderer
     {
         return GridRow::new()->addGridColumn(parent::render())->render() .
             Script::new('$(document).keydown(function(e) {
-                                if ((e.ctrlKey) && (e.key === "p")) {
-                                    // Prevent default print dialog
-                                    // Trigger click on the print button
-                                    e.preventDefault(); 
-                                    $(".buttons-print").click(); 
-                                }
-                                
-                                return false; 
-                           });');
+                             if ((e.ctrlKey) && (e.key === "p")) {
+                                 // Prevent default print dialog
+                                 // Trigger click on the print button
+                                 e.preventDefault(); 
+                                 $(".buttons-print").click(); 
+                                 return false; 
+                            }
+                        });');
     }
 }
