@@ -71,7 +71,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     public function renderHtmlHeaders(string $doctype): ?string
     {
-        return '<!DOCTYPE ' . $doctype . ">\n<html lang=\"" . Session::getLanguage() . '">' . PHP_EOL . '<head>';
+        return '<!DOCTYPE ' . $doctype . ">\n<html lang=\"" . Session::getLanguage() . '">' . PHP_EOL . Response::renderHeadTag();
     }
 
 
