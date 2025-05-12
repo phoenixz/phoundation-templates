@@ -39,27 +39,31 @@ class TemplateInputText extends TemplateInput
      */
     public function render(): ?string
     {
-        if ($this->o_component->getClearButton()) {
-            $this->o_component->addClass('form-icon-trailing');
+        $o_component = $this->o_component;
+
+        if ($o_component->getClearButton()) {
+            $o_component->addClass('form-icon-trailing');
         }
 
         $return = parent::render();
-        $icon   = $this->o_component->getIcon();
+        $icon   = $o_component->getIcon();
 
         if ($icon) {
             // Add an icon
             $return = $icon->render() . ' ' . $return;
         }
 
-        if ($this->o_component->getClearButton()) {
-            $name = $this->o_component->getName();
+        if ($o_component->getClearButton()) {
+            $name = $o_component->getName();
 
-            // Add a clear button
-            $return .= '<span class="trailing pe-auto clear" tabindex="0">✕</span>';
+            if ($o_component->getValue()) {
+                // Add a clear button
+                $return .= '<span class="trailing pe-auto clear" tabindex="0">✕</span>';
 
-            $return .= Script::new('const clearButton = document.querySelector(".trailing.clear");
+                if ($name) {
+                    $return .= Script::new('const clearButton = document.querySelector(".trailing.clear");
                                     const ' . $name . '= document.querySelector("#' . $name . '");
-                                    const  showElement = (element) => {
+                                    const showElement = (element) => {
                                         if (element.classList.contains("d-none")) {
                                             element.classList.remove("d-none");
                                         }
@@ -93,6 +97,8 @@ class TemplateInputText extends TemplateInput
                                         showElement(clearButton);
                                       }
                                     });');
+                }
+            }
         }
 
         return $return;
