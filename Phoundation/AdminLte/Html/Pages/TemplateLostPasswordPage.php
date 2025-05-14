@@ -49,7 +49,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <button type="submit" class="btn btn-primary btn-block">' . $o_component->getText(tr('Request a new password')) . '</button>
+                                                        <button type="submit" class="btn btn-primary btn-block">' . $o_component->getText(tr('Request a link to update your password')) . '</button>
                                                     </div>
                                                 </div>
                                                 <div class="row">

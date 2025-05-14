@@ -63,7 +63,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                                           <label class="form-label" for="loginName">' . $o_component->getText(tr('Email address')) . '</label>
                                                       </div>
                                                       <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                                                          ' . $o_component->getText(tr('Update your password')) . '
+                                                          ' . $o_component->getText(tr('Request a link to update your password')) . '
                                                       </button>
                                                       <div class="row mb-4">
                                                           <div class="col-md-12 d-flex justify-content-center">
