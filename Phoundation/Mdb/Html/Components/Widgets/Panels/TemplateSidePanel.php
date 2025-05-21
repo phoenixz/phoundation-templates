@@ -40,7 +40,7 @@ class TemplateSidePanel extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = '   <nav data-mdb-sidenav-init id="sidenav-9" data-mdb-scroll-container="#scroll-container" class="sidenav sidenav-sm" data-mdb-accordion="true" data-mdb-hidden="' . (Session::autoShowMenu() ? 'false' : 'true') . '">
+        $this->render = '   <nav data-mdb-sidenav-init id="sidenav-9" data-mdb-scroll-container="#scroll-container" class="sidenav sidenav-sm" data-mdb-accordion="true" data-mdb-hidden="' . (Session::getAutoShowMenu() ? 'false' : 'true') . '">
                               <a href="' . Url::new('index')->makeWww() . '" data-mdb-ripple-init class="d-flex justify-content-center py-4 mb-3" style="background: white; border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary">
                                 <img src="' . Url::new('logos/large.png')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" width="200px" draggable="false">
                               </a>
