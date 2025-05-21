@@ -94,7 +94,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         // Render the page body
         $body = $this->renderMain();
 
-        if (Response::getRenderMainContentsOnly()) {
+        if (Response::getDirectOutputMode()) {
             return $body;
         }
 
@@ -209,7 +209,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
     {
         $body = parent::renderMain();
 
-        if (Response::getRenderMainContentsOnly()) {
+        if (Response::getDirectOutputMode()) {
             return $body;
         }
 
