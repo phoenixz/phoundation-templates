@@ -38,25 +38,27 @@ class TemplateButtons extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $render       = [];
-        $this->render = '';
+        if (empty($this->render)) {
+            $render       = [];
+            $this->render = '';
 
-        if ($this->o_component->getGroup()) {
-            $this->render .= '<div class="btn-group" role="group" aria-label="Button group">';
-        }
-
-        foreach ($this->o_component->getSource() as $button) {
-            if (is_string($button)) {
-                $render[] = $button;
-            } else {
-                $render[] = $button->render();
+            if ($this->o_component->getGroup()) {
+                $this->render .= '<div class="btn-group" role="group" aria-label="Button group">';
             }
-        }
 
-        $this->render = implode(' ', $render);
+            foreach ($this->o_component->getSource() as $button) {
+                if (is_string($button)) {
+                    $render[] = $button;
+                } else {
+                    $render[] = $button->render();
+                }
+            }
 
-        if ($this->o_component->getGroup()) {
-            $this->render .= '</div>';
+            $this->render = implode(' ', $render);
+
+            if ($this->o_component->getGroup()) {
+                $this->render .= '</div>';
+            }
         }
 
         return parent::render();
