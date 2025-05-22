@@ -296,73 +296,80 @@ class TemplateTopPanel extends TemplateRenderer
         foreach ($this->o_component->getElementsObject() as $element) {
             $element_type = Strings::until($element, '-');
 
-            switch ($element) {
-                case 'messages':
-                    $content = $this->o_component->getMessagesDropDown()->render();
-                    break;
+            if (is_string($element)) {
+                switch ($element) {
+                    case 'messages':
+                        $content = $this->o_component->getMessagesDropDown()->render();
+                        break;
 
-                case 'notifications':
-                    Log::warning(ts('Notifications and the icon in the top nav-bar are temporarily disabled'));
-                    $content = '  <li class="nav-item me-3 me-lg-1 dropdown d-none">
+                    case 'notifications':
+                        Log::warning(ts('Notifications and the icon in the top nav-bar are temporarily disabled'));
+                        $content = '  <li class="nav-item me-3 me-lg-1 dropdown d-none">
                                       <span>' . $this->o_component->getNotificationsDropDown()->render() . '</span>
                                   </li>';
-                    break;
+                        break;
 
-                case 'languages':
-                    $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
+                    case 'languages':
+                        $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
                                     <span>' . $this->o_component->getLanguagesDropDown()->render() . '</span>
                                   </li>';
-                    break;
+                        break;
 
-                case 'breadcrumbs':
-                    $content = $this->o_component->getBreadcrumbs()->get($element_type)->render();
-                    break;
+                    case 'breadcrumbs':
+                        $content = $this->o_component->getBreadcrumbs()->get($element_type)->render();
+                        break;
 
-                case 'button':
-                    $content = '  <li class="nav-item me-3 me-lg-1">
+                    case 'button':
+                        $content = '  <li class="nav-item me-3 me-lg-1">
                                     <span>' . $this->o_component->getButtons()->get($element_type)->render() . '</span>
                                   </li>';
-                    break;
+                        break;
 
-                case 'avatar':
-                    $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
+                    case 'avatar':
+                        $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
                                     <a class="nav-link" href="#">
                                       <span>' . $this->o_component->getAvatars()->get($element_type)->render() . '</span>
                                     </a>
                                   </li>';
-                    break;
+                        break;
 
-                case 'icon':
-                    $content = '  <li class="nav-item me-3 me-lg-1">
+                    case 'icon':
+                        $content = '  <li class="nav-item me-3 me-lg-1">
                                     ' . $this->o_component->getIcons()->get($element_type)->render() . '
                                   </li>';
-                    break;
+                        break;
 
-                case 'full-screen':
-                    $content = '  <li class="nav-item me-3 me-lg-1">
+                    case 'full-screen':
+                        $content = '  <li class="nav-item me-3 me-lg-1">
                                     ' . FullScreen::new()->render() .  '
                                   </li>';
-                    break;
+                        break;
 
-                case 'sign-out':
-                    $content = '  <li class="nav-item me-3 me-lg-1">
+                    case 'sign-out':
+                        $content = '  <li class="nav-item me-3 me-lg-1">
                                     ' . SignOut::new()->render() .  '
                                   </li>';
-                    break;
+                        break;
 
-                default:
-                    // This is a custom element. Must be either a render-able object, or a callback that returns HTML
-                    if ($element instanceof RenderInterface) {
-                        $content = $element->render();
-
-                    } elseif (is_callable($element)) {
-                        $content = $element();
-
-                    } else {
+                    default:
                         throw new MdbException(tr('Unknown top panel element ":element" specified', [
                             ':element' => $element
                         ]));
-                    }
+                }
+
+            } else {
+                // This is a custom element object. Must be either a render-able object, or a callback that returns HTML
+                if ($element instanceof RenderInterface) {
+                    $content = $element->render();
+
+                } elseif (is_callable($element)) {
+                    $content = $element();
+
+                } else {
+                    throw new MdbException(tr('Unknown top panel element object ":element" specified', [
+                        ':element' => get_class_or_datatype($element)
+                    ]));
+                }
             }
 
             $contents .= $content;

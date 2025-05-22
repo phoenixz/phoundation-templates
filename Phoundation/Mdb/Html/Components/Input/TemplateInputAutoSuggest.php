@@ -83,8 +83,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
             return parent::render() . Script::new('const asyncAutocompletes = document.querySelectorAll(\'' . $o_component->getSelector() . '\');
                                    const asyncFilter = async (query) => {
                                      const response = await fetch(`' . $o_component->getSourceUrl() . '?term=${encodeURI(query)}`);
-                                     const data = await response.json();
-                                     return data.data;
+                                     return $.filterPhoundation(await response.json()).data;
                                    };
                                    
                                    if (asyncAutocompletes.length) {                                   
