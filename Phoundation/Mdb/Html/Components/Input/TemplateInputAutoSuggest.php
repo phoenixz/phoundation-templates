@@ -91,7 +91,13 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                        asyncAutocompletes.forEach(function(asyncAutocomplete) {
                                            new mdb.Autocomplete(asyncAutocomplete, {
                                              filter: asyncFilter,
-                                             displayValue: (value) => value.label
+                                             displayValue: function (value) { if (value) {
+                                                     return value.label; 
+                                                 }
+                                                 
+                                                 return null;
+                                             },
+                                             noResults: "' . tr('Please start typing...') . '"
                                            });
                                        });
                                    }');
