@@ -222,59 +222,66 @@ class TemplateTopPanel extends TemplateRenderer
 
         // Render collapsible parts
         foreach ($this->o_component->getElementsObject() as $element_id => $element) {
-            $element_type = Strings::until($element, '-');
+            if (is_string($element)) {
+                switch ($element) {
+                    case 'logo':
+                        $delete[] = $element_id;
+                        $logo = Logo::new();
+                        $contents .= '<a class="navbar-brand mt-2 mt-lg-0" href="' . $logo->getAnchorObject()
+                                                                                          ->getHref() . '">
+                                        <img src="' . $logo->getSrc() . '" height="15" alt="' . $logo->getAlt() . '" loading="lazy"/>
+                                      </a>';
+                        break;
 
-            switch ($element) {
-                case 'logo':
-                    $delete[]  = $element_id;
-                    $logo      = Logo::new();
-                    $contents .= '<a class="navbar-brand mt-2 mt-lg-0" href="' . $logo->getAnchorObject()->getHref() . '">
-                                    <img src="' . $logo->getSrc() . '" height="15" alt="' . $logo->getAlt() . '" loading="lazy"/>
-                                  </a>';
-                    break;
+                    case 'menu':
+                        $delete[] = $element_id;
 
-                case 'menu':
-                    $delete[] = $element_id;
-
-                    if ($this->o_component->getMenusObject()->getCount()) {
-                        foreach ($this->o_component->getMenusObject() as $menu) {
-                            $contents .= $menu->render();
+                        if (
+                            $this->o_component->getMenusObject()
+                                              ->getCount()
+                        ) {
+                            foreach ($this->o_component->getMenusObject() as $menu) {
+                                $contents .= $menu->render();
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case 'text':
-                    $delete[] = $element_id;
+                    case 'text':
+                        $delete[] = $element_id;
 
-                    if ($this->o_component->getTexts()->getCount()) {
-                        foreach ($this->o_component->getTexts() as $text) {
-                            $contents .= '<small>' . $text . '</small>';
+                        if (
+                            $this->o_component->getTexts()
+                                              ->getCount()
+                        ) {
+                            foreach ($this->o_component->getTexts() as $text) {
+                                $contents .= '<small>' . $text . '</small>';
+                            }
                         }
-                    }
 
-                    break;
+                        break;
 
-                case 'sidebar-button':
-                    $delete[] = $element_id;
+                    case 'sidebar-button':
+                        $delete[] = $element_id;
 
-                    $contents .= '<button data-mdb-ripple-init data-mdb-toggle="sidenav" data-mdb-target="#sidenav-9" class="btn btn-primary me-2 d-flex align-items-center" aria-controls="#sidenav-9" aria-haspopup="true">
-                                    <i class="fas fa-bars"></i>
-                                  </button>';
-                    break;
+                        $contents .= '<button data-mdb-ripple-init data-mdb-toggle="sidenav" data-mdb-target="#sidenav-9" class="btn btn-primary me-2 d-flex align-items-center" aria-controls="#sidenav-9" aria-haspopup="true">
+                                        <i class="fas fa-bars"></i>
+                                      </button>';
+                        break;
 
-                case 'search':
-                    $delete[] = $element_id;
+                    case 'search':
+                        $delete[] = $element_id;
 
-                    $contents .= '<form class="d-flex input-group w-auto" method="get">
-                                    ' . Csrf::getHiddenElement() . '
-                                    <input type="search" class="form-control rounded" placeholder="' . tr('Search') . '" aria-label="' . tr('Search') . '" aria-describedby="search-addon" />
-                                      <span class="input-group-text border-0" id="search-addon">
-                                        <i class="fas fa-search"></i>
-                                      </span>
-                                  </form>';
-                    break;
+                        $contents .= '<form class="d-flex input-group w-auto" method="get">
+                                        ' . Csrf::getHiddenElement() . '
+                                        <input type="search" class="form-control rounded" placeholder="' . tr('Search') . '" aria-label="' . tr('Search') . '" aria-describedby="search-addon" />
+                                          <span class="input-group-text border-0" id="search-addon">
+                                            <i class="fas fa-search"></i>
+                                          </span>
+                                      </form>';
+                        break;
 
+                }
             }
         }
 
@@ -294,9 +301,9 @@ class TemplateTopPanel extends TemplateRenderer
         $contents = '';
 
         foreach ($this->o_component->getElementsObject() as $element) {
-            $element_type = Strings::until($element, '-');
-
             if (is_string($element)) {
+                $element_type = Strings::until($element, '-');
+
                 switch ($element) {
                     case 'messages':
                         $content = $this->o_component->getMessagesDropDown()->render();

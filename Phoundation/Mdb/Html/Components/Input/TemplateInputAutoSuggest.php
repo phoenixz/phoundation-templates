@@ -71,6 +71,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
             ]));
         }
 
+        // TODO Check $variables not being used here
         if ($o_component->getVariables()) {
             $variables = $o_component->getVariables()->getSource();
             $variables = ',' . Arrays::implodeWithKeys($variables, ',' . PHP_EOL, ':');
