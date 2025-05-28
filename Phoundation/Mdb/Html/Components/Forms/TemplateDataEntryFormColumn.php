@@ -191,7 +191,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
             default:
                 $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
-                                        <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+                                        <div' . $mdb_init . ' class="' . ($o_definition->getReadonly() ? 'readonly ' : null) . ($o_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
                                             ' . $render;
                 if (!$group and $o_definition->hasLabel()) {
                     $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
