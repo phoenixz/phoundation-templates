@@ -1,7 +1,7 @@
 <?php
 
 /**
- * class TemplatePage
+ * Class TemplatePage
  *
  *
  *
@@ -29,6 +29,7 @@ use Phoundation\Web\Html\Html;
 use Phoundation\Web\Requests\Request;
 use Phoundation\Web\Requests\Response;
 
+
 class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 {
     /**
@@ -42,7 +43,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     protected function getDisplayModeString(?string $mode = null): string
     {
-        $mode = $mode ?? config()->getString('web.display.mode', '', true);
+        $mode = $mode ?? Session::getCompactMode();
 
         if ($mode) {
             switch ($mode) {

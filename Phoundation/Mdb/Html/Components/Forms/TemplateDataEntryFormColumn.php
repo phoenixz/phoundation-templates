@@ -165,6 +165,8 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
             case EnumElement::input:
                 $label    = null;
                 $mdb_init = ($group ? null : ' data-mdb-input-init=""');
+                $mask     = $o_definition->getInputMask();
+                $mask     = ($mask ? ' data-mdb-input-mask="' . $mask . '" data-mdb-input-mask-init' : null);
                 break;
 
             default:
@@ -176,7 +178,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
             case EnumInputType::auto_suggest:
                 $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $o_component->getClass()) . ' ';
                 $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
-                                        <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
+                                        <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . $mask . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render;
 
                 if (!$group and $o_definition->hasLabel()) {
@@ -187,6 +189,22 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
                 $this->render .= '      </div>
                                     </div>';
+                break;
+
+            case EnumInputType::date:
+                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                                        <div' . $mdb_init . ' id="' . $o_component->getId() . '" class="' . ($group ? ' form-outline input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . $mask . ' data-mdb-input-init>
+                                            ' . $render;
+                if (!$group and $o_definition->hasLabel()) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
+                                                ' . Html::safe($o_definition->getLabel()) . '
+                                            </label>';
+                }
+
+                $this->render .= '      </div>
+                                    </div>';
+
+                //            ' . $this->renderTooltip($definition) . '
                 break;
 
             default:

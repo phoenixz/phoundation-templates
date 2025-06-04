@@ -16,15 +16,13 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Components\Input;
 
-use Locale;
-use Phoundation\Core\Locale\PhoLocale;
-use Phoundation\Date\PhoDateFormats;
+use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Date\PhoDateTimeFormats;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Input\InputDateTimeLocal;
 use Phoundation\Web\Html\Components\Script;
 use Phoundation\Web\Html\Enums\EnumInputType;
 use Phoundation\Web\Requests\Response;
-
 
 class TemplateInputDateTimeLocal extends TemplateInputText
 {
@@ -79,17 +77,17 @@ class TemplateInputDateTimeLocal extends TemplateInputText
                 Script::new()->setContent('
                     // Date and time picker
                     $.datepicker.setDefaults({
-                        format: "' . PhoDateFormats::convertJsToMoment(PhoLocale::getJsDateTimeFormat()) . '"
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getUserObject()->getLocaleObject()->getJsDateTimeFormat()) . '"
                     });
                     $("#' . $id . '").datetimepicker({ 
-                        locale: "' . PhoLocale::getLocale() . '",                            
-                        format: "' . PhoDateFormats::convertJsToMoment(PhoLocale::getJsDateTimeFormat()) . '"
+                        locale: "' . Session::getUserObject()->getLocaleObject()->getLocale() . '",                            
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getUserObject()->getLocaleObject()->getJsDateTimeFormat()) . '"
                         icons: { 
                             time: "far fa-clock" 
                         }
                     });
                 ');
-//        locale: "' . PhoLocale::getLocale() . '",
-//        format: "' . DateFormats::convertJsToMoment(PhoLocale::getJsDateTimeFormat()) . '"
+//        locale: "' . Session::getUserObject()->getLocaleObject()->getLocale() . '",
+//        format: "' . DateFormats::convertJsToMoment(Session::getUserObject()->getLocaleObject()->getJsDateTimeFormat()) . '"
     }
 }

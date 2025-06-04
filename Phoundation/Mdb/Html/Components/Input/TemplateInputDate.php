@@ -3,12 +3,11 @@
 /**
  * Class TemplateInputDate
  *
- *
- *
+ * @see       https://github.com/jcsmorais/shortcut-buttons-flatpickr
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @license http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
+ * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Templates\Mdb
+ * @package   Templates\Mdb
  */
 
 
@@ -16,7 +15,11 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Web\Html\Components\Input\InputDate;
+use Phoundation\Web\Html\Components\Script;
+use Phoundation\Web\Html\Enums\EnumInputType;
+use Phoundation\Web\Requests\Response;
 
 
 class TemplateInputDate extends TemplateInputText
@@ -26,7 +29,69 @@ class TemplateInputDate extends TemplateInputText
      */
     public function __construct(InputDate $o_component)
     {
-        $o_component->addClasses('form-control');
+        $o_component->addClasses('form-control')
+                    ->setInputType(EnumInputType::text);
+
         parent::__construct($o_component);
+    }
+
+
+    /**
+     * Renders and returns the HTML for the InputDate control
+     *
+     * @return string|null
+     */
+    public function render(): ?string
+    {
+//<div class="form-outline" data-mdb-datepicker-init data-mdb-input-init>
+//    <input type="text" class="form-control" id="datepickerWithRanges" />
+//    <label for="datepickerWithRanges" class="form-label">Select a date</label>
+//</div>
+//
+//<script>
+//    const datepickerElement = document.querySelector('#datepickerWithRanges');
+//    const predefinedRanges = [
+//        { start: new Date(2025, 5, 1), end: new Date(2025, 5, 7) }, // Example range
+//        { start: new Date(2025, 5, 15), end: new Date(2025, 5, 21) } // Example range
+//    ];
+//
+//    const filterFunction = (date) => {
+//        return predefinedRanges.some(range => date >= range.start && date <= range.end);
+//    };
+//
+//    new mdb.Datepicker(datepickerElement, {
+//        filter: filterFunction
+//    });
+//</script>
+
+
+        // Required to format the date of the "Today" button action below
+        Response::loadJavascript('templates/mdb/js/plugins/moment/moment');
+
+        // Set default options and backup $ID as ID needs to be rendered on outer div
+        $o_component = $this->getComponentObject();
+        $id          = $o_component->getId();
+        $variable    = strtolower(str_replace('-', '_', $id));
+
+        // The ID should be on the outer div, so remove it for the component itself
+        $o_component->setId($id . '-input', false);
+
+        $return = parent::render() . Script::new('      
+        const ' . $variable . '       = document.getElementById("' . $variable . '");
+        const ' . $variable . 'Object = new mdb.Datepicker("#' . $variable . '", {' . $o_component->renderOptions() . '});
+
+        ' . $variable . '.addEventListener("valueChanged.mdb.datepicker", (e) => {
+            $("[name=' . $id . ']").trigger("change");
+        });
+
+        $("body").on("click", ".datepicker-footer-btn.datepicker-clear-btn", function (e) {
+            $("[name=' . $id . ']").val(moment(Date.now()).format("' . Session::getUserObject()->getLocaleObject()->getDateFormatJavascript() . '"));  
+            ' . strtolower(str_replace('-', '_', $id)) . '.close();
+            $("[name=' . $id . ']").trigger("change");
+        });');
+
+        $o_component->setId($id);
+        return $return;
+
     }
 }

@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Core\Core;
 use Phoundation\Core\Plugins\Plugins;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
@@ -44,25 +45,17 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      */
     protected function getDisplayModeString(?string $mode = null, ?bool $compact = null): string
     {
-        if (Session::getUserObject()->isGuest()) {
-            $return  = null;
-            $classes = [];
-            $compact = $compact ?? Session::get('display', 'dark_mode')    ?? config()->getBoolean('web.display.compact'   , false, true);
-            $mode    = $mode    ?? Session::get('display', 'compact_mode') ?? config()->getTristate('web.display.modes.dark', false, true);
-
-        } else {
-            $return  = null;
-            $classes = [];
-            $compact = $compact ?? config()->getBoolean('web.display.compact'   , false, true);
-            $mode    = $mode    ?? config()->getTristate('web.display.modes.dark', false, true);
-        }
+        $return  = null;
+        $classes = [];
+        $compact = $compact ?? Session::getCompactMode();
+        $mode    = $mode    ?? Session::getDisplayMode();
 
         switch ($mode) {
-            case false:
+            case 'light':
                 $classes[] = 'light';
                 break;
 
-            case true:
+            case 'dark':
                 $classes[] = 'dark';
                 $return   .= ' data-mdb-theme="dark"';
                 break;
@@ -203,6 +196,8 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             'templates/mdb/css/mdb',
             'templates/mdb/css/mdb-fix',
             'templates/mdb/css/phoundation',
+            'templates/mdb/css/' . Core::getClientShortSeoName(),
+            'templates/mdb/css/' . Core::getProjectShortSeoName(),
         ], true);
 
         // Load configured CSS files
