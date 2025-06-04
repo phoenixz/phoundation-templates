@@ -30,7 +30,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
     public function __construct(InputAutoSuggest $o_component)
     {
         $o_component->addClasses('form-outline autocomplete')
-                    ->addData(null, 'data-mdb-input-init');
+                    ->addData('', 'data-mdb-input-init');
 
         parent::__construct($o_component);
     }

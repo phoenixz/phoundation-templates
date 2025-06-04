@@ -53,7 +53,7 @@ class TemplateDropdownButton extends TemplateButtons
                                        ->setMode($this->o_component->getMode())
                                        ->setName($this->o_component->getName())
                                        ->addClasses(['dropdown-toggle'])
-                                       ->addData(null, 'mdb-dropdown-init') .
+                                       ->addData('', 'mdb-dropdown-init') .
                                  '<ul class="dropdown-menu no-min-width" aria-labelledby="dropdownMenuButton">';
 
             foreach ($this->o_component->getSource() as $button) {
