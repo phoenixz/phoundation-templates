@@ -77,17 +77,17 @@ class TemplateInputDateTimeLocal extends TemplateInputText
                 Script::new()->setContent('
                     // Date and time picker
                     $.datepicker.setDefaults({
-                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getUserObject()->getLocaleObject()->getJsDateTimeFormat()) . '"
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getJsDateTimeFormat()) . '"
                     });
                     $("#' . $id . '").datetimepicker({ 
-                        locale: "' . Session::getUserObject()->getLocaleObject()->getLocale() . '",                            
-                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getUserObject()->getLocaleObject()->getJsDateTimeFormat()) . '"
+                        locale: "' . Session::getLocaleObject()->getLocale() . '",                            
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getJsDateTimeFormat()) . '"
                         icons: { 
                             time: "far fa-clock" 
                         }
                     });
                 ');
-//        locale: "' . Session::getUserObject()->getLocaleObject()->getLocale() . '",
-//        format: "' . DateFormats::convertJsToMoment(Session::getUserObject()->getLocaleObject()->getJsDateTimeFormat()) . '"
+//        locale: "' . Session::getLocaleObject()->getLocale() . '",
+//        format: "' . DateFormats::convertJsToMoment(Session::getLocaleObject()->getJsDateTimeFormat()) . '"
     }
 }

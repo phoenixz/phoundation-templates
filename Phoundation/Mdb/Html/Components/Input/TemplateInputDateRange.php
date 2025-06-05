@@ -46,7 +46,8 @@ class TemplateInputDateRange extends TemplateInputText
         // Ensure these two classes are always available
         $this->o_component->addClasses(['form-control', 'float-right']);
 
-        $html = '   <div class="input-group">
+        // Render and return
+        return '    <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">
                                 <i class="far fa-calendar-alt"></i>
@@ -54,8 +55,5 @@ class TemplateInputDateRange extends TemplateInputText
                         </div>
                         ' . parent::render() . '
                     </div>';
-
-        // Add date range picker JS
-        return $html;
     }
 }

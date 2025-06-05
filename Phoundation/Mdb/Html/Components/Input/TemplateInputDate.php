@@ -71,23 +71,33 @@ class TemplateInputDate extends TemplateInputText
         // Set default options and backup $ID as ID needs to be rendered on outer div
         $o_component = $this->getComponentObject();
         $id          = $o_component->getId();
-        $variable    = strtolower(str_replace('-', '_', $id));
+        $outline     = strtolower(str_replace('-', '_', $id));
 
         // The ID should be on the outer div, so remove it for the component itself
         $o_component->setId($id . '-input', false);
 
         $return = parent::render() . Script::new('      
-        const ' . $variable . '       = document.getElementById("' . $variable . '");
-        const ' . $variable . 'Object = new mdb.Datepicker("#' . $variable . '", {' . $o_component->renderOptions() . '});
+        const ' . $outline . '       = document.getElementById("' . $outline . '");
+        const ' . $outline . 'Object = new mdb.Datepicker("#' . $outline . '", {' . $o_component->renderOptions() . '});
 
-        ' . $variable . '.addEventListener("valueChanged.mdb.datepicker", (e) => {
+        ' . $outline . '.addEventListener("valueChanged.mdb.datepicker", (e) => {
             $("[name=' . $id . ']").trigger("change");
         });
 
         $("body").on("click", ".datepicker-footer-btn.datepicker-clear-btn", function (e) {
-            $("[name=' . $id . ']").val(moment(Date.now()).format("' . Session::getUserObject()->getLocaleObject()->getDateFormatJavascript() . '"));  
-            ' . strtolower(str_replace('-', '_', $id)) . '.close();
+            e.preventDefault();
+            $("[name=' . $id . ']").val(moment(Date.now()).format("' . Session::getLocaleObject()->getDateFormatJavascript() . '"));  
+            ' . $outline . 'Object.close();
             $("[name=' . $id . ']").trigger("change");
+      
+            const hasInput = ' . $outline . '.querySelector("input");
+            const hasLabel = ' . $outline . '.querySelector("label");
+            
+            if (hasInput && hasLabel) {
+                new mdb.Input(' . $outline . ').init();
+            }
+
+            return false;
         });');
 
         $o_component->setId($id);
