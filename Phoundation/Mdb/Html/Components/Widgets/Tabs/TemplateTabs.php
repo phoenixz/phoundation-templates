@@ -96,8 +96,7 @@ class TemplateTabs extends TemplateRenderer
             $first_tab_active = true;
             $active = true;
 
-        }
-        else {
+        } else {
             $first_tab_active = false;
             $active = false;
         }
@@ -130,8 +129,7 @@ class TemplateTabs extends TemplateRenderer
             $first_tab_active = true;
             $active = true;
 
-        }
-        else {
+        } else {
             $first_tab_active = false;
             $active = false;
         }
@@ -230,7 +228,7 @@ class TemplateTabs extends TemplateRenderer
 
     /**
      * Returns the tabs with orientation left
-     * 
+     *
      * @param TabsInterface $o_tabs
      * @param string        $buttons
      *
@@ -241,7 +239,7 @@ class TemplateTabs extends TemplateRenderer
 throw new UnderConstructionException(tr('left orientation for tabs with MDB template requires an upgrade to support before and after content!'));
         $content_display_size = $o_tabs->getContentDisplaySize()->value;
         $tab_display_size     = 12 - $content_display_size;
-        
+
         $render = '  <div class="row w-100">
                          <div class="col-' . $tab_display_size . ' col-sm-' . $tab_display_size . '">
                              <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist" aria-orientation="vertical">';
@@ -372,8 +370,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
             $first_tab_active = true;
             $active = true;
 
-        }
-        else {
+        } else {
             $first_tab_active = false;
             $active = false;
         }

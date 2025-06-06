@@ -30,7 +30,6 @@ use Phoundation\Web\Html\Enums\EnumInputType;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Requests\Request;
-use Templates\Phoundation\Mdb\TemplatePage;
 
 
 class TemplateDataEntryFormColumn extends TemplateRenderer
@@ -116,7 +115,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
             $group = (($o_component instanceof BeforeAfterContentInterface) and ($o_component->hasBeforeContent() or $o_component->hasAfterContent()));
 
-            if ($group or ($o_component instanceof InputDateRange) or ($o_component instanceof InputDateTimeRange)) {
+            if (($group or ($o_component instanceof InputDateRange) or ($o_component instanceof InputDateTimeRange)) and !($o_component instanceof InputSelectInterface)) {
                 $o_component->setPlaceholder($o_definition->getLabel());
                 $o_definition->setLabel(null);
             }
