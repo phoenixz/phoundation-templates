@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+use Phoundation\Data\Traits\TraitDataEventHandler;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Arrays;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
@@ -86,12 +87,13 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                      const response = await fetch(`' . $o_component->getSourceUrl() . '?term=${encodeURI(query)}`);
                                      return $.filterPhoundation(await response.json()).data;
                                    };
-                                   
+
                                    if (asyncAutocompletes.length) {                                   
                                        asyncAutocompletes.forEach(function(asyncAutocomplete) {
                                            new mdb.Autocomplete(asyncAutocomplete, {
                                              filter: asyncFilter,
-                                             displayValue: function (value) { if (value) {
+                                             displayValue: function (value) { 
+                                                 if (value) {
                                                      return value.label; 
                                                  }
                                                  
@@ -99,6 +101,10 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                              },
                                              noResults: "' . tr('Please start typing...') . '"
                                            });
+
+                                           ' . $o_component->getEventHandler('onselect', 'asyncAutocomplete.addEventListener("itemSelect.mdb.autocomplete", (e) => {
+                                               :SCRIPT
+                                           });') . '
                                        });
                                    }');
         }
