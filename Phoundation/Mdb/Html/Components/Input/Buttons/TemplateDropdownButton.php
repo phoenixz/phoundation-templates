@@ -46,7 +46,7 @@ class TemplateDropdownButton extends TemplateButtons
                                        ->setOutlined($this->o_component->getOutlined())
                                        ->setRounded($this->o_component->getRounded())
                                        ->setOutlined($this->o_component->getOutlined())
-                                       ->setContent($this->o_component->getContent())
+                                       ->setContent($this->o_component->getContent(), false)
                                        ->addClass($this->o_component->getClass())
                                        ->setValue($this->o_component->getValue())
                                        ->setFloatRight($this->o_component->getFloatRight())

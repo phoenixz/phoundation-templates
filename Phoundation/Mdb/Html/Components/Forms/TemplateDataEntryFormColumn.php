@@ -19,6 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Forms;
 use Phoundation\Core\Log\Log;
 use Phoundation\Data\DataEntries\Definitions\Interfaces\DefinitionInterface;
 use Phoundation\Exception\OutOfBoundsException;
+use Phoundation\Web\Html\Components\Input\Buttons\Interfaces\ButtonInterface;
 use Phoundation\Web\Html\Components\Input\InputDateRange;
 use Phoundation\Web\Html\Components\Input\InputDateTimeRange;
 use Phoundation\Web\Html\Components\Input\Interfaces\BeforeAfterContentInterface;
@@ -115,7 +116,8 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
 
             $group = (($o_component instanceof BeforeAfterContentInterface) and ($o_component->hasBeforeContent() or $o_component->hasAfterContent()));
 
-            if (($group or ($o_component instanceof InputDateRange) or ($o_component instanceof InputDateTimeRange)) and !($o_component instanceof InputSelectInterface)) {
+            // TODO Fix this by generating a hasPlaceholderInterface type class Interface that is added to all controls that support placeholders. This way its one interface check to see if the method is there or not
+            if (($group or ($o_component instanceof InputDateRange) or ($o_component instanceof InputDateTimeRange)) and !($o_component instanceof InputSelectInterface) and !($o_component instanceof ButtonInterface)) {
                 $o_component->setPlaceholder($o_definition->getLabel());
                 $o_definition->setLabel(null);
             }
@@ -204,6 +206,21 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                                     </div>';
 
                 //            ' . $this->renderTooltip($definition) . '
+                break;
+
+            case EnumInputType::button:
+                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                                        <div class="' . ($o_definition->getReadonly() ? 'readonly ' : null) . ($o_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
+                                            ' . $render;
+                if (!$group and $o_definition->hasLabel()) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
+                                                ' . Html::safe($o_definition->getLabel()) . '
+                                            </label>';
+                }
+
+                $this->render .= '      </div>
+                                    </div>';
+
                 break;
 
             default:
