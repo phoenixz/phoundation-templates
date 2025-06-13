@@ -35,7 +35,7 @@ class TemplateInputCheckbox extends TemplateInput
     public function __construct(InputCheckbox $o_component)
     {
         parent::__construct($o_component);
-        $o_component->getClassesObject()->removeKeys('form-control')->add(true, 'form-check-input');
+        $o_component->removeClass('form-control')->addClass('form-check-input');
     }
 
 
@@ -49,7 +49,7 @@ class TemplateInputCheckbox extends TemplateInput
         $o_component = $this->getComponentObject();
         $label       = $o_component->getLabel() ? '<label for="' . $o_component->getId() . '" class="form-check-label">' . $o_component->getLabel() . '</label>'
                                                 : '';
-        
+
         return '<div class="form-check' . ($o_component->getInline() ? ' form-check-inline' : '') . $this->type_class . '">
                     ' . ($o_component->getLabelAfter() ? parent::render() . $label
                                                        : $label . parent::render()) .
