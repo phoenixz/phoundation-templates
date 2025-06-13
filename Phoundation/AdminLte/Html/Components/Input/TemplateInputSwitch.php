@@ -29,7 +29,7 @@ class TemplateInputSwitch extends TemplateInputCheckbox
     {
 throw new UnderConstructionException('PLEASE IMPLEMENT \ADMINLTE\TEMPLATEINPUTSWITCH FIRST');
         parent::__construct($o_component);
-        $o_component->getClassesObject()->removeKeys('form-control')->add(true, 'form-check-input');
+        $o_component->removeClass('form-control')->addClass('form-check-input');
     }
 
 
