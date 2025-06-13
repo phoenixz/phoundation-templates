@@ -4,11 +4,12 @@
  * Class TemplateMdb template
  *
  *
+ * @see       https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-background
  *
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @license http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
+ * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Templates\Mdb
+ * @package   Templates\Mdb
  */
 
 

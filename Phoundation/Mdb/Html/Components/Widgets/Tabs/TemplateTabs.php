@@ -336,8 +336,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
             $first_tab_active = true;
             $active = true;
 
-        }
-        else {
+        } else {
             $first_tab_active = false;
             $active = false;
         }
