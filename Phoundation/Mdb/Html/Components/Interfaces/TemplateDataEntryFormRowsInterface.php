@@ -41,11 +41,11 @@ interface TemplateDataEntryFormRowsInterface
     /**
      * Adds the column component and its definition as a DataEntryFormColumn
      *
-     * @param DefinitionInterface|null    $definition
+     * @param DefinitionInterface|null    $o_definition
      * @param RenderInterface|string|null $component
      * @return static
      */
-    public function add(?DefinitionInterface $definition = null, RenderInterface|string|null $component = null): static;
+    public function add(?DefinitionInterface $o_definition = null, RenderInterface|string|null $component = null): static;
 
     /**
      * Adds the specified DataEntryFormColumn to this DataEntryFormRow

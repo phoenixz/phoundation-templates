@@ -118,15 +118,15 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
     /**
      * Renders and returns the tooltip for the specified definition
      *
-     * @param DefinitionInterface $definition
+     * @param DefinitionInterface $o_definition
      * @return string|null
      */
-    protected function renderTooltip(DefinitionInterface $definition): ?string
+    protected function renderTooltip(DefinitionInterface $o_definition): ?string
     {
-        if ($definition->getTooltip()) {
+        if ($o_definition->getTooltip()) {
             // Render and return the tooltip
             return Tooltip::new()
-                          ->setTitle($definition->getTooltip())
+                          ->setTitle($o_definition->getTooltip())
                           ->setUseIcon(true)
                           ->render();
         }
