@@ -205,7 +205,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::loadCss(config()->getArray('templates.mdb.css', []));
 
         // Load basic MDB amd jQuery javascript libraries
-        Response::loadJavascript([
+        Response::loadJavaScript([
             'templates/mdb/js/jquery',
             'templates/mdb/js/mdb.umd',
             'templates/phoundation/js/jquery-phoundation'

@@ -48,6 +48,7 @@ class TemplateButtons extends TemplateRenderer
         foreach ($this->o_component->getSource() as $button) {
             if (is_string($button)) {
                 $render[] = $button;
+
             } else {
                 $render[] = $button->render();
             }

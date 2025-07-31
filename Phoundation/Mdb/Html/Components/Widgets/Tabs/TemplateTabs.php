@@ -17,9 +17,8 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Tabs;
 
 use Phoundation\Exception\UnderConstructionException;
-use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
+use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
 use Phoundation\Web\Html\Components\Widgets\Tabs\Interfaces\TabsInterface;
-use Phoundation\Web\Html\Components\Widgets\Tabs\Tabs;
 use Phoundation\Web\Html\Enums\EnumOrientation;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 

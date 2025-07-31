@@ -185,7 +185,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::loadCss(config()->getArray('templates.adminlte.css', []));
 
         // Load basic AdminLte amd jQuery javascript libraries
-        Response::loadJavascript([
+        Response::loadJavaScript([
             'templates/adminlte/plugins/jquery/jquery',
             'templates/adminlte/plugins/jquery-ui/jquery-ui',
             'templates/adminlte/plugins/bootstrap/js/bootstrap.bundle',

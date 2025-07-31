@@ -19,7 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Icons\FullScreen;
-use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
+use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
 use Phoundation\Web\Html\Enums\EnumDisplayMode;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;

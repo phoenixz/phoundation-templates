@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Components\Input;
 
+use Phoundation\Date\Enums\EnumDateFormat;
 use Phoundation\Web\Html\Components\Input\InputDate;
 
 
@@ -28,5 +29,16 @@ class TemplateInputDate extends TemplateInput
     {
         $o_component->addClasses('form-control');
         parent::__construct($o_component);
+    }
+
+
+    /**
+     * Returns the default date format required for this TemplateInputDate class
+     *
+     * @return EnumDateFormat|string
+     */
+    public static function getDateFormat(): EnumDateFormat|string
+    {
+        return 'Y-m-d';
     }
 }

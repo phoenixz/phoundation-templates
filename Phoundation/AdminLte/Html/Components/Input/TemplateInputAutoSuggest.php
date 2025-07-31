@@ -69,7 +69,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
 
         // This input element requires some javascript
         // TODO This should load from the correct Template library!
-        Response::loadJavascript('templates/adminlte/plugins/jquery-ui/jquery-ui');
+        Response::loadJavaScript('templates/adminlte/plugins/jquery-ui/jquery-ui');
 
         if ($o_component->getPropertyBoolean('add_javascript', true)) {
             // Create JavaScript code for the component

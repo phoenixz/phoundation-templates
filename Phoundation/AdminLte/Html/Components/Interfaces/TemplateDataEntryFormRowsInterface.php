@@ -18,8 +18,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Interfaces;
 
 use Phoundation\Data\DataEntries\Definitions\Interfaces\DefinitionInterface;
 use Phoundation\Web\Html\Components\Forms\DataEntryFormColumn;
-use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
-
+use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
 
 interface TemplateDataEntryFormRowsInterface
 {

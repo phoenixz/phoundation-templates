@@ -16,7 +16,6 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
-use Phoundation\Data\Traits\TraitDataEventHandler;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Arrays;
 use Phoundation\Web\Html\Components\Input\InputAutoSuggest;
@@ -34,6 +33,17 @@ class TemplateInputAutoSuggest extends TemplateInputText
                     ->addData('', 'data-mdb-input-init');
 
         parent::__construct($o_component);
+    }
+
+
+    /**
+     * Returns the suffix for this component for JavaScript selecting
+     *
+     * @return string|null
+     */
+    public static function getJavaScriptSelectorSuffix(): ?string
+    {
+        return '_autosuggest_div';
     }
 
 

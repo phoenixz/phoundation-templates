@@ -62,7 +62,7 @@ class TemplateInputDateTimeLocal extends TemplateInputText
 
         // Load required CSS and JS
         Response::loadCss('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4');
-        Response::loadJavascript([
+        Response::loadJavaScript([
             'templates/adminlte/plugins/moment/moment',
             'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4'
         ]);
@@ -77,17 +77,17 @@ class TemplateInputDateTimeLocal extends TemplateInputText
                 Script::new()->setContent('
                     // Date and time picker
                     $.datepicker.setDefaults({
-                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getJsDateTimeFormat()) . '"
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getDateTimeFormatJavaScript()) . '"
                     });
                     $("#' . $id . '").datetimepicker({ 
                         locale: "' . Session::getLocaleObject()->getLocale() . '",                            
-                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getJsDateTimeFormat()) . '"
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getDateTimeFormatJavaScript()) . '"
                         icons: { 
                             time: "far fa-clock" 
                         }
                     });
                 ');
 //        locale: "' . Session::getLocaleObject()->getLocale() . '",
-//        format: "' . DateFormats::convertJsToMoment(Session::getLocaleObject()->getJsDateTimeFormat()) . '"
+//        format: "' . DateFormats::convertJsToMoment(Session::getLocaleObject()->getDateTimeFormatJavaScript()) . '"
     }
 }

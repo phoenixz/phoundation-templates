@@ -20,14 +20,13 @@ use Phoundation\Core\Log\Log;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Icons\FullScreen;
 use Phoundation\Web\Html\Components\Icons\SignOut;
-use Phoundation\Web\Html\Components\Input\Interfaces\RenderInterface;
+use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
 use Phoundation\Web\Html\Components\Logo;
 use Phoundation\Web\Html\Components\Widgets\Panels\TopPanel;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Templates\Phoundation\Mdb\Exception\MdbException;
-
 
 class TemplateTopPanel extends TemplateRenderer
 {

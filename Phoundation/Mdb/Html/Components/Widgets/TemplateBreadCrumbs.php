@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets;
 
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Interfaces\AnchorInterface;
 use Phoundation\Web\Html\Components\Widgets\BreadCrumbs;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -47,14 +48,31 @@ class TemplateBreadCrumbs extends TemplateRenderer
             $count = count($this->o_component->getSource());
 
             foreach ($this->o_component->getSource() as $url => $label) {
-                $label = Strings::truncate($label, 48);
+                // Limit label size for normal use
+                if ($label instanceof AnchorInterface) {
+                    $label->setContent(Strings::truncate($label->getContent(), 48));
 
-                if (!--$count) {
-                    // The last item is the active item
-                    $this->render .= '<li class="breadcrumb-item active">' . Html::safe($label) . '</li>';
+                    if (!--$count) {
+                        // The last item is the active item, the active item has (need) no URL
+                        $this->render .= '<li class="breadcrumb-item active">' . $label->setHref(null) . '</li>';
+
+                    } else {
+                        $this->render .= '<li class="breadcrumb-item">' . $label->setRenderRightsFail(true) . '</li>';
+                    }
 
                 } else {
-                    $this->render .= '<li class="breadcrumb-item"><a href="' . Html::safe(Url::new($url)->makeWww()) . '">' . Html::safe($label) . '</a></li>';
+                    $label = Strings::truncate($label, 48);
+
+                    if (!--$count) {
+                        // The last item is the active item
+                        $this->render .= '<li class="breadcrumb-item active">' . Html::safe($label) . '</li>';
+
+                    } elseif (is_int($url)) {
+                        $this->render .= '<li class="breadcrumb-item">' . Html::safe($label) . '</li>';
+
+                    } else {
+                        $this->render .= '<li class="breadcrumb-item"><a href="' . Html::safe(Url::new($url)->makeWww()) . '">' . Html::safe($label) . '</a></li>';
+                    }
                 }
             }
         }

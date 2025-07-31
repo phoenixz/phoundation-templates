@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Date\Enums\EnumDateFormat;
 use Phoundation\Web\Html\Components\Input\InputDate;
 use Phoundation\Web\Html\Components\Script;
 use Phoundation\Web\Html\Enums\EnumInputType;
@@ -33,6 +34,17 @@ class TemplateInputDate extends TemplateInputText
                     ->setInputType(EnumInputType::text);
 
         parent::__construct($o_component);
+    }
+
+
+    /**
+     * Returns the default date format required for this TemplateInputDate class
+     *
+     * @return EnumDateFormat|string
+     */
+    public static function getDateFormat(): EnumDateFormat|string
+    {
+        return EnumDateFormat::user_date;
     }
 
 
@@ -64,9 +76,8 @@ class TemplateInputDate extends TemplateInputText
 //    });
 //</script>
 
-
         // Required to format the date of the "Today" button action below
-        Response::loadJavascript('templates/mdb/js/plugins/moment/moment');
+        Response::loadJavaScript('templates/mdb/js/plugins/moment/moment');
 
         // Set default options and backup $ID as ID needs to be rendered on outer div
         $o_component = $this->getComponentObject();
@@ -86,7 +97,7 @@ class TemplateInputDate extends TemplateInputText
 
         $("body").on("click", ".datepicker-footer-btn.datepicker-clear-btn", function (e) {
             e.preventDefault();
-            $("[name=' . $id . ']").val(moment(Date.now()).format("' . Session::getLocaleObject()->getDateFormatJavascript() . '"));  
+            $("[name=' . $id . ']").val(moment(Date.now()).format("' . Session::getLocaleObject()->getDateFormatJavaScript() . '"));  
             ' . $outline . 'Object.close();
             $("[name=' . $id . ']").trigger("change");
       

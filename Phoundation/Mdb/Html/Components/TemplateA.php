@@ -16,7 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components;
 
-use Phoundation\Web\Html\Components\A;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 
 
@@ -25,7 +25,7 @@ class TemplateA extends TemplateRenderer
     /**
      * Icons class constructor
      */
-    public function __construct(A $o_component)
+    public function __construct(Anchor $o_component)
     {
         parent::__construct($o_component);
     }
