@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Exception\OutOfBoundsException;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 
@@ -56,8 +57,16 @@ class TemplateSystemHttpErrorPage extends TemplateRenderer
                                                 <div class="border-top border-dark" style="width: 100px"></div>
                                                 <h2 class="display-4 mt-5 mb-4" style="color: #344e41"><i class="fas fa-exclamation-triangle text-:type"></i> :h2 :h3</h2>
                                                 <p>:p</p>
-                                                <a class="btn btn-lg btn-primary" href="' . Url::new('sign-out')->makeWww() . '">' . tr('Sign out') . '</a>
-                                                <a class="btn btn-lg btn-primary" href="' . Url::newCurrentDomainRootUrl() . '" role="button" data-mdb-ripple-init>' . tr('Go to main page') . '</a>
+                                                ' . Anchor::new()
+                                                          ->addClasses('btn btn-lg btn-primary')
+                                                          ->setHref(Url::new('sign-out')->makeWww())
+                                                          ->setContent(tr('Sign out')). '
+                                                ' . Anchor::new()
+                                                          ->addAttribute('button', 'role')
+                                                          ->addData('', 'mdb-ripple-init')
+                                                          ->addClasses('btn btn-lg btn-primary')
+                                                          ->setHref(Url::newCurrentDomainRootUrl())
+                                                          ->setContent(tr('Go to main page')). '
                                               </div>
                                             </div>
                                           </div>

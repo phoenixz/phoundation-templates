@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Core;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -40,7 +41,7 @@ class TemplateBottomPanel extends TemplateRenderer
     {
         $phoudation = '<a href="https://phoundation.org/">Phoundation</a>';
         $adminlte   = tr('template :name', [':name' => '<a href="https://adminlte.io/">' . tr('AdminLte') . '</a>']);
-        $project    = '<a href="' . Url::newCurrentDomainRootUrl() . '">' . config()->getString('project.name', 'Phoundation') . '</a>';
+        $project    = Anchor::new(Url::newCurrentDomainRootUrl(), config()->getString('project.name', 'Phoundation'));
 
         return '  <footer class="main-footer">
                     <div class="float-right d-none d-sm-block">

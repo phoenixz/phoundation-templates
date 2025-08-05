@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -37,8 +38,8 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setRenderMainWrapper(false);
 
         $o_component  = $this->getComponentObject();
-        $terms        = '<a href="' . Url::new('terms')->makeWww() . '">' . tr('terms and conditions') . '</a>';
-        $register     = '<a href="' . Url::new('sign-up')->makeWww() . '">' . tr('Register') . '</a>';
+        $terms        = Anchor::new(Url::new('terms')->makeWww(), tr('terms and conditions'));
+        $register     = Anchor::new(Url::new('sign-up')->makeWww(), tr('Register'));
 
         // Render SSO entries?
         if ($o_component->getEnabled('facebook')) {

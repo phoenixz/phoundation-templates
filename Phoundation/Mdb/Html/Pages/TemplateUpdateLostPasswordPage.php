@@ -17,7 +17,9 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -69,14 +71,21 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                                       </button>
                                                       <div class="row mb-4">
                                                           <div class="col-md-12 d-flex justify-content-center">
-                                                              <a data-mdb-ripple-init class="btn btn-block btn-outline-primary" href="' . Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww() . '">' . $o_component->getText('Back to sign-in page') . '</a>
+                                                              ' . Anchor::new()
+                                                                        ->addClasses('btn btn-block btn-outline-primary')
+                                                                        ->addData('', 'mdb-ripple-init')
+                                                                        ->setHref(Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww())
+                                                                        ->setContent($o_component->getText('Back to sign-in page')). '
                                                           </div>
                                                       </div>';
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
                                                           ' . $o_component->getText(tr('Copyright © 2025 :url', [
-                    ':url' => '<a target="_blank" href="' . $o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')) . '">' . $o_component->getText(config()->getString('project.owner.name', 'Phoundation')) . '</a>'
+                    ':url' => Anchor::new()
+                                    ->setHref($o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')))
+                                    ->setContent($o_component->getText(config()->getString('project.owner.name', 'Phoundation')))
+                                    ->setTarget(EnumAnchorTarget::blank)
                 ])) . '
                                                           <br/>
                                                           <small>

@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -37,7 +38,7 @@ class TemplateSignUpPage extends TemplateRenderer
                                 <div class="register-box">
                                     <div class="card card-outline card-primary">
                                         <div class="card-header text-center">
-                                            <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                            ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'), config()->getString('project.owner.label', '<span>Phoun</span>dation'))->addClass('h1') . '
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Register a new membership') . '</p>
@@ -80,7 +81,7 @@ class TemplateSignUpPage extends TemplateRenderer
                                                         <div class="icheck-primary">
                                                             <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                                             <label for="agreeTerms">
-                                                                ' . tr('I agree to the :terms', [':terms' => '<a href="' . Url::new('terms')->makeWww() . '">' . $terms . '</a>']) . '
+                                                                ' . tr('I agree to the :terms', [':terms' => Anchor::new(Url::new('terms')->makeWww(), $terms)]) . '
                                                             </label>
                                                         </div>
                                                     </div>

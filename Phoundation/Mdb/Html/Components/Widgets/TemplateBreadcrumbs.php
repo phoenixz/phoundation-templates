@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateBreadCrumbs
+ * Class TemplateBreadcrumbs
  *
  *
  *
@@ -18,19 +18,19 @@ namespace Templates\Phoundation\Mdb\Html\Components\Widgets;
 
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Interfaces\AnchorInterface;
-use Phoundation\Web\Html\Components\Widgets\BreadCrumbs;
+use Phoundation\Web\Html\Components\Widgets\Interfaces\BreadcrumbsInterface;
 use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 
 
-class TemplateBreadCrumbs extends TemplateRenderer
+class TemplateBreadcrumbs extends TemplateRenderer
 {
     /**
      * BreadCrumbs class constructor
      */
-    public function __construct(BreadCrumbs $o_component)
+    public function __construct(BreadcrumbsInterface $o_component)
     {
         parent::__construct($o_component);
     }
