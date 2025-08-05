@@ -19,6 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Widgets;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Interfaces\AnchorInterface;
 use Phoundation\Web\Html\Components\Widgets\BreadCrumbs;
+use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -46,22 +47,23 @@ class TemplateBreadCrumbs extends TemplateRenderer
 
         if ($this->o_component->getSource()) {
             $count = count($this->o_component->getSource());
+            $count--;
 
             foreach ($this->o_component->getSource() as $url => $label) {
                 // Limit label size for normal use
                 if ($label instanceof AnchorInterface) {
-                    $label->setContent(Strings::truncate($label->getContent(), 48));
+                    $label->setContent(Strings::capitalize(Strings::truncate($label->getContent(), 48)));
 
                     if (!--$count) {
                         // The last item is the active item, the active item has (need) no URL
                         $this->render .= '<li class="breadcrumb-item active">' . $label->setHref(null) . '</li>';
 
                     } else {
-                        $this->render .= '<li class="breadcrumb-item">' . $label->setRenderRightsFail(true) . '</li>';
+                        $this->render .= '<li class="breadcrumb-item">' . $label->setRenderRightsFail(EnumAnchorRenderRightsFail::no_url) . '</li>';
                     }
 
                 } else {
-                    $label = Strings::truncate($label, 48);
+                    $label = Strings::capitalize(Strings::truncate($label, 48));
 
                     if (!--$count) {
                         // The last item is the active item
