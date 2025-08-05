@@ -24,7 +24,7 @@ use Phoundation\Web\Html\Template\TemplateRenderer;
 class TemplateFlashMessages extends TemplateRenderer
 {
     /**
-     * BreadCrumbs class constructor
+     * Breadcrumbs class constructor
      */
     public function __construct(FlashMessagesInterface $o_component)
     {

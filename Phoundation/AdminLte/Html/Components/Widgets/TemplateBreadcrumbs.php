@@ -28,7 +28,7 @@ use Phoundation\Web\Http\Url;
 class TemplateBreadcrumbs extends TemplateRenderer
 {
     /**
-     * BreadCrumbs class constructor
+     * Breadcrumbs class constructor
      */
     public function __construct(BreadcrumbsInterface $o_component)
     {

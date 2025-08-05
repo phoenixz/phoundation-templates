@@ -23,7 +23,7 @@ use Phoundation\Web\Html\Template\TemplateRenderer;
 class TemplateToast extends TemplateRenderer
 {
     /**
-     * BreadCrumbs class constructor
+     * Breadcrumbs class constructor
      */
     public function __construct(ToastInterface $o_component)
     {
