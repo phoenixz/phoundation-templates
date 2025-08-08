@@ -103,7 +103,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('lost-password')) {
             $this->render .= '        <p class="mb-1">
-                                          <a href="' . Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email') . '">' . tr('I forgot my password') . '</a>
+                                          <a href="' . Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'), tr('I forgot my password') . '</a>
                                       </p>';
         }
 

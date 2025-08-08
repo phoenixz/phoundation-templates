@@ -63,7 +63,7 @@ class TemplateSignInForm extends TemplateRenderer
                         
                             <div class="col">
                               <!-- Simple link -->
-                              <a href="' . Html::safe($this->o_component->getForgotPasswordUrl()) . '">' . tr('Forgot password?') . '</a>
+                              <a href="' . Html::safe($this->o_component->getForgotPasswordUrl()), tr('Forgot password?') . '</a>
                             </div>
                           </div>
                         
@@ -72,7 +72,7 @@ class TemplateSignInForm extends TemplateRenderer
                         
                           <!-- Register buttons -->
                           <div class="text-center">
-                            <p>' . tr('Not a member?') . ' <a href="' . Html::safe($this->o_component->getRegisterUrl()) . '">' . tr('Register') . '</a></p>
+                            <p>' . tr('Not a member?') . ' <a href="' . Html::safe($this->o_component->getRegisterUrl()), tr('Register') . '</a></p>
                             <p>' . tr('or sign up with:') . '</p>
                             <button type="button" class="btn btn-primary btn-floating mx-1">
                               <i class="fab fa-facebook-f"></i>
