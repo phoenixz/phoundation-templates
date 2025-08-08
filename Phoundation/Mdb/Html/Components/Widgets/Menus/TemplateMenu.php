@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Menus;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Menus\Interfaces\MenuInterface;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -75,11 +76,11 @@ class TemplateMenu extends TemplateRenderer
                                ' . (isset($entry['icon']) ? '<i class="me-3 ' . Html::safe($entry['icon']) . '"></i>' : '') .
                                '<span class="sidenav-subheading text-muted">' . strtoupper(Html::safe($label)) . '</span>' . (isset($entry['badge']) ? '<span class="badge rounded-pill badge-notification bg-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '');
             } else {
-                $render .= ($li ? ' <li class="sidenav-item">' : '') . '
-                                      <a href="' . Html::safe(isset_get($entry['url']) ?? '#') . '" class="sidenav-link">
-                                        ' . (isset($entry['icon']) ? '<i class="me-3 ' . Html::safe($entry['icon']) . '"></i>' . (isset($entry['badge']) ? '<span class="badge rounded-pill badge-notification bg-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '') : '') . '
-                                        ' . $label . '
-                                      </a>';
+                $anchor  = Anchor::new(Html::safe(isset_get($entry['url'])))
+                                 ->addClass('sidenav_link')
+                                 ->setContent((isset($entry['icon']) ? '<i class="me-3 ' . Html::safe($entry['icon']) . '"></i>' . (isset($entry['badge']) ? '<span class="badge rounded-pill badge-notification bg-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '') : '') . $label);
+
+                $render .= ($li ? ' <li class="sidenav-item">' : '') . $anchor;
 
                 if (isset($entry['menu'])) {
                     $render .= $this->renderMenu($entry['menu'], ++$sub_menu);

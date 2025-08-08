@@ -46,30 +46,17 @@ class TemplateBreadcrumbs extends TemplateRenderer
         $this->render = ' <ol class="breadcrumb float-sm-right">';
 
         if ($this->o_component->getSource()) {
-            $count = count($this->o_component->getSource());
-            $count--;
-
             foreach ($this->o_component->getSource() as $url => $label) {
                 // Limit label size for normal use
                 if ($label instanceof AnchorInterface) {
                     $label->setContent(Strings::capitalize(Strings::truncate($label->getContent(), 48)));
 
-                    if (!--$count) {
-                        // The last item is the active item, the active item has (need) no URL
-                        $this->render .= '<li class="breadcrumb-item active">' . $label->setHref(null) . '</li>';
-
-                    } else {
-                        $this->render .= '<li class="breadcrumb-item">' . $label->setRenderRightsFail(EnumAnchorRenderRightsFail::no_url) . '</li>';
-                    }
+                    $this->render .= '<li class="breadcrumb-item">' . $label->setRenderRightsFail(EnumAnchorRenderRightsFail::no_url) . '</li>';
 
                 } else {
                     $label = Strings::capitalize(Strings::truncate($label, 48));
 
-                    if (!--$count) {
-                        // The last item is the active item
-                        $this->render .= '<li class="breadcrumb-item active">' . Html::safe($label) . '</li>';
-
-                    } elseif (is_int($url)) {
+                    if (is_int($url) or empty($url)) {
                         $this->render .= '<li class="breadcrumb-item">' . Html::safe($label) . '</li>';
 
                     } else {

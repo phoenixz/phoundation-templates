@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Menus;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Menus\Menu;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -74,11 +75,12 @@ class TemplateMenu extends TemplateRenderer
                                    ' . strtoupper(Html::safe($label)) . (isset($entry['badge']) ? '<span class="right badge badge-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '') . '
                                </li>';
             } else {
-                $html .= $menu_label . '<li class="nav-item">
-                                            <a href="' . Html::safe(isset_get($entry['url']) ?? '#') . '" class="nav-link">
-                                                ' . (isset($entry['icon']) ? '<i class="nav-icon fas fa ' . Html::safe($entry['icon']) . '"></i>' : '') . '
-                                                <p>' . Html::safe($label) . (isset($entry['menu']) ? '<i class="right fas fa-angle-left"></i>' : (isset($entry['badge']) ? '<span class="right badge badge-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '')) . '</p>
-                                            </a>';
+                $anchor  = Anchor::new(Html::safe(isset_get($entry['url'])))
+                                 ->addClass('nav-link')
+                                 ->setContent((isset($entry['icon']) ? '<i class="nav-icon fas fa ' . Html::safe($entry['icon']) . '"></i>' : '') .
+                                              '<p>' . Html::safe($label) . (isset($entry['menu']) ? '<i class="right fas fa-angle-left"></i>' : (isset($entry['badge']) ? '<span class="right badge badge-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '')) . '</p>');
+
+                $html .= $menu_label . '<li class="nav-item">' . $anchor;
 
                 if (isset($entry['menu'])) {
                     $html .= $this->renderMenu($entry['menu'], ++$sub_menu);
