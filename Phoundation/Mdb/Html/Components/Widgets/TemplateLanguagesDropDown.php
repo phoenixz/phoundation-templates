@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets;
 
 use Phoundation\Exception\OutOfBoundsException;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\LanguagesDropDown;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -71,7 +72,9 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                 }
 
                 $this->render .= '<li>
-                                    <a class="dropdown-item" href="' . Html::safe(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl())) . '"><i class="flag-' . $language->getFlagName() . ' flag"></i>' . $language->getName() . '</a>
+                                    ' . Anchor::new(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl()))
+                                              ->setClass('dropdown-item')
+                                              ->setContent('<i class="flag-' . $language->getFlagName() . ' flag"></i>' . $language->getName()) . '
                                   </li>';
             }
 
@@ -85,7 +88,9 @@ class TemplateLanguagesDropDown extends TemplateRenderer
         }
 
         $this->render .= '        <li>
-                                    <a href="' . Html::safe($this->o_component->getSettingsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('Language settings') . '</a>
+                                    ' . Anchor::new($this->o_component->getSettingsUrl())
+                                              ->setClass('dropdown-item dropdown-footer')
+                                              ->setContent(tr('Language settings')) . ' 
                                   </li>
                                 </ul>';
 

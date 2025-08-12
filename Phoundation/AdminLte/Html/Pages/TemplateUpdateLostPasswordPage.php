@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -36,7 +37,9 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                            <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                            ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
+                                                      ->setClass('h1')
+                                                      ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation')) . '
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Hello :user, please enter a new password for your account to continue...', [':user' => $user->getDisplayName()]) . '</p>
@@ -66,7 +69,9 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <a href="' . Url::new('sign-out')->makeWww() . '" class="btn btn-outline-secondary btn-block">' . tr('Sign out') . '</a>
+                                                        ' . Anchor::new(Url::new('sign-out'))
+                                                                  ->setClass('btn btn-outline-secondary btn-block')
+                                                                  ->setContent(tr('Sign out')) . '
                                                     </div>
                                                 </div>
                                             </form>

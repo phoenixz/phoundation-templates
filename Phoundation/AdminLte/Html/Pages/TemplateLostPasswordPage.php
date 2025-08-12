@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -31,7 +32,9 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                            <a href="' . Url::new($o_component->getUrl('customer'))->makeImg() . '" class="h1">' . $o_component->getText('owner-label') . '</a>
+                                            ' . Anchor::new(Url::new($o_component->getUrl('customer'))->makeImg())
+                                                      ->setClass('h1')
+                                                      ->setContent($o_component->getText('owner-label')) . '                                            
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg text-center">' . $o_component->getText(tr('Please provide your email address and we will send you a link where you can re-establish your password')) . '</p>
@@ -54,7 +57,9 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <a class="btn btn-outline-secondary btn-block" href="' . $o_component->getUrl('back-to-sign-in') . '">' . $o_component->getText(tr('Back to sign in')) . '</a>
+                                                        ' . Anchor::new($o_component->getUrl('back-to-sign-in'))
+                                                                  ->setContent($o_component->getText(tr('Back to sign in')))
+                                                                  ->setClass('btn btn-outline-secondary btn-block') . '                                                       
                                                     </div>
                                                 </div>';
         }

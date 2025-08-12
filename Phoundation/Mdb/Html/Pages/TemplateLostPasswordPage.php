@@ -16,7 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
+use Phoundation\Developer\Project\Project;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -67,19 +70,16 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                                       </button>
                                                       <div class="row mb-4">
                                                           <div class="col-md-12 d-flex justify-content-center">
-                                                              <a data-mdb-ripple-init class="btn btn-block btn-outline-primary" href="' . Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email') . '">' . $o_component->getText('Back to sign-in page') . '</a>
+                                                              ' . Anchor::new(Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email'))
+                                                                        ->setClass('btn btn-block btn-outline-primary')
+                                                                        ->setContent($o_component->getText('Back to sign-in page'))
+                                                                        ->addData('', 'mdb-ripple-init') . '
                                                           </div>
                                                       </div>';
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
-                                                          ' . $o_component->getText(tr('Copyright © 2025 :url', [
-                                                              ':url' => '<a target="_blank" href="' . $o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')) . '">' . $o_component->getText(config()->getString('project.owner.name', 'Phoundation')) . '</a>'
-                                                          ])) . '      
-                                                          <br/>
-                                                          <small>
-                                                              ' . $o_component->getText(tr('All rights reserved')) . '
-                                                          </small>
+                                                          ' . Project::getCopyright(true) . '      
                                                       </div>';
         }
 

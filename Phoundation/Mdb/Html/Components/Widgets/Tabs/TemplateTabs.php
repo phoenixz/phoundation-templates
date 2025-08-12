@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Tabs;
 
 use Phoundation\Exception\UnderConstructionException;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
 use Phoundation\Web\Html\Components\Widgets\Tabs\Interfaces\TabsInterface;
 use Phoundation\Web\Html\Enums\EnumOrientation;
@@ -110,9 +111,14 @@ class TemplateTabs extends TemplateRenderer
             }
 
             $render .= '        <li class="nav-item" role="presentation">
-                                    <a data-mdb-tab-init class="nav-link ' . ($active ? ' active' : '') . $tab->getClass(' ') . '" id="' . $tab->getId() . '-tab" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
-                                        ' . $tab->getLabel() . '
-                                    </a>
+                                    ' . Anchor::new('#' . $tab->getId())
+                                              ->setClass('nav-link ' . ($active ? 'active ' : '') . $tab->getClass())
+                                              ->setId($tab->getId())
+                                              ->setRole('tab')
+                                              ->setContent($tab->getLabel())
+                                              ->addData('', 'mdb-tab-init')
+                                              ->addAria($tab->getId(), 'controls')
+                                              ->addAria(($active ? 'true' : 'false'), 'selected') . '
                                 </li>';
 
             $active = false;
@@ -264,9 +270,15 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
                 }
             }
 
-            $render .= '         <a data-mdb-tab-init class="nav-link' . $tab->getClass(' ') . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
-                                     ' . $tab->getLabel() . '
-                                 </a>';
+            $render .= Anchor::new('#' . $tab->getId())
+                             ->setClass('nav-link' . $tab->getClass(' ') . ($active ? ' active' : ''))
+                             ->setId($tab->getId() . '-tab')
+                             ->setRole('tab')
+                             ->setContent($tab->getLabel())
+                             ->addAria($tab->getId(), 'controls')
+                             ->addAria(($active ? 'true' : 'false'), 'selected')
+                             ->addData('', 'mdb-tab-init');
+
             $active = false;
         }
 
@@ -382,9 +394,15 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
                 }
             }
 
-            $render .= '         <a class="nav-link' . $tab->getClass(' ') . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
-                                     ' . $tab->getLabel() . '
-                                 </a>';
+            $render .= Anchor::new('#' . $tab->getId())
+                             ->setClass('nav-link' . $tab->getClass(' ') . ($active ? ' active' : ''))
+                             ->setId($tab->getId() . '-tab')
+                             ->setRole('tab')
+                             ->setContent($tab->getLabel())
+                             ->addAria($tab->getId(), 'controls')
+                             ->addAria(($active ? 'true' : 'false'), 'selected')
+                             ->addData('pill', 'toggle');
+
             $active = false;
         }
 

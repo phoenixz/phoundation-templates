@@ -17,8 +17,10 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Core;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 
@@ -40,14 +42,14 @@ class TemplateBottomPanel extends TemplateRenderer
     public function render(): ?string
     {
         if (config()->getBoolean('web.panels.bottom.enabled', true)) {
-            $phoudation = '<a href="https://phoundation.org/">Phoundation</a>';
-            $template   = tr('template :name', [':name' => '<a href="https://mdbootstrap.com/">' . tr('Mdb') . '</a>']);
+            $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
+            $template   = tr('template :name', [':name' => Anchor::new('https://mdbootstrap.com/', tr('MDB'))]);
             $project    = Anchor::new(Url::newCurrentDomainRootUrl(), config()->getString('project.name', 'Phoundation'));
 
             return '  <footer class="bg-body-tertiary text-center fixed-bottom">
                       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
                           ' . tr(':project using :phoundation (:template)', [':project' => $project, ':phoundation' => $phoudation, ':template' => $template]) . ' ' . Core::PHOUNDATION_VERSION . '
-                          <span class="float-end">' . tr('Copyright © :project', [':project' => config()->getString('project.copyright', '2025')]) . ' <a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a> ' . tr('All rights reserved.') . ' <br></span>
+                          <span class="float-end">' . Project::getCopyright(true) . '</span>
                       </div>
                   </footer>';
         }

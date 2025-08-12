@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets;
 
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Interfaces\AnchorInterface;
 use Phoundation\Web\Html\Components\Widgets\Interfaces\BreadcrumbsInterface;
 use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
@@ -60,7 +61,7 @@ class TemplateBreadcrumbs extends TemplateRenderer
                         $this->render .= '<li class="breadcrumb-item">' . Html::safe($label) . '</li>';
 
                     } else {
-                        $this->render .= '<li class="breadcrumb-item"><a href="' . Html::safe(Url::new($url)->makeWww()) . '">' . Html::safe($label) . '</a></li>';
+                        $this->render .= '<li class="breadcrumb-item">' . Anchor::new(Url::new($url), $label) . '</a></li>';
                     }
                 }
             }

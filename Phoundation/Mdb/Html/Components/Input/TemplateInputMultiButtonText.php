@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Input;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Input\InputMultiButtonText;
 use Phoundation\Web\Html\Html;
 
@@ -45,8 +46,9 @@ class TemplateInputMultiButtonText extends TemplateInput
             if (str_starts_with($label, '#')) {
                 // Any label starting with # is a divider
                 $options .= '<li class="dropdown-divider"></li>';
+
             } else {
-                $options .= '<li class="dropdown-item"><a href="' . Html::safe($url) . '">' . Html::safe($label) . '</a></li>';
+                $options .= '<li class="dropdown-item">' . Anchor::new($url, $label) . '</li>';
             }
         }
 

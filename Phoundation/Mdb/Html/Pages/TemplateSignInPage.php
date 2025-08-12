@@ -16,8 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -86,7 +88,8 @@ class TemplateSignInPage extends TemplateRenderer
         $signin .=        $o_component->getSection('sso') . '
                           <div class="row mb-4">
                               <div class="col-md-12 d-flex justify-content-center">
-                                  <a href="' . Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email') . '">' . $o_component->getText('Forgot password?') . '</a>
+                                  ' . Anchor::new(Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email'))
+                                            ->setContent($o_component->getText('Forgot password?')) . '
                               </div>
                           </div>';
 
@@ -98,13 +101,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.sign-in.enabled.copyright', true))) {
             $signin .= '  <div class="text-center">
-                              ' . $o_component->getText(tr('Copyright © 2025 :url', [
-                                  ':url' => '<a target="_blank" href="' . $o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')) . '">' . $o_component->getText(config()->getString('project.owner.name', 'Phoundation')) . '</a>'
-                              ])) . '
-                              <br/>
-                              <small>
-                                  ' . $o_component->getText(tr('All rights reserved')) . '
-                              </small>
+                              ' . Project::getCopyright(true) . '
                           </div>';
         }
 
@@ -128,14 +125,23 @@ class TemplateSignInPage extends TemplateRenderer
             $render .= '                      <!-- Pills navs -->
                                               <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                                   <li class="nav-item" role="presentation">
-                                                      <a class="nav-link active" id="tab-login" data-mdb-pill-init href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">
-                                                          ' . $o_component->getText(tr('Sign in')) . '
-                                                      </a>
+                                                      ' . Anchor::new('#pills-login')
+                                                                ->setClass('nav-link active')
+                                                                ->setId('tab-login')
+                                                                ->addData('', 'mdb-pill-init')
+                                                                ->addAria('true', 'selected')
+                                                                ->setRole('tab')
+                                                                ->setContent($o_component->getText(tr('Sign in'))) . '
                                                   </li>
                                                   <li class="nav-item" role="presentation">
-                                                      <a class="nav-link" id="tab-register" data-mdb-pill-init href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">
-                                                          ' . $o_component->getText(tr('Register')) . '
-                                                      </a>
+                                                      ' . Anchor::new('#pills-register')
+                                                                ->setClass('nav-link')
+                                                                ->setRole('tab')
+                                                                ->setId('tab-register')
+                                                                ->addData('', 'mdb-pill-init')
+                                                                ->addAria('pills-register', 'controls')
+                                                                ->addAria('false', 'selected')
+                                                                ->setContent($o_component->getText(tr('Register'))). '
                                                   </li>
                                               </ul>';
 

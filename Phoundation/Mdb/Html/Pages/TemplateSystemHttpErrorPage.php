@@ -60,13 +60,13 @@ class TemplateSystemHttpErrorPage extends TemplateRenderer
                                                 ' . Anchor::new()
                                                           ->addClasses('btn btn-lg btn-primary')
                                                           ->setHref(Url::new('sign-out')->makeWww())
-                                                          ->setContent(tr('Sign out')). '
+                                                          ->setContent(tr('Sign out')) . '
                                                 ' . Anchor::new()
                                                           ->addAttribute('button', 'role')
                                                           ->addData('', 'mdb-ripple-init')
                                                           ->addClasses('btn btn-lg btn-primary')
                                                           ->setHref(Url::newCurrentDomainRootUrl())
-                                                          ->setContent(tr('Go to main page')). '
+                                                          ->setContent(tr('Go to main page')) . '
                                               </div>
                                             </div>
                                           </div>

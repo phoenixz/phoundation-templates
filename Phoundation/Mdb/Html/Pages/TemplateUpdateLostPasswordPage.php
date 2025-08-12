@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumAnchorTarget;
@@ -75,22 +76,13 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                                                         ->addClasses('btn btn-block btn-outline-primary')
                                                                         ->addData('', 'mdb-ripple-init')
                                                                         ->setHref(Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww())
-                                                                        ->setContent($o_component->getText('Back to sign-in page')). '
+                                                                        ->setContent($o_component->getText('Back to sign-in page')) . '
                                                           </div>
                                                       </div>';
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
-                                                          ' . $o_component->getText(tr('Copyright © 2025 :url', [
-                    ':url' => Anchor::new()
-                                    ->setHref($o_component->getUrl('owner', default: config()->getString('project.owner.url', 'https://phoundation.org')))
-                                    ->setContent($o_component->getText(config()->getString('project.owner.name', 'Phoundation')))
-                                    ->setTarget(EnumAnchorTarget::blank)
-                ])) . '
-                                                          <br/>
-                                                          <small>
-                                                              ' . $o_component->getText(tr('All rights reserved')) . '
-                                                          </small>
+                                                          ' . Project::getCopyright(true) . '
                                                       </div>';
         }
 

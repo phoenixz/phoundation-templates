@@ -18,6 +18,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Icons\FullScreen;
 use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
 use Phoundation\Web\Html\Enums\EnumDisplayMode;
@@ -47,20 +48,23 @@ class TemplateTopPanel extends TemplateRenderer
         // Top level message?
         if (isset($message)) {
             $message = '    <li class="nav-item d-none d-sm-inline-block">
-                              <a href="#" class="nav-link">' . Html::safe($message) . '</a>
+                              ' . Anchor::new('#', $message)->setClass('nav-link') . '
                             </li>';
         }
 
         // Build the left menu
         $left_menu = '    <ul class="navbar-nav">
                             <li class="nav-item">
-                              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                              ' . Anchor::new('#', '<i class="fas fa-bars"></i>')
+                                        ->setRole('button')
+                                        ->setClass('nav-link')
+                                        ->addData('pushmenu', 'widget') . '  
                             </li>';
 
         if ($this->o_component->keyExists('menu')) {
             foreach ($this->o_component->get('menu') as $label => $url) {
                 $left_menu .= ' <li class="nav-item d-none d-sm-inline-block">
-                                  <a href="' . Html::safe($url) . '" class="nav-link">' . Html::safe($label) . '</a>
+                                  ' . Anchor::new($url, $label)->setClass('nav-link') . '
                                 </li>';
             }
         }
@@ -83,10 +87,12 @@ class TemplateTopPanel extends TemplateRenderer
                 case 'search':
                     $this->render .= '<!-- Navbar Search -->
                                       <li class="nav-item">
-                                        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                                          <i class="fas fa-search"></i>
-                                        </a>
-                                        <div class="navbar-search-block">
+                                        ' . Anchor::new()
+                                                  ->setClass('nav-link')
+                                                  ->addData('navbar-search', 'widget')
+                                                  ->setRole('button')
+                                                  ->setContent('<i class="fas fa-search"></i>') . '
+                                          <div class="navbar-search-block">
                                           <form class="form-inline" method="get">
                                             <div class="input-group input-group-sm">
                                               <input class="form-control form-control-navbar" type="search" placeholder="' . tr('Search everywhere') . '" aria-label="' . tr('Search everywhere') . '">
@@ -138,17 +144,19 @@ class TemplateTopPanel extends TemplateRenderer
 
                 case 'sign-out':
                     $this->render .= '<li class="nav-item">
-                                        <a class="nav-link" href="' . Html::safe(Url::new('sign-out')->makeWww()) . '" role="button">
-                                          <i class="fas fa-sign-out-alt"></i>
-                                        </a>
+                                        ' . Anchor::new(Url::new('sign-out'), '<i class="fas fa-sign-out-alt"></i>')
+                                                  ->setRole('button')
+                                                  ->setClass('nav-link') . '
                                       </li>';
                     break;
 
                 case 'sidebar-button':
                     $this->render .= '<li class="nav-item">
-                                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                                          <i class="fas fa-th-large"></i>
-                                        </a>
+                                        ' . Anchor::new('#', '<i class="fas fa-th-large"></i>')
+                                                  ->setRole('button')
+                                                  ->setClass('nav-link')
+                                                  ->addData('control-sidebar', 'widget')
+                                                  ->addData('true', 'slide') . '
                                       </li>';
                     break;
 

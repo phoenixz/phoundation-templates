@@ -17,8 +17,11 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
+use Phoundation\Web\Html\Components\AnchorBlock;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
@@ -96,17 +99,15 @@ class TemplateSignUpPage extends TemplateRenderer
         $html = '';
 
         if (Session::supports('facebook')) {
-            $html .= '                          <a href="#" class="btn btn-block btn-primary">
-                                                    <i class="fab fa-facebook mr-2"></i>
-                                                    ' . tr('Sign up using Facebook') . '
-                                                </a>';
+            $html .=                            Anchor::new('#')
+                                                      ->setClass('btn btn-block btn-primary')
+                                                      ->setContent('<i class="fab fa-facebook mr-2"></i>' . tr('Sign up using Facebook'));
         }
 
         if (Session::supports('google')) {
-            $html .= '                          <a href="#" class="btn btn-block btn-danger">
-                                                    <i class="fab fa-google-plus mr-2"></i>
-                                                    ' . tr('Sign up using Google+') . '
-                                                </a>';
+            $html .=                            Anchor::new('#')
+                                                      ->setClass('btn btn-block btn-danger')
+                                                      ->setContent('<i class="fab fa-google-plus mr-2"></i>' . tr('Sign up using Google+'));
         }
 
         if ($html) {
@@ -115,13 +116,14 @@ class TemplateSignUpPage extends TemplateRenderer
                                             </div>';
         }
 
-        $this->render .= '                  <a href="' . Url::new('sign-in')->makeWww() . '" class="text-center">' . tr('I already have an account') . '</a>
+        $this->render .= '                  ' . Anchor::new(Url::new('sign-in'))
+                                                      ->setClass('text-center')
+                                                      ->setContent(tr('I already have an account')) . '
                                         </div>';
 
         if (Session::supports('copyright')) {
             $this->render .= '          <div class="login-footer text-center">
-                                            ' . 'Copyright © ' . config()->getString('project.copyright', '2025') . ' <b><a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a></b><br>' . '
-                                            All rights reserved
+                                            ' . Project::getCopyright(true) . '
                                         </div>';
         }
 

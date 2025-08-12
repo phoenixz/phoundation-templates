@@ -19,6 +19,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Widgets;
 use Phoundation\Date\PhoDate;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\LanguagesDropDown;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -49,10 +50,8 @@ class TemplateLanguagesDropDown extends TemplateRenderer
         $languages = $this->o_component->getLanguages();
         $count     = $languages?->getCount();
 
-        $this->render = '   <a class="nav-link" data-toggle="dropdown" href="#">
-                              <i style="color:red;">&#x1F1E8;&#x1F1E6;</i>                                                                                          
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">';
+        $this->render =     Anchor::new('#')->setClass('nav-link')->addData('dropdown', 'toggle')->setContent('<i style="color:red;">&#x1F1E8;&#x1F1E6;</i>') .
+                            '<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">';
 
         if ($count) {
             $current = 0;
@@ -65,11 +64,10 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                     break;
                 }
 
-                $this->render .= '<a href="' . Html::safe(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl())) . '" class="dropdown-item">
-                                    ' . ($language->getIcon() ? '<i class="text-' . Html::safe($language->getMode()->value) . ' fas fa-' . Html::safe($language->getIcon()) . ' mr-2"></i> ' : null) . Strings::truncate($language->getTitle(), 24) . '
-                                    <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($language->getCreatedOnObject())) . '</span>
-                                  </a>
-                                  <div class="dropdown-divider"></div>';
+                $this->render .= Anchor::new(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl()))
+                                       ->setClass('dropdown-item')
+                                       ->setContent(($language->getIcon() ? '<i class="text-' . Html::safe($language->getMode()->value) . ' fas fa-' . Html::safe($language->getIcon()) . ' mr-2"></i> ' : null) . Strings::truncate($language->getTitle(), 24) . '<span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($language->getCreatedOnObject())) . '</span>') .
+                                 '<div class="dropdown-divider"></div>';
             }
 
         } else {
@@ -77,7 +75,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                                     <div class="dropdown-divider"></div>';
         }
 
-        $this->render .= '        <a href="' . Html::safe($this->o_component->getSettingsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('Language settings') . '</a>
+        $this->render .= '          ' . Anchor::new($this->o_component->getSettingsUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('Language settings')) . '
                                 </div>';
 
         return parent::render();

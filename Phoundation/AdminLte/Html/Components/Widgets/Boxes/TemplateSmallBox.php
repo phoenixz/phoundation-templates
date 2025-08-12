@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Boxes;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Boxes\SmallBox;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -47,13 +48,9 @@ class TemplateSmallBox extends TemplateRenderer
                               ' . (($this->o_component->getProgress() !== null) ? '   <div class="progress">
                                                                                     <div class="progress-bar" style="width: ' . $this->o_component->getProgress() . '%"></div>
                                                                                   </div>' : '') . '
-                              ' . ($this->o_component->getDescription() ? '<p>' . Html::safe($this->o_component->getDescription()) . '</p>' : '') . '                        
-                              ' . ($this->o_component->getIcon() ? '  <div class="icon">
-                                                        <i class="fas ' . Html::safe($this->o_component->getIcon()) . '"></i>
-                                                    </div>' : '') . '
-                              ' . ($this->o_component->getUrl() ? ' <a href="' . Html::safe($this->o_component->getUrl()) . '" class="small-box-footer">
-                                                    ' . tr('More info') . ' <i class="fas fa-arrow-circle-right"></i>
-                                                  </a>' : '') . '                        
+                              ' . ($this->o_component->getDescription() ? ' <p>' . Html::safe($this->o_component->getDescription()) . '</p>' : '') . '                        
+                              ' . ($this->o_component->getIcon()        ? ' <div class="icon"><i class="fas ' . Html::safe($this->o_component->getIcon()) . '"></i></div>' : '') . '
+                              ' . ($this->o_component->getUrl()         ? Anchor::new($this->o_component->getUrl())->setClass('small-box-footer')->setContent(tr('More info') . ' <i class="fas fa-arrow-circle-right"></i>') : null) . '                        
                             </div>';
 
         return parent::render();

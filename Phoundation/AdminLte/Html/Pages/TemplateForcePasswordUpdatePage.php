@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -35,7 +36,9 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                     <!-- /.login-logo -->
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                          <a href="' .  config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                          ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
+                                                    ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'))
+                                                    ->setClass('h1'). '
                                     </div>
                                     <div class="card-body">
                                         <p class="login-box-msg">' .  $o_component->getText(tr('Please update your account to have a new and secure password password before continuing...')) . '</p>
@@ -66,7 +69,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-12">
-                                                    <a href="' .  Url::new('/sign-out.html')->makeWww() . '" class="btn btn-outline-secondary btn-block">' . tr('Sign out') . '</a>
+                                                    ' . Anchor::new(Url::new('/sign-out.html'), tr('Sign out'))->setClass('btn btn-outline-secondary btn-block') . '
                                                 </div>
                                             </div>
                                         </form>

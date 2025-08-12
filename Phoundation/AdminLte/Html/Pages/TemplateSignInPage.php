@@ -17,7 +17,11 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Developer\Project\Project;
+use Phoundation\Web\Html\Components\Anchor;
+use Phoundation\Web\Html\Components\AnchorBlock;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
@@ -39,7 +43,9 @@ class TemplateSignInPage extends TemplateRenderer
                                   <!-- /.login-logo -->
                                   <div class="card card-outline card-info">
                                     <div class="card-header text-center">
-                                      <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                      ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
+                                                ->setClass('h1')
+                                                ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation')). '
                                     </div>
                                     <div class="card-body">
                                       <p class="login-box-msg">' . tr('Please sign in to start your session') . '</p>
@@ -84,15 +90,15 @@ class TemplateSignInPage extends TemplateRenderer
 
 
         if (Session::supports('facebook')) {
-            $html = '                 <a href="#" class="btn btn-block btn-primary">
-                                          <i class="fab fa-facebook mr-2"></i>' . tr('Sign in using Facebook') . '
-                                      </a>';
+            $html =                   Anchor::new('#')
+                                            ->setClass('btn btn-block btn-primary')
+                                            ->setContent('<i class="fab fa-facebook mr-2"></i>' . tr('Sign in using Facebook'));
         }
 
         if (Session::supports('google')) {
-            $html = '                 <a href="#" class="btn btn-block btn-danger">
-                                          <i class="fab fa-google-plus mr-2"></i>' . tr('Sign in using Google') . '
-                                      </a>';
+            $html =                   Anchor::new('#')
+                                            ->setClass('btn btn-block btn-primary')
+                                            ->setContent('<i class="fab fa-google-plus mr-2"></i>' . tr('Sign in using Google'));
         }
 
         if (isset($html)) {
@@ -103,20 +109,24 @@ class TemplateSignInPage extends TemplateRenderer
 
         if (Session::supports('lost-password')) {
             $this->render .= '        <p class="mb-1">
-                                          <a href="' . Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'), tr('I forgot my password') . '</a>
+                                          ' . Anchor::new(Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'))
+                                                    ->setContent(tr('text-center'))
+                                                    ->setContent(tr('I forgot my password')) . '
                                       </p>';
         }
 
         if (Session::supports('register')) {
             $this->render .= '        <p class="mb-0">
-                                          <a href="' . Url::new('/sign-up.html')->makeWww() . '" class="text-center">' . tr('Register a new membership') . '</a>
+                                          ' . Anchor::new(Url::new('/sign-up.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'))
+                                                    ->setContent(tr('text-center'))
+                                                    ->setContent(tr('Register a new membership')) . '
                                       </p>';
         }
 
         if (Session::supports('copyright')) {
-            $this->render .= '      <div class="login-footer text-center">
-                                        ' . 'Copyright © ' . config()->getString('project.copyright', '2025') . ' <b><a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a></b><br>' . '
-                                        ' . tr('All rights reserved') . '</div>
+            $this->render .= '          <div class="login-footer text-center">
+                                            ' . Project::getCopyright() . '
+                                        </div>
                                     </div>';
         }
 

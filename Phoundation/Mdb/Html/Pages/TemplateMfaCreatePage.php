@@ -17,7 +17,11 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Developer\Project\Project;
+use Phoundation\Web\Html\Components\Anchor;
+use Phoundation\Web\Html\Components\AnchorBlock;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Request;
@@ -41,9 +45,10 @@ class TemplateMfaCreatePage extends TemplateRenderer
         $back = null;
 
         if (Request::isPostRequestMethod()) {
-            $back = ' <a href="' . Url::new('mfa-verify')->makeWww() . '" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                          ' . tr('Back to creating a new MFA code') . '
-                      </a>';
+            $back = Anchor::new(Url::new('mfa-verify'))
+                          ->setContent(tr('Back to creating a new MFA code'))
+                          ->setClass('btn btn-primary btn-block mb-4')
+                          ->addData('', 'mdb-ripple-init');
         }
 
         // Render the page
@@ -60,15 +65,15 @@ class TemplateMfaCreatePage extends TemplateRenderer
                           <button class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
                               ' . (Request::isPostRequestMethod() ? tr('Confirm and enable multi-factor authentication') : tr('Test multi-factor authentication code')) . '
                           </button>
-                          ' . $back . '                          
-                          <a href="' . Url::new('signout')->makeWww() . '" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-init>
-                              ' . tr('Sign out') . '
-                          </a>';
-
+                          ' . $back .
+                          Anchor::new(Url::new('signout'))
+                                ->setClass('btn btn-outline-secondary btn-block mb-4')
+                                ->setContent(tr('Sign out'))
+                                ->addData('', 'mdb-ripple-init');
 
         if (Session::supports('copyright')) {
             $render .= '  <div class="text-center">
-                            Copyright © 2025 <a target="_blank" href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '">' . config()->getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
+                               ' . Project::getCopyright() . '
                           </div>';
         }
 
@@ -100,8 +105,7 @@ class TemplateMfaCreatePage extends TemplateRenderer
                                     <div class="card shadow-4">
                                       <div class="card-body p-4">';
 
-                                        $this->render .= $render;
-
+        $this->render .= $render;
         $this->render .= '            </div>
                                     </div>
                                   </div>

@@ -17,8 +17,10 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Core;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
+use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 
@@ -39,15 +41,15 @@ class TemplateBottomPanel extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $phoudation = '<a href="https://phoundation.org/">Phoundation</a>';
-        $adminlte   = tr('template :name', [':name' => '<a href="https://adminlte.io/">' . tr('AdminLte') . '</a>']);
+        $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
+        $adminlte   = tr('template :name', [':name' => Anchor::new('https://adminlte.io/', tr('AdminLte'))]);
         $project    = Anchor::new(Url::newCurrentDomainRootUrl(), config()->getString('project.name', 'Phoundation'));
 
         return '  <footer class="main-footer">
                     <div class="float-right d-none d-sm-block">
                       <b>' . tr(':project using :phoundation (:adminlte)', [':project' => $project, ':phoundation' => $phoudation, ':adminlte' => $adminlte]) . '</b> ' . Core::PHOUNDATION_VERSION . '
                     </div>
-                    <strong>Copyright © ' . config()->getString('project.copyright', '2025') . ' <a href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '" target="_blank">' . config()->getString('project.owner.name', 'Phoundation') . '</a>.</strong> All rights reserved. <br>
+                    ' . Project::getCopyright(true) . '
                   </footer>';
     }
 }

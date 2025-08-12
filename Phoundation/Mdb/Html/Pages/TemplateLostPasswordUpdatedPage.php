@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
@@ -51,12 +52,19 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                                   <hr>  
                                                   <div class="row mb-4">
                                                       <div class="col-md-12 d-flex justify-content-center">
-                                                          <a data-mdb-ripple-init class="btn btn-block btn-primary" href="' . Url::new($o_component->getUrl('sign-in', default: 'index'))->makeWww() . '">' . $o_component->getText('Go to dashboard') . '</a>
+                                                          ' . Anchor::new(Url::new($o_component->getUrl('sign-in', default: 'index')))
+                                                                    ->setClass('btn btn-block btn-primary')
+                                                                    ->addData('', 'mdb-ripple-init')
+                                                                    ->setContent($o_component->getText('Go to dashboard')). '                                                            
                                                       </div>
                                                   </div>
                                                   <div class="row mb-4">
                                                       <div class="col-md-12 d-flex justify-content-center">
-                                                          <a data-mdb-ripple-init class="btn btn-block btn-outline-primary" href="' . Url::new($o_component->getUrl('sign-out', default: 'sign-out'))->makeWww() . '">' . $o_component->getText('Go back to sign-in page') . '</a>
+                                                          ' . Anchor::new()
+                                                                    ->setClass('btn btn-block btn-outline-primary')
+                                                                    ->addData('', 'mdb-ripple-init')
+                                                                    ->setContent(Url::new($o_component->getUrl('sign-out', default: 'sign-out')))
+                                                                    ->setContent($o_component->getText('Go back to sign-in page')). '
                                                       </div>
                                                 </div>
                                               </div>

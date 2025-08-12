@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -33,7 +34,9 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                            <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+                                            ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
+                                                      ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'))
+                                                      ->setClass('h1'). '
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('All done! You can now continue to your dashboard or continue to the sign-in page...') . '</p>
@@ -42,12 +45,16 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                                 ' . Csrf::getHiddenElement() . '
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <a href="' . Url::new('index')->makeWww() . '" class="btn btn-primary btn-block">' . tr('Go to dashboard') . '</a>
+                                                        ' . Anchor::new(Url::new('index'))
+                                                                  ->setClass('btn btn-primary btn-block')
+                                                                  ->setContent(tr('Go to dashboard')) . '
                                                     </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                     <div class="col-12">
-                                                        <a href="' . Url::new('sign-out')->makeWww()->removeQueryKeys('redirect') . '" class="btn btn-outline-secondary btn-block">' . tr('Go to sign-in page') . '</a>
+                                                        ' . Anchor::new(Url::new('sign-out')->makeWww()->removeQueryKeys('redirect'))
+                                                                  ->setClass('btn btn-outline-secondary btn-block')
+                                                                  ->setContent(tr('Go to sign-in page')) . '
                                                     </div>
                                                 </div>
                                             </form>

@@ -18,6 +18,7 @@ namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Panels;
 
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Panels\SidePanel;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -41,24 +42,25 @@ class TemplateSidePanel extends TemplateRenderer
     public function render(): ?string
     {
         $this->render = ' <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                            <a href="' . Url::new('/') . '" class="brand-link">
-                              <img src="' . Url::new('logos/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" class="brand-image elevation-3" width="250px" style="opacity: .8">
-                            </a>
+                            ' . Anchor::new(Url::new('/'))
+                                      ->setClass('brand-link')
+                                      ->setContent('<img src="' . Url::new('logos/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" class="brand-image elevation-3" width="250px" style="opacity: .8">') . '
                             <div class="sidebar">
                               <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                                 <div class="image">
-                                    <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">
-                                      ' . Session::getUserObject()
-                                                 ->getProfileImageObject()
-                                                     ->getHtmlImgObject()
-                                                         ->setId('menu-profile-image')
-                                                         ->setClass('img-circle elevation-2')
-                                                         ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
-                                                         ->render() . '
-                                    </a>
+                                    ' . Anchor::new(Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww())
+                                              ->setClass('d-block')
+                                              ->setContent(Session::getUserObject()
+                                                                  ->getProfileImageObject()
+                                                                  ->getHtmlImgObject()
+                                                                  ->setId('menu-profile-image')
+                                                                  ->setClass('img-circle elevation-2')
+                                                                  ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))). '
                                   </div>
                                 <div class="info">
-                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">' . Session::getUserObject()->getDisplayName() . '</a>
+                                    ' . Anchor::new(Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww())
+                                              ->setClass('d-block')
+                                              ->setContent(Session::getUserObject()->getDisplayName()). '    
                                 </div>
                               </div>
                               <div class="form-inline">
@@ -72,13 +74,13 @@ class TemplateSidePanel extends TemplateRenderer
                                 </div>
                                 <div class="sidebar-search-results">
                                   <div class="list-group">
-                                    <a href="#" class="list-group-item">
-                                      <div class="search-title">
-                                        <strong class="text-light"></strong>N<strong class="text-light"></strong>o<strong class="text-light"></strong> <strong class="text-light"></strong>e<strong class="text-light"></strong>l<strong class="text-light"></strong>e<strong class="text-light"></strong>m<strong class="text-light"></strong>e<strong class="text-light"></strong>n<strong class="text-light"></strong>t<strong class="text-light"></strong> <strong class="text-light"></strong>f<strong class="text-light"></strong>o<strong class="text-light"></strong>u<strong class="text-light"></strong>n<strong class="text-light"></strong>d<strong class="text-light"></strong>!<strong class="text-light"></strong>
-                                      </div>
-                                      <div class="search-path">
-                                      </div>
-                                    </a>
+                                    ' . Anchor::new('#')
+                                              ->setClass('list-group-item')
+                                              ->setContent('<div class="search-title">
+                                                                <strong class="text-light"></strong>N<strong class="text-light"></strong>o<strong class="text-light"></strong> <strong class="text-light"></strong>e<strong class="text-light"></strong>l<strong class="text-light"></strong>e<strong class="text-light"></strong>m<strong class="text-light"></strong>e<strong class="text-light"></strong>n<strong class="text-light"></strong>t<strong class="text-light"></strong> <strong class="text-light"></strong>f<strong class="text-light"></strong>o<strong class="text-light"></strong>u<strong class="text-light"></strong>n<strong class="text-light"></strong>d<strong class="text-light"></strong>!<strong class="text-light"></strong>
+                                                            </div>
+                                                            <div class="search-path">
+                                                            </div>') . '
                                   </div>
                                 </div>
                               </div>

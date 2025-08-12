@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\AdminLte\Html\Components\Widgets\Cards;
 
 use Phoundation\Exception\UnderConstructionException;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Tabs\Tabs;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 
@@ -50,9 +51,14 @@ class TemplateTabs extends TemplateRenderer
 
                 foreach ($tabs as $tab) {
                     $this->render .= '          <li class="nav-item">
-                                                    <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="false">
-                                                        ' . $tab->getLabel() . '
-                                                    </a>
+                                                    ' . Anchor::new('#' . $tab->getId())
+                                                              ->setId($tab->getId() . '-tab')
+                                                              ->setRole('tab')
+                                                              ->setClass('nav-link' . ($active ? ' active' : ''))
+                                                              ->setContent($tab->getLabel())
+                                                              ->addData('pill', 'toggle')
+                                                              ->addAria($tab->getId(), 'controls')
+                                                              ->addAria(($active ? 'true' : 'false'), 'selected') . '
                                                 </li>';
 
                     $active = false;
@@ -85,9 +91,15 @@ class TemplateTabs extends TemplateRenderer
                 $active = true;
 
                 foreach ($tabs as $tab) {
-                    $this->render .= '          <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
-                                                    ' . $tab->getLabel() . '
-                                                </a>';
+                    $this->render .= Anchor::new('#' . $tab->getId())
+                                           ->setId($tab->getId() . '-tab')
+                                           ->setRole('tab')
+                                           ->setClass('nav-link' . ($active ? ' active' : ''))
+                                           ->setContent($tab->getLabel())
+                                           ->addData('pill', 'toggle')
+                                           ->addAria($tab->getId(), 'controls')
+                                           ->addAria(($active ? 'true' : 'false'), 'selected');
+
                     $active = false;
                 }
 
@@ -138,9 +150,15 @@ class TemplateTabs extends TemplateRenderer
                 $active = true;
 
                 foreach ($tabs as $tab) {
-                    $this->render .= '          <a class="nav-link' . ($active ? ' active' : '') . '" id="' . $tab->getId() . '-tab" data-toggle="pill" href="#' . $tab->getId() . '" role="tab" aria-controls="' . $tab->getId() . '" aria-selected="' . ($active ? 'true' : 'false') . '">
-                                                    ' . $tab->getLabel() . '
-                                                </a>';
+                    $this->render .= Anchor::new('#' . $tab->getId())
+                                           ->setId($tab->getId() . '-tab')
+                                           ->setRole('tab')
+                                           ->setClass('nav-link' . ($active ? ' active' : ''))
+                                           ->setContent($tab->getLabel())
+                                           ->addData('pill', 'toggle')
+                                           ->addAria($tab->getId(), 'controls')
+                                           ->addAria(($active ? 'true' : 'false'), 'selected');
+
                     $active = false;
                 }
 

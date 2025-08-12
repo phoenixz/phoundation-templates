@@ -19,6 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Widgets;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Notifications\Html\Components\Modals\NotificationModal;
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\NotificationsDropDown;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -90,9 +91,9 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                 }
 
                 $this->render .= '<li>
-                                    <a class="dropdown-item" href="' . Html::safe(str_replace(':ID', (string)$notification->getId(), (string)$this->o_component->getNotificationsUrl())) . '">
-                                        ' . $notification->getIcon()?->render() . Html::safe(Strings::truncate($notification->getTitle(), 24)) . '
-                                    </a>
+                                    ' . Anchor::new(str_replace(':ID', (string)$notification->getId(), (string)$this->o_component->getNotificationsUrl()))
+                                              ->setClass('dropdown-item')
+                                              ->setContent($notification->getIcon()?->render() . Html::safe(Strings::truncate($notification->getTitle(), 24))). '
                                   </li>';
 
 
@@ -105,7 +106,9 @@ class TemplateNotificationsDropDown extends TemplateRenderer
         }
 
         $this->render .= '        <li>
-                                    <a href="' . Html::safe($this->o_component->getAllNotificationsUrl()) . '" class="dropdown-item dropdown-footer">' . tr('See all unread notifications') . '</a>
+                                    ' . Anchor::new($this->o_component->getAllNotificationsUrl())
+                                              ->setClass('dropdown-item dropdown-footer')
+                                              ->setContent(tr('See all unread notifications')) . '
                                   </li>
                                 </ul>';
 

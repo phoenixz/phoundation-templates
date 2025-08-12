@@ -17,6 +17,8 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Developer\Project\Project;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -63,14 +65,14 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                           <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
                             ' . tr('Update and continue') . '
                           </button>
-                          <a href="' . Url::new('signout')->makeWww() . '" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-init>
-                            ' . tr('Sign out') . '
-                          </a>';
-
+                          ' . Anchor::new(Url::new('signout'))
+                                    ->setContent(tr('Sign out'))
+                                    ->setClass('btn btn-outline-secondary btn-block mb-4')
+                                    ->addData('', 'mdb-ripple-init');
 
         if (Session::supports('copyright')) {
             $render .= '  <div class="text-center">
-                            Copyright © 2025 <a target="_blank" href="' . config()->getString('project.owner.url', 'https://phoundation.org') . '">' . config()->getString('project.owner.name', 'Phoundation') . '</a><br/><small>All rights reserved</small>
+                              ' . Project::getCopyright() . '
                           </div>';
         }
 

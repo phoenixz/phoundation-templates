@@ -18,6 +18,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Log\Log;
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Icons\FullScreen;
 use Phoundation\Web\Html\Components\Icons\SignOut;
 use Phoundation\Web\Html\Components\Interfaces\RenderInterface;
@@ -226,10 +227,9 @@ class TemplateTopPanel extends TemplateRenderer
                     case 'logo':
                         $delete[] = $element_id;
                         $logo = Logo::new();
-                        $contents .= '<a class="navbar-brand mt-2 mt-lg-0" href="' . $logo->getAnchorObject()
-                                                                                          ->getHref() . '">
-                                        <img src="' . $logo->getSrc() . '" height="15" alt="' . $logo->getAlt() . '" loading="lazy"/>
-                                      </a>';
+                        $contents .= Anchor::new($logo->getAnchorObject()->getHref())
+                                           ->setClass('navbar-brand mt-2 mt-lg-0')
+                                           ->setContent('<img src="' . $logo->getSrc() . '" height="15" alt="' . $logo->getAlt() . '" loading="lazy"/>');
                         break;
 
                     case 'menu':
@@ -288,7 +288,7 @@ class TemplateTopPanel extends TemplateRenderer
             $this->o_component->getElementsObject()->removeKeys($delete);
 
             $this->render .= '<div class="d-flex">
-                                ' . $contents . ' 
+                                ' . $contents . '
                               </div>';
 
 //            $this->render .= '<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -311,14 +311,14 @@ class TemplateTopPanel extends TemplateRenderer
                     case 'notifications':
                         Log::warning(ts('Notifications and the icon in the top nav-bar are temporarily disabled'));
                         $content = '  <li class="nav-item me-3 me-lg-1 dropdown d-none">
-                                      <span>' . $this->o_component->getNotificationsDropDown()->render() . '</span>
-                                  </li>';
+                                          <span>' . $this->o_component->getNotificationsDropDown()->render() . '</span>
+                                      </li>';
                         break;
 
                     case 'languages':
                         $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
-                                    <span>' . $this->o_component->getLanguagesDropDown()->render() . '</span>
-                                  </li>';
+                                        <span>' . $this->o_component->getLanguagesDropDown()->render() . '</span>
+                                      </li>';
                         break;
 
                     case 'breadcrumbs':
@@ -327,34 +327,34 @@ class TemplateTopPanel extends TemplateRenderer
 
                     case 'button':
                         $content = '  <li class="nav-item me-3 me-lg-1">
-                                    <span>' . $this->o_component->getButtons()->get($element_type)->render() . '</span>
-                                  </li>';
+                                        <span>' . $this->o_component->getButtons()->get($element_type)->render() . '</span>
+                                      </li>';
                         break;
 
                     case 'avatar':
                         $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
-                                    <a class="nav-link" href="#">
-                                      <span>' . $this->o_component->getAvatars()->get($element_type)->render() . '</span>
-                                    </a>
-                                  </li>';
+                                        ' . Anchor::new('#')
+                                                  ->setClass('nav-link')
+                                                  ->setContent('<span>' . $this->o_component->getAvatars()->get($element_type)->render() . '</span>') . '
+                                      </li>';
                         break;
 
                     case 'icon':
                         $content = '  <li class="nav-item me-3 me-lg-1">
-                                    ' . $this->o_component->getIcons()->get($element_type)->render() . '
-                                  </li>';
+                                        ' . $this->o_component->getIcons()->get($element_type)->render() . '
+                                      </li>';
                         break;
 
                     case 'full-screen':
                         $content = '  <li class="nav-item me-3 me-lg-1">
-                                    ' . FullScreen::new()->render() .  '
-                                  </li>';
+                                        ' . FullScreen::new()->render() .  '
+                                      </li>';
                         break;
 
                     case 'sign-out':
                         $content = '  <li class="nav-item me-3 me-lg-1">
-                                    ' . SignOut::new()->render() .  '
-                                  </li>';
+                                        ' . SignOut::new()->render() .  '
+                                      </li>';
                         break;
 
                     default:

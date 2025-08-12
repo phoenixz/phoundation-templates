@@ -45,11 +45,7 @@ class TemplateInputButtons extends TemplateRenderer
         }
 
         foreach ($this->o_component->getSource() as $button) {
-            if (is_string($button)) {
-                $this->render .= $button . ' ';
-            } else {
-                $this->render .= $button->render(). ' ';
-            }
+            $this->render .= $button . ' ';
         }
 
         if ($this->o_component->getGroup()) {

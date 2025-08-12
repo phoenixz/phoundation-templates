@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Menus;
 
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Menus\TopMenu;
 use Phoundation\Web\Html\Html;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -42,10 +43,14 @@ class TemplateTopMenu extends TemplateRenderer
     {
         $return = '<ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                            ' . Anchor::new('#')
+                                      ->setClass('nav-link')
+                                      ->addData('pushmenu', 'widget')
+                                      ->setRole('button')
+                                      ->setContent('<i class="fas fa-bars"></i>') . '
                         </li>
                         <li class="nav-item d-none d-sm-inline-block">
-                            <a href="' . Html::safe(Url::newCurrent()) . '" class="nav-link">' . tr('Home') . '</a>
+                            ' . Anchor::new(Url::newCurrent(), tr('Home'))->setClass('nav-link') . '
                         </li>';
 
         if ($this->o_component->getSource()) {
@@ -55,7 +60,7 @@ class TemplateTopMenu extends TemplateRenderer
                 }
 
                 $return .= '<li class="nav-item d-none d-sm-inline-block">
-                                <a href="' . Html::safe($entry['url']) . '" class="nav-link">' . Html::safe($label) . '</a>
+                                ' . Anchor::new($entry['url'], $label)->setContent('nav-link') . '  
                             </li>';
             }
         }

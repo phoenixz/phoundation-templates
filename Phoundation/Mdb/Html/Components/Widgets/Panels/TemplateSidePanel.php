@@ -18,6 +18,7 @@ namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Panels;
 
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Utils\Strings;
+use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Panels\SidePanel;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -40,21 +41,25 @@ class TemplateSidePanel extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = '   <nav data-mdb-sidenav-init id="sidenav-9" data-mdb-scroll-container="#scroll-container" class="sidenav sidenav-sm" data-mdb-accordion="true" data-mdb-hidden="' . (Session::getAutoShowMenu() ? 'false' : 'true') . '">
-                              <a href="' . Url::new('index')->makeWww() . '" data-mdb-ripple-init class="d-flex justify-content-center py-4 mb-3" style="background: white; border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary">
-                                <img src="' . Url::new('logos/large.png')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" width="200px" draggable="false">
-                              </a>
-
-                              <a data-mdb-ripple-init class="d-flex py-4 mb-3 justify-content-center" style="align-items: center; border-bottom: 2px solid #f5f5f5" href="' . Url::new('profile')->makeWww() . '" data-mdb-ripple-color="primary">
-                                ' . Session::getUserObject()->getProfileImageObject()->getHtmlImgObject()
-                                                                                     ->setId('menu-profile-image')
-                                                                                     ->setClass('img-circle elevation-2')
-                                                                                     ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
-                                                                                     ->setWidth(32)
-                                                                                     ->setHeight(32) . Session::getUserObject()->getDisplayName(reverse: true) . '
-                              </a>
+        $this->render = ' <nav data-mdb-sidenav-init id="sidenav-9" data-mdb-scroll-container="#scroll-container" class="sidenav sidenav-sm" data-mdb-accordion="true" data-mdb-hidden="' . (Session::getAutoShowMenu() ? 'false' : 'true') . '">
+                              ' . Anchor::new(Url::new('index'))
+                                        ->setClass('d-flex justify-content-center py-4 mb-3')
+                                        ->addData('', 'mdb-ripple-init')
+                                        ->setStyle('background: white; border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary')
+                                        ->setContent('<img src="' . Url::new('logos/large.png')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" width="200px" draggable="false">') .
+                                  Anchor::new(Url::new('profile'))
+                                        ->setClass('d-flex py-4 mb-3 justify-content-center')
+                                        ->addData('', 'mdb-ripple-init')
+                                        ->addData('primary', 'mdb-ripple-color')
+                                        ->setStyle('align-items: center; border-bottom: 2px solid #f5f5f5')
+                                        ->setContent(Session::getUserObject()->getProfileImageObject()->getHtmlImgObject()
+                                                            ->setId('menu-profile-image')
+                                                            ->setClass('img-circle elevation-2')
+                                                            ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
+                                                            ->setWidth(32)
+                                                            ->setHeight(32) . Session::getUserObject()->getDisplayName(reverse: true)). '
                               ' . $this->o_component->getMenu()?->render() . '
-                            </nav>';
+                          </nav>';
 
         $this->render .= $this->o_component->getModals()?->render() . PHP_EOL;
 
