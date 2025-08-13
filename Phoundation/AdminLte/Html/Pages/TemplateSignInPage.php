@@ -21,6 +21,7 @@ use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\AnchorBlock;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
 use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -45,7 +46,8 @@ class TemplateSignInPage extends TemplateRenderer
                                     <div class="card-header text-center">
                                       ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
                                                 ->setClass('h1')
-                                                ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation')). '
+                                                ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'))
+                                                ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                     </div>
                                     <div class="card-body">
                                       <p class="login-box-msg">' . tr('Please sign in to start your session') . '</p>
@@ -111,7 +113,8 @@ class TemplateSignInPage extends TemplateRenderer
             $this->render .= '        <p class="mb-1">
                                           ' . Anchor::new(Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'))
                                                     ->setContent(tr('text-center'))
-                                                    ->setContent(tr('I forgot my password')) . '
+                                                    ->setContent(tr('I forgot my password'))
+                                                    ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                       </p>';
         }
 
@@ -119,13 +122,14 @@ class TemplateSignInPage extends TemplateRenderer
             $this->render .= '        <p class="mb-0">
                                           ' . Anchor::new(Url::new('/sign-up.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'))
                                                     ->setContent(tr('text-center'))
-                                                    ->setContent(tr('Register a new membership')) . '
+                                                    ->setContent(tr('Register a new membership'))
+                                                    ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                       </p>';
         }
 
         if (Session::supports('copyright')) {
             $this->render .= '          <div class="login-footer text-center">
-                                            ' . Project::getCopyright() . '
+                                            ' . Project::getCopyright(true) . '
                                         </div>
                                     </div>';
         }

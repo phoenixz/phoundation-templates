@@ -19,6 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Pages;
 use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
+use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
 use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -40,8 +41,8 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setRenderMainWrapper(false);
 
         $o_component  = $this->getComponentObject();
-        $terms        = Anchor::new(Url::new('terms')->makeWww(), tr('terms and conditions'));
-        $register     = Anchor::new(Url::new('sign-up')->makeWww(), tr('Register'));
+        $terms        = Anchor::new(Url::new('terms')->makeWww(), tr('terms and conditions'))->setRenderRightsFail(EnumAnchorRenderRightsFail::full);
+        $register     = Anchor::new(Url::new('sign-up')->makeWww(), tr('Register'))->setRenderRightsFail(EnumAnchorRenderRightsFail::full);
 
         // Render SSO entries?
         if ($o_component->getEnabled('facebook')) {
@@ -89,7 +90,8 @@ class TemplateSignInPage extends TemplateRenderer
                           <div class="row mb-4">
                               <div class="col-md-12 d-flex justify-content-center">
                                   ' . Anchor::new(Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email'))
-                                            ->setContent($o_component->getText('Forgot password?')) . '
+                                            ->setContent($o_component->getText('Forgot password?'))
+                                            ->setRenderRightsFail(EnumAnchorRenderRightsFail::full). '
                               </div>
                           </div>';
 
@@ -131,7 +133,8 @@ class TemplateSignInPage extends TemplateRenderer
                                                                 ->addData('', 'mdb-pill-init')
                                                                 ->addAria('true', 'selected')
                                                                 ->setRole('tab')
-                                                                ->setContent($o_component->getText(tr('Sign in'))) . '
+                                                                ->setContent($o_component->getText(tr('Sign in')))
+                                                                ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                                   </li>
                                                   <li class="nav-item" role="presentation">
                                                       ' . Anchor::new('#pills-register')
@@ -141,7 +144,8 @@ class TemplateSignInPage extends TemplateRenderer
                                                                 ->addData('', 'mdb-pill-init')
                                                                 ->addAria('pills-register', 'controls')
                                                                 ->addAria('false', 'selected')
-                                                                ->setContent($o_component->getText(tr('Register'))). '
+                                                                ->setContent($o_component->getText(tr('Register')))
+                                                                ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                                   </li>
                                               </ul>';
 
