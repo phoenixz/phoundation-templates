@@ -81,7 +81,7 @@ class TemplateInputDateTimeLocal extends TemplateInputText
                     });
                     $("#' . $id . '").datetimepicker({ 
                         locale: "' . Session::getLocaleObject()->getLocale() . '",                            
-                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getDateTimeFormatJavaScript()) . '"
+                        format: "' . PhoDateTimeFormats::convertJsToMoment(Session::getLocaleObject()->getDateTimeFormatJavaScript()) . '",
                         icons: { 
                             time: "far fa-clock" 
                         }
