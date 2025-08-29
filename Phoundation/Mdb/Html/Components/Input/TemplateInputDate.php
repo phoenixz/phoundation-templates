@@ -77,7 +77,7 @@ class TemplateInputDate extends TemplateInputText
 //</script>
 
         // Required to format the date of the "Today" button action below
-        Response::loadJavaScript('templates/mdb/js/plugins/moment/moment');
+        Response::loadJavaScript('mdb/js/plugins/moment/moment');
 
         // Set default options and backup $ID as ID needs to be rendered on outer div
         $o_component = $this->getComponentObject();

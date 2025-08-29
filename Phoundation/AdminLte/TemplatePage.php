@@ -173,12 +173,12 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         // Load basic AdminLte and fonts CSS
         Response::loadCss([
             'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback',
-            'templates/adminlte/plugins/fontawesome-free-6.4.0-web/css/all',
-            'templates/adminlte/plugins/fontawesome-free-6.4.0-web/css/regular',
-//            'templates/adminlte/plugins/fontawesome-free-6.4.0-web/css/v4-shim',
-            'templates/adminlte/css/adminlte',
-            'templates/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars',
-            'templates/adminlte/css/phoundation'
+            'adminlte/plugins/fontawesome-free-6.4.0-web/css/all',
+            'adminlte/plugins/fontawesome-free-6.4.0-web/css/regular',
+//            'adminlte/plugins/fontawesome-free-6.4.0-web/css/v4-shim',
+            'adminlte/css/adminlte',
+            'adminlte/plugins/overlayScrollbars/css/OverlayScrollbars',
+            'adminlte/css/phoundation'
         ], true);
 
         // Load configured CSS files
@@ -186,12 +186,12 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Load basic AdminLte amd jQuery javascript libraries
         Response::loadJavaScript([
-            'templates/adminlte/plugins/jquery/jquery',
-            'templates/adminlte/plugins/jquery-ui/jquery-ui',
-            'templates/adminlte/plugins/bootstrap/js/bootstrap.bundle',
-            'templates/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars',
-            'templates/adminlte/js/adminlte',
-            'templates/phoundation/js/jquery-phoundation',
+            'adminlte/plugins/jquery/jquery',
+            'adminlte/plugins/jquery-ui/jquery-ui',
+            'adminlte/plugins/bootstrap/js/bootstrap.bundle',
+            'adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars',
+            'adminlte/js/adminlte',
+            'phoundation/js/jquery-phoundation',
         ], prefix: true);
 
         // Set basic page details

@@ -46,7 +46,7 @@ class TemplateSignInPage extends TemplateRenderer
                                     <div class="card-header text-center">
                                       ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
                                                 ->setClass('h1')
-                                                ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'))
+                                                ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'), false)
                                                 ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                     </div>
                                     <div class="card-body">

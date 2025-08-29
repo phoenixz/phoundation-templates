@@ -44,8 +44,8 @@ class TemplateMfaVerifyPage extends TemplateRenderer
         Response::setPageTitle(tr('Please setup multi-factor authentication'));
         Response::setHeaderTitle(tr('Please setup multi-factor authentication'));
         Response::loadJavaScript([
-            'templates/mdb/js/jquery',
-            'templates/phoundation/js/jquery-phoundation'
+            'mdb/js/jquery',
+            'phoundation/js/jquery-phoundation'
         ], prefix: true);
 
         $qr     = new QRServerProvider();
