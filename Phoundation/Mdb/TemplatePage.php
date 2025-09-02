@@ -194,11 +194,11 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::loadCss([
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css',
             'https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap',
-            'templates/mdb/css/mdb',
-            'templates/mdb/css/mdb-fix',
-            'templates/mdb/css/phoundation',
-            'templates/mdb/css/' . Core::getClientShortSeoName(),
-            'templates/mdb/css/' . Core::getProjectShortSeoName(),
+            'mdb/css/mdb',
+            'mdb/css/mdb-fix',
+            'mdb/css/phoundation',
+            'mdb/css/' . Core::getClientShortSeoName(),
+            'mdb/css/' . Core::getProjectShortSeoName(),
         ], true);
 
         // Load configured CSS files
@@ -206,9 +206,9 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Load basic MDB amd jQuery javascript libraries
         Response::loadJavaScript([
-            'templates/mdb/js/jquery',
-            'templates/mdb/js/mdb.umd',
-            'templates/phoundation/js/jquery-phoundation'
+            'mdb/js/jquery',
+            'mdb/js/mdb.umd',
+            'phoundation/js/jquery-phoundation'
         ], prefix: true);
 
         // Set basic page details

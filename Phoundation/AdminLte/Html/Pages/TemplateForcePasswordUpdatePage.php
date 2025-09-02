@@ -37,7 +37,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
                                           ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
-                                                    ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'))
+                                                    ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'), false)
                                                     ->setClass('h1'). '
                                     </div>
                                     <div class="card-body">

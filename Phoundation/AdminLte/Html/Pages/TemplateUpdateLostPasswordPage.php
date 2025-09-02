@@ -39,7 +39,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                         <div class="card-header text-center">
                                             ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
                                                       ->setClass('h1')
-                                                      ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation')) . '
+                                                      ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'), false) . '
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Hello :user, please enter a new password for your account to continue...', [':user' => $user->getDisplayName()]) . '</p>
