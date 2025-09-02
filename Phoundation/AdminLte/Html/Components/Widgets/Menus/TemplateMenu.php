@@ -62,6 +62,7 @@ class TemplateMenu extends TemplateRenderer
 
         if ($sub_menu) {
             $html = '<ul class="nav nav-treeview sub-menu-' . Html::safe($sub_menu) . '">';
+
         } else {
             $html = '<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">';
         }
@@ -75,7 +76,7 @@ class TemplateMenu extends TemplateRenderer
                                    ' . strtoupper(Html::safe($label)) . (isset($entry['badge']) ? '<span class="right badge badge-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '') . '
                                </li>';
             } else {
-                $anchor  = Anchor::new(Html::safe(isset_get($entry['url'])))
+                $anchor  = Anchor::new(array_get_safe($entry, 'url'))
                                  ->addClass('nav-link')
                                  ->setContent((isset($entry['icon']) ? '<i class="nav-icon fas fa ' . Html::safe($entry['icon']) . '"></i>' : '') .
                                               '<p>' . Html::safe($label) . (isset($entry['menu']) ? '<i class="right fas fa-angle-left"></i>' : (isset($entry['badge']) ? '<span class="right badge badge-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '')) . '</p>');
