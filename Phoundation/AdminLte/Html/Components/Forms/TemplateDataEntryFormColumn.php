@@ -51,7 +51,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         }
 
         // Add marker to all labels that are obligatory
-        if (!$o_definition->getOptional()) {
+        if (!$o_definition->getOptional() and !$o_definition->getReadOnly() and !$o_definition->getDisabled()) {
             if ($o_definition->getContainsData()) {
                 if ($o_definition->getRender()) {
                     if ($o_definition->getLabel()) {

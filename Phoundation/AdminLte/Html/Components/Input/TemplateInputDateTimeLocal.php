@@ -24,6 +24,7 @@ use Phoundation\Web\Html\Components\Script;
 use Phoundation\Web\Html\Enums\EnumInputType;
 use Phoundation\Web\Requests\Response;
 
+
 class TemplateInputDateTimeLocal extends TemplateInputText
 {
     /**
@@ -54,11 +55,9 @@ class TemplateInputDateTimeLocal extends TemplateInputText
             return parent::render();
         }
 
-        $this->o_component->setId(null);
-
         $this->o_component->setInputType(EnumInputType::text)
-                        ->addClass('datetimepicker-input')
-                        ->addData('#' . $id, 'target');
+                          ->addClass('datetimepicker-input')
+                          ->addData('#' . $id, 'target');
 
         // Load required CSS and JS
         Response::loadCss('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4');
