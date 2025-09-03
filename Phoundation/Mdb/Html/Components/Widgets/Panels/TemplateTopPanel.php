@@ -250,10 +250,10 @@ class TemplateTopPanel extends TemplateRenderer
                         $delete[] = $element_id;
 
                         if (
-                            $this->o_component->getTexts()
+                            $this->o_component->getTextsObject()
                                               ->getCount()
                         ) {
-                            foreach ($this->o_component->getTexts() as $text) {
+                            foreach ($this->o_component->getTextsObject() as $text) {
                                 $contents .= '<small>' . $text . '</small>';
                             }
                         }
@@ -305,29 +305,29 @@ class TemplateTopPanel extends TemplateRenderer
 
                 switch ($element) {
                     case 'messages':
-                        $content = $this->o_component->getMessagesDropDown()->render();
+                        $content = $this->o_component->getMessagesDropDownObject()->render();
                         break;
 
                     case 'notifications':
                         Log::warning(ts('Notifications and the icon in the top nav-bar are temporarily disabled'));
                         $content = '  <li class="nav-item me-3 me-lg-1 dropdown d-none">
-                                          <span>' . $this->o_component->getNotificationsDropDown()->render() . '</span>
+                                          <span>' . $this->o_component->getNotificationsDropDownObject()->render() . '</span>
                                       </li>';
                         break;
 
                     case 'languages':
                         $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
-                                        <span>' . $this->o_component->getLanguagesDropDown()->render() . '</span>
+                                        <span>' . $this->o_component->getLanguagesDropDownObject()->render() . '</span>
                                       </li>';
                         break;
 
                     case 'breadcrumbs':
-                        $content = $this->o_component->getBreadcrumbs()->get($element_type)->render();
+                        $content = $this->o_component->getBreadcrumbsObject()->get($element_type)->render();
                         break;
 
                     case 'button':
                         $content = '  <li class="nav-item me-3 me-lg-1">
-                                        <span>' . $this->o_component->getButtons()->get($element_type)->render() . '</span>
+                                        <span>' . $this->o_component->getButtonsObject()->get($element_type)->render() . '</span>
                                       </li>';
                         break;
 
@@ -335,7 +335,7 @@ class TemplateTopPanel extends TemplateRenderer
                         $content = '  <li class="nav-item me-3 me-lg-1 dropdown">
                                         ' . Anchor::new('#')
                                                   ->setClass('nav-link')
-                                                  ->setContent('<span>' . $this->o_component->getAvatars()->get($element_type)->render() . '</span>') . '
+                                                  ->setContent('<span>' . $this->o_component->getAvatarsObject()->get($element_type)->render() . '</span>') . '
                                       </li>';
                         break;
 

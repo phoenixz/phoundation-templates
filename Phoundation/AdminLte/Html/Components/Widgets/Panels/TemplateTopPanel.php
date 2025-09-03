@@ -113,20 +113,20 @@ class TemplateTopPanel extends TemplateRenderer
                 case 'messages':
                     $this->render .= '<!-- Messages Dropdown Menu -->
                                       <li class="nav-item dropdown messages">
-                                        ' . $this->o_component->getMessagesDropDown()->render() . '
+                                        ' . $this->o_component->getMessagesDropDownObject()->render() . '
                                       </li>';
                     break;
 
                 case 'notifications':
                     $this->render .= '<!-- Notifications Dropdown Menu -->
                                       <li class="nav-item dropdown notifications">
-                                        ' . $this->o_component->getNotificationsDropDown()->render() . '
+                                        ' . $this->o_component->getNotificationsDropDownObject()->render() . '
                                       </li>';
                     break;
 
                 case 'languages':
                     $this->render .= '<li class="nav-item dropdown languages">                                  
-                                          ' . $this->o_component->getLanguagesDropDown()->render() . '
+                                          ' . $this->o_component->getLanguagesDropDownObject()->render() . '
                                       </li>';
                     break;
 

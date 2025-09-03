@@ -43,9 +43,9 @@ class TemplateTabs extends TemplateRenderer
         $content_display_size = $tabs->getContentDisplaySize()->value;
         $tab_display_size     = 12 - $content_display_size;
 
-        if ($tabs->getButtons()->getCount()) {
+        if ($tabs->getButtonsObject()->getCount()) {
             $buttons = '<div class="modal-footer justify-content-between buttons">
-                            ' . $tabs->getButtons()->render() . '
+                            ' . $tabs->getButtonsObject()->render() . '
                         </div>';
         }
 

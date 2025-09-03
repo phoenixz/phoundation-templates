@@ -45,7 +45,7 @@ class TemplateHeaderPanel extends TemplateRenderer
 
         $title       = Response::getHeaderTitle();
         $sub_title   = Response::getHeaderSubTitle();
-        $breadcrumbs = Response::getBreadcrumbs()?->render();
+        $breadcrumbs = Response::getBreadcrumbs()->render();
 
         if (!$title) {
             throw new OutOfBoundsException(tr('Cannot render HeaderPanel, no title specified'));

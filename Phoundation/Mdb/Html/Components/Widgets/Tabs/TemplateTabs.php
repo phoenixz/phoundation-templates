@@ -43,11 +43,11 @@ class TemplateTabs extends TemplateRenderer
         $o_tabs = $this->o_component;
 
         if (
-            $o_tabs->getButtons()
+            $o_tabs->getButtonsObject()
                    ->getCount()
         ) {
             $buttons = '<div class="modal-footer justify-content-between buttons">
-                            ' . $o_tabs->getButtons()
+                            ' . $o_tabs->getButtonsObject()
                                        ->render() . '
                         </div>';
         }

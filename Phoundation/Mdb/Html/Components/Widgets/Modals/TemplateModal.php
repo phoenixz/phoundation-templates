@@ -87,7 +87,7 @@ class TemplateModal extends TemplateRenderer
                                 ' . $component->getContent() . '
                             </div>
                             <div class="modal-footer justify-content-between buttons">
-                                ' . $component->getButtons()->render() . '
+                                ' . $component->getButtonsObject()->render() . '
                             </div>
                         </div>
                     </div>

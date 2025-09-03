@@ -8,13 +8,13 @@
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Templates\AdminLte
+ * @package Templates\Mdb
  */
 
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\AdminLte\Html\Components\Widgets;
+namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Breadcrumbs;
 
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Anchor;
