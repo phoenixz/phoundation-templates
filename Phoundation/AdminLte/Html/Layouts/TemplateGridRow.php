@@ -39,7 +39,12 @@ class TemplateGridRow extends TemplateRenderer
     public function render(): ?string
     {
         $class        = $this->o_component->getClass();
-        $this->render = '<div class="row' . ($class ? ' ' . $class : '') . '">';
+        $name         = $this->o_component->getName();
+        $id           = $this->o_component->getId();
+
+        $this->render = '<div class="row' . ($class ? ' '       . $class      : '') . '"'
+                                          . ($name  ? ' name="' . $name . '"' : '')
+                                          . ($id    ? ' id="'   . $id   . '"' : '') .'>';
 
         if ($this->o_component->getForm()) {
             // Return content rendered in a form

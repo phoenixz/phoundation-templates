@@ -42,6 +42,7 @@ class TemplateHtmlTable extends TemplateRenderer
     public function render(): ?string
     {
         return GridRow::new()
+                      ->setId($this->o_component->getId() . '_wrapper')
                       ->addGridColumn(GridColumn::new()
                                                 ->setContent(parent::render())
                                                 ->addClass('overflow-x'))->render();
