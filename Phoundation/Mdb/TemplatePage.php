@@ -20,6 +20,7 @@ namespace Templates\Phoundation\Mdb;
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Core\Core;
 use Phoundation\Core\Plugins\Plugins;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
@@ -197,8 +198,8 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             'mdb/css/mdb',
             'mdb/css/mdb-fix',
             'mdb/css/phoundation',
-            'mdb/css/' . Core::getClientShortSeoName(),
-            'mdb/css/' . Core::getProjectShortSeoName(),
+            'mdb/css/' . Project::getOwnerShortSeoName()
+            'mdb/css/' . Project::getSeoShortName(),
         ], true);
 
         // Load configured CSS files
@@ -215,7 +216,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::setPageTitle(tr('Phoundation platform'));
 
         // Set basic page details
-        Response::setPageTitle(config()->get('project.name', tr('Phoundation project')) . ' (' . Response::getHeaderTitle() . ')');
+        Response::setPageTitle(Project::getFullName() . ' (' . Response::getHeaderTitle() . ')');
 
         return Response::renderHtmlHeaders();
     }

@@ -17,6 +17,7 @@ declare(strict_types=1);
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets\Panels;
 
 use Phoundation\Accounts\Users\Sessions\Session;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Utils\Strings;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Widgets\Panels\SidePanel;
@@ -46,7 +47,7 @@ class TemplateSidePanel extends TemplateRenderer
                                         ->setClass('d-flex justify-content-center py-4 mb-3')
                                         ->addData('', 'mdb-ripple-init')
                                         ->setStyle('background: white; border-bottom: 2px solid #f5f5f5" data-mdb-ripple-color="primary')
-                                        ->setContent('<img src="' . Url::new('logos/large.png')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" width="200px" draggable="false">') .
+                                        ->setContent('<img src="' . Url::new('logos/large.png')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Project::getFullName())]) . '" width="200px" draggable="false">') .
                                   Anchor::new(Url::new('profile'))
                                         ->setClass('d-flex py-4 mb-3 justify-content-center')
                                         ->addData('', 'mdb-ripple-init')
@@ -67,7 +68,7 @@ class TemplateSidePanel extends TemplateRenderer
 
 //        $this->render = ' <aside class="main-sidebar sidebar-dark-primary elevation-4">
 //                            <a href="' . Url::new('index')->makeWww() . '" class="brand-link">
-//                              <img src="' . Url::new('logos/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(config()->get('project.name'))]) . '" class="brand-image elevation-3" style="opacity: .8" width="250px">
+//                              <img src="' . Url::new('logos/large.webp')->makeImg() . '" alt="' . tr(':project logo', [':project' => Strings::capitalize(Project::getFullName())]) . '" class="brand-image elevation-3" style="opacity: .8" width="250px">
 //                            </a>
 //                            <div class="sidebar">
 //                              <div class="user-panel mt-3 pb-3 mb-3 d-flex">

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateLostPasswordPage
+ * Class TemplateMfaVerifyPage
  *
  *
  *
@@ -21,7 +21,6 @@ use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Components\Forms\Form;
 use Phoundation\Web\Html\Csrf;
-use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -48,9 +47,10 @@ class TemplateMfaVerifyPage extends TemplateRenderer
             'phoundation/js/jquery-phoundation'
         ], prefix: true);
 
-        $qr     = new QRServerProvider();
-        $tfa    = new TwoFactorAuth(qrcodeprovider: $qr);
-        $secret = $tfa->createSecret();
+        $qr          = new QRServerProvider();
+        $tfa         = new TwoFactorAuth(qrcodeprovider: $qr);
+        $secret      = $tfa->createSecret();
+        $o_component = $this->getComponentObject();
 
         // Render the page
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
@@ -79,9 +79,9 @@ class TemplateMfaVerifyPage extends TemplateRenderer
                                     ->addData('', 'mdb-ripple-init')
                                     ->setContent(tr('Sign out'));
 
-        if (Session::supports('copyright')) {
+        if ($o_component->getEnabled('copyright')) {
             $render .= '  <div class="text-center">
-                              ' . Project::getCopyright(true) . '  
+                              ' . Project::getCopyrightString(true) . '  
                           </div>';
         }
 

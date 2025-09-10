@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateSignInPage
+ * Class TemplateLostPasswordUpdatedPage
  *
  *
  *
@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Pages;
 
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -83,7 +84,7 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
 //                                <div class="login-box">
 //                                    <div class="card card-outline card-info">
 //                                        <div class="card-header text-center">
-//                                            <a href="' . config()->getString('project.customer-url', 'https://phoundation.org') . '" class="h1">' . config()->getString('project.owner.label', '<span>Phoun</span>dation') . '</a>
+//                                            <a href="' . Project::getOwnerUrl() . '" class="h1">' . Project::getOwnerLabel() . '</a>
 //                                        </div>
 //                                        <div class="card-body">
 //                                            <p class="login-box-msg">' . tr('All done! You can now continue to your dashboard or continue to the sign-in page...') . '</p>

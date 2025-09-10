@@ -34,14 +34,15 @@ class TemplateSignUpPage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $terms = tr('terms');
-        $get   = $this->getComponentObject()->getGetData();
+        $terms       = tr('terms');
+        $o_component = $this->getComponentObject();
+        $get         = $o_component->getGetData();
 
         $this->render = '   <body class="hold-transition register-page">
                                 <div class="register-box">
                                     <div class="card card-outline card-primary">
                                         <div class="card-header text-center">
-                                            ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'), config()->getString('project.owner.label', '<span>Phoun</span>dation'))->addClass('h1') . '
+                                            ' . Anchor::new(Project::getOwnerUrl(), Project::getOwnerLabel())->addClass('h1') . '
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('Register a new membership') . '</p>
@@ -98,13 +99,13 @@ class TemplateSignUpPage extends TemplateRenderer
 
         $html = '';
 
-        if (Session::supports('facebook')) {
+        if ($o_component->getEnabled('facebook')) {
             $html .=                            Anchor::new('#')
                                                       ->setClass('btn btn-block btn-primary')
                                                       ->setContent('<i class="fab fa-facebook mr-2"></i>' . tr('Sign up using Facebook'));
         }
 
-        if (Session::supports('google')) {
+        if ($o_component->getEnabled('google')) {
             $html .=                            Anchor::new('#')
                                                       ->setClass('btn btn-block btn-danger')
                                                       ->setContent('<i class="fab fa-google-plus mr-2"></i>' . tr('Sign up using Google+'));
@@ -121,9 +122,9 @@ class TemplateSignUpPage extends TemplateRenderer
                                                       ->setContent(tr('I already have an account')) . '
                                         </div>';
 
-        if (Session::supports('copyright')) {
+        if ($o_component->getEnabled('copyright')) {
             $this->render .= '          <div class="login-footer text-center">
-                                            ' . Project::getCopyright(true) . '
+                                            ' . Project::getCopyrightString(true) . '
                                         </div>';
         }
 

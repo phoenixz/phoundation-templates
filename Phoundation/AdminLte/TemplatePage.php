@@ -18,6 +18,7 @@ namespace Templates\Phoundation\AdminLte;
 
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Core\Plugins\Plugins;
+use Phoundation\Developer\Project\Project;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Web\Html\Components\Widgets\Panels\BottomPanel;
 use Phoundation\Web\Html\Components\Widgets\Panels\HeaderPanel;
@@ -195,7 +196,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         ], prefix: true);
 
         // Set basic page details
-        Response::setPageTitle(config()->get('project.name', tr('Phoundation project')) . ' (' . Response::getHeaderTitle() . ')');
+        Response::setPageTitle(Project::getFullName() . ' (' . Response::getHeaderTitle() . ')');
 
         return Response::renderHtmlHeaders();
     }

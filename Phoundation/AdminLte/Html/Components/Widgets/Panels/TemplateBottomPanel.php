@@ -43,13 +43,13 @@ class TemplateBottomPanel extends TemplateRenderer
     {
         $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
         $adminlte   = tr('Using template :name', [':name' => Anchor::new('https://adminlte.io/', tr('AdminLte'))]);
-        $project    = Anchor::new(Url::newCurrentDomainRootUrl(), config()->getString('project.name', 'Phoundation'));
+        $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getFullName());
 
         return '  <footer class="main-footer">
                     <div class="float-right d-none d-sm-block">
                       <b>' . tr(':project using :phoundation (:adminlte)', [':project' => $project, ':phoundation' => $phoudation, ':adminlte' => $adminlte]) . '</b> ' . Core::PHOUNDATION_VERSION . '
                     </div>
-                    ' . Project::getCopyright() . '
+                    ' . Project::getCopyrightString() . '
                   </footer>';
     }
 }

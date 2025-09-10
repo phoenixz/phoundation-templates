@@ -16,13 +16,10 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
-use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
-use Phoundation\Web\Html\Components\AnchorBlock;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
-use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
@@ -37,24 +34,22 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setPageTitle(tr('Please sign in'));
         Response::setHeaderTitle(tr('Please sign in'));
 
-        $get = $this->getComponentObject()->getGetData();
+        $o_component = $this->getComponentObject();
+        $get         = $o_component->getGetData();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . Url::new('backgrounds/signin.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . $o_component->getUrl('image-background') . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
                                 <div class="login-box">
                                   <!-- /.login-logo -->
                                   <div class="card card-outline card-info">
                                     <div class="card-header text-center">
-                                      ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
-                                                ->setClass('h1')
-                                                ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'), false)
-                                                ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
+                                        ' . $o_component->getSection('card-header') . '                                      
                                     </div>
                                     <div class="card-body">
-                                      <p class="login-box-msg">' . tr('Please sign in to start your session') . '</p>
+                                      <p class="login-box-msg">' . $o_component->getText(tr('Please sign in to start your session')) . '</p>
                                       <form action="' . Url::newCurrent() . '" method="post">
                                             ' . Csrf::getHiddenElement();
 
-                                            if (Session::supports('email')) {
+                                            if ($o_component->getEnabled('email')) {
                                                 $this->render .= '  <div class="input-group mb-3">
                                                                         <input type="email" name="email" id="email" class="form-control" placeholder="' . tr('Email address') . '"' . (isset($get['email']) ? 'value="' . $get['email'] . '"' : '') . '>
                                                                         <div class="input-group-append">
@@ -91,13 +86,13 @@ class TemplateSignInPage extends TemplateRenderer
         $this->render .= '            </form>';
 
 
-        if (Session::supports('facebook')) {
+        if ($o_component->getEnabled('facebook')) {
             $html =                   Anchor::new('#')
                                             ->setClass('btn btn-block btn-primary')
                                             ->setContent('<i class="fab fa-facebook mr-2"></i>' . tr('Sign in using Facebook'));
         }
 
-        if (Session::supports('google')) {
+        if ($o_component->getEnabled('google')) {
             $html =                   Anchor::new('#')
                                             ->setClass('btn btn-block btn-primary')
                                             ->setContent('<i class="fab fa-google-plus mr-2"></i>' . tr('Sign in using Google'));
@@ -109,16 +104,13 @@ class TemplateSignInPage extends TemplateRenderer
                                      </div>';
         }
 
-        if (Session::supports('lost-password')) {
+        if ($o_component->getEnabled('lost-password')) {
             $this->render .= '        <p class="mb-1">
-                                          ' . Anchor::new(Url::new('/lost-password.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'))
-                                                    ->setContent(tr('text-center'))
-                                                    ->setContent(tr('I forgot my password'))
-                                                    ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
+                                          ' . $o_component->getSection('lost-password') . '                                          
                                       </p>';
         }
 
-        if (Session::supports('register')) {
+        if ($o_component->getEnabled('register')) {
             $this->render .= '        <p class="mb-0">
                                           ' . Anchor::new(Url::new('/sign-up.html')->makeWww()->addRedirect(isset_get($get['redirect']))->addQuery(isset_get($get['email']), 'email'))
                                                     ->setContent(tr('text-center'))
@@ -127,9 +119,9 @@ class TemplateSignInPage extends TemplateRenderer
                                       </p>';
         }
 
-        if (Session::supports('copyright')) {
+        if ($o_component->getEnabled('copyright')) {
             $this->render .= '          <div class="login-footer text-center">
-                                            ' . Project::getCopyright(true) . '
+                                            ' . Project::getCopyrightString(true) . '
                                         </div>
                                     </div>';
         }

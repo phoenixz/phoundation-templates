@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateSignInPage
+ * Class TemplateUpdateLostPasswordPage
  *
  *
  *
@@ -20,8 +20,6 @@ use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
-use Phoundation\Web\Html\Enums\EnumAnchorTarget;
-use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
@@ -82,7 +80,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
-                                                          ' . Project::getCopyright(true) . '
+                                                          ' . Project::getCopyrightString(true) . '
                                                       </div>';
         }
 

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateSignInPage
+ * Class TemplateLostPasswordPage
  *
  *
  *
@@ -19,7 +19,6 @@ namespace Templates\Phoundation\Mdb\Html\Pages;
 use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
-use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -37,9 +36,8 @@ class TemplateLostPasswordPage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $o_component  = $this->getComponentObject();
-
         // Render the entire page
+        $o_component  = $this->getComponentObject();
         $this->render = ' <header>
                               <section class="text-center text-md-start">
                                   <div class="p-5" style="height: 200px; background: url(' . Url::new($o_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
@@ -79,7 +77,7 @@ class TemplateLostPasswordPage extends TemplateRenderer
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
-                                                          ' . Project::getCopyright(true) . '      
+                                                          ' . Project::getCopyrightString(true) . '      
                                                       </div>';
         }
 

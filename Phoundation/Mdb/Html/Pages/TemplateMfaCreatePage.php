@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateLostPasswordPage
+ * Class TemplateMfaCreatePage
  *
  *
  *
@@ -19,9 +19,7 @@ namespace Templates\Phoundation\Mdb\Html\Pages;
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
-use Phoundation\Web\Html\Components\AnchorBlock;
 use Phoundation\Web\Html\Csrf;
-use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Request;
@@ -42,7 +40,8 @@ class TemplateMfaCreatePage extends TemplateRenderer
         Response::setPageTitle(tr('Please setup multi-factor authentication'));
         Response::setHeaderTitle(tr('Please setup multi-factor authentication'));
 
-        $back = null;
+        $o_component = $this->getComponentObject();
+        $back        = null;
 
         if (Request::isPostRequestMethod()) {
             $back = Anchor::new(Url::new('mfa-verify'))
@@ -71,9 +70,9 @@ class TemplateMfaCreatePage extends TemplateRenderer
                                 ->setContent(tr('Sign out'))
                                 ->addData('', 'mdb-ripple-init');
 
-        if (Session::supports('copyright')) {
+        if ($o_component->getEnabled('copyright')) {
             $render .= '  <div class="text-center">
-                               ' . Project::getCopyright() . '
+                               ' . Project::getCopyrightString() . '
                           </div>';
         }
 

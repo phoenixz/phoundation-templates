@@ -20,7 +20,6 @@ use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
-use Phoundation\Web\Html\Enums\EnumAnchorTarget;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -103,7 +102,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.sign-in.enabled.copyright', true))) {
             $signin .= '  <div class="text-center">
-                              ' . Project::getCopyright(true) . '
+                              ' . Project::getCopyrightString(true) . '
                           </div>';
         }
 

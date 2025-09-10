@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class TemplateSignInPage
+ * Class TemplateLostPasswordUpdatedPage
  *
  *
  *
@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
@@ -34,8 +35,8 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                            ' . Anchor::new(config()->getString('project.customer-url', 'https://phoundation.org'))
-                                                      ->setContent(config()->getString('project.owner.label', '<span>Phoun</span>dation'), false)
+                                            ' . Anchor::new(Project::getOwnerUrl())
+                                                      ->setContent(Project::getOwnerLabel(), false)
                                                       ->setClass('h1'). '
                                         </div>
                                         <div class="card-body">
