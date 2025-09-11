@@ -86,7 +86,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                              ' . $variables . '
                                            },
                                            success: function(data) {
-                                             response(data.data);
+                                             response(data);
                                            }
                                          });
                                        },
