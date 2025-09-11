@@ -198,8 +198,8 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             'mdb/css/mdb',
             'mdb/css/mdb-fix',
             'mdb/css/phoundation',
-            'mdb/css/' . Project::getOwnerShortSeoName()
-            'mdb/css/' . Project::getSeoShortName(),
+            'mdb/css/' . Project::getSeoOwnerName(),
+            'mdb/css/' . Project::getSeoName(),
         ], true);
 
         // Load configured CSS files
