@@ -216,7 +216,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::setPageTitle(tr('Phoundation platform'));
 
         // Set basic page details
-        Response::setPageTitle(Project::getFullName() . ' (' . Response::getHeaderTitle() . ')');
+        Response::setPageTitle(Project::getHumanReadableFullName() . ' (' . Response::getHeaderTitle() . ')');
 
         return Response::renderHtmlHeaders();
     }

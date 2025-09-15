@@ -196,7 +196,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         ], prefix: true);
 
         // Set basic page details
-        Response::setPageTitle(Project::getFullName() . ' (' . Response::getHeaderTitle() . ')');
+        Response::setPageTitle(Project::getHumanReadableFullName() . ' (' . Response::getHeaderTitle() . ')');
 
         return Response::renderHtmlHeaders();
     }

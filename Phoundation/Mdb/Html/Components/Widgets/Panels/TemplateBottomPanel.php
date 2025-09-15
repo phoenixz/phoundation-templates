@@ -44,7 +44,7 @@ class TemplateBottomPanel extends TemplateRenderer
         if (config()->getBoolean('web.panels.bottom.enabled', true)) {
             $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
             $template   = tr('Using template :name', [':name' => Anchor::new('https://mdbootstrap.com/', tr('MDB'))]);
-            $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getFullName());
+            $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getHumanReadableFullName());
 
             return '  <footer class="bg-body-tertiary text-center fixed-bottom">
                       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">

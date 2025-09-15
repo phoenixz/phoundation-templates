@@ -43,7 +43,7 @@ class TemplateBottomPanel extends TemplateRenderer
     {
         $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
         $adminlte   = tr('Using template :name', [':name' => Anchor::new('https://adminlte.io/', tr('AdminLte'))]);
-        $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getFullName());
+        $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getHumanReadableFullName());
 
         return '  <footer class="main-footer">
                     <div class="float-right d-none d-sm-block">
