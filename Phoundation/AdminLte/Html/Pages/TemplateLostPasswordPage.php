@@ -16,12 +16,13 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\AdminLte\Html\Pages;
 
+use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
+use Phoundation\Web\Html\Components\Img;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Enums\EnumAnchorRenderRightsFail;
 use Phoundation\Web\Html\Enums\EnumHttpRequestMethod;
 use Phoundation\Web\Html\Template\TemplateRenderer;
-use Phoundation\Web\Http\Url;
 use Phoundation\Web\Requests\Response;
 
 
@@ -36,7 +37,10 @@ class TemplateLostPasswordPage extends TemplateRenderer
                                 <div class="login-box">
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
-                                            <img src="' . Url::new($o_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $o_component->getText(tr('Medinet tracking')) . '" width="310">                                        
+                                            ' . Anchor::new(Project::getOwnerUrl())
+                                                      ->setClass('h1')
+                                                      ->setContent(Img::new('logos/large.jpg')
+                                                                      ->setAlt(tr(':owner logo', [':owner' => Project::getOwnerName()])), false) . '
                                         </div>
                                         <div class="card-body">
                                             <h1 class="text-center">' . $o_component->getText(tr('Lost password?')) . '</h1>            

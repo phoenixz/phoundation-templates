@@ -18,6 +18,7 @@ namespace Templates\Phoundation\AdminLte\Html\Pages;
 
 use Phoundation\Developer\Project\Project;
 use Phoundation\Web\Html\Components\Anchor;
+use Phoundation\Web\Html\Components\Img;
 use Phoundation\Web\Html\Csrf;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 use Phoundation\Web\Http\Url;
@@ -36,8 +37,9 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                     <div class="card card-outline card-info">
                                         <div class="card-header text-center">
                                             ' . Anchor::new(Project::getOwnerUrl())
-                                                      ->setContent(Project::getOwnerLabel(), false)
-                                                      ->setClass('h1'). '
+                                                      ->setClass('h1')
+                                                      ->setContent(Img::new('logos/large.jpg')
+                                                                      ->setAlt(tr(':owner logo', [':owner' => Project::getOwnerName()])), false) . '
                                         </div>
                                         <div class="card-body">
                                             <p class="login-box-msg">' . tr('All done! You can now continue to your dashboard or continue to the sign-in page...') . '</p>
@@ -64,6 +66,6 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                 </div>
                             </body>';
 
-        return parent::render();
+        return $this->render;
     }
 }
