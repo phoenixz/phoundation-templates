@@ -54,7 +54,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
 
         $o_notifications = $this->o_component->getNotifications();
 
-        return cache('html')->getOrGenerate(function () use ($o_notifications) {
+        return cache('html')->get($o_notifications->getCacheKey() . '-AdminLteNotificationsDropDown', function () use ($o_notifications) {
             if ($o_notifications) {
                 $o_notifications->autoUpdate();
 
@@ -101,6 +101,6 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                                 </div>';
 
             return parent::render() . NotificationModal::new()->render();
-        }, static::class, $o_notifications->getCacheKey() . '-AdminLteNotificationsDropDown');
+        });
     }
 }
