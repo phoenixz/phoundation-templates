@@ -105,12 +105,12 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::getHtmlHeadersSent(true);
 
         if (Response::getRenderMainWrapper()) {
-            $body    = Request::getPanelsObject()->get('top', false)?->render() .
-                       Request::getPanelsObject()->get('left')?->render() .
+            $body    = Request::getPanelsObject()->get('top' , exception: false)?->render() .
+                       Request::getPanelsObject()->get('left', exception: false)?->render() .
                        $body .
-                       Request::getPanelsObject()->get('bottom', false)?->render();
+                       Request::getPanelsObject()->get('bottom', exception: false)?->render();
 
-            $output .= ' <body class="sidebar-mini' . (config()->get('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . $this->getDisplayModeString() . '" style="height: auto;">
+            $output .= ' <body class="sidebar-mini' . (config()->getBoolean('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . $this->getDisplayModeString() . '" style="height: auto;">
                             <div class="wrapper">' .
                                 Response::getFlashMessagesObject()->render() .
                                 $body . '
@@ -217,7 +217,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         if (Response::getRenderMainWrapper()) {
             $body = '   <div class="' . Response::getClass('content-wrapper', 'content-wrapper') .  '" style="min-height: 1518.06px;">
-                           ' . Request::getPanelsObject()->get('header', false)?->render() . '
+                           ' . Request::getPanelsObject()->get('header', exception: false)?->render() . '
                             <section class="content">
                                 <div class="container-fluid">
                                     <div class="row">
