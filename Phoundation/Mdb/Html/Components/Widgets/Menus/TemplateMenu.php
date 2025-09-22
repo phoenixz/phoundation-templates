@@ -77,7 +77,7 @@ class TemplateMenu extends TemplateRenderer
                                '<span class="sidenav-subheading text-muted">' . strtoupper(Html::safe($label)) . '</span>' . (isset($entry['badge']) ? '<span class="badge rounded-pill badge-notification bg-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '');
 
             } else {
-                $anchor  = Anchor::new(array_get_safe($entry, 'url'))
+                $anchor  = Anchor::new(array_get($entry, 'url'))
                                  ->addClass('sidenav_link')
                                  ->setContent((isset($entry['icon']) ? '<i class="me-3 ' . Html::safe($entry['icon']) . '"></i>' . (isset($entry['badge']) ? '<span class="badge rounded-pill badge-notification bg-' . Html::safe($entry['badge']['type']) . '">' . Html::safe($entry['badge']['label']) . '</span>' : '') : '') . $label);
 
