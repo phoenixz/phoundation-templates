@@ -132,10 +132,10 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::getHtmlHeadersSent();
 
         if (Response::getRenderMainWrapper()) {
-            $body    = Request::getPanelsObject()->get('top', false)?->render() .
-                       Request::getPanelsObject()->get('left')?->render() .
+            $body    = Request::getPanelsObject()->get('top' , exception: false)?->render() .
+                       Request::getPanelsObject()->get('left', exception: false)?->render() .
                        $body .
-                       Request::getPanelsObject()->get('bottom', false)?->render();
+                       Request::getPanelsObject()->get('bottom', exception: false)?->render();
 
             $output .=  '<body class="mdb-skin-custom" data-mdb-spy="scroll" data-mdb-target="#scrollspy" data-mdb-offset="250">';
         }
@@ -263,7 +263,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
                         </div>';
         }
 
-        return  Request::getPanelsObject()->get('header', false)?->render() . '
+        return  Request::getPanelsObject()->get('header', exception: false)?->render() . '
                 <main class="pt-' . $horizontal_padding . ' mdb-docs-layout">
                     <div class="container mt-' . $vertical_padding . ' mt-' . $horizontal_padding . ' px-lg-' . $horizontal_margin . '">
                         <div class="tab-content">
