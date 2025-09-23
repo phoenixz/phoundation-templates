@@ -39,28 +39,48 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
      * Currently supported modes are "light" and "dark" or "" (no mode, template default)
      *
      * @param string|null $mode
+     * @param bool|null   $compact
      *
      * @return string
      */
-    protected function getDisplayModeString(?string $mode = null): string
+    protected function getDisplayModeString(?string $mode = null, ?bool $compact = null): string
     {
-        $mode = $mode ?? Session::getCompactMode();
+        $return  = '';
+        $mode    = $mode    ?? Session::getDisplayMode();
+        $compact = $compact ?? Session::getCompactMode();
 
-        if ($mode) {
-            switch ($mode) {
-                case 'light':
-                    return '';
+        switch ($mode) {
+            case null:
+                // no break
 
-                case 'dark':
-                    return ' dark-mode';
-            }
+            case 'light':
+                break;
 
-            throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
-                ':mode' => $mode,
-            ]));
+            case 'dark':
+                $return .= ' dark-mode';
+                break;
+
+            default:
+                throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
+                    ':mode' => $mode,
+                ]));
         }
 
-        return '';
+        switch ($compact) {
+            case false:
+                break;
+
+            case true:
+                $return .= ' compact';
+                break;
+
+            default:
+                throw new OutOfBoundsException(tr('Unknown display compact mode ":compact" specified', [
+                    ':compact' => $compact,
+                ]));
+        }
+
+        return $return;
     }
 
 

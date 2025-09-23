@@ -77,8 +77,8 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
                 break;
 
             default:
-                throw new OutOfBoundsException(tr('Unknown display mode ":mode" specified', [
-                    ':mode' => $mode,
+                throw new OutOfBoundsException(tr('Unknown display compact mode ":compact" specified', [
+                    ':compact' => $compact,
                 ]));
         }
 
