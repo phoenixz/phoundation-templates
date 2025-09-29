@@ -63,7 +63,7 @@ class TemplateSignInModal extends TemplateRenderer
 
         // Render the sign in modal.
         // TemplateSignInModal objects handle caching themselves to avoid Script class output not being cached
-        return cache('html')->get($this->o_component->getCacheKey(), function () {
+        return cache('html')->get(function () {
             $this->o_component->setUseCache(false);
 
             return parent::render() . Script::new()
@@ -71,8 +71,7 @@ class TemplateSignInModal extends TemplateRenderer
                                                 $("form#form-sign-in").submit(function(e) {
                                                     e.stopPropagation();
                                     
-                                                    $.post("' . Url::new('sign-in')
-                                                                   ->makeAjax() . '", $(this).serialize())
+                                                    $.post("' . Url::new('sign-in')->makeAjax() . '", $(this).serialize())
                                                         .done(function (data, textStatus, jqXHR) {
                                                             $(".image-menu").replaceWith(data.html);
                                                             $("#signinModal").modal("hide");
@@ -80,6 +79,6 @@ class TemplateSignInModal extends TemplateRenderer
                                     
                                                     return false;
                                                 })');
-        });
+        }, static::class, $this->o_component->getCacheKey());
     }
 }
