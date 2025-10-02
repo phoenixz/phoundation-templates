@@ -73,7 +73,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                                               ' . Anchor::new()
                                                                         ->addClasses('btn btn-block btn-outline-primary')
                                                                         ->addData('', 'mdb-ripple-init')
-                                                                        ->setHref(Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww())
+                                                                        ->setUrlObject(Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww())
                                                                         ->setContent($o_component->getText('Back to sign-in page')) . '
                                                           </div>
                                                       </div>';
