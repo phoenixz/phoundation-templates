@@ -33,7 +33,7 @@ class TemplateButton extends TemplateRenderer
                     ->addData('', 'mdb-ripple-init');
 
         if ($o_component->getReadonly()) {
-            $o_component->setAnchorUrl(null)
+            $o_component->setUrlObject(null)
                         ->addAria('true', 'disabled')
                         ->addClass('disabled');
         }
