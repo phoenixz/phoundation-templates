@@ -63,7 +63,7 @@ class TemplateSignInModal extends TemplateRenderer
 
         // Render the sign in modal.
         // TemplateSignInModal objects handle caching themselves to avoid Script class output not being cached
-        return cache('html')->get(function () {
+        return cache('html')->getOrGenerate(function () {
             $this->o_component->setUseCache(false);
 
             return parent::render() . Script::new()

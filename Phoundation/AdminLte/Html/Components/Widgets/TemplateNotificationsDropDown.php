@@ -54,7 +54,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
 
         $o_notifications = $this->o_component->getNotifications();
 
-        return cache('html')->get(function () use ($o_notifications) {
+        return cache('html')->getOrGenerate(function () use ($o_notifications) {
             if ($o_notifications) {
                 $o_notifications->autoUpdate();
 
