@@ -223,6 +223,24 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
 
     /**
+     * Actually renders the environment warning message
+     *
+     * @param string|null $mode
+     * @param string|null $title
+     * @param string|null $message
+     *
+     * @return string|null
+     */
+    protected function getRenderedEnvironmentWarning(?string $mode, ?string $title, ?string $message): ?string
+    {
+        return '<div class="text-center alert alert-' . $mode . ' alert-dismissible">
+                  <h5 class=""><i class="icon fas fa-ban"></i> ' . $title . '</h5>
+                      ' . $message . '
+                </div>';
+    }
+
+
+    /**
      * Build the HTML body
      *
      * @return string|null
@@ -242,7 +260,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            ' . $body . '
+                                            ' . $this->renderEnvironmentWarning() . $body . '
                                         </div>
                                     </div>
                                 </div>
