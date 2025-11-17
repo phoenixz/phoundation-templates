@@ -235,42 +235,38 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
             return $body;
         }
 
-        $header             = null;
         $horizontal_padding = 1;
         $vertical_padding   = 1;
         $horizontal_margin  = 1;
         $vertical_margin    = 1;
 
-        if (str_contains(ENVIRONMENT, 'trial')) {
-            $header .= '<div class="row">
-                            <div class="p-3 mb-4 bg-secondary bg-gradient col-xl-12 rounded-5">
-                                <div class="text-center example-square">' . tr('This is a trial version. All data is artificially generated and the database can be reset upon request') . '</div>
-                            </div>
-                        </div>';
-
-        } elseif (str_contains(ENVIRONMENT, 'demo')) {
-            $header .= '<div class="row">
-                            <div class="p-3 mb-4 bg-secondary bg-gradient col-xl-12 rounded-5">
-                                <div class="text-center example-square">' . tr('This is a demonstration version. All data is artificially generated and the database can be reset upon request') . '</div>
-                            </div>
-                        </div>';
-
-        } elseif (str_contains(ENVIRONMENT, 'local')) {
-            $header .= '<div class="row">
-                            <div class="p-3 mb-4 bg-secondary bg-gradient col-xl-12 rounded-5">
-                                <div class="text-center example-square">' . tr('This is a local version of your project') . '</div>
-                            </div>
-                        </div>';
-        }
-
         return  Request::getPanelsObject()->get('header', exception: false)?->render() . '
                 <main class="pt-' . $horizontal_padding . ' mdb-docs-layout">
                     <div class="container mt-' . $vertical_padding . ' mt-' . $horizontal_padding . ' px-lg-' . $horizontal_margin . '">
                         <div class="tab-content">
-                            ' . $header . $body . '
+                            ' . $this->renderEnvironmentWarning() . $body . '
                         </div>
                     </div>
                 </main>';
+    }
+
+
+    /**
+     * Actually renders the environment warning message
+     *
+     * @param string|null $mode
+     * @param string|null $title
+     * @param string|null $message
+     *
+     * @return string|null
+     */
+    protected function getRenderedEnvironmentWarning(?string $mode, ?string $title, ?string $message): ?string
+    {
+        return '<div class="row">
+                    <div class="p-3 mb-4 bg-' . $mode . ' bg-gradient col-xl-12 rounded-5">
+                        <div class="text-center example-square">' . $message . '</div>
+                    </div>
+                </div>';
     }
 
 
