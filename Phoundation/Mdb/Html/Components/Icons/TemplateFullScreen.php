@@ -39,7 +39,7 @@ class TemplateFullScreen extends TemplateIcon
      */
     public function render(): ?string
     {
-        $this->o_component->getAnchorObject()->setHref('#');
+        $this->o_component->getAnchorObject()->setUrl('#');
 
         return parent::render() . Script::new('
             function toggleFullScreen() {
