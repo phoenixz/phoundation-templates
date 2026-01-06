@@ -78,6 +78,6 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                 </div>
                             </body>';
 
-        return parent::render();
+        return $this->render;
     }
 }

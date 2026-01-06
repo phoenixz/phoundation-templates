@@ -54,7 +54,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
 
         $o_notifications = $this->o_component->getNotifications();
 
-        return cache('html')->getOrGenerate(function () use ($o_notifications) {
+        return cache('html')->getOrGenerate(static::class . '-' . $o_notifications->getCacheKey(), function () use ($o_notifications) {
             if ($o_notifications) {
                 $o_notifications->autoUpdate();
 
@@ -70,9 +70,6 @@ class TemplateNotificationsDropDown extends TemplateRenderer
             } else {
                 $count = 0;
             }
-
-
-
 
             $this->render =     Anchor::new('#')->setClass('nav-link')
                                                 ->addData('dropdown', 'toggle')
@@ -92,7 +89,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                     $this->render .= Anchor::new(str_replace(':ID', (string) $o_notification->getId(), (string) $this->o_component->getNotificationsUrl()))
                                            ->setClass('dropdown-item notification open-modal')
                                            ->addData($o_notification->getId(), 'id')
-                                           ->setContent(($o_notification->getIcon() ? '<i class="text-' . Html::safe($o_notification->getMode()->value) . ' fas fa-' . Html::safe($o_notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($o_notification->getTitle(), 24)) . ' <span class="float-right text-muted text-sm"> ' . Html::safe(PhoDate::getAge($o_notification->getCreatedOnObject())) . '</span>') . '                                    
+                                           ->setContent(($o_notification->getIcon() ? '<i class="text-' . Html::safe($o_notification->getMode()->value) . ' fas fa-' . Html::safe($o_notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($o_notification->getTitle(), 24)) . ' <span class="float-right text-muted text-sm"> ' . Html::safe($o_notification->getCreatedOnObject()->getAge()) . '</span>') . '                                    
                                   <div class="dropdown-divider"></div>';
                 }
             }
@@ -101,6 +98,6 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                                 </div>';
 
             return parent::render() . NotificationModal::new()->render();
-        }, static::class, $o_notifications->getCacheKey());
+        });
     }
 }

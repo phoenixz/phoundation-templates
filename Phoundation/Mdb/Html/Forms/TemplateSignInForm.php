@@ -42,7 +42,7 @@ class TemplateSignInForm extends TemplateRenderer
     {
         $this->render = ' <!-- Email input -->
                           <div class="form-outline mb-4">
-                            <input type="email" id="email" name="email" class="form-control"' . (array_get($get, 'email') ? ' value="' . $get['email'] . '"' : '') . '/>
+                            <input type="email" id="email" name="email" class="form-control"' . (array_get_safe($get, 'email') ? ' value="' . $get['email'] . '"' : '') . '/>
                             <label class="form-label" for="email">' . tr('Email address') . '</label>
                           </div>
                         

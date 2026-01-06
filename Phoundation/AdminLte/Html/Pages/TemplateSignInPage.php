@@ -112,7 +112,7 @@ class TemplateSignInPage extends TemplateRenderer
 
         if ($o_component->getEnabled('register')) {
             $this->render .= '        <p class="mb-0">
-                                          ' . Anchor::new(Url::new('/sign-up.html')->makeWww()->addRedirect(array_get($get, 'redirect'))->addQuery(array_get($get, 'email'), 'email'))
+                                          ' . Anchor::new(Url::new('/sign-up.html')->makeWww()->addRedirect(array_get_safe($get, 'redirect'))->addQuery(array_get_safe($get, 'email'), 'email'))
                                                     ->setContent(tr('text-center'))
                                                     ->setContent(tr('Register a new membership'))
                                                     ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
