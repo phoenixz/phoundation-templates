@@ -270,20 +270,4 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         return $body;
     }
-
-
-    /**
-     * ???
-     *
-     * @param string|null $mode
-     * @param string|null $title
-     * @param string|null $message
-     *
-     * @return string|null
-     */
-    protected function getRenderedEnvironmentWarning(?string $mode, ?string $title, ?string $message): ?string
-    {
-        // TODO: Implement getRenderedEnvironmentWarning() method.
-        return null;
-    }
 }
