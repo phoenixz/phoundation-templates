@@ -82,7 +82,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
         }
 
         if ($o_definition->getHidden()) {
-            // Hidden elements don't display anything beyond the hidden <input>
+            // Hidden elements do not display anything beyond the hidden <input>
             return $render . $scripts;
         }
 

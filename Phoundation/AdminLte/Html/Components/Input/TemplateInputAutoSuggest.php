@@ -104,7 +104,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
                          ->render() . parent::render();
         }
 
-        // Don't render the JavaScript part
+        // Do not render the JavaScript part
         return parent::render();
     }
 }

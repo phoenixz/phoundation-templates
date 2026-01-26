@@ -119,7 +119,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                    }');
         }
 
-        // Don't render the JavaScript object
+        // Do not render the JavaScript object
         return parent::render();
     }
 }
