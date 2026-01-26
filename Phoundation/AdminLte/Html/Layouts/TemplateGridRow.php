@@ -46,7 +46,7 @@ class TemplateGridRow extends TemplateRenderer
                                           . ($name  ? ' name="' . $name . '"' : '')
                                           . ($id    ? ' id="'   . $id   . '"' : '') .'>';
 
-        if ($this->o_component->getForm()) {
+        if ($this->o_component->getFormObject()) {
             // Return content rendered in a form
             $render = '';
 
@@ -54,7 +54,7 @@ class TemplateGridRow extends TemplateRenderer
                 $render .= $column->render();
             }
 
-            $this->render .= $this->o_component->getForm()->setContent($render)->render();
+            $this->render .= $this->o_component->getFormObject()->setContent($render)->render();
             $this->o_component->setForm(null);
         } else {
             foreach ($this->o_component->getSource() as $column) {
