@@ -42,9 +42,9 @@ class TemplateGridColumn extends TemplateRenderer
         $class        = $this->o_component->getClass();
         $this->render = '   <div class="col' . (Html::safe($this->o_component->getTier()->value) ? '-' . Html::safe($this->o_component->getTier()->value) : '') . '-' . Html::safe($this->o_component->getSize()->value) . ($class ? ' ' . $class : '') . '">';
 
-        if ($this->o_component->getForm()) {
+        if ($this->o_component->getFormObject()) {
             // Return column content rendered in a form
-            $this->render .= $this->o_component->getForm()->setContent($this->o_component->getContent())->render();
+            $this->render .= $this->o_component->getFormObject()->setContent($this->o_component->getContent())->render();
             $this->o_component->setForm(null);
         } else {
             $this->render .= $this->o_component->getContent();

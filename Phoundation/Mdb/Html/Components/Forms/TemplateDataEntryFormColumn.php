@@ -209,6 +209,36 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 break;
 
             case EnumInputType::button:
+                // no break;
+
+            case EnumInputType::submit:
+                // no break;
+
+            case EnumInputType::reset:
+                // no break;
+
+            case EnumInputType::create_button:
+                // no break;
+
+            case EnumInputType::save_button:
+                // no break;
+
+            case EnumInputType::back_button:
+                // no break;
+
+            case EnumInputType::audit_button:
+                // no break;
+
+            case EnumInputType::lock_button:
+                // no break;
+
+            case EnumInputType::unlock_button:
+                // no break;
+
+            case EnumInputType::delete_button:
+                // no break;
+
+            case EnumInputType::undelete_button:
                 $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                         <div class="' . ($o_definition->getReadonly() ? 'readonly ' : null) . ($o_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
                                             ' . $render;

@@ -41,7 +41,7 @@ class TemplateGrid extends TemplateRenderer
         $class        = $this->o_component->getClass();
         $this->render = '<div class="container-fluid' . ($class ? ' ' . $class : '') . '">';
 
-        if ($this->o_component->getForm()) {
+        if ($this->o_component->getFormObject()) {
             // Return content rendered in a form
             $render = '';
 
@@ -49,7 +49,7 @@ class TemplateGrid extends TemplateRenderer
                 $render .= $row->render();
             }
 
-            $this->render .= $this->o_component->getForm()->setContent($render)->render();
+            $this->render .= $this->o_component->getFormObject()->setContent($render)->render();
             $this->o_component->setForm(null);
         } else {
             foreach ($this->o_component->getSource() as $row) {
