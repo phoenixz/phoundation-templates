@@ -41,7 +41,7 @@ class TemplateGridRow extends TemplateRenderer
         $class        = $this->o_component->getClass();
         $this->render = '<div class="row' . ($class ? ' ' . $class : '') . '">';
 
-        if ($this->o_component->getForm()) {
+        if ($this->o_component->getFormObject()) {
             // Return content rendered in a form
             $render = '';
 
@@ -49,8 +49,8 @@ class TemplateGridRow extends TemplateRenderer
                 $render .= $column->render();
             }
 
-            $this->render .= $this->o_component->getForm()->setContent($render)->render();
-            $this->o_component->setForm(null);
+            $this->render .= $this->o_component->getFormObject()->setContent($render)->render();
+            $this->o_component->setFormObject(null);
         } else {
             foreach ($this->o_component->getSource() as $column) {
                 $this->render .= $column->render();

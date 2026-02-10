@@ -45,7 +45,7 @@ class TemplateSignInModal extends TemplateRenderer
     public function render(): ?string
     {
         // Build the form
-        $form = $this->o_component->getForm()->render();
+        $form = $this->o_component->getFormObject()->render();
 
         // Build the layout
         $layout = Grid::new()
