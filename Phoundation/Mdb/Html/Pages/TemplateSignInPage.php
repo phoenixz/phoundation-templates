@@ -39,68 +39,68 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setPageTitle(tr('Please sign in'));
         Response::setRenderMainWrapper(false);
 
-        $o_component  = $this->getComponentObject();
+        $_component  = $this->getComponentObject();
         $terms        = Anchor::new(Url::new('terms')->makeWww(), tr('terms and conditions'))->setRenderRightsFail(EnumAnchorRenderRightsFail::full);
         $register     = Anchor::new(Url::new('sign-up')->makeWww(), tr('Register'))->setRenderRightsFail(EnumAnchorRenderRightsFail::full);
 
         // Render SSO entries?
-        if ($o_component->getEnabled('facebook')) {
+        if ($_component->getEnabled('facebook')) {
             $facebook = ' <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
                               <i class="fab fa-facebook-f"></i>
                           </button>';
         }
 
-        if ($o_component->getEnabled('google')) {
+        if ($_component->getEnabled('google')) {
             $google = ' <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
                             <i class="fab fa-google"></i>
                         </button>';
         }
 
-        if ($o_component->getEnabled('github')) {
+        if ($_component->getEnabled('github')) {
             $github = ' <button type="button" class="btn btn-link btn-lg btn-floating mx-1" data-mdb-ripple-init data-ripple-color="primary">
                             <i class="fab fa-github"></i>
                         </button>';
         }
 
         // Render the sign-in page section
-        $signin   = ' <form method="post" action="' . Url::new($o_component->getUrl('form-action', default: config()->getString('web.pages.sign-in.urls.form', 'sign-in')))->makeWww() . '">
+        $signin   = ' <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('web.pages.sign-in.urls.form', 'sign-in')))->makeWww() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new($o_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $o_component->getText(tr('Medinet Mobile')) . '" width="310">
+                              <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
                           </div>
                           <hr>';
 
-        if ($o_component->getEnabled('email', default: config()->getBoolean('web.pages.sign-in.enabled.email', true))) {
+        if ($_component->getEnabled('email', default: config()->getBoolean('web.pages.sign-in.enabled.email', true))) {
             $signin .= '  <div class="form-outline mb-4" data-mdb-input-init>
-                              <input type="email" id="loginName" name="email" class="form-control"' . $o_component->getValue(EnumHttpRequestMethod::get, 'email') . ' />
-                              <label class="form-label" for="loginName">' . $o_component->getText(tr('Email')) . '</label>
+                              <input type="email" id="loginName" name="email" class="form-control"' . $_component->getValue(EnumHttpRequestMethod::get, 'email') . ' />
+                              <label class="form-label" for="loginName">' . $_component->getText(tr('Email')) . '</label>
                           </div>
                           <div class="form-outline mb-4" data-mdb-input-init>
                               <input type="password" id="loginPassword" name="password" class="form-control" />
-                              <label class="form-label" for="loginPassword">' . $o_component->getText(tr('Password')) . '</label>
+                              <label class="form-label" for="loginPassword">' . $_component->getText(tr('Password')) . '</label>
                           </div>
                           <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                              ' . $o_component->getText(tr('Sign in')) . '
+                              ' . $_component->getText(tr('Sign in')) . '
                           </button>';
 
         }
 
-        $signin .=        $o_component->getSection('sso') . '
+        $signin .=        $_component->getSection('sso') . '
                           <div class="row mb-4">
                               <div class="col-md-12 d-flex justify-content-center">
-                                  ' . Anchor::new(Url::new($o_component->getUrl('lost-password', default: 'lost-password'))->makeWww()->addQuery($o_component->get(EnumHttpRequestMethod::get, 'email'), 'email'))
-                                            ->setContent($o_component->getText('Forgot password?'))
+                                  ' . Anchor::new(Url::new($_component->getUrl('lost-password', default: 'lost-password'))->makeWww()->addQuery($_component->get(EnumHttpRequestMethod::get, 'email'), 'email'))
+                                            ->setContent($_component->getText('Forgot password?'))
                                             ->setRenderRightsFail(EnumAnchorRenderRightsFail::full). '
                               </div>
                           </div>';
 
-        if ($o_component->getEnabled('sign-up', default: config()->getBoolean('web.pages.sign-in.enabled.sign-up', true))) {
+        if ($_component->getEnabled('sign-up', default: config()->getBoolean('web.pages.sign-in.enabled.sign-up', true))) {
             $signin .= '   <div class="text-center">
-                              <p>' . $o_component->getText(tr('Not a member? :register', [':register' => $register])) . '</p>
+                              <p>' . $_component->getText(tr('Not a member? :register', [':register' => $register])) . '</p>
                           </div>';
         }
 
-        if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.sign-in.enabled.copyright', true))) {
+        if ($_component->getEnabled('copyright', default: config()->getBoolean('web.pages.sign-in.enabled.copyright', true))) {
             $signin .= '  <div class="text-center">
                               ' . Project::getCopyrightString(true) . '
                           </div>';
@@ -111,7 +111,7 @@ class TemplateSignInPage extends TemplateRenderer
         // Render the entire page
         $render = '   <header>
                           <section class="text-center text-md-start">
-                              <div class="p-5" style="height: 200px; background: url(' . Url::new($o_component->getUrl('banner', default: 'banners/large.jpg'))->makeImg() . ') center no-repeat;">
+                              <div class="p-5" style="height: 200px; background: url(' . Url::new($_component->getUrl('banner', default: 'banners/large.jpg'))->makeImg() . ') center no-repeat;">
                               </div>
                           </section>
                       </header>
@@ -122,7 +122,7 @@ class TemplateSignInPage extends TemplateRenderer
                                       <div class="card shadow-4">
                                           <div class="card-body p-4">';
 
-        if ($o_component->getEnabled('signup')) {
+        if ($_component->getEnabled('signup')) {
             $render .= '                      <!-- Pills navs -->
                                               <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                                                   <li class="nav-item" role="presentation">
@@ -132,7 +132,7 @@ class TemplateSignInPage extends TemplateRenderer
                                                                 ->addData('', 'mdb-pill-init')
                                                                 ->addAria('true', 'selected')
                                                                 ->setRole('tab')
-                                                                ->setContent($o_component->getText(tr('Sign in')))
+                                                                ->setContent($_component->getText(tr('Sign in')))
                                                                 ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                                   </li>
                                                   <li class="nav-item" role="presentation">
@@ -143,7 +143,7 @@ class TemplateSignInPage extends TemplateRenderer
                                                                 ->addData('', 'mdb-pill-init')
                                                                 ->addAria('pills-register', 'controls')
                                                                 ->addAria('false', 'selected')
-                                                                ->setContent($o_component->getText(tr('Register')))
+                                                                ->setContent($_component->getText(tr('Register')))
                                                                 ->setRenderRightsFail(EnumAnchorRenderRightsFail::full) . '
                                                   </li>
                                               </ul>';

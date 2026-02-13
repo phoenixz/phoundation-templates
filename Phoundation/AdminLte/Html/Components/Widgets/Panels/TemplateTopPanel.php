@@ -38,11 +38,11 @@ class TemplateTopPanel extends TemplateRenderer
     {
         // If impersonated, change top panel color and add an impersonation message
         if (Session::isImpersonated()) {
-            $this->o_component->setMode(EnumDisplayMode::danger);
+            $this->_component->setMode(EnumDisplayMode::danger);
             $message = tr('(Impersonated by ":user")', [':user' => Session::getRealUserObject()->getDisplayName()]);
 
         } else {
-            $this->o_component->setMode(EnumDisplayMode::white);
+            $this->_component->setMode(EnumDisplayMode::white);
         }
 
         // Top level message?
@@ -61,8 +61,8 @@ class TemplateTopPanel extends TemplateRenderer
                                         ->addData('pushmenu', 'widget') . '  
                             </li>';
 
-        if ($this->o_component->keyExists('menu')) {
-            foreach ($this->o_component->get('menu') as $label => $url) {
+        if ($this->_component->keyExists('menu')) {
+            foreach ($this->_component->get('menu') as $label => $url) {
                 $left_menu .= ' <li class="nav-item d-none d-sm-inline-block">
                                   ' . Anchor::new($url, $label)->setClass('nav-link') . '
                                 </li>';
@@ -74,13 +74,13 @@ class TemplateTopPanel extends TemplateRenderer
                           </ul>';
 
         // Build the top panel with the left menu in it
-        $this->render = ' <nav class="main-header navbar navbar-expand navbar-' . Html::safe($this->o_component->getMode()->value) . ' navbar-light">
+        $this->render = ' <nav class="main-header navbar navbar-expand navbar-' . Html::safe($this->_component->getMode()->value) . ' navbar-light">
                             <!-- Left navbar links -->
                             ' . $left_menu . '                    
                             <!-- Right navbar links -->
                             <ul class="navbar-nav ml-auto">';
 
-        foreach ($this->o_component->getElementsObject() as $element) {
+        foreach ($this->_component->getElementsObject() as $element) {
             $element_type = Strings::until($element, '-');
 
             switch ($element) {
@@ -113,26 +113,26 @@ class TemplateTopPanel extends TemplateRenderer
                 case 'messages':
                     $this->render .= '<!-- Messages Dropdown Menu -->
                                       <li class="nav-item dropdown messages">
-                                        ' . $this->o_component->getMessagesDropDownObject()->render() . '
+                                        ' . $this->_component->getMessagesDropDownObject()->render() . '
                                       </li>';
                     break;
 
                 case 'notifications':
                     $this->render .= '<!-- Notifications Dropdown Menu -->
                                       <li class="nav-item dropdown notifications">
-                                        ' . $this->o_component->getNotificationsDropDownObject()->render() . '
+                                        ' . $this->_component->getNotificationsDropDownObject()->render() . '
                                       </li>';
                     break;
 
                 case 'languages':
                     $this->render .= '<li class="nav-item dropdown languages">                                  
-                                          ' . $this->o_component->getLanguagesDropDownObject()->render() . '
+                                          ' . $this->_component->getLanguagesDropDownObject()->render() . '
                                       </li>';
                     break;
 
                 case 'icon':
                     $this->render .= '  <li class="nav-item">
-                                          ' . $this->o_component->getIcons()->get($element_type)->render() . '
+                                          ' . $this->_component->getIcons()->get($element_type)->render() . '
                                         </li>';
                     break;
 

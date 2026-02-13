@@ -25,8 +25,8 @@ class TemplateProfileImage extends TemplateRenderer
     /**
      * ProfileImage class constructor
      */
-    public function __construct(ProfileImage $o_component)
+    public function __construct(ProfileImage $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

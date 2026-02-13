@@ -26,10 +26,10 @@ class TemplateInput extends TemplateRenderer
     /**
      * Input class constructor
      */
-    public function __construct(InputInterface $o_component)
+    public function __construct(InputInterface $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 
 
@@ -40,18 +40,18 @@ class TemplateInput extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $o_component = $this->o_component;
+        $_component = $this->_component;
 
         // Hidden elements render as an <input hidden>
-        if ($o_component->getHidden()) {
+        if ($_component->getHidden()) {
             return InputHidden::new()
-                              ->setName($o_component->getName())
-                              ->setValue($o_component->getValue())
+                              ->setName($_component->getName())
+                              ->setValue($_component->getValue())
                               ->render();
         }
 
-        $before = $o_component->renderBeforeContent();
-        $after  = $o_component->renderAfterContent();
+        $before = $_component->renderBeforeContent();
+        $after  = $_component->renderAfterContent();
 
         if ($before or $after) {
             return '<div class="input-group mb-3">' . $before . parent::render() . $after . '</div>';

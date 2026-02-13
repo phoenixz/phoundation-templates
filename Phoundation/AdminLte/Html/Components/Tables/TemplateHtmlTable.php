@@ -27,10 +27,10 @@ class TemplateHtmlTable extends TemplateRenderer
     /**
      * Table class constructor
      */
-    public function __construct(HtmlTable $o_component)
+    public function __construct(HtmlTable $_component)
     {
-        $o_component->addClasses('table');
-        parent::__construct($o_component);
+        $_component->addClasses('table');
+        parent::__construct($_component);
     }
 
 
@@ -42,7 +42,7 @@ class TemplateHtmlTable extends TemplateRenderer
     public function render(): ?string
     {
         return GridRow::new()
-                      ->setId($this->o_component->getId() . '_wrapper')
+                      ->setId($this->_component->getId() . '_wrapper')
                       ->addGridColumn(GridColumn::new()
                                                 ->setContent(parent::render())
                                                 ->addClass('overflow-x'))->render();

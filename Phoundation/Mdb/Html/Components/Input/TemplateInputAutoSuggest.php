@@ -27,12 +27,12 @@ class TemplateInputAutoSuggest extends TemplateInputText
     /**
      * InputAutoSuggest class constructor
      */
-    public function __construct(InputAutoSuggest $o_component)
+    public function __construct(InputAutoSuggest $_component)
     {
-        $o_component->addClasses('form-outline autocomplete')
+        $_component->addClasses('form-outline autocomplete')
                     ->addData('', 'data-mdb-input-init');
 
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -54,47 +54,47 @@ class TemplateInputAutoSuggest extends TemplateInputText
      */
     public function render(): ?string
     {
-        $o_component = $this->getComponentObject();
+        $_component = $this->getComponentObject();
 
         // Auto suggest is only available when not readonly or not disabled
-        if ($o_component->getReadonly() or $o_component->getDisabled()) {
+        if ($_component->getReadonly() or $_component->getDisabled()) {
             return parent::render();
         }
 
         // ID is required. If ID is not available, name can be used as an alternative
-        if (empty($o_component->getId())) {
-            if (empty($o_component->getName())) {
+        if (empty($_component->getId())) {
+            if (empty($_component->getName())) {
                 throw new OutOfBoundsException(tr('Cannot render autosuggest input, it has no id nor name specified'));
 
             }
 
             // Copy ID from name
-            $o_component->setId($o_component->getName());
+            $_component->setId($_component->getName());
         }
 
-        if (empty($o_component->getName())) {
+        if (empty($_component->getName())) {
             throw new OutOfBoundsException(tr('No required HTML name attribute specified for auto suggest component'));
         }
 
-        if (empty($o_component->getSourceUrl())) {
+        if (empty($_component->getSourceUrl())) {
             throw new OutOfBoundsException(tr('No source URL specified for auto suggest component ":name"', [
-                ':name' => $o_component->getName(),
+                ':name' => $_component->getName(),
             ]));
         }
 
         // TODO Check $variables not being used here
-        if ($o_component->getVariables()) {
-            $variables = $o_component->getVariables()->getSource();
+        if ($_component->getVariables()) {
+            $variables = $_component->getVariables()->getSource();
             $variables = ',' . Arrays::implodeWithKeys($variables, ',' . PHP_EOL, ':');
 
         } else {
             $variables = null;
         }
 
-        if ($o_component->getPropertyBoolean('add_javascript', true)) {
-            return parent::render() . Script::new('const asyncAutocompletes = document.querySelectorAll(\'' . $o_component->getSelector() . '\');
+        if ($_component->getPropertyBoolean('add_javascript', true)) {
+            return parent::render() . Script::new('const asyncAutocompletes = document.querySelectorAll(\'' . $_component->getSelector() . '\');
                                    const asyncFilter = async (query) => {
-                                     const response = await fetch(`' . $o_component->getSourceUrl() . '?term=${encodeURI(query)}`);
+                                     const response = await fetch(`' . $_component->getSourceUrl() . '?term=${encodeURI(query)}`);
                                      return $.filterPhoundation(await response.json()).data;
                                    };
 
@@ -112,7 +112,7 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                              noResults: "' . tr('Please start typing...') . '"
                                            });
 
-                                           ' . $o_component->getEventHandler('onselect', 'asyncAutocomplete.addEventListener("itemSelect.mdb.autocomplete", (e) => {
+                                           ' . $_component->getEventHandler('onselect', 'asyncAutocomplete.addEventListener("itemSelect.mdb.autocomplete", (e) => {
                                                :SCRIPT
                                            });') . '
                                        });

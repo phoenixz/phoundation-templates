@@ -39,8 +39,8 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
         Response::setPageTitle(tr('Please update your password'));
         Response::setHeaderTitle(tr('Please update your password'));
 
-        $o_component = $this->getComponentObject();
-        $get         = $o_component->getGetData();
+        $_component = $this->getComponentObject();
+        $get         = $_component->getGetData();
 
         // Render the page
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
@@ -71,7 +71,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                     ->setClass('btn btn-outline-secondary btn-block mb-4')
                                     ->addData('', 'mdb-ripple-init');
 
-        if ($o_component->getEnabled('copyright')) {
+        if ($_component->getEnabled('copyright')) {
             $render .= '  <div class="text-center">
                               ' . Project::getCopyrightString() . '
                           </div>';

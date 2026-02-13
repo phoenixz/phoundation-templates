@@ -25,9 +25,9 @@ class TemplateLabel extends TemplateRenderer
     /**
      * Icons class constructor
      */
-    public function __construct(Label $o_component)
+    public function __construct(Label $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -38,7 +38,7 @@ class TemplateLabel extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->o_component->addClasses('form-label');
+        $this->_component->addClasses('form-label');
         return parent::render();
     }
 }

@@ -27,9 +27,9 @@ class TemplateSmallBox extends TemplateRenderer
     /**
      * SmallBox class constructor
      */
-    public function __construct(SmallBox $o_component)
+    public function __construct(SmallBox $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -40,17 +40,17 @@ class TemplateSmallBox extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = '   <div class="small-box bg-' . Html::safe($this->o_component->getMode()->value) . ($this->o_component->getShadow() ? ' ' . Html::safe($this->o_component->getShadow()) : '') . '">
+        $this->render = '   <div class="small-box bg-' . Html::safe($this->_component->getMode()->value) . ($this->_component->getShadow() ? ' ' . Html::safe($this->_component->getShadow()) : '') . '">
                               <div class="inner">
-                                <h3>' . Html::safe($this->o_component->get()) . '</h3>       
-                                <p>' . Html::safe($this->o_component->getTitle()) . '</p>
+                                <h3>' . Html::safe($this->_component->get()) . '</h3>       
+                                <p>' . Html::safe($this->_component->getTitle()) . '</p>
                               </div>
-                              ' . (($this->o_component->getProgress() !== null) ? '   <div class="progress">
-                                                                                    <div class="progress-bar" style="width: ' . $this->o_component->getProgress() . '%"></div>
+                              ' . (($this->_component->getProgress() !== null) ? '   <div class="progress">
+                                                                                    <div class="progress-bar" style="width: ' . $this->_component->getProgress() . '%"></div>
                                                                                   </div>' : '') . '
-                              ' . ($this->o_component->getDescription() ? ' <p>' . Html::safe($this->o_component->getDescription()) . '</p>' : '') . '                        
-                              ' . ($this->o_component->getIcon()        ? ' <div class="icon"><i class="fas ' . Html::safe($this->o_component->getIcon()) . '"></i></div>' : '') . '
-                              ' . ($this->o_component->getUrl()         ? Anchor::new($this->o_component->getUrl())->setClass('small-box-footer')->setContent(tr('More info') . ' <i class="fas fa-arrow-circle-right"></i>') : null) . '                        
+                              ' . ($this->_component->getDescription() ? ' <p>' . Html::safe($this->_component->getDescription()) . '</p>' : '') . '                        
+                              ' . ($this->_component->getIcon()        ? ' <div class="icon"><i class="fas ' . Html::safe($this->_component->getIcon()) . '"></i></div>' : '') . '
+                              ' . ($this->_component->getUrl()         ? Anchor::new($this->_component->getUrl())->setClass('small-box-footer')->setContent(tr('More info') . ' <i class="fas fa-arrow-circle-right"></i>') : null) . '                        
                             </div>';
 
         return parent::render();

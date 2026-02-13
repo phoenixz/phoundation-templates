@@ -28,9 +28,9 @@ class TemplateTopMenu extends TemplateRenderer
     /**
      * TopMenu class constructor
      */
-    public function __construct(TopMenu $o_component)
+    public function __construct(TopMenu $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -49,8 +49,8 @@ class TemplateTopMenu extends TemplateRenderer
                             ' . Anchor::new()->setClass(Url::newCurrent())->setClass('nav-link')->setContent(tr('Home')) . '
                         </li>';
 
-        if ($this->o_component->getSource()) {
-            foreach ($this->o_component->getSource() as $label => $entry) {
+        if ($this->_component->getSource()) {
+            foreach ($this->_component->getSource() as $label => $entry) {
                 if (is_string($entry))  {
                     $entry = ['url' => $entry];
                 }

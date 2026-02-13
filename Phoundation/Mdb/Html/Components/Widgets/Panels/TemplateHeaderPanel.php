@@ -28,9 +28,9 @@ class TemplateHeaderPanel extends TemplateRenderer
     /**
      * HeaderPanel class constructor
      */
-    public function __construct(HeaderPanel $o_component)
+    public function __construct(HeaderPanel $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,7 +39,7 @@ class TemplateHeaderPanel extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if ($this->o_component->getMini()) {
+        if ($this->_component->getMini()) {
             return '<section class="content-header"></section>';
         }
 

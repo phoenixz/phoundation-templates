@@ -28,12 +28,12 @@ class TemplateInputDate extends TemplateInputText
     /**
      * InputDate class constructor
      */
-    public function __construct(InputDate $o_component)
+    public function __construct(InputDate $_component)
     {
-        $o_component->addClasses('form-control')
+        $_component->addClasses('form-control')
                     ->setInputType(EnumInputType::text);
 
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -80,16 +80,16 @@ class TemplateInputDate extends TemplateInputText
         Response::loadJavaScript('mdb/js/plugins/moment/moment');
 
         // Set default options and backup $ID as ID needs to be rendered on outer div
-        $o_component = $this->getComponentObject();
-        $id          = $o_component->getId();
+        $_component = $this->getComponentObject();
+        $id          = $_component->getId();
         $outline     = strtolower(str_replace('-', '_', $id));
 
         // The ID should be on the outer div, so remove it for the component itself
-        $o_component->setId($id . '-input', false);
+        $_component->setId($id . '-input', false);
 
         $return = parent::render() . Script::new('      
         const ' . $outline . '       = document.getElementById("' . $outline . '");
-        const ' . $outline . 'Object = new mdb.Datepicker("#' . $outline . '", {' . $o_component->renderOptions() . '});
+        const ' . $outline . 'Object = new mdb.Datepicker("#' . $outline . '", {' . $_component->renderOptions() . '});
 
         ' . $outline . '.addEventListener("valueChanged.mdb.datepicker", (e) => {
             $("[name=' . $id . ']").trigger("change");
@@ -111,7 +111,7 @@ class TemplateInputDate extends TemplateInputText
             return false;
         });');
 
-        $o_component->setId($id);
+        $_component->setId($id);
         return $return;
 
     }

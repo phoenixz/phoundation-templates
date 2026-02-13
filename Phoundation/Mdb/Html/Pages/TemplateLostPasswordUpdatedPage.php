@@ -30,12 +30,12 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $o_component = $this->getComponentObject();
+        $_component = $this->getComponentObject();
 
         // Render the entire page
         $this->render = ' <header>
                               <section class="text-center text-md-start">
-                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($o_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
+                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
                                   </div>
                               </section>
                           </header>
@@ -46,17 +46,17 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                           <div class="card shadow-4">
                                               <div class="card-body p-4">
                                                   <div class="sign-in text-center h1"> 
-                                                      <img src="' . Url::new($o_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $o_component->getText(tr('Medinet Mobile')) . '" width="310">
+                                                      <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
                                                   </div>
                                                   <hr>
-                                                  <p class="login-box-msg text-center">' . $o_component->getText(tr('All done! You can now continue to your dashboard or continue to the sign-in page...')) . '</p>
+                                                  <p class="login-box-msg text-center">' . $_component->getText(tr('All done! You can now continue to your dashboard or continue to the sign-in page...')) . '</p>
                                                   <hr>  
                                                   <div class="row mb-4">
                                                       <div class="col-md-12 d-flex justify-content-center">
-                                                          ' . Anchor::new(Url::new($o_component->getUrl('sign-in', default: 'index')))
+                                                          ' . Anchor::new(Url::new($_component->getUrl('sign-in', default: 'index')))
                                                                     ->setClass('btn btn-block btn-primary')
                                                                     ->addData('', 'mdb-ripple-init')
-                                                                    ->setContent($o_component->getText('Go to dashboard')). '                                                            
+                                                                    ->setContent($_component->getText('Go to dashboard')). '                                                            
                                                       </div>
                                                   </div>
                                                   <div class="row mb-4">
@@ -64,8 +64,8 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                                           ' . Anchor::new()
                                                                     ->setClass('btn btn-block btn-outline-primary')
                                                                     ->addData('', 'mdb-ripple-init')
-                                                                    ->setContent(Url::new($o_component->getUrl('sign-out', default: 'sign-out')))
-                                                                    ->setContent($o_component->getText('Go back to sign-in page')). '
+                                                                    ->setContent(Url::new($_component->getUrl('sign-out', default: 'sign-out')))
+                                                                    ->setContent($_component->getText('Go back to sign-in page')). '
                                                       </div>
                                                 </div>
                                               </div>
@@ -89,11 +89,11 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
 //                                        <div class="card-body">
 //                                            <p class="login-box-msg">' . tr('All done! You can now continue to your dashboard or continue to the sign-in page...') . '</p>
 //
-//                                            <form action="' . Url::new($o_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.form', Url::newCurrent()->getSource())))->makeWww() . '" method="post">
+//                                            <form action="' . Url::new($_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.form', Url::newCurrent()->getSource())))->makeWww() . '" method="post">
 //                                                ' . Csrf::getHiddenElement() . '
 //                                                <div class="row mb-3">
 //                                                    <div class="col-12">
-//                                                        <a href="' . Url::new($o_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.index', 'index')))->makeWww() . '" class="btn btn-primary btn-block">' . tr('Go to dashboard') . '</a>
+//                                                        <a href="' . Url::new($_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.index', 'index')))->makeWww() . '" class="btn btn-primary btn-block">' . tr('Go to dashboard') . '</a>
 //                                                    </div>
 //                                                </div>
 //                                                <div class="row mb-3">

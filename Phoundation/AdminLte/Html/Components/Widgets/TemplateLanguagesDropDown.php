@@ -30,9 +30,9 @@ class TemplateLanguagesDropDown extends TemplateRenderer
     /**
      * LanguagesDropDown class constructor
      */
-    public function __construct(LanguagesDropDown $o_component)
+    public function __construct(LanguagesDropDown $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -43,11 +43,11 @@ class TemplateLanguagesDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getSettingsUrl()) {
+        if (!$this->_component->getSettingsUrl()) {
             throw new OutOfBoundsException(tr('No settings page URL specified'));
         }
 
-        $languages = $this->o_component->getLanguages();
+        $languages = $this->_component->getLanguages();
         $count     = $languages?->getCount();
 
         $this->render =     Anchor::new('#')->setClass('nav-link')->addData('dropdown', 'toggle')->setContent('<i style="color:red;">&#x1F1E8;&#x1F1E6;</i>') .
@@ -64,7 +64,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                     break;
                 }
 
-                $this->render .= Anchor::new(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl()))
+                $this->render .= Anchor::new(str_replace(':ID', $language->getId(), $this->_component->getLanguagesUrl()))
                                        ->setClass('dropdown-item')
                                        ->setContent(($language->getIcon() ? '<i class="text-' . Html::safe($language->getMode()->value) . ' fas fa-' . Html::safe($language->getIcon()) . ' mr-2"></i> ' : null) . Strings::truncate($language->getTitle(), 24) . '<span class="float-right text-muted text-sm"> ' . Html::safe($language->getCreatedOnObject()->getAge()) . '</span>') .
                                  '<div class="dropdown-divider"></div>';
@@ -75,7 +75,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                                     <div class="dropdown-divider"></div>';
         }
 
-        $this->render .= '          ' . Anchor::new($this->o_component->getSettingsUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('Language settings')) . '
+        $this->render .= '          ' . Anchor::new($this->_component->getSettingsUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('Language settings')) . '
                                 </div>';
 
         return parent::render();

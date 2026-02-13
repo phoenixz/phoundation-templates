@@ -28,9 +28,9 @@ class TemplateLanguagesDropDown extends TemplateRenderer
     /**
      * LanguagesDropDown class constructor
      */
-    public function __construct(LanguagesDropDown $o_component)
+    public function __construct(LanguagesDropDown $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -41,11 +41,11 @@ class TemplateLanguagesDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getSettingsUrl()) {
+        if (!$this->_component->getSettingsUrl()) {
             throw new OutOfBoundsException(tr('No settings page URL specified'));
         }
 
-        $languages = $this->o_component->getLanguages();
+        $languages = $this->_component->getLanguages();
         $count     = $languages?->getCount();
 
         $this->render = '   <span data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
@@ -72,7 +72,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
                 }
 
                 $this->render .= '<li>
-                                    ' . Anchor::new(str_replace(':ID', $language->getId(), $this->o_component->getLanguagesUrl()))
+                                    ' . Anchor::new(str_replace(':ID', $language->getId(), $this->_component->getLanguagesUrl()))
                                               ->setClass('dropdown-item')
                                               ->setContent('<i class="flag-' . $language->getFlagName() . ' flag"></i>' . $language->getName()) . '
                                   </li>';
@@ -88,7 +88,7 @@ class TemplateLanguagesDropDown extends TemplateRenderer
         }
 
         $this->render .= '        <li>
-                                    ' . Anchor::new($this->o_component->getSettingsUrl())
+                                    ' . Anchor::new($this->_component->getSettingsUrl())
                                               ->setClass('dropdown-item dropdown-footer')
                                               ->setContent(tr('Language settings')) . ' 
                                   </li>

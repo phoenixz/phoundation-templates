@@ -27,9 +27,9 @@ class TemplateToast extends TemplateRenderer
     /**
      * Breadcrumbs class constructor
      */
-    public function __construct(ToastInterface $o_component)
+    public function __construct(ToastInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -40,19 +40,19 @@ class TemplateToast extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $o_message    = $this->o_component->getFlashMessageObject();
-        $position     = $this->renderPosition($o_message);
+        $_message    = $this->_component->getFlashMessageObject();
+        $position     = $this->renderPosition($_message);
         $this->render = '   var toast = document.createElement("div");
-                            toast.setAttribute("data-mdb-color", "' . $o_message->getMode()->value . '");
+                            toast.setAttribute("data-mdb-color", "' . $_message->getMode()->value . '");
                             toast.classList.add("toast", "fade");
                             toast.innerHTML = `
                                 <div class="toast-header">
-                                    ' . $o_message->getIcon() . ' <strong class="me-auto">' . $o_message->getTitle() . '</strong>
-                                    <small>' . $o_message->getSubTitle() . '</small>
+                                    ' . $_message->getIcon() . ' <strong class="me-auto">' . $_message->getTitle() . '</strong>
+                                    <small>' . $_message->getSubTitle() . '</small>
                                     <button type="button" class="btn-close" data-mdb-dismiss="toast" aria-label="Close"></button>
                                 </div>
                                 <div class="toast-body">
-                                    ' . $o_message->getMessage() . '
+                                    ' . $_message->getMessage() . '
                                 </div>
                                 `;                              
                             
@@ -61,10 +61,10 @@ class TemplateToast extends TemplateRenderer
                             var toastInstance = new mdb.Toast(toast, {
                                 stacking: true,
                                 hidden: true,
-                                width: "' . $o_message->getWidth() . 'px",
+                                width: "' . $_message->getWidth() . 'px",
                                 position: "' . $position . '",             
-                                autohide: ' . Strings::fromBoolean((bool) $o_message->getAutoClose()) . '
-                                ' . ($o_message->getAutoClose() ? ', delay: ' . $o_message->getAutoClose() : null) . '                                
+                                autohide: ' . Strings::fromBoolean((bool) $_message->getAutoClose()) . '
+                                ' . ($_message->getAutoClose() ? ', delay: ' . $_message->getAutoClose() : null) . '                                
                             });
                             
                             toastInstance.show();';
@@ -76,21 +76,21 @@ class TemplateToast extends TemplateRenderer
     /**
      * Renders the Toast position on screen
      *
-     * @param FlashMessageInterface $o_message
+     * @param FlashMessageInterface $_message
      *
      * @return string|null
      */
-    protected function renderPosition(FlashMessageInterface $o_message): ?string
+    protected function renderPosition(FlashMessageInterface $_message): ?string
     {
-        if ($o_message->getTop()) {
-            if ($o_message->getLeft()) {
+        if ($_message->getTop()) {
+            if ($_message->getLeft()) {
                 return 'top-left';
             }
 
             return 'top-right';
         }
 
-        if ($o_message->getLeft()) {
+        if ($_message->getLeft()) {
             return 'bottom-left';
         }
 

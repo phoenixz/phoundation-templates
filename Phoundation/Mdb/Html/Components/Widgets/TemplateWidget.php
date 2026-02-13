@@ -25,8 +25,8 @@ class TemplateWidget extends TemplateRenderer
     /**
      * Widget class constructor
      */
-    public function __construct(Widget $o_component)
+    public function __construct(Widget $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

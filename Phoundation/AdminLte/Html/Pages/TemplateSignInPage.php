@@ -34,22 +34,22 @@ class TemplateSignInPage extends TemplateRenderer
         Response::setPageTitle(tr('Please sign in'));
         Response::setHeaderTitle(tr('Please sign in'));
 
-        $o_component = $this->getComponentObject();
-        $get         = $o_component->getGetData();
+        $_component = $this->getComponentObject();
+        $get         = $_component->getGetData();
 
-        $this->render = '   <body class="hold-transition login-page" style="background: url(' . $o_component->getUrl('image-background') . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
+        $this->render = '   <body class="hold-transition login-page" style="background: url(' . $_component->getUrl('image-background') . '); background-position: center; background-repeat: no-repeat; background-size: cover; !important;">
                                 <div class="login-box">
                                   <!-- /.login-logo -->
                                   <div class="card card-outline card-info">
                                     <div class="card-header text-center">
-                                        ' . $o_component->getSection('card-header') . '                                      
+                                        ' . $_component->getSection('card-header') . '                                      
                                     </div>
                                     <div class="card-body">
-                                      <p class="login-box-msg">' . $o_component->getText(tr('Please sign in to start your session')) . '</p>
+                                      <p class="login-box-msg">' . $_component->getText(tr('Please sign in to start your session')) . '</p>
                                       <form action="' . Url::newCurrent() . '" method="post">
                                             ' . Csrf::getHiddenElement();
 
-                                            if ($o_component->getEnabled('email')) {
+                                            if ($_component->getEnabled('email')) {
                                                 $this->render .= '  <div class="input-group mb-3">
                                                                         <input type="email" name="email" id="email" class="form-control" placeholder="' . tr('Email address') . '"' . (isset($get['email']) ? 'value="' . $get['email'] . '"' : '') . '>
                                                                         <div class="input-group-append">
@@ -86,13 +86,13 @@ class TemplateSignInPage extends TemplateRenderer
         $this->render .= '            </form>';
 
 
-        if ($o_component->getEnabled('facebook')) {
+        if ($_component->getEnabled('facebook')) {
             $html =                   Anchor::new('#')
                                             ->setClass('btn btn-block btn-primary')
                                             ->setContent('<i class="fab fa-facebook mr-2"></i>' . tr('Sign in using Facebook'));
         }
 
-        if ($o_component->getEnabled('google')) {
+        if ($_component->getEnabled('google')) {
             $html =                   Anchor::new('#')
                                             ->setClass('btn btn-block btn-primary')
                                             ->setContent('<i class="fab fa-google-plus mr-2"></i>' . tr('Sign in using Google'));
@@ -104,13 +104,13 @@ class TemplateSignInPage extends TemplateRenderer
                                      </div>';
         }
 
-        if ($o_component->getEnabled('lost-password')) {
+        if ($_component->getEnabled('lost-password')) {
             $this->render .= '        <p class="mb-1">
-                                          ' . $o_component->getSection('lost-password') . '                                          
+                                          ' . $_component->getSection('lost-password') . '                                          
                                       </p>';
         }
 
-        if ($o_component->getEnabled('register')) {
+        if ($_component->getEnabled('register')) {
             $this->render .= '        <p class="mb-0">
                                           ' . Anchor::new(Url::new('/sign-up.html')->makeWww()->addRedirect(array_get_safe($get, 'redirect'))->addQuery(array_get_safe($get, 'email'), 'email'))
                                                     ->setContent(tr('text-center'))
@@ -119,7 +119,7 @@ class TemplateSignInPage extends TemplateRenderer
                                       </p>';
         }
 
-        if ($o_component->getEnabled('copyright')) {
+        if ($_component->getEnabled('copyright')) {
             $this->render .= '          <div class="login-footer text-center">
                                             ' . Project::getCopyrightString(true) . '
                                         </div>

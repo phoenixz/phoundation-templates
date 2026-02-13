@@ -50,7 +50,7 @@ class TemplateMfaVerifyPage extends TemplateRenderer
         $qr          = new QRServerProvider();
         $tfa         = new TwoFactorAuth(qrcodeprovider: $qr);
         $secret      = $tfa->createSecret();
-        $o_component = $this->getComponentObject();
+        $_component = $this->getComponentObject();
 
         // Render the page
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
@@ -79,7 +79,7 @@ class TemplateMfaVerifyPage extends TemplateRenderer
                                     ->addData('', 'mdb-ripple-init')
                                     ->setContent(tr('Sign out'));
 
-        if ($o_component->getEnabled('copyright')) {
+        if ($_component->getEnabled('copyright')) {
             $render .= '  <div class="text-center">
                               ' . Project::getCopyrightString(true) . '  
                           </div>';

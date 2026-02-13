@@ -31,9 +31,9 @@ class TemplateNotificationsDropDown extends TemplateRenderer
     /**
      * NotificationsDropDown class constructor
      */
-    public function __construct(NotificationsDropDown $o_component)
+    public function __construct(NotificationsDropDown $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -44,22 +44,22 @@ class TemplateNotificationsDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getAllNotificationsUrl()) {
+        if (!$this->_component->getAllNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No all notifications page URL specified'));
         }
 
-        if (!$this->o_component->getNotificationsUrl()) {
+        if (!$this->_component->getNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No notifications page URL specified'));
         }
 
-        $o_notifications = $this->o_component->getNotifications();
+        $_notifications = $this->_component->getNotifications();
 
-        return cache('html')->getOrGenerate(static::class . '-' . $o_notifications->getCacheKey(), function () use ($o_notifications) {
-            if ($o_notifications) {
-                $o_notifications->autoUpdate();
+        return cache('html')->getOrGenerate(static::class . '-' . $_notifications->getCacheKey(), function () use ($_notifications) {
+            if ($_notifications) {
+                $_notifications->autoUpdate();
 
-                $count = $o_notifications->getCount();
-                $mode  = $o_notifications->getMostImportantMode();
+                $count = $_notifications->getCount();
+                $mode  = $_notifications->getMostImportantMode();
                 $mode  = strtolower($mode);
                 $mode  = match ($mode) {
                     // With HTML, "notice" and "information" are known as "info"
@@ -81,20 +81,20 @@ class TemplateNotificationsDropDown extends TemplateRenderer
             if ($count) {
                 $current = 0;
 
-                foreach ($o_notifications as $o_notification) {
+                foreach ($_notifications as $_notification) {
                     if (++$current > 12) {
                         break;
                     }
 
-                    $this->render .= Anchor::new(str_replace(':ID', (string) $o_notification->getId(), (string) $this->o_component->getNotificationsUrl()))
+                    $this->render .= Anchor::new(str_replace(':ID', (string) $_notification->getId(), (string) $this->_component->getNotificationsUrl()))
                                            ->setClass('dropdown-item notification open-modal')
-                                           ->addData($o_notification->getId(), 'id')
-                                           ->setContent(($o_notification->getIcon() ? '<i class="text-' . Html::safe($o_notification->getMode()->value) . ' fas fa-' . Html::safe($o_notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($o_notification->getTitle(), 24)) . ' <span class="float-right text-muted text-sm"> ' . Html::safe($o_notification->getCreatedOnObject()->getAge()) . '</span>') . '                                    
+                                           ->addData($_notification->getId(), 'id')
+                                           ->setContent(($_notification->getIcon() ? '<i class="text-' . Html::safe($_notification->getMode()->value) . ' fas fa-' . Html::safe($_notification->getIcon()) . ' mr-2"></i> ' : null) . Html::safe(Strings::truncate($_notification->getTitle(), 24)) . ' <span class="float-right text-muted text-sm"> ' . Html::safe($_notification->getCreatedOnObject()->getAge()) . '</span>') . '                                    
                                   <div class="dropdown-divider"></div>';
                 }
             }
 
-            $this->render .=      Anchor::new($this->o_component->getAllNotificationsUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('See all unread notifications')) . '
+            $this->render .=      Anchor::new($this->_component->getAllNotificationsUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('See all unread notifications')) . '
                                 </div>';
 
             return parent::render() . NotificationModal::new()->render();

@@ -25,8 +25,8 @@ class TemplateInputButton extends TemplateRenderer
     /**
      * Button class constructor
      */
-    public function __construct(InputButton $o_component)
+    public function __construct(InputButton $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

@@ -25,16 +25,16 @@ class TemplateInputTime extends TemplateInputText
     /**
      * InputTime class constructor
      */
-    public function __construct(InputTime $o_component)
+    public function __construct(InputTime $_component)
     {
-        $o_component->addClasses('form-control');
-        $o_component->setInputType(EnumInputType::text);
-        $o_component->getOuterDivObject()
+        $_component->addClasses('form-control');
+        $_component->setInputType(EnumInputType::text);
+        $_component->getOuterDivObject()
                     ->addClasses('form-outline timepicker')
                     ->getAttributesObject()
                     ->add('', 'data-mdb-timepicker-init')
                     ->add('', 'data-mdb-input-init');
 
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

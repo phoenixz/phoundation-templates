@@ -25,9 +25,9 @@ class TemplateA extends TemplateRenderer
     /**
      * Icons class constructor
      */
-    public function __construct(Anchor $o_component)
+    public function __construct(Anchor $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,7 +39,7 @@ class TemplateA extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->o_component->addClasses('nav-link');
+        $this->_component->addClasses('nav-link');
         return parent::render();
     }
 }

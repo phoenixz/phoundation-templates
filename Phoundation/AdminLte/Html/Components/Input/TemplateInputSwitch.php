@@ -25,11 +25,11 @@ class TemplateInputSwitch extends TemplateInputCheckbox
     /**
      * TemplateInputRadio class constructor
      */
-    public function __construct(InputSwitch $o_component)
+    public function __construct(InputSwitch $_component)
     {
 throw new UnderConstructionException('PLEASE IMPLEMENT \ADMINLTE\TEMPLATEINPUTSWITCH FIRST');
-        parent::__construct($o_component);
-        $o_component->removeClass('form-control')->addClass('form-check-input');
+        parent::__construct($_component);
+        $_component->removeClass('form-control')->addClass('form-check-input');
     }
 
 

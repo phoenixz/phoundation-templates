@@ -25,9 +25,9 @@ class TemplateDropdownButton extends TemplateButtons
     /**
      * Buttons class constructor
      */
-    public function __construct(DropDownButton $o_component)
+    public function __construct(DropDownButton $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -42,21 +42,21 @@ class TemplateDropdownButton extends TemplateButtons
             $render        = [];
             $this->render  = '<div class="dropdown">' .
                                  Button::new()
-                                       ->setWrapping($this->o_component->getWrapping())
-                                       ->setOutlined($this->o_component->getOutlined())
-                                       ->setRounded($this->o_component->getRounded())
-                                       ->setOutlined($this->o_component->getOutlined())
-                                       ->setContent($this->o_component->getContent(), false)
-                                       ->addClass($this->o_component->getClass())
-                                       ->setValue($this->o_component->getValue())
-                                       ->setFloatRight($this->o_component->getFloatRight())
-                                       ->setMode($this->o_component->getMode())
-                                       ->setName($this->o_component->getName())
+                                       ->setWrapping($this->_component->getWrapping())
+                                       ->setOutlined($this->_component->getOutlined())
+                                       ->setRounded($this->_component->getRounded())
+                                       ->setOutlined($this->_component->getOutlined())
+                                       ->setContent($this->_component->getContent(), false)
+                                       ->addClass($this->_component->getClass())
+                                       ->setValue($this->_component->getValue())
+                                       ->setFloatRight($this->_component->getFloatRight())
+                                       ->setMode($this->_component->getMode())
+                                       ->setName($this->_component->getName())
                                        ->addClasses(['dropdown-toggle'])
                                        ->addData('', 'mdb-dropdown-init') .
                                  '<ul class="dropdown-menu no-min-width" aria-labelledby="dropdownMenuButton">';
 
-            foreach ($this->o_component->getSource() as $button) {
+            foreach ($this->_component->getSource() as $button) {
                 $render[] =      '    <li>' . $button . '</li>';
             }
 

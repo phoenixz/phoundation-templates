@@ -27,9 +27,9 @@ class TemplateSignInForm extends TemplateRenderer
     /**
      * SignInForm class constructor
      */
-    public function __construct(SignInForm $o_component)
+    public function __construct(SignInForm $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -64,7 +64,7 @@ class TemplateSignInForm extends TemplateRenderer
                         
                             <div class="col">
                               <!-- Simple link -->
-                              ' . Anchor::new($this->o_component->getForgotPasswordUrl())->setContent(tr('Forgot password?')) . '
+                              ' . Anchor::new($this->_component->getForgotPasswordUrl())->setContent(tr('Forgot password?')) . '
                             </div>
                           </div>
                         
@@ -73,7 +73,7 @@ class TemplateSignInForm extends TemplateRenderer
                         
                           <!-- Register buttons -->
                           <div class="text-center">
-                            <p>' . tr('Not a member?') . Anchor::new($this->o_component->getRegisterUrl())->setContent(tr('Register')) . '</p>
+                            <p>' . tr('Not a member?') . Anchor::new($this->_component->getRegisterUrl())->setContent(tr('Register')) . '</p>
                             <p>' . tr('or sign up with:') . '</p>
                             <button type="button" class="btn btn-primary btn-floating mx-1">
                               <i class="fab fa-facebook-f"></i>

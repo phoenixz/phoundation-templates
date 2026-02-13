@@ -38,9 +38,9 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
     /**
      * FilterForm class constructor
      */
-    public function __construct(ComponentInterface $o_component)
+    public function __construct(ComponentInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -55,105 +55,105 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component) {
+        if (!$this->_component) {
             return null;
         }
 
-        $o_definition =  $this->o_component->getDefinitionObject();
-        $o_component  =  $this->o_component->getColumnComponent();
+        $_definition =  $this->_component->getDefinitionObject();
+        $_component  =  $this->_component->getColumnComponent();
         $scripts      =  '';
 
-        if (!$o_definition) {
+        if (!$_definition) {
             throw new OutOfBoundsException(tr('Cannot render form component, no definition specified'));
         }
 
-        if (!$o_definition->getRender()) {
+        if (!$_definition->getRender()) {
             // Do not render the object!
             return null;
         }
 
-        if (!$o_component) {
+        if (!$_component) {
             return null;
         }
 
         // Add marker to all labels that are obligatory
-        if (!$o_definition->getOptional() and !$o_definition->getReadOnly() and !$o_definition->getDisabled()) {
-            if ($o_definition->getContainsData()) {
-                if ($o_definition->getRender()) {
-                    if ($o_definition->getLabel()) {
-                        $o_definition->setLabel('* ' . $o_definition->getLabel());
+        if (!$_definition->getOptional() and !$_definition->getReadOnly() and !$_definition->getDisabled()) {
+            if ($_definition->getContainsData()) {
+                if ($_definition->getRender()) {
+                    if ($_definition->getLabel()) {
+                        $_definition->setLabel('* ' . $_definition->getLabel());
                     }
 
-                    if ($o_definition->getPlaceholder()) {
-                        $o_definition->setLabel('* ' . $o_definition->getPlaceholder());
+                    if ($_definition->getPlaceholder()) {
+                        $_definition->setLabel('* ' . $_definition->getPlaceholder());
                     }
                 }
             }
         }
 
         // Ensure that when d-none is added, it is only added to the div
-        $d_none = ($o_definition->getDisplay() ? '' : ' d-none');
-        $o_component->removeClass('d-none');
+        $d_none = ($_definition->getDisplay() ? '' : ' d-none');
+        $_component->removeClass('d-none');
 
-        if (is_string($o_component)) {
-            $render = $o_component;
+        if (is_string($_component)) {
+            $render = $_component;
             $group  = false;
 
         } else {
-            if ($o_component instanceof InputSelectInterface) {
-                if ($o_definition->getElement() !== EnumElement::select) {
-                    if ($o_definition->getElement() !== 'select') {
+            if ($_component instanceof InputSelectInterface) {
+                if ($_definition->getElement() !== EnumElement::select) {
+                    if ($_definition->getElement() !== 'select') {
                         Log::warning(ts('Encountered <select> component ":component" in data entry form ":data_entry" with element not set to EnumElement->select but to ":element" instead. This will cause rendering issues, forced $component->setElement(EnumElement->select)', [
-                            ':data_entry' => $o_definition->getDataEntryObject() ? get_class($o_definition->getDataEntryObject()) : 'N/A',
-                            ':component'  => $o_definition->getColumn(),
-                            ':element'    => $o_component->getElement(),
+                            ':data_entry' => $_definition->getDataEntryObject() ? get_class($_definition->getDataEntryObject()) : 'N/A',
+                            ':component'  => $_definition->getColumn(),
+                            ':element'    => $_component->getElement(),
                         ]), 3);
                     }
 
-                    $o_definition->setElement(EnumElement::select);
+                    $_definition->setElement(EnumElement::select);
                 }
             }
 
-            $group = (($o_component instanceof BeforeAfterContentInterface) and ($o_component->hasBeforeContent() or $o_component->hasAfterContent()));
+            $group = (($_component instanceof BeforeAfterContentInterface) and ($_component->hasBeforeContent() or $_component->hasAfterContent()));
 
             // TODO Fix this by generating a hasPlaceholderInterface type class Interface that is added to all controls that support placeholders. This way its one interface check to see if the method is there or not
-            if (($group or ($o_component instanceof InputDateRange) or ($o_component instanceof InputDateTimeRange)) and !($o_component instanceof InputSelectInterface) and !($o_component instanceof ButtonInterface)) {
-                $o_component->setPlaceholder($o_definition->getLabel());
-                $o_definition->setLabel(null);
+            if (($group or ($_component instanceof InputDateRange) or ($_component instanceof InputDateTimeRange)) and !($_component instanceof InputSelectInterface) and !($_component instanceof ButtonInterface)) {
+                $_component->setPlaceholder($_definition->getLabel());
+                $_definition->setLabel(null);
             }
 
-            $render = $o_component->render();
+            $render = $_component->render();
 
-            if ($o_component->hasOuterDiv()) {
+            if ($_component->hasOuterDiv()) {
                 // Get attributes and properties for the o_outer div
-                $o_outer    = $o_component->getOuterDivObject();
-                $class      = $o_outer->getClass();
-                $attributes = $o_outer->getAttributesString();
+                $_outer    = $_component->getOuterDivObject();
+                $class      = $_outer->getClass();
+                $attributes = $_outer->getAttributesString();
             }
         }
 
-        if ($o_definition->getHidden()) {
+        if ($_definition->getHidden()) {
             // Hidden elements do not display anything beyond the hidden <input>
             return $render . $scripts;
         }
 
-        switch ($o_definition->getElement()) {
+        switch ($_definition->getElement()) {
             case EnumElement::select:
                 if ($group) {
-                    $this->render .= '<div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                    $this->render .= '<div class="' . Html::safe($_definition->getSize() ? 'col-sm-' . $_definition->getSize() : 'col') . ($_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                           <div class="input-group">
                                             ' . $render . $scripts .
-               ($o_definition->hasLabel() ? ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
-                                                  ' . Html::safe($o_definition->getLabel()) . '
+               ($_definition->hasLabel() ? ' <label class="form-label select-label" for="' . Html::safe($_definition->getColumn()) . '">
+                                                  ' . Html::safe($_definition->getLabel()) . '
                                               </label>' : '') . '
                                           </div>
                                       </div>';
 
                 } else {
-                    $this->render .= '<div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                    $this->render .= '<div class="' . Html::safe($_definition->getSize() ? 'col-sm-' . $_definition->getSize() : 'col') . ($_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                         ' . $render . $scripts .
-      ($o_definition->hasLabel() ?      ' <label class="form-label select-label" for="' . Html::safe($o_definition->getColumn()) . '">
-                                              ' . Html::safe($o_definition->getLabel()) . '
+      ($_definition->hasLabel() ?      ' <label class="form-label select-label" for="' . Html::safe($_definition->getColumn()) . '">
+                                              ' . Html::safe($_definition->getLabel()) . '
                                           </label>' : '') . '
                                       </div>';
                 }
@@ -166,7 +166,7 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
             case EnumElement::input:
                 $label    = null;
                 $mdb_init = ($group ? null : ' data-mdb-input-init=""');
-                $mask     = $o_definition->getInputMask();
+                $mask     = $_definition->getInputMask();
                 $mask     = ($mask ? ' data-mdb-input-mask="' . $mask . '" data-mdb-input-mask-init' : null);
                 break;
 
@@ -175,16 +175,16 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 $mdb_init = '';
         }
 
-        switch ($o_definition->getInputType()) {
+        switch ($_definition->getInputType()) {
             case EnumInputType::auto_suggest:
-                $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $o_component->getClass()) . ' ';
-                $this->render .= '  <div id="' . $o_component->getId() . '_autosuggest_div" class="' . $class . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                $class         = ' ' . str_replace(['form-control', 'form-outline'], '', $_component->getClass()) . ' ';
+                $this->render .= '  <div id="' . $_component->getId() . '_autosuggest_div" class="' . $class . Html::safe($_definition->getSize() ? 'col-sm-' . $_definition->getSize() : 'col') . ($_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
                                         <div' . $mdb_init . ' class="' . ($group ? ' input-group' : 'form-outline') . $mask . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . '>
                                             ' . $render;
 
-                if (!$group and $o_definition->hasLabel()) {
-                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
-                                                ' . Html::safe($o_definition->getLabel()) . '
+                if (!$group and $_definition->hasLabel()) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($_definition->getColumn()) . '">
+                                                ' . Html::safe($_definition->getLabel()) . '
                                             </label>';
                 }
 
@@ -193,19 +193,19 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 break;
 
             case EnumInputType::date:
-                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
-                                        <div' . $mdb_init . ' id="' . $o_component->getId() . '" class="' . ($group ? ' form-outline input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . $mask . ' data-mdb-input-init>
+                $this->render .= '  <div class="' . Html::safe($_definition->getSize() ? 'col-sm-' . $_definition->getSize() : 'col') . ($_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                                        <div' . $mdb_init . ' id="' . $_component->getId() . '" class="' . ($group ? ' form-outline input-group' : 'form-outline') . (isset($class) ? ' ' . $class : '') . '"' . (isset($attributes) ? ' ' . $attributes : '') . $mask . ' data-mdb-input-init>
                                             ' . $render;
-                if (!$group and $o_definition->hasLabel()) {
-                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
-                                                ' . Html::safe($o_definition->getLabel()) . '
+                if (!$group and $_definition->hasLabel()) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($_definition->getColumn()) . '">
+                                                ' . Html::safe($_definition->getLabel()) . '
                                             </label>';
                 }
 
                 $this->render .= '      </div>
                                     </div>';
 
-                //            ' . $this->renderTooltip($o_definition) . '
+                //            ' . $this->renderTooltip($_definition) . '
                 break;
 
             case EnumInputType::button:
@@ -239,12 +239,12 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 // no break;
 
             case EnumInputType::undelete_button:
-                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
-                                        <div class="' . ($o_definition->getReadonly() ? 'readonly ' : null) . ($o_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
+                $this->render .= '  <div class="' . Html::safe($_definition->getSize() ? 'col-sm-' . $_definition->getSize() : 'col') . ($_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                                        <div class="' . ($_definition->getReadonly() ? 'readonly ' : null) . ($_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
                                             ' . $render;
-                if (!$group and $o_definition->hasLabel()) {
-                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
-                                                ' . Html::safe($o_definition->getLabel()) . '
+                if (!$group and $_definition->hasLabel()) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($_definition->getColumn()) . '">
+                                                ' . Html::safe($_definition->getLabel()) . '
                                             </label>';
                 }
 
@@ -254,18 +254,18 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
                 break;
 
             default:
-                $this->render .= '  <div class="' . Html::safe($o_definition->getSize() ? 'col-sm-' . $o_definition->getSize() : 'col') . ($o_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
-                                        <div' . $mdb_init . ' class="' . ($o_definition->getReadonly() ? 'readonly ' : null) . ($o_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
+                $this->render .= '  <div class="' . Html::safe($_definition->getSize() ? 'col-sm-' . $_definition->getSize() : 'col') . ($_definition->getVisible() ? '' : ' invisible') . $d_none . Request::getPageObject()?->getBottomMarginString() . '">
+                                        <div' . $mdb_init . ' class="' . ($_definition->getReadonly() ? 'readonly ' : null) . ($_definition->getDisabled() ? 'disabled ' : null) . ($group ? 'input-group ' : 'form-outline ') . (isset($class) ? $class . ' ' : '') . '"' . ($attributes ?? '') . '>
                                             ' . $render;
-                if (!$group and $o_definition->hasLabel()) {
-                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($o_definition->getColumn()) . '">
-                                                ' . Html::safe($o_definition->getLabel()) . '
+                if (!$group and $_definition->hasLabel()) {
+                    $this->render .= '      <label class="form-label' . $label . '" for="' . Html::safe($_definition->getColumn()) . '">
+                                                ' . Html::safe($_definition->getLabel()) . '
                                             </label>';
                 }
 
                 $this->render .= '      </div>
                                     </div>';
-            //            ' . $this->renderTooltip($o_definition) . '
+            //            ' . $this->renderTooltip($_definition) . '
         };
 
         return parent::render();
@@ -275,15 +275,15 @@ class TemplateDataEntryFormColumn extends TemplateRenderer
     /**
      * Renders and returns the tooltip for the specified definition
      *
-     * @param DefinitionInterface $o_definition
+     * @param DefinitionInterface $_definition
      * @return string|null
      */
-    protected function renderTooltip(DefinitionInterface $o_definition): ?string
+    protected function renderTooltip(DefinitionInterface $_definition): ?string
     {
-        if ($o_definition->getTooltip()) {
+        if ($_definition->getTooltip()) {
             // Render and return the tooltip
             return Tooltip::new()
-                          ->setTitle($o_definition->getTooltip())
+                          ->setTitle($_definition->getTooltip())
                           ->setUseIcon(true)
                           ->render();
         }

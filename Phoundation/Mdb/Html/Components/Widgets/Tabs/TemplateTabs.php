@@ -28,9 +28,9 @@ class TemplateTabs extends TemplateRenderer
     /**
      * Card class constructor
      */
-    public function __construct(TabsInterface $o_component)
+    public function __construct(TabsInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -40,29 +40,29 @@ class TemplateTabs extends TemplateRenderer
     public function render(): ?string
     {
         $buttons = null;
-        $o_tabs = $this->o_component;
+        $_tabs = $this->_component;
 
         if (
-            $o_tabs->getButtonsObject()
+            $_tabs->getButtonsObject()
                    ->getCount()
         ) {
             $buttons = '<div class="modal-footer justify-content-between buttons">
-                            ' . $o_tabs->getButtonsObject()
+                            ' . $_tabs->getButtonsObject()
                                        ->render() . '
                         </div>';
         }
 
-        switch ($o_tabs->getOrientation()) {
+        switch ($_tabs->getOrientation()) {
             case EnumOrientation::top:
-                $this->render = $this->renderTop($o_tabs, $buttons);
+                $this->render = $this->renderTop($_tabs, $buttons);
                 break;
 
             case EnumOrientation::left:
-                $this->render = $this->renderLeft($o_tabs, $buttons);
+                $this->render = $this->renderLeft($_tabs, $buttons);
                 break;
 
             case EnumOrientation::right:
-                $this->render = $this->renderRight($o_tabs, $buttons);
+                $this->render = $this->renderRight($_tabs, $buttons);
                 break;
 
             case EnumOrientation::bottom:
@@ -76,21 +76,21 @@ class TemplateTabs extends TemplateRenderer
     /**
      * Renders the tabs with orientation top
      *
-     * @param TabsInterface $o_tabs
+     * @param TabsInterface $_tabs
      * @param string        $buttons
      *
      * @return string|null
      */
-    protected function renderTop(TabsInterface $o_tabs, string $buttons): ?string
+    protected function renderTop(TabsInterface $_tabs, string $buttons): ?string
     {
-        $before = $this->renderTopBeforeContent($o_tabs->getBeforeContent());
-        $after  = $this->renderTopAfterContent($o_tabs->getAfterContent());
+        $before = $this->renderTopBeforeContent($_tabs->getBeforeContent());
+        $after  = $this->renderTopAfterContent($_tabs->getAfterContent());
 
         $render = '      <div class="row">
                              <ul class="nav nav-tabs mb-3" role="tablist">' . $before;
 
         // Render the tabs
-        $active_tab = $o_tabs->getActiveTab();
+        $active_tab = $_tabs->getActiveTab();
 
         if (empty($active_tab)) {
             $first_tab_active = true;
@@ -101,7 +101,7 @@ class TemplateTabs extends TemplateRenderer
             $active = false;
         }
 
-        foreach ($o_tabs as $tab) {
+        foreach ($_tabs as $tab) {
             if (!$first_tab_active) {
                 $name = $tab->getName();
 
@@ -128,7 +128,7 @@ class TemplateTabs extends TemplateRenderer
         $render .= $after . '</ul>
                              <div class="tab-content" id="ex-with-icons-content">';
 
-        $active_tab = $o_tabs->getActiveTab();
+        $active_tab = $_tabs->getActiveTab();
 
         if (empty($active_tab)) {
             $first_tab_active = true;
@@ -139,7 +139,7 @@ class TemplateTabs extends TemplateRenderer
             $active = false;
         }
 
-        foreach ($o_tabs as $tab) {
+        foreach ($_tabs as $tab) {
             if (!$first_tab_active) {
                 $name = $tab->getName();
 
@@ -234,15 +234,15 @@ class TemplateTabs extends TemplateRenderer
     /**
      * Returns the tabs with orientation left
      *
-     * @param TabsInterface $o_tabs
+     * @param TabsInterface $_tabs
      * @param string        $buttons
      *
      * @return string|null
      */
-    protected function renderLeft(TabsInterface $o_tabs, string $buttons): ?string
+    protected function renderLeft(TabsInterface $_tabs, string $buttons): ?string
     {
 throw new UnderConstructionException(tr('left orientation for tabs with MDB template requires an upgrade to support before and after content!'));
-        $content_display_size = $o_tabs->getContentDisplaySize()->value;
+        $content_display_size = $_tabs->getContentDisplaySize()->value;
         $tab_display_size     = 12 - $content_display_size;
 
         $render = '  <div class="row w-100">
@@ -250,7 +250,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
                              <div class="nav flex-column nav-tabs text-center" id="v-tabs-tab" role="tablist" aria-orientation="vertical">';
 
         // Render the tabs
-        $active_tab = $o_tabs->getActiveTab();
+        $active_tab = $_tabs->getActiveTab();
 
         if (empty($active_tab)) {
             $first_tab_active = true;
@@ -261,7 +261,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
             $active           = false;
         }
 
-        foreach ($o_tabs as $tab) {
+        foreach ($_tabs as $tab) {
             if (!$first_tab_active) {
                 $name = $tab->getName();
 
@@ -288,7 +288,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
                          <div class="col-' . $content_display_size . ' col-sm-' . $content_display_size . '">
                              <div class="tab-content" id="v-tabs-tabContent">';
 
-        $active_tab = $o_tabs->getActiveTab();
+        $active_tab = $_tabs->getActiveTab();
 
         if (empty($active_tab)) {
             $first_tab_active = true;
@@ -299,7 +299,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
             $active           = false;
         }
 
-        foreach ($o_tabs as $tab) {
+        foreach ($_tabs as $tab) {
             if (!$first_tab_active) {
                 $name = $tab->getName();
 
@@ -327,12 +327,12 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
     /**
      * Renders the Right orientation tabs
      *
-     * @param TabsInterface $o_tabs
+     * @param TabsInterface $_tabs
      * @param string        $buttons
      *
      * @return string|null
      */
-    public function renderRight(TabsInterface $o_tabs, string $buttons): ?string
+    public function renderRight(TabsInterface $_tabs, string $buttons): ?string
     {
         throw new UnderConstructionException(tr('right orientation for tabs with MDB template is still under construction!'));
 
@@ -341,7 +341,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
                              <div class="tab-content" id="vert-tabs-tabContent">';
 
         // Render the tab contents
-        $active_tab = $o_tabs->getActiveTab();
+        $active_tab = $_tabs->getActiveTab();
 
         if (empty($active_tab)) {
             $first_tab_active = true;
@@ -352,7 +352,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
             $active = false;
         }
 
-        foreach ($o_tabs as $tab) {
+        foreach ($_tabs as $tab) {
             if (!$first_tab_active) {
                 $name = $tab->getName();
 
@@ -374,7 +374,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
                              <div class="nav flex-column nav-tabs nav-tabs-right h-100" id="vert-tabs-tab" role="tablist" aria-orientation="vertical">';
 
         // Render the tabs
-        $active_tab = $o_tabs->getActiveTab();
+        $active_tab = $_tabs->getActiveTab();
 
         if (empty($active_tab)) {
             $first_tab_active = true;
@@ -385,7 +385,7 @@ throw new UnderConstructionException(tr('left orientation for tabs with MDB temp
             $active = false;
         }
 
-        foreach ($o_tabs as $tab) {
+        foreach ($_tabs as $tab) {
             if (!$first_tab_active) {
                 $name = $tab->getName();
 

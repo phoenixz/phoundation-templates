@@ -24,9 +24,9 @@ class TemplateInputSwitch extends TemplateInputCheckbox
     /**
      * InputCheckbox class constructor
      */
-    public function __construct(InputSwitch $o_component)
+    public function __construct(InputSwitch $_component)
     {
         $this->type_class = ' form-switch';
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

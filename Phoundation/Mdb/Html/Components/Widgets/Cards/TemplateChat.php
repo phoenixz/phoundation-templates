@@ -25,8 +25,8 @@ class TemplateChat extends TemplateRenderer
     /**
      * Chat class constructor
      */
-    public function __construct(Chat $o_component)
+    public function __construct(Chat $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

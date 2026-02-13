@@ -25,15 +25,15 @@ class TemplateButton extends TemplateRenderer
     /**
      * Button class constructor
      */
-    public function __construct(ButtonInterface $o_component)
+    public function __construct(ButtonInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
 
-        $o_component->setReadonly($o_component->getReadonly() or $o_component->getDisabled())
+        $_component->setReadonly($_component->getReadonly() or $_component->getDisabled())
                     ->addData('', 'mdb-ripple-init');
 
-        if ($o_component->getReadonly()) {
-            $o_component->setUrlObject(null)
+        if ($_component->getReadonly()) {
+            $_component->setUrlObject(null)
                         ->addAria('true', 'disabled')
                         ->addClass('disabled');
         }

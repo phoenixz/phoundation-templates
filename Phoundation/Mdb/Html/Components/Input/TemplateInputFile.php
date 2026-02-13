@@ -24,9 +24,9 @@ class TemplateInputFile extends TemplateInputText
     /**
      * InputFile class constructor
      */
-    public function __construct(InputFile $o_component)
+    public function __construct(InputFile $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 }

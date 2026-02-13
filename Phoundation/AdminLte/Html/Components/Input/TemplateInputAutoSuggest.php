@@ -28,10 +28,10 @@ class TemplateInputAutoSuggest extends TemplateInputText
     /**
      * InputAutoSuggest class constructor
      */
-    public function __construct(InputAutoSuggest $o_component)
+    public function __construct(InputAutoSuggest $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 
 
@@ -42,25 +42,25 @@ class TemplateInputAutoSuggest extends TemplateInputText
      */
     public function render(): ?string
     {
-        $o_component = $this->o_component;
+        $_component = $this->_component;
 
         // Auto suggest is only available when not readonly or not disabled
-        if ($o_component->getReadonly() or $o_component->getDisabled()) {
+        if ($_component->getReadonly() or $_component->getDisabled()) {
             return parent::render();
         }
 
-        if (empty($o_component->getName())) {
+        if (empty($_component->getName())) {
             throw new OutOfBoundsException(tr('No required HTML name attribute specified for auto suggest component'));
         }
 
-        if (empty($o_component->getSourceUrl())) {
+        if (empty($_component->getSourceUrl())) {
             throw new OutOfBoundsException(tr('No source URL specified for auto suggest component ":name"', [
-                ':name' => $o_component->getName(),
+                ':name' => $_component->getName(),
             ]));
         }
 
-        if ($o_component->getVariables()) {
-            $variables = $o_component->getVariables()->getSource();
+        if ($_component->getVariables()) {
+            $variables = $_component->getVariables()->getSource();
             $variables = ',' . Arrays::implodeWithKeys($variables, ',' . PHP_EOL, ':');
 
         } else {
@@ -71,15 +71,15 @@ class TemplateInputAutoSuggest extends TemplateInputText
         // TODO This should load from the correct Template library!
         Response::loadJavaScript('adminlte/plugins/jquery-ui/jquery-ui');
 
-        if ($o_component->getPropertyBoolean('add_javascript', true)) {
+        if ($_component->getPropertyBoolean('add_javascript', true)) {
             // Create JavaScript code for the component
             return Script::new()
-                         ->setContent('$(\'' . $o_component->getSelector() . '\').autocomplete({
+                         ->setContent('$(\'' . $_component->getSelector() . '\').autocomplete({
                                        source: function(request, response) {
-                                         let $selected = $(\'[name="' . $o_component->getName() . '"]\');
+                                         let $selected = $(\'[name="' . $_component->getName() . '"]\');
                          
                                          $.ajax({
-                                           url: "' . $o_component->getSourceUrl() . '",
+                                           url: "' . $_component->getSourceUrl() . '",
                                            dataType: "jsonp",
                                            data: {
                                              term: request.term
@@ -90,13 +90,13 @@ class TemplateInputAutoSuggest extends TemplateInputText
                                            }
                                          });
                                        },
-      ' . ($o_component->getWidth() ? 'open: function(event, ui) {
+      ' . ($_component->getWidth() ? 'open: function(event, ui) {
                                             $(this).autocomplete("widget").css({
-                                                width: ' . $o_component->getWidth() . '
+                                                width: ' . $_component->getWidth() . '
                                             });
                                        },' : '') . '
-                                       delay: ' . $o_component->getDelay() . ', 
-                                       minLength: ' . $o_component->getMinSuggestLength() . ',
+                                       delay: ' . $_component->getDelay() . ', 
+                                       minLength: ' . $_component->getMinSuggestLength() . ',
                                        select: function(event, ui) {
                                          console.log("Selected: " + ui.item.value + " aka " + ui.item.id);
                                        }

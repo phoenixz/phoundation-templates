@@ -30,24 +30,24 @@ class TemplateInputDateTimeLocal extends TemplateInputText
     /**
      * InputDateTimeLocal class constructor
      */
-    public function __construct(InputDateTimeLocal $o_component)
+    public function __construct(InputDateTimeLocal $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 
 
     public function render(): ?string
     {
         // Extract id from the component
-        if (!$this->o_component->getId()) {
-            $this->o_component->setId($this->o_component->getName());
+        if (!$this->_component->getId()) {
+            $this->_component->setId($this->_component->getName());
         }
 
-        $id = $this->o_component->getId();
+        $id = $this->_component->getId();
 
         if (!$id) {
-            if (!$this->o_component->getReadonly() and !$this->o_component->getDisabled()) {
+            if (!$this->_component->getReadonly() and !$this->_component->getDisabled()) {
                 throw new OutOfBoundsException(tr('Cannot render IntputDateTimeLocal object, no HTML id attribute specified'));
             }
 
@@ -55,7 +55,7 @@ class TemplateInputDateTimeLocal extends TemplateInputText
             return parent::render();
         }
 
-        $this->o_component->setInputType(EnumInputType::text)
+        $this->_component->setInputType(EnumInputType::text)
                           ->addClass('datetimepicker-input')
                           ->addData('#' . $id, 'target');
 

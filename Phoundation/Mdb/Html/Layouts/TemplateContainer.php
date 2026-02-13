@@ -26,9 +26,9 @@ class TemplateContainer extends TemplateRenderer
     /**
      * Container class constructor
      */
-    public function __construct(Container $o_component)
+    public function __construct(Container $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,6 +39,6 @@ class TemplateContainer extends TemplateRenderer
      */
     public function render(): ?string
     {
-        return '<div class="container' . ($this->o_component->getTier()->value ? '-' . Html::safe($this->o_component->getTier()->value) : null) . '">' . Html::safe($this->o_component->getContent()) . '</div>';
+        return '<div class="container' . ($this->_component->getTier()->value ? '-' . Html::safe($this->_component->getTier()->value) : null) . '">' . Html::safe($this->_component->getContent()) . '</div>';
     }
 }

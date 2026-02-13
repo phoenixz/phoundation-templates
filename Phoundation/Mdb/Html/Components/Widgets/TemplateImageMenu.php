@@ -28,9 +28,9 @@ class TemplateImageMenu extends TemplateRenderer
     /**
      * ImageMenu class constructor
      */
-    public function __construct(ImageMenu $o_component)
+    public function __construct(ImageMenu $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -41,36 +41,36 @@ class TemplateImageMenu extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getImage()) {
+        if (!$this->_component->getImage()) {
             throw new OutOfBoundsException(tr('Cannot render ImageMenu object HTML, no image specified'));
         }
 //.        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal" style=""> Launch demo modal </button>
 
-        $o_anchor     = Anchor::new(($this->o_component->getMenu() ? '#' : Html::safe($this->o_component->getUrl())))
-                              ->setClasS(($this->o_component->getMenu() ? 'dropdown-toggle ' : '') . 'd-flex align-items-center hidden-arrow')
+        $_anchor     = Anchor::new(($this->_component->getMenu() ? '#' : Html::safe($this->_component->getUrl())))
+                              ->setClasS(($this->_component->getMenu() ? 'dropdown-toggle ' : '') . 'd-flex align-items-center hidden-arrow')
                               ->setId('navbarDropdownMenuAvatar')
                               ->addData('dropdown', 'mdb-toggle')
                               ->addAria('false', 'expanded');
 
-        if ($this->o_component->getMenu()) {
-            $o_anchor->setRole('button');
+        if ($this->_component->getMenu()) {
+            $_anchor->setRole('button');
 
-            if ($this->o_component->getModalSelector()) {
-                $o_anchor->addData('modal', 'mdb-toggle')
-                         ->addData($this->o_component->getModalSelector(), 'mdb-target');
+            if ($this->_component->getModalSelector()) {
+                $_anchor->addData('modal', 'mdb-toggle')
+                         ->addData($this->_component->getModalSelector(), 'mdb-target');
             }
         }
 
         $this->render = ' <div class="dropdown image-menu">
-                            ' . $o_anchor->setContent($this->o_component->getImage()->getImgObject()
-                                                                                    ->setHeight($this->o_component->getHeight())
+                            ' . $_anchor->setContent($this->_component->getImage()->getImgObject()
+                                                                                    ->setHeight($this->_component->getHeight())
                                                                                     ->addClasses('rounded-circle')
                                                                                     ->addExtraAttributes('loading="lazy"'));
 
         $this->render .= '  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">';
 
-        if ($this->o_component->getMenu()) {
-            foreach ($this->o_component->getMenu() as $label => $url) {
+        if ($this->_component->getMenu()) {
+            foreach ($this->_component->getMenu() as $label => $url) {
                 $this->render .= '<li>
                                     ' . Anchor::new($url, $label)->setClass('dropdown-item') . '
                                   </li>';

@@ -25,10 +25,10 @@ class TemplateInputDateRange extends TemplateInputText
     /**
      * InputText class constructor
      */
-    public function __construct(InputDateRange $o_component)
+    public function __construct(InputDateRange $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 
 
@@ -39,12 +39,12 @@ class TemplateInputDateRange extends TemplateInputText
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getName()) {
+        if (!$this->_component->getName()) {
             throw new OutOfBoundsException(tr('Cannot render InputDateRange object, no HTML name attribute specified'));
         }
 
         // Ensure these two classes are always available
-        $this->o_component->addClasses(['form-control', 'float-right']);
+        $this->_component->addClasses(['form-control', 'float-right']);
 
         // TODO Move InputDateRange javascript code here
         return '    <div class="input-group">

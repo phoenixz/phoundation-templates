@@ -28,9 +28,9 @@ class TemplateMessagesDropDown extends TemplateRenderer
     /**
      * MessagesDropDown class constructor
      */
-    public function __construct(MessagesDropDown $o_component)
+    public function __construct(MessagesDropDown $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -41,12 +41,12 @@ class TemplateMessagesDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getMessagesUrl()) {
+        if (!$this->_component->getMessagesUrl()) {
             throw new OutOfBoundsException(tr('No messages page URL specified'));
         }
 
-        if ($this->o_component->getMessages()) {
-            $count = $this->o_component->getMessages()->count();
+        if ($this->_component->getMessages()) {
+            $count = $this->_component->getMessages()->count();
         } else {
             $count = 0;
         }
@@ -60,7 +60,7 @@ class TemplateMessagesDropDown extends TemplateRenderer
                                   <div class="dropdown-divider"></div>';
 
         if ($count) {
-            foreach ($this->o_component->getMessages() as $message) {
+            foreach ($this->_component->getMessages() as $message) {
                 $this->render .= Anchor::new($message->getUrl())
                                        ->addClass('dropdown-item')
                                        ->setContent('<!-- Message Start -->
@@ -80,7 +80,7 @@ class TemplateMessagesDropDown extends TemplateRenderer
             }
         }
 
-        $this->render .=          Anchor::new($this->o_component->getMessagesUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('See All Messages')) . '
+        $this->render .=          Anchor::new($this->_component->getMessagesUrl())->setClass('dropdown-item dropdown-footer')->setContent(tr('See All Messages')) . '
                                 </div>';
 
         return parent::render();

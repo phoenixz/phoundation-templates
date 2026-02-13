@@ -40,7 +40,7 @@ class TemplateMfaCreatePage extends TemplateRenderer
         Response::setPageTitle(tr('Please setup multi-factor authentication'));
         Response::setHeaderTitle(tr('Please setup multi-factor authentication'));
 
-        $o_component = $this->getComponentObject();
+        $_component = $this->getComponentObject();
         $back        = null;
 
         if (Request::isPostRequestMethod()) {
@@ -70,7 +70,7 @@ class TemplateMfaCreatePage extends TemplateRenderer
                                 ->setContent(tr('Sign out'))
                                 ->addData('', 'mdb-ripple-init');
 
-        if ($o_component->getEnabled('copyright')) {
+        if ($_component->getEnabled('copyright')) {
             $render .= '  <div class="text-center">
                                ' . Project::getCopyrightString() . '
                           </div>';

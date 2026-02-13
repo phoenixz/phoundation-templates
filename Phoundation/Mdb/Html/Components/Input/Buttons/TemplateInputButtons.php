@@ -25,9 +25,9 @@ class TemplateInputButtons extends TemplateRenderer
     /**
      * Buttons class constructor
      */
-    public function __construct(InputButtons $o_component)
+    public function __construct(InputButtons $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -40,15 +40,15 @@ class TemplateInputButtons extends TemplateRenderer
     {
         $this->render = '';
 
-        if ($this->o_component->getGroup()) {
+        if ($this->_component->getGroup()) {
             $this->render .= '<div class="btn-group" role="group" aria-label="Button group">';
         }
 
-        foreach ($this->o_component->getSource() as $button) {
+        foreach ($this->_component->getSource() as $button) {
             $this->render .= $button . ' ';
         }
 
-        if ($this->o_component->getGroup()) {
+        if ($this->_component->getGroup()) {
             $this->render .= '</div>';
         }
 

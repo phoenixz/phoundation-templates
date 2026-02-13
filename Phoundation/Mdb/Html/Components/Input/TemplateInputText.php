@@ -25,10 +25,10 @@ class TemplateInputText extends TemplateInput
     /**
      * InputText class constructor
      */
-    public function __construct(InputText $o_component)
+    public function __construct(InputText $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 
 
@@ -39,24 +39,24 @@ class TemplateInputText extends TemplateInput
      */
     public function render(): ?string
     {
-        $o_component = $this->o_component;
+        $_component = $this->_component;
 
-        if ($o_component->getClearButton()) {
-            $o_component->addClass('form-icon-trailing');
+        if ($_component->getClearButton()) {
+            $_component->addClass('form-icon-trailing');
         }
 
         $return = parent::render();
-        $icon   = $o_component->getIcon();
+        $icon   = $_component->getIcon();
 
         if ($icon) {
             // Add an icon
             $return = $icon->render() . ' ' . $return;
         }
 
-        if ($o_component->getClearButton()) {
-            $name = $o_component->getName();
+        if ($_component->getClearButton()) {
+            $name = $_component->getName();
 
-            if ($o_component->getValue()) {
+            if ($_component->getValue()) {
                 // Add a clear button
                 $return .= '<span class="trailing pe-auto clear" tabindex="0">✕</span>';
 

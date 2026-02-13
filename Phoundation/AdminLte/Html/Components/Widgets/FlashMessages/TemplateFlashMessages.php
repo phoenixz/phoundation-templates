@@ -26,9 +26,9 @@ class TemplateFlashMessages extends TemplateRenderer
     /**
      * Breadcrumbs class constructor
      */
-    public function __construct(FlashMessagesInterface $o_component)
+    public function __construct(FlashMessagesInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -41,13 +41,13 @@ class TemplateFlashMessages extends TemplateRenderer
     {
         $this->render = '';
 
-        foreach ($this->o_component as $o_message) {
-            $this->render .= $o_message->render();
+        foreach ($this->_component as $_message) {
+            $this->render .= $_message->render();
         }
 
         // Add script tags around all the flash calls
         $this->render = Script::new($this->render)
-                              ->setAttach($this->o_component->getAttachJavaScript())
+                              ->setAttach($this->_component->getAttachJavaScript())
                               ->render();
 
         return parent::render();

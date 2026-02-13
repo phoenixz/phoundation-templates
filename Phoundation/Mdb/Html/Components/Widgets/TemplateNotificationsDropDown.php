@@ -30,9 +30,9 @@ class TemplateNotificationsDropDown extends TemplateRenderer
     /**
      * NotificationsDropDown class constructor
      */
-    public function __construct(NotificationsDropDown $o_component)
+    public function __construct(NotificationsDropDown $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -43,15 +43,15 @@ class TemplateNotificationsDropDown extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (!$this->o_component->getAllNotificationsUrl()) {
+        if (!$this->_component->getAllNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No all notifications page URL specified'));
         }
 
-        if (!$this->o_component->getNotificationsUrl()) {
+        if (!$this->_component->getNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No notifications page URL specified'));
         }
 
-        $notifications = $this->o_component->getNotifications();
+        $notifications = $this->_component->getNotifications();
 
         if ($notifications) {
             $notifications->autoUpdate();
@@ -91,7 +91,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
                 }
 
                 $this->render .= '<li>
-                                    ' . Anchor::new(str_replace(':ID', (string)$notification->getId(), (string)$this->o_component->getNotificationsUrl()))
+                                    ' . Anchor::new(str_replace(':ID', (string)$notification->getId(), (string)$this->_component->getNotificationsUrl()))
                                               ->setClass('dropdown-item')
                                               ->setContent($notification->getIcon()?->render() . Html::safe(Strings::truncate($notification->getTitle(), 24))). '
                                   </li>';
@@ -106,7 +106,7 @@ class TemplateNotificationsDropDown extends TemplateRenderer
         }
 
         $this->render .= '        <li>
-                                    ' . Anchor::new($this->o_component->getAllNotificationsUrl())
+                                    ' . Anchor::new($this->_component->getAllNotificationsUrl())
                                               ->setClass('dropdown-item dropdown-footer')
                                               ->setContent(tr('See all unread notifications')) . '
                                   </li>

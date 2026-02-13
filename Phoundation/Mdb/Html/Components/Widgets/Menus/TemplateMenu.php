@@ -27,9 +27,9 @@ class TemplateMenu extends TemplateRenderer
     /**
      * Menu class constructor
      */
-    public function __construct(MenuInterface $o_component)
+    public function __construct(MenuInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -41,7 +41,7 @@ class TemplateMenu extends TemplateRenderer
      */
     public function render(): ?string
     {
-        return $this->renderMenu($this->o_component->getSource(), 0);
+        return $this->renderMenu($this->_component->getSource(), 0);
     }
 
 

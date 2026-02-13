@@ -25,9 +25,9 @@ class TemplateModal extends TemplateRenderer
     /**
      * Modal class constructor
      */
-    public function __construct(Modal $o_component)
+    public function __construct(Modal $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,7 +39,7 @@ class TemplateModal extends TemplateRenderer
     public function render(): ?string
     {
         // Get the render component to use it directly
-        $component = $this->o_component;
+        $component = $this->_component;
 
 //        $form   = $component->getForm()->render();
 //

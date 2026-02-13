@@ -31,9 +31,9 @@ class TemplateBreadcrumbs extends TemplateRenderer
     /**
      * Breadcrumbs class constructor
      */
-    public function __construct(BreadcrumbsInterface $o_component)
+    public function __construct(BreadcrumbsInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -46,8 +46,8 @@ class TemplateBreadcrumbs extends TemplateRenderer
     {
         $this->render = ' <ol class="breadcrumb float-sm-right">';
 
-        if ($this->o_component->getSource()) {
-            foreach ($this->o_component->getSource() as $url => $label) {
+        if ($this->_component->getSource()) {
+            foreach ($this->_component->getSource() as $url => $label) {
                 // Limit label size for normal use
                 if ($label instanceof AnchorInterface) {
                     $label->setContent(Strings::capitalize(Strings::truncate($label->getContent(), 48)));

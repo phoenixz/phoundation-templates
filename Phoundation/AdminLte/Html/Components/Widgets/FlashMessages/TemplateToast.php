@@ -25,9 +25,9 @@ class TemplateToast extends TemplateRenderer
     /**
      * Breadcrumbs class constructor
      */
-    public function __construct(ToastInterface $o_component)
+    public function __construct(ToastInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -38,7 +38,7 @@ class TemplateToast extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = '$(document).Toasts("create", ' . $this->o_component->renderJson() . ');';
+        $this->render = '$(document).Toasts("create", ' . $this->_component->renderJson() . ');';
 
         return parent::render();
     }

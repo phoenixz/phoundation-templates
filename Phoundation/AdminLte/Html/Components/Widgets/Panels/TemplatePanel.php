@@ -25,8 +25,8 @@ class TemplatePanel extends TemplateRenderer
     /**
      * Panel class constructor
      */
-    public function __construct(Panel $o_component)
+    public function __construct(Panel $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

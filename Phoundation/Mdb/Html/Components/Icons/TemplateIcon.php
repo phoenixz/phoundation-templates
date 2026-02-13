@@ -25,9 +25,9 @@ class TemplateIcon extends TemplateRenderer
     /**
      * Icons class constructor
      */
-    public function __construct(Icon $o_component)
+    public function __construct(Icon $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 

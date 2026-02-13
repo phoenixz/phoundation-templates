@@ -31,9 +31,9 @@ class TemplateSignInModal extends TemplateRenderer
     /**
      * SignInModal class constructor
      */
-    public function __construct(SignInModal $o_component)
+    public function __construct(SignInModal $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -45,7 +45,7 @@ class TemplateSignInModal extends TemplateRenderer
     public function render(): ?string
     {
         // Build the form
-        $form = $this->o_component->getFormObject()->render();
+        $form = $this->_component->getFormObject()->render();
 
         // Build the layout
         $layout = Grid::new()
@@ -55,7 +55,7 @@ class TemplateSignInModal extends TemplateRenderer
                                           ->addGridColumn(GridColumn::new()->setSize(EnumDisplaySize::three)));
 
         // Set defaults
-        $this->o_component
+        $this->_component
              ->setId('signinModal')
              ->setSize('lg')
              ->setTitle(tr('Sign in'))
@@ -63,8 +63,8 @@ class TemplateSignInModal extends TemplateRenderer
 
         // Render the sign in modal.
         // TemplateSignInModal objects handle caching themselves to avoid Script class output not being cached
-        return cache('html')->getOrGenerate(static::class . '-' . $this->o_component->getCacheKey(), function () {
-            $this->o_component->setUseCache(false);
+        return cache('html')->getOrGenerate(static::class . '-' . $this->_component->getCacheKey(), function () {
+            $this->_component->setUseCache(false);
 
             return parent::render() . Script::new()
                                             ->setContent('

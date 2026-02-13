@@ -26,9 +26,9 @@ class TemplateFlashMessage extends TemplateRenderer
     /**
      * Breadcrumbs class constructor
      */
-    public function __construct(FlashMessageInterface $o_component)
+    public function __construct(FlashMessageInterface $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,8 +39,8 @@ class TemplateFlashMessage extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = match ($this->o_component->getFlashHandler()) {
-            'toast' => Toast::new($this->o_component)->render(),
+        $this->render = match ($this->_component->getFlashHandler()) {
+            'toast' => Toast::new($this->_component)->render(),
         };
 
         return parent::render();

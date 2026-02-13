@@ -31,7 +31,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $o_component  = $this->getComponentObject();
+        $_component  = $this->getComponentObject();
         $this->render = '   <body class="hold-transition login-page" style="background: url(' .  Url::new('backgrounds/password.jpg')->makeImg() . '); background-position: center; background-repeat: no-repeat; background-size: cover;">
                                 <div class="login-box">
                                     <!-- /.login-logo -->
@@ -42,7 +42,7 @@ class TemplateForcePasswordUpdatePage extends TemplateRenderer
                                                     ->setClass('h1'). '
                                     </div>
                                     <div class="card-body">
-                                        <p class="login-box-msg">' .  $o_component->getText(tr('Please update your account to have a new and secure password password before continuing...')) . '</p>
+                                        <p class="login-box-msg">' .  $_component->getText(tr('Please update your account to have a new and secure password password before continuing...')) . '</p>
                                         <p class="login-box-msg">' .  tr('Please ensure that your password has at least 10 characters, is secure, and is known only to you.') . '</p>
 
                                         <form action="' .  Url::newCurrent() . '" method="post">

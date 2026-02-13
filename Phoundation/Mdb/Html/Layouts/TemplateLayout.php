@@ -25,8 +25,8 @@ abstract class TemplateLayout extends TemplateRenderer
     /**
      * Layout class constructor
      */
-    public function __construct(Layout $o_component)
+    public function __construct(Layout $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 }

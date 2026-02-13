@@ -32,13 +32,13 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
         // This page will build its own body
         Response::setRenderMainWrapper(false);
 
-        $o_component = $this->getComponentObject();
-        $o_user      = Session::getUserObject();
+        $_component = $this->getComponentObject();
+        $_user      = Session::getUserObject();
 
         // Render the entire page
         $this->render = ' <header>
                               <section class="text-center text-md-start">
-                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($o_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
+                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
                                   </div>
                               </section>
                           </header>
@@ -48,37 +48,37 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                       <div class="col-xl-5 col-md-8">
                                           <div class="card shadow-4">
                                               <div class="card-body p-4">
-                                                  <form method="post" action="' . Url::new($o_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.form', Url::newCurrent())))->makeWww() . '">
+                                                  <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.form', Url::newCurrent())))->makeWww() . '">
                                                       ' . Csrf::getHiddenElement() . '
                                                       <div class="sign-in text-center h1"> 
-                                                          <img src="' . Url::new($o_component->getImage('image-logo', default: config()->getString('web.pages.update-lost-password.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $o_component->getText(tr('Medinet Mobile')) . '" width="310">
+                                                          <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('web.pages.update-lost-password.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
                                                       </div>
                                                       <hr>
-                                                      <h2 class="text-center">' . $o_component->getText(tr('Update lost password')) . '</h2>
-                                                      <p class="login-box-msg text-center">' . $o_component->getText(tr('Please provide your new password below')) . '</p>
+                                                      <h2 class="text-center">' . $_component->getText(tr('Update lost password')) . '</h2>
+                                                      <p class="login-box-msg text-center">' . $_component->getText(tr('Please provide your new password below')) . '</p>
                                                       <hr>
                                                       <div class="form-outline mb-4" data-mdb-input-init>
                                                           <input type="password" id="password" name="password" class="form-control" />
-                                                          <label class="form-label" for="password">' . $o_component->getText(tr('Password')) . '</label>
+                                                          <label class="form-label" for="password">' . $_component->getText(tr('Password')) . '</label>
                                                       </div>
                                                       <div class="form-outline mb-4" data-mdb-input-init>
                                                           <input type="password" id="passwordv" name="passwordv" class="form-control" />
-                                                          <label class="form-label" for="passwordv">' . $o_component->getText(tr('Verify password')) . '</label>
+                                                          <label class="form-label" for="passwordv">' . $_component->getText(tr('Verify password')) . '</label>
                                                       </div>
                                                       <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-init>
-                                                          ' . $o_component->getText(tr('Request a new password')) . '
+                                                          ' . $_component->getText(tr('Request a new password')) . '
                                                       </button>
                                                       <div class="row mb-4">
                                                           <div class="col-md-12 d-flex justify-content-center">
                                                               ' . Anchor::new()
                                                                         ->addClasses('btn btn-block btn-outline-primary')
                                                                         ->addData('', 'mdb-ripple-init')
-                                                                        ->setUrlObject(Url::new($o_component->getUrl('sign-in', default: 'sign-in'))->makeWww())
-                                                                        ->setContent($o_component->getText('Back to sign-in page')) . '
+                                                                        ->setUrlObject(Url::new($_component->getUrl('sign-in', default: 'sign-in'))->makeWww())
+                                                                        ->setContent($_component->getText('Back to sign-in page')) . '
                                                           </div>
                                                       </div>';
 
-        if ($o_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
+        if ($_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
                                                           ' . Project::getCopyrightString(true) . '
                                                       </div>';

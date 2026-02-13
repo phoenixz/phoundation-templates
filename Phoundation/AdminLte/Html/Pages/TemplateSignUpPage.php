@@ -35,8 +35,8 @@ class TemplateSignUpPage extends TemplateRenderer
         Response::setRenderMainWrapper(false);
 
         $terms       = tr('terms');
-        $o_component = $this->getComponentObject();
-        $get         = $o_component->getGetData();
+        $_component = $this->getComponentObject();
+        $get         = $_component->getGetData();
 
         $this->render = '   <body class="hold-transition register-page">
                                 <div class="register-box">
@@ -99,13 +99,13 @@ class TemplateSignUpPage extends TemplateRenderer
 
         $html = '';
 
-        if ($o_component->getEnabled('facebook')) {
+        if ($_component->getEnabled('facebook')) {
             $html .=                            Anchor::new('#')
                                                       ->setClass('btn btn-block btn-primary')
                                                       ->setContent('<i class="fab fa-facebook mr-2"></i>' . tr('Sign up using Facebook'));
         }
 
-        if ($o_component->getEnabled('google')) {
+        if ($_component->getEnabled('google')) {
             $html .=                            Anchor::new('#')
                                                       ->setClass('btn btn-block btn-danger')
                                                       ->setContent('<i class="fab fa-google-plus mr-2"></i>' . tr('Sign up using Google+'));
@@ -122,7 +122,7 @@ class TemplateSignUpPage extends TemplateRenderer
                                                       ->setContent(tr('I already have an account')) . '
                                         </div>';
 
-        if ($o_component->getEnabled('copyright')) {
+        if ($_component->getEnabled('copyright')) {
             $this->render .= '          <div class="login-footer text-center">
                                             ' . Project::getCopyrightString(true) . '
                                         </div>';

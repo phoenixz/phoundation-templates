@@ -25,9 +25,9 @@ class TemplateFullScreen extends TemplateIcon
     /**
      * Icons class constructor
      */
-    public function __construct(FullScreen $o_component)
+    public function __construct(FullScreen $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,7 +39,7 @@ class TemplateFullScreen extends TemplateIcon
      */
     public function render(): ?string
     {
-        $this->o_component->getAnchorObject()->setUrl('#');
+        $this->_component->getAnchorObject()->setUrl('#');
 
         return parent::render() . Script::new('
             function toggleFullScreen() {

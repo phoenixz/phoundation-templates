@@ -26,9 +26,9 @@ class TemplateInfoBoxBg extends TemplateRenderer
     /**
      * InfoBoxBg class constructor
      */
-    public function __construct(InfoBoxBg $o_component)
+    public function __construct(InfoBoxBg $_component)
     {
-        parent::__construct($o_component);
+        parent::__construct($_component);
     }
 
 
@@ -39,18 +39,18 @@ class TemplateInfoBoxBg extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = '   <div class="info-box bg-' . Html::safe($this->o_component->getMode()->value) . '">
-                              <span class="info-box-icon"><i class="far ' . Html::safe($this->o_component->getIcon()) . '"></i></span>
+        $this->render = '   <div class="info-box bg-' . Html::safe($this->_component->getMode()->value) . '">
+                              <span class="info-box-icon"><i class="far ' . Html::safe($this->_component->getIcon()) . '"></i></span>
                 
                               <div class="info-box-content">
-                                <span class="info-box-text">' . Html::safe($this->o_component->getTitle()) . '</span>
-                                <span class="info-box-number">' . Html::safe($this->o_component->get()) . '</span>
+                                <span class="info-box-text">' . Html::safe($this->_component->getTitle()) . '</span>
+                                <span class="info-box-number">' . Html::safe($this->_component->get()) . '</span>
                 
-                                ' . (($this->o_component->getProgress() !== null) ? ' <div class="progress">
-                                                                                    <div class="progress-bar" style="width: ' . Html::safe($this->o_component->getProgress()) . '%"></div>
+                                ' . (($this->_component->getProgress() !== null) ? ' <div class="progress">
+                                                                                    <div class="progress-bar" style="width: ' . Html::safe($this->_component->getProgress()) . '%"></div>
                                                                                   </div>' : '') . '
                                 <span class="progress-description">
-                                  ' . Html::safe($this->o_component->getDescription()) . '
+                                  ' . Html::safe($this->_component->getDescription()) . '
                                 </span>
                               </div>
                               <!-- /.info-box-content -->

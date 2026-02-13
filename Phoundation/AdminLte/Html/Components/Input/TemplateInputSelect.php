@@ -26,10 +26,10 @@ class TemplateInputSelect extends TemplateInput
     /**
      * Select class constructor
      */
-    public function __construct(InputSelect $o_component)
+    public function __construct(InputSelect $_component)
     {
-        $o_component->addClasses('form-control');
-        parent::__construct($o_component);
+        $_component->addClasses('form-control');
+        parent::__construct($_component);
     }
 
 
@@ -38,16 +38,16 @@ class TemplateInputSelect extends TemplateInput
      */
     public function render(): ?string
     {
-        $o_component = $this->o_component;
+        $_component = $this->_component;
 
         // Hidden elements render as an <input hidden>
-        if ($o_component->getHidden()) {
+        if ($_component->getHidden()) {
             // Select input have multiple values support
             $return = null;
 
-            foreach (Arrays::force($o_component->getSelected()) as $key => $value) {
+            foreach (Arrays::force($_component->getSelected()) as $key => $value) {
                 $return .= InputHidden::new()
-                                      ->setName($o_component->getName())
+                                      ->setName($_component->getName())
                                       ->setValue($key)
                                       ->render();
             }
@@ -55,27 +55,27 @@ class TemplateInputSelect extends TemplateInput
             return $return;
         }
 
-        if ($o_component->getClearButton()) {
-            $o_component->getAttributesObject()->add("true", 'data-mdb-clear-button');
-            $o_component->getAttributesObject()->removeKeys('clear_button');
+        if ($_component->getClearButton()) {
+            $_component->getAttributesObject()->add("true", 'data-mdb-clear-button');
+            $_component->getAttributesObject()->removeKeys('clear_button');
 
         }
 
-        if ($o_component->getSearch()) {
-            $o_component->getAttributesObject()->add("true", 'data-mdb-filter');
-            $o_component->getAttributesObject()->removeKeys('search');
+        if ($_component->getSearch()) {
+            $_component->getAttributesObject()->add("true", 'data-mdb-filter');
+            $_component->getAttributesObject()->removeKeys('search');
         }
 
-        if ($o_component->getCustomContent()) {
-            $o_component->getAttributesObject()->removeKeys('custom_content');
+        if ($_component->getCustomContent()) {
+            $_component->getAttributesObject()->removeKeys('custom_content');
 
             $render = '<div class="select-custom-content">
-                         ' . render($o_component->getCustomContent()) . '
+                         ' . render($_component->getCustomContent()) . '
                        </div>';
         }
 
-        $after  = $o_component->renderAfterContent();
-        $before = $o_component->renderBeforeContent();
+        $after  = $_component->renderAfterContent();
+        $before = $_component->renderBeforeContent();
 
         if ($before or $after) {
             return '<div class="input-group mb-3">' . $before . parent::render() . isset_get($render) . $after . '</div>';
