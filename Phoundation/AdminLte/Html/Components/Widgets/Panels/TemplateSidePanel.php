@@ -56,12 +56,12 @@ class TemplateSidePanel extends TemplateRenderer
                                                                   ->getHtmlImgObject()
                                                                   ->setId('menu-profile-image')
                                                                   ->setClass('img-circle elevation-2')
-                                                                  ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))). '
+                                                                  ->setAlt(tr('Profile picture for :user', [':user' => Session::getUsersDisplayName()]))). '
                                   </div>
                                 <div class="info">
                                     ' . Anchor::new(Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww())
                                               ->setClass('d-block')
-                                              ->setContent(Session::getUserObject()->getDisplayName()). '    
+                                              ->setContent(Session::getUsersDisplayName()). '    
                                 </div>
                               </div>
                               <div class="form-inline">
