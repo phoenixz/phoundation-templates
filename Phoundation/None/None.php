@@ -83,6 +83,6 @@ class None extends Template
      */
     public function getDirectoryObject(): PhoDirectoryInterface
     {
-        return new PhoDirectory(__DIR__ . '/', PhoRestrictions::newReadonlyObject(DIRECTORY_ROOT));
+        return new PhoDirectory(__DIR__ . '/', PhoRestrictions::newReadonly(DIRECTORY_ROOT));
     }
 }
