@@ -62,7 +62,7 @@ class TemplateInputDateTimeLocal extends TemplateInputText
         // Load required CSS and JS
         Response::loadCss('vendor/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4');
         Response::loadJavaScript([
-            'adminltev4/plugins/moment/moment',
+            'plugins/moment/moment',
             'vendor/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4'
         ]);
 

@@ -194,12 +194,12 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         // Load basic AdminLteV3 and fonts CSS
         Response::loadCss([
             'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback',
-            'adminltev3/plugins/fontawesome-free-6.4.0-web/css/all',
-            'adminltev3/plugins/fontawesome-free-6.4.0-web/css/regular',
-//            'adminltev3/plugins/fontawesome-free-6.4.0-web/css/v4-shim',
-            'adminltev3/css/adminlte',
-            'adminltev3/plugins/overlayScrollbars/css/OverlayScrollbars',
-            'adminltev3/css/phoundation'
+            'plugins/fontawesome-free-6.4.0-web/css/all',
+            'plugins/fontawesome-free-6.4.0-web/css/regular',
+//            'plugins/fontawesome-free-6.4.0-web/css/v4-shim',
+            'css/adminlte',
+            'plugins/overlayScrollbars/css/OverlayScrollbars',
+            'css/phoundation'
         ], true);
 
         // Load configured CSS files
@@ -207,11 +207,11 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
 
         // Load basic AdminLteV3 amd jQuery javascript libraries
         Response::loadJavaScript([
-            'adminltev3/plugins/jquery/jquery',
-            'adminltev3/plugins/jquery-ui/jquery-ui',
-            'adminltev3/plugins/bootstrap/js/bootstrap.bundle',
-            'adminltev3/plugins/overlayScrollbars/js/jquery.overlayScrollbars',
-            'adminltev3/js/adminlte',
+            'plugins/jquery/jquery',
+            'plugins/jquery-ui/jquery-ui',
+            'plugins/bootstrap/js/bootstrap.bundle',
+            'plugins/overlayScrollbars/js/jquery.overlayScrollbars',
+            'js/adminlte',
             'phoundation/js/jquery-phoundation',
         ], prefix: true);
 
