@@ -56,7 +56,7 @@ class TemplateSidePanel extends TemplateRenderer
                                         ->setContent(Session::getUserObject()->getProfileImageObject()->getHtmlImgObject()
                                                             ->setId('menu-profile-image')
                                                             ->setClass('img-circle elevation-2')
-                                                            ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
+                                                            ->setAlt(tr('Profile picture for :user', [':user' => Session::getUsersDisplayName()]))
                                                             ->setWidth(32)
                                                             ->setHeight(32) . Session::getUserObject()->getDisplayName(reverse: true)). '
                               ' . $this->_component->getMenu()?->render() . '
@@ -79,12 +79,12 @@ class TemplateSidePanel extends TemplateRenderer
 //                                                                        ->setId('menu-profile-image')
 //                                                                        ->setSrc(Url::new('img/profiles/default.png')->makeImg())
 //                                                                        ->setClass('img-circle elevation-2')
-//                                                                        ->setAlt(tr('Profile picture for :user', [':user' => Session::getUserObject()->getDisplayName()]))
+//                                                                        ->setAlt(tr('Profile picture for :user', [':user' => Session::getUsersDisplayName()]))
 //                                                                        ->render() . '
 //                                  </a>
 //                                </div>
 //                                <div class="info">
-//                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">' . Session::getUserObject()->getDisplayName() . '</a>
+//                                  <a href="' . (Session::getUserObject()->isGuest() ? '#' : Url::new('/my/profile.html')->makeWww()) . '" class="d-block">' . Session::getUsersDisplayName() . '</a>
 //                                </div>
 //                              </div>
 //                              <div class="form-inline">

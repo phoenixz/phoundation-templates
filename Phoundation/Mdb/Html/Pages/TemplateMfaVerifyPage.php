@@ -59,7 +59,7 @@ class TemplateMfaVerifyPage extends TemplateRenderer
                               <img src="' . Url::new('/logos/sign-in-large.webp')->makeImg() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
                           </div>
                           <hr>  
-                          <p class="login-box-msg text-center">' .  tr('Please type the 2FA code for your account ":account"', [':account' => Session::getUserObject()->getDisplayName()]) . '</p>
+                          <p class="login-box-msg text-center">' .  tr('Please type the 2FA code for your account ":account"', [':account' => Session::getUsersDisplayName()]) . '</p>
                           ' . Form::new()
                                   ->setRequestMethod(EnumHttpRequestMethod::post)
                                   ->setAction(Url::new('mfa-create')->makeWww())
