@@ -29,6 +29,17 @@ use Templates\Phoundation\Mdb\TemplatePage;
 class None extends Template
 {
     /**
+     * Returns the base directory for this template
+     *
+     * @return string
+     */
+    static public function getBaseDirectory(): string
+    {
+        return 'none/';
+    }
+
+
+    /**
      * Template constructor
      *
      * @return void

@@ -14,7 +14,7 @@
 
 declare(strict_types=1);
 
-namespace Templates\None;
+namespace Templates\Phoundation\None;
 
 use Phoundation\Web\Requests\Response;
 

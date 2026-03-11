@@ -203,7 +203,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         ], true);
 
         // Load configured CSS files
-        Response::loadCss(config()->getArray('templates.adminlte.css', []));
+        Response::loadCss(config()->getArray('templates.adminltev3.css', []));
 
         // Load basic AdminLteV3 amd jQuery javascript libraries
         Response::loadJavaScript([

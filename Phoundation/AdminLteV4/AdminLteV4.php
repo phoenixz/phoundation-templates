@@ -27,6 +27,17 @@ use Templates\Phoundation\AdminLteV4\Html\Components\Widgets\Menus\TemplateMenu;
 class AdminLteV4 extends Template
 {
     /**
+     * Returns the base directory for this template
+     *
+     * @return string
+     */
+    static public function getBaseDirectory(): string
+    {
+        return 'adminltev4/';
+    }
+
+
+    /**
      * Template constructor
      *
      * @return void

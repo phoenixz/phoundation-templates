@@ -28,6 +28,17 @@ use Templates\Phoundation\Mdb\Html\Components\Widgets\Menus\TemplateMenu;
 class Mdb extends Template
 {
     /**
+     * Returns the base directory for this template
+     *
+     * @return string
+     */
+    static public function getBaseDirectory(): string
+    {
+        return 'mdb/';
+    }
+
+
+    /**
      * Template constructor
      *
      * @return void
