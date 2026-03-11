@@ -1,32 +1,31 @@
 <?php
 
 /**
- * Class TemplateFlashMessage
+ * Class TemplateToast
  *
  *
  *
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Templates\Mdb
+ * @package Templates\AdminLteV3
  */
 
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\Mdb\Html\Components\Widgets\FlashMessages;
+namespace Templates\Phoundation\AdminLteV3\Html\Components\Widgets\FlashMessages;
 
-use Phoundation\Web\Html\Components\Widgets\FlashMessages\Interfaces\FlashMessageInterface;
-use Phoundation\Web\Html\Components\Widgets\FlashMessages\Toast;
+use Phoundation\Web\Html\Components\Widgets\FlashMessages\Interfaces\ToastInterface;
 use Phoundation\Web\Html\Template\TemplateRenderer;
 
 
-class TemplateFlashMessage extends TemplateRenderer
+class TemplateToast extends TemplateRenderer
 {
     /**
      * Breadcrumbs class constructor
      */
-    public function __construct(FlashMessageInterface $_component)
+    public function __construct(ToastInterface $_component)
     {
         parent::__construct($_component);
     }
@@ -39,9 +38,7 @@ class TemplateFlashMessage extends TemplateRenderer
      */
     public function render(): ?string
     {
-        $this->render = match ($this->_component->getFlashHandler()) {
-            'toast' => Toast::new($this->_component)->render(),
-        };
+        $this->render = '$(document).Toasts("create", ' . $this->_component->renderJson() . ');';
 
         return parent::render();
     }
