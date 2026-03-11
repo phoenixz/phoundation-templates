@@ -14,7 +14,7 @@
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\AdminLteV3\Html\Components\Input;
+namespace Templates\Phoundation\AdminLteV4\Html\Components\Input;
 
 use Phoundation\Exception\UnderConstructionException;
 use Phoundation\Web\Html\Components\Input\InputSwitch;

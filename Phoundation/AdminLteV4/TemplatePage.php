@@ -8,13 +8,13 @@
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Templates\AdminLteV3
+ * @package Templates\AdminLteV4
  */
 
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\AdminLteV3;
+namespace Templates\Phoundation\AdminLteV4;
 
 use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Core\Plugins\Plugins;
@@ -191,7 +191,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         Response::setFavIcon();
         Response::setViewport('width=device-width, initial-scale=1');
 
-        // Load basic AdminLteV3 and fonts CSS
+        // Load basic AdminLteV4 and fonts CSS
         Response::loadCss([
             'https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback',
             'adminlte/plugins/fontawesome-free-6.4.0-web/css/all',
@@ -205,7 +205,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
         // Load configured CSS files
         Response::loadCss(config()->getArray('templates.adminlte.css', []));
 
-        // Load basic AdminLteV3 amd jQuery javascript libraries
+        // Load basic AdminLteV4 amd jQuery javascript libraries
         Response::loadJavaScript([
             'adminlte/plugins/jquery/jquery',
             'adminlte/plugins/jquery-ui/jquery-ui',

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\AdminLteV3\Html\Components\Interfaces;
+namespace Templates\Phoundation\AdminLteV4\Html\Components\Interfaces;
 
 use Phoundation\Web\Html\Components\Interfaces\ComponentInterface;
 

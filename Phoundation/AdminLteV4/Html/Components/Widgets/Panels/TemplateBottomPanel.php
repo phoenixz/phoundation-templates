@@ -8,13 +8,13 @@
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package Templates\AdminLteV3
+ * @package Templates\AdminLteV4
  */
 
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\AdminLteV3\Html\Components\Widgets\Panels;
+namespace Templates\Phoundation\AdminLteV4\Html\Components\Widgets\Panels;
 
 use Phoundation\Core\Core;
 use Phoundation\Developer\Project\Project;
@@ -42,7 +42,7 @@ class TemplateBottomPanel extends TemplateRenderer
     public function render(): ?string
     {
         $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
-        $adminlte   = tr('Using template :name', [':name' => Anchor::new('https://adminlte.io/', tr('AdminLteV3'))]);
+        $adminlte   = tr('Using template :name', [':name' => Anchor::new('https://adminlte.io/', tr('AdminLteV4'))]);
         $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getHumanReadableFullName() . ' (v' . Project::getVersion() . ')');
 
         return '  <footer class="main-footer">

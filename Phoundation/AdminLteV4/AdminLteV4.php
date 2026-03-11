@@ -1,29 +1,30 @@
 <?php
 
 /**
- * Class AdminLteV3
+ * Class AdminLteV4
  *
- * This is the AdminLteV3 template
+ * This is the AdminLteV4 template
  *
  * @author    Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
  * @license   http://opensource.org/licenses/GPL-2.0 GNU Public License, Version 2
  * @copyright Copyright © 2025 Sven Olaf Oostenbrink <so.oostenbrink@gmail.com>
- * @package AdminLteV3\Web
+ * @package AdminLteV4\Web
  */
 
 
 declare(strict_types=1);
 
-namespace Templates\Phoundation\AdminLteV3;
+namespace Templates\Phoundation\AdminLteV4;
 
 use Phoundation\Filesystem\Interfaces\PhoDirectoryInterface;
 use Phoundation\Filesystem\PhoDirectory;
 use Phoundation\Filesystem\PhoRestrictions;
 use Phoundation\Utils\Seo;
 use Phoundation\Web\Html\Template\Template;
-use Templates\Phoundation\AdminLteV3\Html\Components\Widgets\Menus\TemplateMenu;
+use Templates\Phoundation\AdminLteV4\Html\Components\Widgets\Menus\TemplateMenu;
 
-class AdminLteV3 extends Template
+
+class AdminLteV4 extends Template
 {
     /**
      * Template constructor
@@ -32,7 +33,7 @@ class AdminLteV3 extends Template
      */
     public function __construct()
     {
-        $this->name        = 'AdminLteV3';
+        $this->name        = 'AdminLteV4';
         $this->page_class  = TemplatePage::class;
         $this->menus_class = TemplateMenu::class;
 
@@ -69,7 +70,7 @@ class AdminLteV3 extends Template
      */
     public function getDescription(): ?string
     {
-        return 'This is the AdminLteV3 admin template for your website. You are free to add or build other templates';
+        return 'This is the AdminLteV4 admin template for your website. You are free to add or build other templates';
     }
 
 
