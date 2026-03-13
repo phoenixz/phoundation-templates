@@ -41,7 +41,7 @@ class TemplateBottomPanel extends TemplateRenderer
      */
     public function render(): ?string
     {
-        if (config()->getBoolean('web.panels.bottom.enabled', true)) {
+        if (config()->getBoolean('platforms.web.panels.bottom.enabled', true)) {
             $phoudation = Anchor::new('https://phoundation.org/', tr('Phoundation'));
             $template   = tr('Using template :name', [':name' => Anchor::new('https://mdbootstrap.com/', tr('MDB'))]);
             $project    = Anchor::new(Url::newCurrentDomainRootUrl(), Project::getHumanReadableFullName() . ' (v' . Project::getVersion() . ')');

@@ -130,7 +130,7 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
                        $body .
                        Request::getPanelsObject()->get('bottom', exception: false)?->render();
 
-            $output .= ' <body class="sidebar-mini' . (config()->getBoolean('web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . $this->getDisplayModeString() . '" style="height: auto;">
+            $output .= ' <body class="sidebar-mini' . (config()->getBoolean('platforms.web.panels.sidebar.collapsed', false) ? ' sidebar-collapse' : '') . $this->getDisplayModeString() . '" style="height: auto;">
                             <div class="wrapper">' .
                                 Response::getFlashMessagesObject()->render() .
                                 $body . '
@@ -160,10 +160,10 @@ class TemplatePage extends \Phoundation\Web\Requests\TemplatePage
     public function getAvailablePanelsObject(): PanelsInterface
     {
         return Panels::new()
-                     ->add(config()->getBoolean('web.panels.top.enabled'   , true) ? TopPanel::new()    : null, 'top')
-                     ->add(config()->getBoolean('web.panels.left.enabled'  , true) ? SidePanel::new()   : null, 'left')
-                     ->add(config()->getBoolean('web.panels.header.enabled', true) ? HeaderPanel::new() : null, 'header')
-                     ->add(config()->getBoolean('web.panels.bottom.enabled', true) ? BottomPanel::new() : null, 'bottom');
+                     ->add(config()->getBoolean('platforms.web.panels.top.enabled'   , true) ? TopPanel::new()    : null, 'top')
+                     ->add(config()->getBoolean('platforms.web.panels.left.enabled'  , true) ? SidePanel::new()   : null, 'left')
+                     ->add(config()->getBoolean('platforms.web.panels.header.enabled', true) ? HeaderPanel::new() : null, 'header')
+                     ->add(config()->getBoolean('platforms.web.panels.bottom.enabled', true) ? BottomPanel::new() : null, 'bottom');
     }
 
 

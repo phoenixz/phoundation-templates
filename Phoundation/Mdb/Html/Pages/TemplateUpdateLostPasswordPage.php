@@ -38,7 +38,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
         // Render the entire page
         $this->render = ' <header>
                               <section class="text-center text-md-start">
-                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($_component->getImage('image-background', default: config()->getString('web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
+                                  <div class="p-5" style="height: 200px; background: url(' . Url::new($_component->getImage('image-background', default: config()->getString('platforms.web.pages.update-lost-password.images.banner', 'banners/large.jpg')))->makeImg() . ') center no-repeat;">
                                   </div>
                               </section>
                           </header>
@@ -48,10 +48,10 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                       <div class="col-xl-5 col-md-8">
                                           <div class="card shadow-4">
                                               <div class="card-body p-4">
-                                                  <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('web.pages.update-lost-password.urls.form', Url::newCurrent())))->makeWww() . '">
+                                                  <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('platforms.web.pages.update-lost-password.urls.form', Url::newCurrent())))->makeWww() . '">
                                                       ' . Csrf::getHiddenElement() . '
                                                       <div class="sign-in text-center h1"> 
-                                                          <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('web.pages.update-lost-password.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
+                                                          <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('platforms.web.pages.update-lost-password.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
                                                       </div>
                                                       <hr>
                                                       <h2 class="text-center">' . $_component->getText(tr('Update lost password')) . '</h2>
@@ -78,7 +78,7 @@ class TemplateUpdateLostPasswordPage extends TemplateRenderer
                                                           </div>
                                                       </div>';
 
-        if ($_component->getEnabled('copyright', default: config()->getBoolean('web.pages.lost-password-page.enabled.copyright', true))) {
+        if ($_component->getEnabled('copyright', default: config()->getBoolean('platforms.web.pages.lost-password-page.enabled.copyright', true))) {
             $this->render .= '                        <div class="text-center">
                                                           ' . Project::getCopyrightString(true) . '
                                                       </div>';

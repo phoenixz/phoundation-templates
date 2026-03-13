@@ -63,14 +63,14 @@ class TemplateSignInPage extends TemplateRenderer
         }
 
         // Render the sign-in page section
-        $signin   = ' <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('web.pages.sign-in.urls.form', 'sign-in')))->makeWww() . '">
+        $signin   = ' <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('platforms.web.pages.sign-in.urls.form', 'sign-in')))->makeWww() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
+                              <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('platforms.web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
                           </div>
                           <hr>';
 
-        if ($_component->getEnabled('email', default: config()->getBoolean('web.pages.sign-in.enabled.email', true))) {
+        if ($_component->getEnabled('email', default: config()->getBoolean('platforms.web.pages.sign-in.enabled.email', true))) {
             $signin .= '  <div class="form-outline mb-4" data-mdb-input-init>
                               <input type="email" id="loginName" name="email" class="form-control"' . $_component->getValue(EnumHttpRequestMethod::get, 'email') . ' />
                               <label class="form-label" for="loginName">' . $_component->getText(tr('Email')) . '</label>
@@ -94,13 +94,13 @@ class TemplateSignInPage extends TemplateRenderer
                               </div>
                           </div>';
 
-        if ($_component->getEnabled('sign-up', default: config()->getBoolean('web.pages.sign-in.enabled.sign-up', true))) {
+        if ($_component->getEnabled('sign-up', default: config()->getBoolean('platforms.web.pages.sign-in.enabled.sign-up', true))) {
             $signin .= '   <div class="text-center">
                               <p>' . $_component->getText(tr('Not a member? :register', [':register' => $register])) . '</p>
                           </div>';
         }
 
-        if ($_component->getEnabled('copyright', default: config()->getBoolean('web.pages.sign-in.enabled.copyright', true))) {
+        if ($_component->getEnabled('copyright', default: config()->getBoolean('platforms.web.pages.sign-in.enabled.copyright', true))) {
             $signin .= '  <div class="text-center">
                               ' . Project::getCopyrightString(true) . '
                           </div>';
