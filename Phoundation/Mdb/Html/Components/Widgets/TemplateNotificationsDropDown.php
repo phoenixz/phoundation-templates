@@ -16,6 +16,7 @@ declare(strict_types=1);
 
 namespace Templates\Phoundation\Mdb\Html\Components\Widgets;
 
+use Phoundation\Accounts\Users\Sessions\Session;
 use Phoundation\Exception\OutOfBoundsException;
 use Phoundation\Notifications\Html\Components\Modals\NotificationModal;
 use Phoundation\Utils\Strings;
@@ -49,6 +50,11 @@ class TemplateNotificationsDropDown extends TemplateRenderer
 
         if (!$this->_component->getNotificationsUrl()) {
             throw new OutOfBoundsException(tr('No notifications page URL specified'));
+        }
+
+        if (Session::isGuest()) {
+            // Guest users do not use the drop down, nothing here for us to render
+            return null;
         }
 
         $notifications = $this->_component->getNotifications();
