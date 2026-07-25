@@ -56,7 +56,7 @@ class TemplateMfaVerifyPage extends TemplateRenderer
         $render   = '   <form method="post" action="' . Url::newCurrent() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new('/logos/sign-in-large.webp')->makeImg() . '" alt="' . tr('Medinet Mobile') . '" width="310" height="51">
+                              <img src="' . Url::new('/logos/sign-in-large.webp')->makeImg() . '" alt="' . tr('PCJ Admin') . '" width="310" height="51">
                           </div>
                           <hr>  
                           <p class="login-box-msg text-center">' .  tr('Please type the 2FA code for your account ":account"', [':account' => Session::getUsersDisplayName()]) . '</p>

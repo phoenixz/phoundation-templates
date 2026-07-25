@@ -46,7 +46,7 @@ class TemplateLostPasswordUpdatedPage extends TemplateRenderer
                                           <div class="card shadow-4">
                                               <div class="card-body p-4">
                                                   <div class="sign-in text-center h1"> 
-                                                      <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('platforms.web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
+                                                      <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('platforms.web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('PCJ Admin')) . '" width="310">
                                                   </div>
                                                   <hr>
                                                   <p class="login-box-msg text-center">' . $_component->getText(tr('All done! You can now continue to your dashboard or continue to the sign-in page...')) . '</p>

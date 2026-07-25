@@ -66,7 +66,7 @@ class TemplateSignInPage extends TemplateRenderer
         $signin   = ' <form method="post" action="' . Url::new($_component->getUrl('form-action', default: config()->getString('platforms.web.pages.sign-in.urls.form', 'sign-in')))->makeWww() . '">
                           ' . Csrf::getHiddenElement() . '
                           <div class="sign-in text-center h1"> 
-                              <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('platforms.web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('Medinet Mobile')) . '" width="310">
+                              <img src="' . Url::new($_component->getImage('image-logo', default: config()->getString('platforms.web.pages.sign-in.images.logo', 'logos/large.webp')))->makeImg() . '" alt="' . $_component->getText(tr('PCJ Admin')) . '" width="310">
                           </div>
                           <hr>';
 
